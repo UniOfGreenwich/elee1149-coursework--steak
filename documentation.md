@@ -1,43 +1,47 @@
 # Agile Documentation Outline for Personal Finance Tracker
 
 ## 1. Project Charter
-- **Purpose and Objectives:** Define the main goals of the Personal Finance Tracker.
-- **Stakeholders:** List key stakeholders and their roles.
-- **Scope:** Briefly outline the project's scope and deliverables.
+### 1.1 Purpose and Objectives:
+### 1.2 Stakeholders: 
+### 1.3 Scope:
 
 ## 2. User Stories & Backlog
-- **User Stories:** Capture functional and non-functional requirements as user stories.
-- **Acceptance Criteria:** Define clear criteria for each user story to be considered complete.
-- **Product Backlog:** Maintain a prioritized list of user stories and tasks.
+### 2.1 User Stories:
+### 2.2 Acceptance Criteria:
+### 2.3 Product Backlog:
 
 ## 3. Sprint Planning Documents
-- **Sprint Goals:** Define specific objectives for each sprint.
-- **Sprint Backlog:** Select user stories and tasks for the upcoming sprint, detailing responsibilities and timelines.
+### 3.1 Sprint Goals:
+### 3.2 Sprint Backlog:
 
 ## 4. Sprint Backlog
-- **Task Breakdown:** Further break down user stories into actionable tasks.
-- **Task Assignments:** Assign tasks to team members with estimated time frames.
+### 4.1 Task Breakdown:
+### 4.2 Task Assignments:
 
 ## 5. Daily Stand-up Notes
-- Record key points and blockers discussed during daily stand-up meetings.
-- Track progress and adjust plans as needed.
+### 5.1 Key Discussion Points:
+### 5.2 Progress Tracking:
 
 ## 6. Sprint Review & Retrospective
-- **Sprint Review:** Document feedback and results of the sprint, highlighting completed user stories.
-- **Retrospective:** Record lessons learned, process improvements, and action items for the next sprint.
+### 6.1 Sprint Review:
+### 6.2 Retrospective:
 
 ## 7. Release Notes
-- Document features, bug fixes, and known issues for each release.
-- Communicate release information to stakeholders.
+### 7.1 Features:
+### 7.2 Bug Fixes:
+### 7.3 Known Issues:
+### 7.4 Stakeholder Communication:
 
 ## 8. Risk Management Document
-- Identify potential risks and their impact on the project.
-- Define mitigation strategies and contingency plans.
+### 8.1 Risk Identification:
+### 8.2 Mitigation Strategies:
+### 8.3 Contingency Plans:
 
 ## 9. COCOMO Calculations
-- Use COCOMO to estimate effort and resources for significant user stories or tasks.
-- Adjust estimates based on feedback and actual progress during sprints.
+### 9.1 Effort Estimation:
+### 9.2 Adjustments:
 
 ## 10. Documentation for Continuous Improvement
-- Keep a log of feedback received and improvements made based on Agile iterations.
-- Document any changes to processes or plans to enhance team efficiency.
+### 10.1 Feedback Log:
+### 10.2 Process Changes:
+### 10.3 Improvement Tracking:
