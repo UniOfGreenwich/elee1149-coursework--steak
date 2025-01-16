@@ -16,7 +16,7 @@
 
 ## 4. Sprint Documentation
 ### 4.1 Sprint Plans:
-[Sprint 1 Plan](./Sprint Planning/Sprint1.md): Prepare documentation outlines, design a high-level system architecture, list requirements, and compile basic feature flowcharts.
+[Sprint 1 Plan](./'Sprint Planning'/Sprint1.md): Prepare documentation outlines, design a high-level system architecture, list requirements, and compile basic feature flowcharts.
 ### 4.2 Sprint Reviews and Retrospectives:
 
 ## 5. Technical Documentation
