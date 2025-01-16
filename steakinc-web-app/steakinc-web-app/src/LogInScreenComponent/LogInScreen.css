@@ -1,0 +1,135 @@
+.logo {
+    height: 60px;
+}
+
+.title-wrapper {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fffcfc;
+    text-align: center;
+    margin-top: 250px;
+    text-shadow: 1px 1px 4px #000000;
+}
+
+.title-text {
+    margin: 0;
+}
+
+.swiper {
+    display: none !important;
+}
+
+.slide-content {
+    text-align: center;
+}
+
+.slide-content img {
+    display: block;
+    margin: 0 auto;
+}
+
+.slide-content p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login-wrapper {
+    text-align: center;
+    margin-top: 300px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.login-button {
+    background-color: #F28C2A80;
+    color: #ffffff;
+    border: none;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 20px 5px 0 0;
+    cursor: pointer;
+    border-radius: 15px;
+    text-shadow: 1px 1px 4px #000000;
+}
+
+.signup-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    width: 115px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 20px 0 0 5px;
+    cursor: pointer;
+    border-radius: 15px;
+    border: #F28C2A80 1px solid;
+    text-shadow: 1px 1px 4px #000000;
+}
+
+.password-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 25px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .title-wrapper {
+        font-size: 34px;
+        margin-top: 50px;
+    }
+
+    .logo {
+        height: 80px;
+    }
+
+    .login-wrapper {
+        margin-top: 50px;
+    }
+
+    .login-button .signup-button {
+        font-size: 24px;
+    }
+
+    .swiper {
+        display: block !important;
+        width: 650px;
+        height: 450px;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .title-wrapper {
+        font-size: 34px;
+        margin-top: 50px;
+    }
+
+    .login-wrapper {
+        margin-top: 50px;
+    }
+
+    .login-button {
+        padding: 12px 35px;
+    }
+
+    .swiper {
+        display: block !important;
+        width: 650px;
+        height: 450px;
+    }
+}
