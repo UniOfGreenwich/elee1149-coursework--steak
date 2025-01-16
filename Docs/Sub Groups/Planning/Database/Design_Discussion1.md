@@ -2,7 +2,7 @@
 
 **Date:** 16/01/2025
 
-**Attendees:** Harrison, Jack, Lewis & Gareth
+**Attendees:** Harrison & Lewis
 
 ---
 
