@@ -1,0 +1,126 @@
+.login-title-wrapper {
+  justify-content: center;
+  margin-top: 50px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.input-field {
+    margin-top: 10px;
+    width: 200px;
+    background: none;
+    border: 1px solid #c2c2c2;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.input-field:focus {
+    border: 1px solid #ffffff;
+    outline: none;
+}
+
+.input-field::placeholder {
+    color: #e9e9e9;
+}
+
+.input-field:focus::placeholder {
+    color: #ffffff;
+}
+
+.login-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+.login-submit-button {
+    background-color: #D44348;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 100px;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.forgot-password-button, .join-us-button{
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+    width: 225px;
+    margin: 0 auto;
+}
+
+.forgot-password-button {
+    margin-top: 25px;
+}
+
+.join-us-button {
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .login-title-wrapper {
+        font-size: 34px;
+        margin-top: 50px;
+    }
+
+    .forgot-password-button, .join-us-button {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 150px;
+        height: auto;
+    }
+
+    input[type="text"], input[type="password"] {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .login-submit-button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .forgot-password-button, .join-us-button {
+        font-size: 20px;
+    }
+
+    .logo {
+        width: 150px;
+        height: auto;
+    }
+
+    input[type="text"], input[type="password"] {
+        font-size: 20px;
+        padding: 12px;
+    }
+
+    .login-submit-button {
+        font-size: 20px;
+        padding: 10px 24px;
+    }
+}
