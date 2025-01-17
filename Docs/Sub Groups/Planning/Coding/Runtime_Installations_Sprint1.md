@@ -1,4 +1,4 @@
-# Meeting Notes: [Runtime Components and Login Page Review]
+# Meeting Notes: Runtime Components and Login Page Review
 
 **Date:** 17/01/2025
 
