@@ -51,16 +51,22 @@
 
 ---
 
-### Next Steps
+## Follow-up Tasks
 
-- **Task 1:** [Description of Task] *(Assigned to [Name])*
-- **Task 2:** [Description of Task] *(Assigned to [Name])*
-- [Add more tasks as needed]
+1. **xxxx:**
+   - Create a database table for user accounts that includes fields for account name, account type, and balance. *(Assigned to Harrison)*
 
----
+2. **xxxx:**
+   - Create an income table to track the user's income and how frequently it arrives. *(Harrison)*
 
-### Follow-up Tasks
+3. **xxxx:**
+   - Create a jars table to store user jars and link transactions to the appropriate jar. *(Harrison)*
 
-1. **Task Description:** [Details of Follow-up Task] *(Assigned to [Name])*
-2. **Task Description:** [Details of Follow-up Task] *(Assigned to [Name])*
-3. [Add more follow-up tasks as needed]
+4. **xxxx:**
+   - Create a budget table to track user savings goals and deadlines. *(Harrison)*
+
+5. **xxxx:**
+    - Create a folder structure to hold documents from the relevant subgroups. *(Harrison)*
+
+6. **xxxx:**
+    - Create the visual design of the database forms. *(Lewis)*
