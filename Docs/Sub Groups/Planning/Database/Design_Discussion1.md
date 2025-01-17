@@ -1,6 +1,8 @@
-# Database ERD Review
+# Meeting Notes: Database ERD Review
 
 **Date:** 16/01/2025
+
+**Attendees:** Harrison & Lewis
 
 ---
 
