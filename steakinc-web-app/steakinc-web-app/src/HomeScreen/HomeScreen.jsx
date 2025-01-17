@@ -1,5 +1,6 @@
 import React from 'react';
-import './LogInScreen.css';
+import './HomeScreen.css';
+import { useNavigate } from 'react-router-dom';
 import Carousel from './Carousel';
 
 function logoSecret() {
@@ -9,7 +10,9 @@ function logoSecret() {
 }
 
 
-function LogInScreen() {
+function HomeScreen() {
+  
+  const navigate = useNavigate();
   return (
     <div className='container'>
       <div className="title-wrapper">
@@ -24,7 +27,7 @@ function LogInScreen() {
       <Carousel />
       <div className="login-wrapper">
         <div className="button-wrapper">
-          <button type='button' className="login-button">Log In</button>
+          <button type='button' className="login-button" onClick={() => navigate('/login')}>Log In</button>
           <button type='button' className="signup-button">Sign Up</button>
         </div>
         <button type='button' className="password-button">Forgot Password?</button>
@@ -33,4 +36,4 @@ function LogInScreen() {
   );
 }
 
-export default LogInScreen;
+export default HomeScreen;
