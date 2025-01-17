@@ -11,62 +11,82 @@
 1. Identify and note runtime installation requirements.
 2. Review login page.
 3. Discuss database implementation.
-4. File structure review for python backend.
+4. File structure review for Python backend.
 
 ---
 
 ### Discussion Points
 
-#### [Topic 1]
+#### Running the Code
 
-- **Participants:** [Names]
+- **Participants:** Harrison and Jack
 - **Key Points:**
-  - [Key Point 1]
-  - [Key Point 2]
-  - [Additional points as needed]
+  - Harrison has written Python code for database creation and user accounts.
+  - Ensured Seb can run the code by documenting the steps.
+  - Cloned the project repository and confirmed the use of Jack's feature branch.
+  - Jack instructed running `npm run dev` for the development server setup.
+  - Node.js installation was required for Harrison; guided download and installation steps.
+  - Verified Node.js and npm installations with version commands.
 
-#### [Topic 2]
+#### Setting Up Node.js
 
-- **Participants:** [Names]
+- **Participants:** Harrison and Jack
 - **Key Points:**
-  - [Key Point 1]
-  - [Key Point 2]
-  - [Additional points as needed]
+  - Downloaded Node.js MSI package for Windows.
+  - Installed Node.js with necessary tools.
+  - Verified installations using `node -v` and `npm -v`.
 
-#### [Additional Topics]
+#### Running npm Commands
 
-- **Participants:** [Names]
+- **Participants:** Harrison and Jack
 - **Key Points:**
-  - [Key Point 1]
-  - [Key Point 2]
-  - [Additional points as needed]
+  - Faced initial issues running `npm run dev`.
+  - Successfully started the development server after navigating to the project folder.
+
+#### Reviewing the Frontend
+
+- **Participants:** Jack and Harrison
+- **Key Points:**
+  - Reviewed frontend design, focusing on responsiveness and layout.
+  - Suggested improvements: moving title and logo to a navigation bar, making carousel full width and height.
+  - Discussed removing 'forgot password' link from the main page.
+
+#### Database Design
+
+- **Participants:** Harrison and Jack
+- **Key Points:**
+  - Shared database design and Python script for table creation and user handling.
+  - Discussed placing backend code in a new 'backend' folder.
+  - Planned new branches for backend and carousel updates.
 
 ---
 
 ### Decisions Made
 
-- **Decision 1:** [Description of Decision]
-- **Decision 2:** [Description of Decision]
-- [Add more decisions as needed]
+- **Decision 1:** Remove the 'forgot password' link from the main page and incorporate it into the login process.
+- **Decision 2:** Create a new 'backend' folder for Python code placement outside the 'source' directory.
+
+---
+
+### Current Steps for running react
+
+- **Step 1:** Download and instal Node.js from https://nodejs.org/en/download/ onto machine
+- **Step 2:** Clone repository and in git bash navigate to the repository and to the folder path "steakinc/steakinc-web-app/steakinc-web-app"
+- **Step 3:** Npm install
+- **Step 4:** Npm run dev
 
 ---
 
 ## Follow-up Tasks
 
-1. **xxxx:**
-   - Create a database table for user accounts that includes fields for account name, account type, and balance. *(Assigned to Harrison)*
+1. **Node.js Installation:**
+   - Document the steps for installing Node.js and running the project for Seb. *(Harrison)*
 
-2. **xxxx:**
-   - Create an income table to track the user's income and how frequently it arrives. *(Harrison)*
+2. **Backend Folder Creation:**
+   - Create a new branch and add the Python backend code in a new folder named 'backend' outside the 'source' directory. *(Harrison)*
 
-3. **xxxx:**
-   - Create a jars table to store user jars and link transactions to the appropriate jar. *(Harrison)*
+3. **Carousel Update:**
+   - Create a new branch to update the carousel with full JavaScript for better functionality and customizability. *(Jack)*
 
-4. **xxxx:**
-   - Create a budget table to track user savings goals and deadlines. *(Harrison)*
-
-5. **xxxx:**
-    - Create a folder structure to hold documents from the relevant subgroups. *(Harrison)*
-
-6. **xxxx:**
-    - Create the visual design of the database forms. *(Lewis)*
+4. **Navbar Design Discussion:**
+   - Discuss the design suggestions for the desktop view, including moving the high steaks title and logo into a navbar with login and sign-up options, during the stand-up meeting. *(Jack, Harrison)*
