@@ -1,3 +1,7 @@
+.container {
+    height: 1200px;
+}
+
 .logo {
     height: 60px;
     transition: transform 0.3s ease-in-out;
@@ -41,24 +45,6 @@
 
 .title-text {
     margin: 0;
-}
-
-.swiper {
-    display: none !important;
-}
-
-.slide-content {
-    text-align: center;
-}
-
-.slide-content img {
-    display: block;
-    margin: 0 auto;
-}
-
-.slide-content p {
-    text-align: center;
-    margin-top: 10px;
 }
 
 .login-wrapper {
@@ -134,13 +120,6 @@
     .login-button .signup-button {
         font-size: 24px;
     }
-
-    .swiper {
-        display: block !important;
-        width: 650px;
-        height: 450px;
-    }
-
 }
 
 @media (min-width: 1024px) {
@@ -163,11 +142,5 @@
 
     .login-button {
         padding: 12px 35px;
-    }
-
-    .swiper {
-        display: block !important;
-        width: 650px;
-        height: 450px;
     }
 }
