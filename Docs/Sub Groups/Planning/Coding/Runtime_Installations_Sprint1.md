@@ -2,18 +2,16 @@
 
 **Date:** 17/01/2025
 
+**Attendees:** Jack, Harrison
+
 ---
-
-### Attendees
-
-- [List of Attendees]
 
 ### Agenda
 
-1. [Agenda Item 1]
-2. [Agenda Item 2]
-3. [Agenda Item 3]
-4. [Add more agenda items as needed]
+1. Identify and note runtime installation requirements.
+2. Review login page.
+3. Discuss database implementation.
+4. File structure review for python backend.
 
 ---
 
