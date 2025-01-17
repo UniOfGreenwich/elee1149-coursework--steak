@@ -2,11 +2,9 @@
 
 **Date:** [Insert Date Here]
 
+**Attendees:** [Insert people Here]
+
 ---
-
-### Attendees
-
-- [List of Attendees]
 
 ### Agenda
 
