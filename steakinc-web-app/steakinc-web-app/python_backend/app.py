@@ -138,10 +138,42 @@ def login():
 
     if user and check_password_hash(user.password_hash, password):
         # Authentication successful
-        return jsonify({'message': 'Login successful'}), 200
+        return jsonify({'message': 'Login successful', 'user_id': user.user_id, 'is_new': user.new}), 200
     else:
         # Authentication failed
         return jsonify({'error': 'Invalid username or password'}), 401
+    
+# Setup endpoint
+@app.route('/setup', methods=['POST'])
+def setup():
+    data = request.json
+    user_id = data.get('userId')
+    account_name = data.get('accountName')
+    account_type = data.get('accountType')
+    balance = data.get('balance')
+    monthly_income = data.get('monthlyIncome')
+
+    # Save account details
+    new_account = Account(user_id=user_id, account_name=account_name, account_type=account_type, balance=balance)
+    db.session.add(new_account)
+
+    # Save income details
+    new_income = Income(user_id=user_id, amount=monthly_income, income_date=datetime.utcnow())
+    db.session.add(new_income)
+
+    db.session.commit()
+
+    return jsonify({'message': 'Setup completed successfully.'}), 200
+
+# Update 'new' status endpoint
+@app.route('/update_new_status/<int:user_id>', methods=['POST'])
+def update_new_status(user_id):
+    user = User.query.get(user_id)
+    if user:
+        user.new = request.json.get('new', False)
+        db.session.commit()
+        return jsonify({'message': 'User status updated.'}), 200
+    return jsonify({'error': 'User not found.'}), 404
 
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts
