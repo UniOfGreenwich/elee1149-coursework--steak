@@ -1,4 +1,4 @@
-# Sprint 2: [Start Date] - [End Date]
+# Sprint 2: January 22, 2025 - January 29, 2025
 
 **Sprint Goal:** Complete the login and registration pages, design the landing page, and create the account information form.
 
