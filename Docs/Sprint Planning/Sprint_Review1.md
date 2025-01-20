@@ -16,13 +16,45 @@
    - **Completed By:** Gareth, Lewis, Harrison & Jack
    - **Outcome:** Gathered and documented all functional and non-functional requirements to define the project scope and functionalities.
 
-4. **Feature Flowcharts:**
+    #### Functional Requirements
+    - **Pre-Main Page:**
+      - Login Page
+      - Registration Page
+      - First-time account form (+bank accounts balances)
+      - Forgot Password
+
+    - **Main Page:**
+      - Income/Outcome History entry/viewing
+      - Money Jars (goals)
+      - Asset total (+steak form)
+      - Logout
+      - Budgeting
+      - TBD - net worth asset tracker
+      - TBD - Financial News
+      - TBD - Blog Page
+      - TBD - Badges
+
+    #### Non-Functional Requirements
+    - Encrypted database fields
+    - Local connection (proof of concept)
+    - Full error handling
+    - Quick response times
+    - Restricted access control
+    - High usability and accessibility
+
+5. **Feature Flowcharts:**
    - **Completed By:** Harrison & Jack
    - **Outcome:** Compiled basic feature flowcharts to illustrate user interactions and system responses effectively.
+   - **Login Flowchart:**
 
-5. **Database Design and Implementation:**
+![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Login_Flow.PNG)
+
+6. **Database Design and Implementation:**
    - **Completed By:** Harrison
    - **Outcome:** Designed the database using an Entity-Relationship Diagram (ERD) and implemented it using Python and SQL.
+   - **Database ERD:**
+
+![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Database_Design.PNG)
 
 ## Outstanding Tasks
 
@@ -37,4 +69,18 @@
 - **Tools Utilized:** The team utilized Markdown via a Git repository for documentation, Figma for design, and Miro for flowcharts.
 
 Overall, Sprint 1 was productive, with all major tasks completed as planned, setting a strong foundation for the upcoming sprints. The team will focus on completing the remaining readme template task and preparing for the next sprint.
+
+## Initial Designs
+
+- **Mobile Views:**
+
+![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Mobile_View.PNG)
+
+- **Login Design:**
+
+![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Login_Design.PNG)
+
+- **Registration Design:**
+
+![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Registration_Design.PNG)
 
