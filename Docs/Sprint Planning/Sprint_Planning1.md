@@ -23,6 +23,11 @@
    - **Task:** Compile basic feature flowcharts.
    - **Description:** Create flowcharts for key features to illustrate user interactions and system responses.
    - **Task Assignments:** Harrison & Jack
+  
+5. **Database Design and Implementation:**
+   - **Task:** Design database using ERD and implement using SQL.
+   - **Description:** Create database using Python and SQL.
+   - **Task Assignments:** Harrison
 
 ## Sprint Planning Notes
 
