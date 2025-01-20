@@ -23,10 +23,10 @@
 
 - **Team Availability:** All team members confirmed availability for the full sprint duration.
 - **Risks and Mitigations:**
-  - Risk: Potential delays in design approval.
+  - Risk: Potential backlog of designs waiting for team approval.
     - Mitigation: Schedule regular design review meetings with the team to ensure timely feedback and adjustments.
 
 - **Tools and Resources:**
   - Design: Figma
-  - Development: HTML, CSS, JavaScript
+  - Development: React, CSS, JavaScript, Python
   - Version Control: Git
