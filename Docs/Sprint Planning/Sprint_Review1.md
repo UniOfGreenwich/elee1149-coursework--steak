@@ -16,7 +16,7 @@
    - **Completed By:** Gareth, Lewis, Harrison & Jack
    - **Outcome:** Gathered and documented all functional and non-functional requirements to define the project scope and functionalities.
 
-    ### Functional Requirements
+    #### Functional Requirements
     - **Pre-Main Page:**
       - Login Page
       - Registration Page
@@ -34,7 +34,7 @@
       - TBD - Blog Page
       - TBD - Badges
 
-    ### Non-Functional Requirements
+    #### Non-Functional Requirements
     - Encrypted database fields
     - Local connection (proof of concept)
     - Full error handling
