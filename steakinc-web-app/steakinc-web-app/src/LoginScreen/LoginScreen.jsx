@@ -1,25 +1,74 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import './LoginScreen.css';
 
 function LoginScreen() {
+    const [loginData, setLoginData] = useState({
+        username: '',
+        password: ''
+    });
+
+    const [message, setMessage] = useState(null);
+
+    const handleChange = (event) => {
+        setLoginData({ ...loginData, [event.target.name]: event.target.value });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/login', loginData);
+            setMessage(response.data.message);
+            // Handle success, e.g., save user ID, redirect, etc.
+            console.log('User ID:', response.data.user_id);
+        } catch (error) {
+            if (error.response) {
+                setMessage(error.response.data.error);
+            } else {
+                setMessage('An error occurred. Please try again.');
+            }
+        }
+    };
+
     return (
         <div className="container">
             <div className="login-container">
                 <div className="login-title-wrapper">
-                    <img src="\src/assets/highsteaks.png" alt="High Steaks Logo" className="logo" />
+                    <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo" />
                     <h1 className="login-title-text">High Steaks</h1>
                 </div>
-                <form className="login-form">
-                    <input type="text" placeholder="Username" className="input-field" />
-                    <input type="password" placeholder="Password" className="input-field" />
+                {/* Template Message for login */}
+                {message && <p>{message}</p>}
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        className="input-field"
+                        value={loginData.username}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        className="input-field"
+                        value={loginData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <div className="login-button-wrapper">
+                        <button type="submit" className="login-submit-button">Login</button>
+                    </div>
                 </form>
                 <div className="login-button-wrapper">
-                    <button type="submit" className="login-submit-button">Login</button>
                     <button className="forgot-password-button">Forgot Password?</button>
                     <button className="join-us-button">Haven't joined us yet?</button>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default LoginScreen;
