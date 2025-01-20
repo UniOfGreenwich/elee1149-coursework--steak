@@ -45,12 +45,16 @@
 5. **Feature Flowcharts:**
    - **Completed By:** Harrison & Jack
    - **Outcome:** Compiled basic feature flowcharts to illustrate user interactions and system responses effectively.
-   - **Flowchart Placeholder:** ![Flowchart Image Placeholder](#)
+   - **Login Flowchart:**
+
+![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Login_Flow.PNG)
 
 6. **Database Design and Implementation:**
    - **Completed By:** Harrison
    - **Outcome:** Designed the database using an Entity-Relationship Diagram (ERD) and implemented it using Python and SQL.
-   - **ERD Placeholder:** ![Database ERD Image Placeholder](#)
+   - **Database ERD:**
+
+![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Database_Design.PNG)
 
 ## Outstanding Tasks
 
