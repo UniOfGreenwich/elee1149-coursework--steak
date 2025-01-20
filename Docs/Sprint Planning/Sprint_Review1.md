@@ -68,4 +68,5 @@ Overall, Sprint 1 was productive, with all major tasks completed as planned, set
 
 ## Initial Designs
 
-- **Design Placeholder:** ![Initial Design Image Placeholder](#)
+- **Design Placeholder:** ![Sprint 1 Registration Design](Docs/Images/Sprints/Sprint1_Registration_Design.PNG)
+
