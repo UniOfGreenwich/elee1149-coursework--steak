@@ -69,9 +69,14 @@ Overall, Sprint 1 was productive, with all major tasks completed as planned, set
 ## Initial Designs
 
 - **Mobile Views:**
+
 ![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Mobile_View.PNG)
+
 - **Login Design:**
+
 ![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Login_Design.PNG)
+
 - **Registration Design:**
+
 ![Sprint 1 Registration Design](../Images/Sprints/Sprint1_Registration_Design.PNG)
 
