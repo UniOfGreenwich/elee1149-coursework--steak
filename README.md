@@ -48,9 +48,8 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributors">Contributors</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -103,23 +102,14 @@ List planned features and milestones for your project.  Use checkboxes to track 
 - [ ] Feature 3
 
 
-<!-- CONTRIBUTING -->
-## Contributors
-
-- Harrison Cox
-- Gareth Massenhove
-- Lewis Bray
-- Jack Buchanan
-
-
 <!-- LICENSE -->
 ## License
 
 Specify the license under which your project is distributed.
 
 
-<!-- CONTACT -->
-## Contact
+<!-- CONTRIBUTORS -->
+## Contributors
 
 - Harrison Cox - hc5167i@gre.ac.uk
 - Gareth Massenhove - gm9918h@gre.ac.uk
