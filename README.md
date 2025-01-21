@@ -116,7 +116,7 @@ Specify the license under which your project is distributed.
 - Lewis Bray - lb3011x@gre.ac.uk
 - Jack Buchanan - jb6522g@gre.ac.uk
 
-Project Link: [https://github.com/Harrisoncox10/steakinc](https://github.com/Harrisoncox10/steakinc)
+Project Link: [https://github.com/UniOfGreenwich/elee1149-coursework--steak](https://github.com/UniOfGreenwich/elee1149-coursework--steakc)
 
 
 <!-- ACKNOWLEDGMENTS -->
