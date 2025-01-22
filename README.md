@@ -1,7 +1,3 @@
-# steakinc
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a id="readme-top"></a>
-
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -17,7 +13,7 @@
   <img src="/steak.png" alt="Steak" width="80" height="80">
   </a>
 
-  <h1 align="center">High Steaks</h3>
+  <h1 align="center">Steak</h3>
 
   <p align="center">
     A simpler money management tool.
