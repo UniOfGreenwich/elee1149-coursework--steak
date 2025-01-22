@@ -88,13 +88,21 @@ Provide examples of how to use your project. Include screenshots, code snippets,
 <!-- ROADMAP -->
 ## Roadmap
 
-List planned features and milestones for your project.  Use checkboxes to track progress.
+Planned, implemented and cancelled project features/milestones.
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-- [ ] Feature 4
-
+- [ ] User Login: Allows existing users to access their accounts.
+- [ ] User Registration: Enables new users to create accounts.
+- [ ] Transaction History (View & Add):  View past transactions and add new ones.
+- [ ] Budgeting Tools: Create and manage budgets for different categories.
+- [ ] Savings Goals ("Money Jars"): Set and track progress towards financial goals.
+- [ ] Asset Tracking (Total Value):  View the total value of all assets.
+- [ ] Financial News Feed: Display relevant financial news articles.
+- [ ] Data Export: Allows users to download their data.
+- [ ] Account Linking (Bank Accounts): Connect bank accounts for automatic transaction import.
+- [ ] Forgot Password Functionality: Reset password if forgotten.
+- [ ] Net Worth Tracking: Calculate and track net worth over time.
+- [ ] Blog/Educational Content: Provide financial advice and educational resources.
+- [ ] Achievement Badges (Gamification): Award badges for reaching financial milestones.
 
 <!-- CONTRIBUTORS -->
 ## Contributors
