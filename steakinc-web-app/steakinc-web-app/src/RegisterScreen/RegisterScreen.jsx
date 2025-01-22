@@ -88,6 +88,9 @@ function registerScreen() {
                             required
                         />
                     </div>
+                    <div className="security-title-wrapper">
+                        <h2 className='security-title-text'>Security Questions</h2>
+                    </div>
                     <div className="register-security-wrapper">
                         <div className="register-security-item">
                             <input
@@ -149,7 +152,7 @@ function registerScreen() {
                     </div>
                     <div className="register-button-wrapper">
                         <button className="back-button" onClick={handleBackClick}>Back</button>
-                        <button type="submit" className="register-button">Sign up</button>
+                        <button type="submit" className="register-button">Sign Up</button>
                     </div>
                 </form>
             </div>

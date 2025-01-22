@@ -10,6 +10,15 @@
     height: 40px;;
 }
 
+.security-title-wrapper {
+    color: #ffffff;
+    margin: 45px 0 0 0;
+}
+
+.security-title-text {
+    font-weight: 400;
+}
+
 .register-title-text {
     margin: 0 0 0 10px;;
 }
@@ -20,7 +29,6 @@
 
 .register-security-wrapper {
     text-align: center;
-    margin-top: 50px;
 }
 
 .register-form {
@@ -141,6 +149,10 @@
         font-size: 18px;
         padding: 15px 55px;
         margin: 0;
+    }
+
+    .security-title-text {
+        font-size: 34px;
     }
 
 }

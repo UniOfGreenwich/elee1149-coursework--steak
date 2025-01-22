@@ -71,7 +71,7 @@ function LoginScreen() {
                 </form>
                 <div className="login-link-wrapper">
                     <button className="forgot-password-button">Forgot Password?</button>
-                    <button className="join-us-button">Haven't joined us yet?</button>
+                    <button className="join-us-button" onClick={() => navigate('/register')}>Haven't Joined Us Yet?</button>
                 </div>
             </div>
         </div>

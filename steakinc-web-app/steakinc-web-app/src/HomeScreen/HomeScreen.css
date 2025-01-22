@@ -104,7 +104,13 @@
         margin-top: 50px;
     }
 
-    .login-button-home .register-button-home {
+    .login-button-home {
         font-size: 24px;
+        padding: 15px 55px;
+    }
+
+    .register-button-home {
+        font-size: 20px;
+        padding: 15px 55px;
     }
 }
