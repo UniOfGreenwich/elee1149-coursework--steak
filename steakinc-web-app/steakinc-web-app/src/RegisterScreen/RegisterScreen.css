@@ -1,0 +1,171 @@
+.register-title-wrapper {
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.logo-register{
+    height: 40px;;
+}
+
+.register-title-text {
+    margin: 0 0 0 10px;;
+}
+
+.register-details-wrapper {
+    text-align: center;
+}
+
+.register-security-wrapper {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.input-field {
+    margin-top: 10px;
+    width: 200px;
+    background: none;
+    border: 1px solid #DA4259;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.input-field-password {
+    margin-top: 10px;
+    width: 200px;
+    background: none;
+    border: 1px solid #DA4259;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.input-field-security {
+    width: 150px;
+    background: none;
+    border: 1px solid #DA4259;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.input-field-security-answer {
+    width: 100px;
+    background: none;
+    border: 1px solid #DA4259;
+    border-radius: 12px;
+    padding: 5px;
+    margin: 10px 0 0 10px;
+}
+
+.input-field:focus {
+    border: 1px solid #ffffff;
+    outline: none;
+}
+
+.input-field::placeholder, .input-field-password::placeholder, .input-field-security::placeholder, .input-field-security-answer::placeholder {
+    color: #bbbbbb;
+}
+
+.input-field:focus::placeholder, .input-field-password:focus::placeholder, .input-field-security.input-field:focus::placeholder, .input-field-security-answer:focus::placeholder {
+    color: #ffffff;
+}
+
+.register-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+.register-button {
+    background-color: #DA4259;
+    color: #ffffff;
+    border: none;
+    padding: 15px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px 0 0 0;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+@media (min-width: 768px) {
+    .register-title-wrapper {
+        font-size: 34px;
+        margin-top: 20px;
+    }
+
+    .logo-register {
+        height: 80px;
+    }
+
+    .register-button-wrapper {
+        flex-direction: row;
+    }
+
+    .register-details-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .input-field-password, .input-field {
+        margin: 10px 0 0 10px;
+        width: 250px;
+    }
+
+    .input-field-security {
+        width: 260px;
+    }
+
+    .input-field-security-answer {
+        width: 200px;
+    }
+
+    input[type="text"], input[type="password"] {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .register-button {
+        font-size: 18px;
+        padding: 15px 55px;
+        margin: 0;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .register-form {
+        margin-top: 50px;
+    }
+
+    .register-title-wrapper {
+        font-size: 30px;
+        margin-top: 20px;
+    }
+
+    .logo-register {
+        height: 70px;
+    }
+
+    input[type="text"], input[type="password"] {
+        font-size: 20px;
+        padding: 12px;
+    }
+
+    .register-button {
+        font-size: 20px;
+        padding: 15px 55px;
+    }
+}
