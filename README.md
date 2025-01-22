@@ -100,6 +100,7 @@ List planned features and milestones for your project.  Use checkboxes to track 
 - [ ] Feature 1
 - [ ] Feature 2
 - [ ] Feature 3
+- [ ] Feature 4
 
 
 <!-- LICENSE -->
