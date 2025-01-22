@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](#)
+<img src="/dashboard.png" alt="dashboard" width="600">
 
 Write a brief description of your project here.  Explain what it does and why it's useful.
 
