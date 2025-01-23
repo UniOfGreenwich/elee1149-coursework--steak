@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginScreen.css';
 
@@ -9,6 +10,11 @@ function LoginScreen() {
     });
 
     const [message, setMessage] = useState(null);
+    const navigate = useNavigate();
+
+    const handleBackClick = () => {
+        navigate('/');
+    };
 
     const handleChange = (event) => {
         setLoginData({ ...loginData, [event.target.name]: event.target.value });
@@ -34,8 +40,8 @@ function LoginScreen() {
         <div className="container">
             <div className="login-container">
                 <div className="login-title-wrapper">
-                    <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo" />
-                    <h1 className="login-title-text">High Steaks</h1>
+                    <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo-login" />
+                    <h1 className="login-title-text">Steak</h1>
                 </div>
                 {/* Template Message for login */}
                 {message && <p>{message}</p>}
@@ -59,12 +65,13 @@ function LoginScreen() {
                         required
                     />
                     <div className="login-button-wrapper">
+                        <button className="back-button" onClick={handleBackClick}>Back</button>
                         <button type="submit" className="login-submit-button">Login</button>
                     </div>
                 </form>
-                <div className="login-button-wrapper">
-                    <button className="forgot-password-button">Forgot Password?</button>
-                    <button className="join-us-button">Haven't joined us yet?</button>
+                <div className="login-link-wrapper">
+                    <button className="forgot-password-button" onClick={() => navigate('/forgot-password')}>Forgot Password?</button>
+                    <button className="join-us-button" onClick={() => navigate('/register')}>Haven't Joined Us Yet?</button>
                 </div>
             </div>
         </div>

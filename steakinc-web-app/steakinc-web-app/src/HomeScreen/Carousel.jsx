@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Carousel.css'; // Remember to create this CSS file
-import image1 from '../assets/image1.png';
-import image2 from '../assets/image2.png';
-import image3 from '../assets/image3.png';
+import image1 from '../assets/Sign Up.png';
+import image2 from '../assets/Login.png';
+import image3 from '../assets/Home.png';
 
 const Carousel = () => {
   const images = [

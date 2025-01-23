@@ -17,20 +17,19 @@ function HomeScreen() {
     <div className='container'>
       <div className="title-wrapper">
         <img
-          className="logo"
+          className="logo-home"
           onClick={logoSecret}
           src="src/assets/highsteaks.png"
           alt="steak"
         />
-        <h1 className='title-text'>High Steaks</h1>
+        <h1 className='title-text'>Steak</h1>
       </div>
       <Carousel />
       <div className="login-wrapper">
         <div className="button-wrapper">
-          <button type='button' className="login-button" onClick={() => navigate('/login')}>Log In</button>
-          <button type='button' className="signup-button">Sign Up</button>
+          <button type='button' className="register-button-home" onClick={() => navigate('/register')}>Sign Up</button>
+          <button type='button' className="login-button-home" onClick={() => navigate('/login')}>Log In</button>
         </div>
-        <button type='button' className="password-button">Forgot Password?</button>
       </div>
     </div>
   );
