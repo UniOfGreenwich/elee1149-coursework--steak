@@ -20,7 +20,8 @@
 }
 
 .register-title-text {
-    margin: 0 0 0 10px;;
+    margin: 0 0 0 10px;
+    font-weight: 400;
 }
 
 .register-details-wrapper {
