@@ -143,6 +143,37 @@ def login():
     else:
         # Authentication failed
         return jsonify({'error': 'Invalid username or password'}), 401
+
+# Forgot password endpoint 
+@app.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    data = request.json
+    username = data.get('username')
+    new_password = data.get('new_password')
+    confirm_password = data.get('confirm_password')
+    security_1_answer = data.get('security_1_answer')
+
+    if not username or not new_password or not confirm_password or not security_1_answer:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    if new_password != confirm_password:
+        return jsonify({'error': 'Passwords do not match'}), 400
+
+    # Find the user by username
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+
+    # Verify security question answer
+    if user.security_1 != security_1_answer:
+        return jsonify({'error': 'Incorrect security answer'}), 401
+
+    # Update the user's password
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+
+    return jsonify({'message': 'Password updated successfully'}), 200
+
     
 # Setup endpoint
 @app.route('/setup', methods=['POST'])
