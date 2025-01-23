@@ -65,6 +65,7 @@ class Jar(db.Model):
 class Income(db.Model):
     income_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=False)
     amount = db.Column(db.Numeric(15, 2), nullable=False)
     income_date = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
