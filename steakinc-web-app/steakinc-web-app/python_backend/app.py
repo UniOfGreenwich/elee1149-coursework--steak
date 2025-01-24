@@ -103,19 +103,22 @@ def register():
     if User.query.filter_by(username=username).first():
         return jsonify({'error': 'Username already exists'}), 409
 
-    # Hash the password
+    # Hash the password and security answers
     password_hash = generate_password_hash(password)
+    security_1_hash = generate_password_hash(security_1)
+    security_2_hash = generate_password_hash(security_2)
+    security_3_hash = generate_password_hash(security_3)
 
     # Create a new user object
     new_user = User(
         username=username,
         password_hash=password_hash,
         email=email,
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow(),
-        security_1=security_1,
-        security_2=security_2,
-        security_3=security_3
+        created_at=datetime.now(),
+        updated_at=datetime.now(),
+        security_1=security_1_hash,
+        security_2=security_2_hash,
+        security_3=security_3_hash
     )
 
     # Add the user to the database
@@ -123,6 +126,7 @@ def register():
     db.session.commit()
 
     return jsonify({'message': 'User registered successfully'}), 201
+
 
 # Login endpoint
 @app.route('/login', methods=['POST'])
@@ -165,7 +169,7 @@ def forgot_password():
         return jsonify({'error': 'User not found'}), 404
 
     # Verify security question answer
-    if user.security_1 != security_1_answer:
+    if not check_password_hash(user.security_1, security_1_answer):
         return jsonify({'error': 'Incorrect security answer'}), 401
 
     # Update the user's password
@@ -173,6 +177,7 @@ def forgot_password():
     db.session.commit()
 
     return jsonify({'message': 'Password updated successfully'}), 200
+
 
     
 # Setup endpoint
