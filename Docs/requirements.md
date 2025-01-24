@@ -1,4 +1,4 @@
-# Finance Manager Application - Requirements Document
+# Steak Finance Tracker - Requirements Document
 
 ## 1. Project Overview
 
