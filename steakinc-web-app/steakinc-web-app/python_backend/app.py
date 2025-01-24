@@ -65,6 +65,7 @@ class Jar(db.Model):
 class Income(db.Model):
     income_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=False)
     amount = db.Column(db.Numeric(15, 2), nullable=False)
     income_date = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
@@ -102,19 +103,22 @@ def register():
     if User.query.filter_by(username=username).first():
         return jsonify({'error': 'Username already exists'}), 409
 
-    # Hash the password
+    # Hash the password and security answers
     password_hash = generate_password_hash(password)
+    security_1_hash = generate_password_hash(security_1)
+    security_2_hash = generate_password_hash(security_2)
+    security_3_hash = generate_password_hash(security_3)
 
     # Create a new user object
     new_user = User(
         username=username,
         password_hash=password_hash,
         email=email,
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow(),
-        security_1=security_1,
-        security_2=security_2,
-        security_3=security_3
+        created_at=datetime.now(),
+        updated_at=datetime.now(),
+        security_1=security_1_hash,
+        security_2=security_2_hash,
+        security_3=security_3_hash
     )
 
     # Add the user to the database
@@ -122,6 +126,7 @@ def register():
     db.session.commit()
 
     return jsonify({'message': 'User registered successfully'}), 201
+
 
 # Login endpoint
 @app.route('/login', methods=['POST'])
@@ -142,6 +147,38 @@ def login():
     else:
         # Authentication failed
         return jsonify({'error': 'Invalid username or password'}), 401
+
+# Forgot password endpoint 
+@app.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    data = request.json
+    username = data.get('username')
+    new_password = data.get('new_password')
+    confirm_password = data.get('confirm_password')
+    security_1_answer = data.get('security_1_answer')
+
+    if not username or not new_password or not confirm_password or not security_1_answer:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    if new_password != confirm_password:
+        return jsonify({'error': 'Passwords do not match'}), 400
+
+    # Find the user by username
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+
+    # Verify security question answer
+    if not check_password_hash(user.security_1, security_1_answer):
+        return jsonify({'error': 'Incorrect security answer'}), 401
+
+    # Update the user's password
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+
+    return jsonify({'message': 'Password updated successfully'}), 200
+
+
     
 # Setup endpoint
 @app.route('/setup', methods=['POST'])

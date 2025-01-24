@@ -141,7 +141,7 @@
         width: 200px;
     }
 
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="password"], input[type="email"] {
         font-size: 18px;
         padding: 10px;
     }
@@ -172,7 +172,7 @@
         height: 70px;
     }
 
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="password"], input[type="email"] {
         font-size: 20px;
         padding: 12px;
     }
