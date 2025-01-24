@@ -91,20 +91,20 @@ function RegisterScreen() {
                             required
                         />
                         <input
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="Confirm Password"
-                            className="input-field-password"
-                            value={registrationData.confirmPassword}
-                            onChange={handleRegistrationChange}
-                            required
-                        />
-                        <input
                             type="email"
                             name="email"
                             placeholder="Email"
                             className="input-field"
                             value={registrationData.email}
+                            onChange={handleRegistrationChange}
+                            required
+                        />
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            className="input-field-password"
+                            value={registrationData.confirmPassword}
                             onChange={handleRegistrationChange}
                             required
                         />
@@ -115,10 +115,18 @@ function RegisterScreen() {
                     <div className="register-security-wrapper">
                         <div className="register-security-item">
                             <input
+                                    type="text"
+                                    name="security_1"
+                                    className="input-field-security"
+                                    placeholder='Favorite book or movie?'
+                                    required
+                                    readOnly
+                            />
+                            <input
                                 type="text"
                                 name="security_1"
-                                className="input-field-security"
-                                placeholder='Favorite book or movie?'
+                                className="input-field-security-answer"
+                                placeholder='Answer'
                                 value={registrationData.security_1}
                                 onChange={handleRegistrationChange}
                                 required
@@ -130,6 +138,14 @@ function RegisterScreen() {
                                 name="security_2"
                                 className="input-field-security"
                                 placeholder='Name of birthplace?'
+                                required
+                                readOnly
+                            />
+                            <input
+                                type="text"
+                                name="security_2"
+                                className="input-field-security-answer"
+                                placeholder='Answer'
                                 value={registrationData.security_2}
                                 onChange={handleRegistrationChange}
                                 required
@@ -141,6 +157,14 @@ function RegisterScreen() {
                                 name="security_3"
                                 className="input-field-security"
                                 placeholder="Mother's maiden name?"
+                                required
+                                readOnly
+                            />
+                            <input
+                                type="text"
+                                name="security_3"
+                                className="input-field-security-answer"
+                                placeholder="Answer"
                                 value={registrationData.security_3}
                                 onChange={handleRegistrationChange}
                                 required
