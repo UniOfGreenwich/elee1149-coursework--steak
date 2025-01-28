@@ -58,7 +58,6 @@ function ForgotPasswordScreen() {
                     <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo-password" />
                     <h1 className="password-title-text">Steak</h1>
                 </div>
-                {message && <p>{message}</p>}
                 <form className="password-form" onSubmit={handleSubmit}>
                     <input
                         type="text"
@@ -108,6 +107,7 @@ function ForgotPasswordScreen() {
                                 onChange={handleChange}
                                 required
                             />
+                            {message && <p className='login-message'>{message}</p>}
                         </div>
                     </div>
                     <div className="password-button-wrapper">

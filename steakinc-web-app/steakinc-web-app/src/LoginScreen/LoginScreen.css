@@ -30,13 +30,13 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin-top: 10px;
     width: 220px;
     background: none;
-    border: 1px solid #DA4259;
+    border: 3px solid #DA4259;
     border-radius: 12px;
     padding: 5px;
 }
 
 .input-field:focus {
-    border: 1px solid #ffffff;
+    border: 3px solid #ffffff;
     outline: none;
 }
 
@@ -106,6 +106,12 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin-top: 10px;
 }
 
+.login-message {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+}
+
 @media (min-width: 768px) {
     .login-title-wrapper {
         font-size: 34px;
@@ -151,6 +157,10 @@ input[type="text"], input[type="password"], input[type="email"] {
         padding: 20px 45px;
         margin: 0 8px 0 0;
     }
+
+    .login-message {
+        font-size: 20px;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -160,6 +170,10 @@ input[type="text"], input[type="password"], input[type="email"] {
 
     .login-form {
         margin-top: 50px;
+    }
+
+    .login-message {
+        font-size: 24px;
     }
 
     .login-title-wrapper {

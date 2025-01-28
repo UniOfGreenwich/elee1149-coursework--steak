@@ -44,7 +44,7 @@
     margin-top: 10px;
     width: 200px;
     background: none;
-    border: 1px solid #DA4259;
+    border: 3px solid #DA4259;
     border-radius: 12px;
     padding: 5px;
 }
@@ -53,7 +53,7 @@
     margin-top: 10px;
     width: 200px;
     background: none;
-    border: 1px solid #DA4259;
+    border: 3px solid #DA4259;
     border-radius: 12px;
     padding: 5px;
 }
@@ -61,7 +61,7 @@
 .input-field-security {
     width: 150px;
     background: none;
-    border: 1px solid #DA4259;
+    border: 3px solid #DA4259;
     border-radius: 12px;
     padding: 5px;
 }
@@ -69,14 +69,14 @@
 .input-field-security-answer {
     width: 100px;
     background: none;
-    border: 1px solid #DA4259;
+    border: 3px solid #DA4259;
     border-radius: 12px;
     padding: 5px;
     margin: 10px 0 0 10px;
 }
 
 .input-field:focus {
-    border: 1px solid #ffffff;
+    border: 3px solid #ffffff;
     outline: none;
 }
 
