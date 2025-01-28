@@ -69,11 +69,6 @@ function RegisterScreen() {
                     <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo-register" />
                     <h1 className="register-title-text">Steak</h1>
                 </div>
-                {message && 
-                    <div className="message-wrapper">
-                        {message}
-                    </div>
-                }
                 <form className="register-form" onSubmit={handleSubmit}>
                     <div className="register-details-wrapper">
                         <input
@@ -173,6 +168,7 @@ function RegisterScreen() {
                                 onChange={handleRegistrationChange}
                                 required
                             />
+                            {message && <p className="login-message">{message}</p>}
                         </div>
                     </div>
                     <div className="register-button-wrapper">

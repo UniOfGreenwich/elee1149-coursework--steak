@@ -43,8 +43,6 @@ function LoginScreen() {
                     <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo-login" />
                     <h1 className="login-title-text">Steak</h1>
                 </div>
-                {/* Template Message for login */}
-                {message && <p>{message}</p>}
                 <form className="login-form" onSubmit={handleSubmit}>
                     <input
                         type="text"
@@ -64,6 +62,7 @@ function LoginScreen() {
                         onChange={handleChange}
                         required
                     />
+                    {message && <p className='login-message'>{message}</p>}
                     <div className="login-button-wrapper">
                         <button className="back-button" onClick={handleBackClick}>Back</button>
                         <button type="submit" className="login-submit-button">Login</button>
