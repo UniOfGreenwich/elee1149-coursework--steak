@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,  useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './LoginScreen.css';
 
@@ -11,6 +11,7 @@ function LoginScreen() {
 
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation(); // Get the location object
 
     const handleBackClick = () => {
         navigate('/');
@@ -25,8 +26,17 @@ function LoginScreen() {
         try {
             const response = await axios.post('http://localhost:5000/login', loginData);
             setMessage(response.data.message);
-            // Handle success, e.g., save user ID, redirect, etc.
-            console.log('User ID:', response.data.user_id);
+
+            const userId = response.data.user_id;
+            const isNew = response.data.is_new;
+
+            if (isNew) {
+                // Redirect to account setup, passing the user ID
+                navigate('/account-setup', { state: { userId } });
+            } else {
+                // Redirect to the dashboard or appropriate page
+                navigate('/', { state: { userId } });
+            }
         } catch (error) {
             if (error.response) {
                 setMessage(error.response.data.error);
