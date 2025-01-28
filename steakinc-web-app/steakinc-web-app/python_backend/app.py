@@ -184,24 +184,36 @@ def forgot_password():
 @app.route('/setup', methods=['POST'])
 def setup():
     data = request.json
+    logging.debug(f"Received data: {data}")
     user_id = data.get('userId')
+    logging.debug(f"User ID received: {user_id}")
+ 
+    if user_id is None:
+        return jsonify({'error': 'User ID is required'}), 400
+ 
     account_name = data.get('accountName')
     account_type = data.get('accountType')
     balance = data.get('balance')
     monthly_income = data.get('monthlyIncome')
-
-    # Save account details
-    new_account = Account(user_id=user_id, account_name=account_name, account_type=account_type, balance=balance)
-    db.session.add(new_account)
-
-    # Save income details
-    new_income = Income(user_id=user_id, amount=monthly_income, income_date=datetime.utcnow())
-    db.session.add(new_income)
-
-    db.session.commit()
-
-    return jsonify({'message': 'Setup completed successfully.'}), 200
-
+ 
+    try:
+        # Save account details
+        new_account = Account(user_id=user_id, account_name=account_name, account_type=account_type, balance=balance)
+        db.session.add(new_account)
+        db.session.commit()  # Commit to get account_id
+ 
+        # Save income details using the new account_id
+        new_income = Income(user_id=user_id, account_id=new_account.account_id, amount=monthly_income, income_date=datetime.utcnow())
+        db.session.add(new_income)
+ 
+        db.session.commit()
+        return jsonify({'message': 'Setup completed successfully.'}), 200
+    except Exception as e:
+        db.session.rollback()  # Rollback in case of error
+        logging.error(f"Error during setup: {e}")
+        return jsonify({'error': 'An error occurred during setup'}), 500
+ 
+ 
 # Update 'new' status endpoint
 @app.route('/update_new_status/<int:user_id>', methods=['POST'])
 def update_new_status(user_id):
@@ -211,6 +223,7 @@ def update_new_status(user_id):
         db.session.commit()
         return jsonify({'message': 'User status updated.'}), 200
     return jsonify({'error': 'User not found.'}), 404
+
 
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts
