@@ -1,4 +1,4 @@
-# Sprint 1: January 15, 2025 - January 22, 2025
+# Sprint 1: January 15, 2025 - January 21, 2025
 
 **Sprint Goal:** Prepare documentation outlines, design a high-level system architecture, list requirements, and compile basic feature flowcharts.
 
