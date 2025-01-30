@@ -7,7 +7,7 @@
 1. **Login and Registration Pages:**
    - **Task:** Complete the design and coding of the login and registration pages.
    - **Description:** Finalize the design elements and implement the functionality for user login and registration.
-   - **Task Assignments:** Harrison & Lewis
+   - **Task Assignments:** Harrison & Jack
 
 2. **Landing Page Design:**
    - **Task:** Design the landing page for the application.
@@ -18,7 +18,12 @@
    - **Task:** Create the account information form.
    - **Description:** Design and implement a form for users to input and manage their account information.
    - **Task Assignments:** Harrison & Gareth
-
+     
+4. **Modernisation of Design:**
+   - **Task:** Modernise the original gradient design to be more minimalistc and dark.
+   - **Description:** Design a darker theme to give the best user experience using clear and bold colours.
+   - **Task Assignments:** Gareth
+     
 ## Sprint Planning Notes
 
 - **Team Availability:** All team members confirmed availability for the full sprint duration.
