@@ -40,7 +40,7 @@ Overall, Sprint 2 was highly productive, with all planned tasks completed on sch
 - **Registration Design:**
 
 
-- **Forgot Password Design:**
+- **Landing Page Design:**
 
 
 - **Account Information Design:**
