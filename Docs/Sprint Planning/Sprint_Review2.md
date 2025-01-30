@@ -36,16 +36,16 @@ Overall, Sprint 2 was highly productive, with all planned tasks completed on sch
 
 - **Login Design:**
 
-![Sprint 2 Login Design](../Images/Sprints/Sprint2_Login_Design.PNG)
+![Sprint 2 Login Design](../Images/Sprints/Sprint2_Login_Design.png)
 
 - **Registration Design:**
 
-![Sprint 2 Registration Design](../Images/Sprints/Sprint2_Registration_Design.PNG)
+![Sprint 2 Registration Design](../Images/Sprints/Sprint2_Registration_Design.png)
 
 - **Landing Page Design:**
 
-![Sprint 2 Landing_Page Design](../Images/Sprints/Sprint2_Dashbaord_Screen_Design.PNG)
+![Sprint 2 Landing_Page Design](../Images/Sprints/Sprint2_Dashbaord_Screen_Design.png)
 
 - **Account Information Design:**
 
-![Sprint 2 Account_Information Design](../Images/Sprints/Sprint2_Account_Information_Design.PNG)
+![Sprint 2 Account_Information Design](../Images/Sprints/Sprint2_Account_Information_Design.png)
