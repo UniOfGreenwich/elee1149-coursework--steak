@@ -1,4 +1,4 @@
-# Sprint 2 Review: January 22, 2025 - January 29, 2025
+# Sprint 2 Review: January 22, 2025 - January 28, 2025
 
 **Sprint Goal:** Complete the login and registration pages, design the landing page, create the account information form, and modernize the design.
 
