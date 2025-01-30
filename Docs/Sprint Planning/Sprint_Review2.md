@@ -44,7 +44,7 @@ Overall, Sprint 2 was highly productive, with all planned tasks completed on sch
 
 - **Landing Page Design:**
 
-![Sprint 2 Landing_Page Design](../Images/Sprints/Sprint2_Dashbaord_Screen_Design.png)
+![Sprint 2 Landing_Page Design](../Images/Sprints/Sprint2_Dashboard_Screen_Design.png)
 
 - **Account Information Design:**
 
