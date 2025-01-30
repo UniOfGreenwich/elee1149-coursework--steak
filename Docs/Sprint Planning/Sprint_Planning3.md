@@ -6,9 +6,8 @@
 
 1. **Account Info Form:**
    - **Task:** Template Frontend for Jack to design off
-   - **Description:** Create a basic frontend template for the account information form to guide further design work.
-   - **Task Assignments:** Harrison
-
+      - **Description:** Create a basic frontend template for the account information form to guide further design work.
+      - **Task Assignments:** Harrison
 
    - **Task:** Account Info Frontend Styling
    - **Description:** Apply styling to the account information form to ensure it aligns with the application's design standards.
