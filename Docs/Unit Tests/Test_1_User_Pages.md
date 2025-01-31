@@ -74,12 +74,25 @@ The tests use an in-memory SQLite database to prevent any impact on production d
 To execute the tests, run the following command in the terminal:
 
 ```bash
-pytest test_1_app.py
+pytest -v test_1_app.py
 ```
 
 ## Test Results
 
 The unit tests for registration, login, and forgot password were successfully executed, confirming that the application correctly handles these processes, maintaining data integrity and reliability.
+
+```bash
+================================================= test session starts =================================================
+platform win32 -- Python 3.13.1, pytest-8.3.4, pluggy-1.5.0 -- C:\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\harri\OneDrive\Documents\GitHub\elee1149-coursework--steak\steakinc-web-app\steakinc-web-app\python_backend
+plugins: flask-1.3.0
+collected 3 items
+
+test_1_app.py::test_register_user PASSED                                                                         [ 33%]
+test_1_app.py::test_login_user PASSED                                                                            [ 66%]
+test_1_app.py::test_forgot_password PASSED                                                                       [100%]
+```
 
 ## Conclusion
 
