@@ -35,6 +35,7 @@ class Account(db.Model):
     account_name = db.Column(db.String(50), nullable=False)
     account_type = db.Column(db.String(20), nullable=False)
     balance = db.Column(db.Numeric(15, 2), nullable=False)
+    after_jar_total = db.Column(db.Numeric(15, 2), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False, onupdate=datetime.utcnow)
 
