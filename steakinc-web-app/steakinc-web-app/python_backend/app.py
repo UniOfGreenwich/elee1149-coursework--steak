@@ -194,19 +194,12 @@ def setup():
     account_name = data.get('accountName')
     account_type = data.get('accountType')
     balance = data.get('balance')
-    monthly_income = data.get('monthlyIncome')
 
     try:
         # Save account details with initial after_jar_total equal to balance
         new_account = Account(user_id=user_id, account_name=account_name, account_type=account_type, balance=balance, after_jar_total=balance)
         db.session.add(new_account)
         db.session.commit()  # Commit to get account_id
-
-        # Save income details using the new account_id
-        new_income = Income(user_id=user_id, account_id=new_account.account_id, amount=monthly_income, income_date=datetime.utcnow())
-        db.session.add(new_income)
-
-        db.session.commit()
         return jsonify({'message': 'Setup completed successfully.'}), 200
     except Exception as e:
         db.session.rollback()  # Rollback in case of error

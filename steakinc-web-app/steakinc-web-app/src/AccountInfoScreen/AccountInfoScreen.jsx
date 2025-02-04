@@ -61,7 +61,7 @@ function AccountInformationForm() {
                                     value={account.accountName}
                                     onChange={(e) => handleAccountChange(index, e)}
                                     required
-                                    className='input-field'
+                                    className='input-field-account'
                                 />
                                 <input
                                     type="text"
@@ -70,7 +70,7 @@ function AccountInformationForm() {
                                     value={account.accountType}
                                     onChange={(e) => handleAccountChange(index, e)}
                                     required
-                                    className='input-field'
+                                    className='input-field-account'
                                 />
                             </div>
                             <div className="account-form-item">
@@ -81,16 +81,7 @@ function AccountInformationForm() {
                                     value={account.balance}
                                     onChange={(e) => handleAccountChange(index, e)}
                                     required
-                                    className='input-field'
-                                />
-                                <input
-                                    type="number"
-                                    name="monthlyIncome"
-                                    placeholder="Monthly Income"
-                                    value={account.monthlyIncome}
-                                    onChange={(e) => handleAccountChange(index, e)}
-                                    required
-                                    className='input-field'
+                                    className='input-field-account'
                                 />
                             </div>
                         </div>
