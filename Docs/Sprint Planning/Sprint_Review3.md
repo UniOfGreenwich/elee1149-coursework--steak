@@ -45,16 +45,16 @@ Overall, Sprint 3 achieved many of its objectives, though some tasks will carry 
 
 - **Jar Page Design:**
 
-![Sprint 3 Jar Page Design](../Images/Sprints/Sprint3_Jar_Page_Design.png)
+![Sprint 3 Jar Page Design](../Images/Sprints/Sprint3_Jar_Design.png)
 
 - **Budgeting Page Design:**
 
-![Sprint 3 Budgeting Page Design](../Images/Sprints/Sprint3_Budgeting_Page_Design.png)
+![Sprint 3 Budgeting Page Design](../Images/Sprints/Sprint3_Budgeting_Design.png)
 
 - **Transactions Page Design:**
 
-![Sprint 3 Transactions Page Design](../Images/Sprints/Sprint3_Transactions_Page_Design.png)
+![Sprint 3 Transactions Page Design](../Images/Sprints/Sprint3_Transactions_Design.png)
 
 - **Accounts Page Design:**
 
-![Sprint 3 Accounts Page Design](../Images/Sprints/Sprint3_Accounts_Page_Design.png)
+![Sprint 3 Accounts Page Design](../Images/Sprints/Sprint3_Accounts_Design.png)
