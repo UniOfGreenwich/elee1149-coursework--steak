@@ -24,7 +24,7 @@ sequenceDiagram
     end
 ```
 
-## User Registration
+## User Login
 
 ```mermaid
 sequenceDiagram
