@@ -69,6 +69,9 @@
 
 2. **Database Changes:**
    - **Description:** Implement database changes and ensure they are reflected in the design.
+  
+3. **Unit Test 2:**
+   - **Description:** Unit test for account form, updating new status and dashbaord display.
 
 ## Team Availability
 
@@ -82,6 +85,6 @@
 
 - **Tools and Resources:**
   - Design: Figma
-  - Development: React, CSS, Python
+  - Development: React, CSS, Python, Pytest
   - Diagramming: Mermaid
   - Version Control: Git
