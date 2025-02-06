@@ -32,6 +32,8 @@ classDiagram
         +DateTime transaction_date
         +Numeric amount
         +String transaction_type
+        +Numeric pre_account_total
+        +Numeric post_account_total
         +String category
         +Text description
         +DateTime created_at
@@ -43,6 +45,7 @@ classDiagram
         +String jar_name
         +Numeric allocated_amount
         +Numeric current_balance
+        +Numeric target_amount
         +DateTime created_at
         +DateTime updated_at
     }
