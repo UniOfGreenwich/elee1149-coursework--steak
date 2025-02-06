@@ -58,6 +58,7 @@ classDiagram
     class Budget {
         +Integer budget_id
         +Integer user_id
+        +Integer income_id
         +String Expense
         +String category
         +Numeric amount
