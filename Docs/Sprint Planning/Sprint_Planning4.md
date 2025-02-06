@@ -71,7 +71,7 @@
    - **Description:** Implement database changes and ensure they are reflected in the design.
   
 3. **Unit Test 2:**
-   - **Description:** Unit test for account form, updating new status and dashbaord display.
+   - **Description:** Unit test for account form, updating new status and dashboard display.
 
 ## Team Availability
 
