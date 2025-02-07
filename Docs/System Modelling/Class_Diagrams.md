@@ -23,6 +23,7 @@ classDiagram
         +Numeric after_jar_total
         +DateTime created_at
         +DateTime updated_at
+        +Boolean is_deleted
     }
     class Transaction {
         +Integer transaction_id
@@ -48,6 +49,7 @@ classDiagram
         +Numeric target_amount
         +DateTime created_at
         +DateTime updated_at
+        +Boolean is_deleted
     }
     class Income {
         +Integer income_id
@@ -57,6 +59,7 @@ classDiagram
         +Numeric amount
         +DateTime income_date
         +DateTime created_at
+        +Boolean is_deleted
     }
     class Budget {
         +Integer budget_id
@@ -67,5 +70,6 @@ classDiagram
         +Numeric amount
         +DateTime created_at
         +DateTime updated_at
+        +Boolean is_deleted
     }
 ```
