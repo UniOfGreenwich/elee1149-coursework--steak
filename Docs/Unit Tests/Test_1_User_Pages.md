@@ -6,7 +6,7 @@ This document provides details on the unit tests for the user registration, logi
 
 ## Test File
 
-- **File Name:** `test_1_app.py`
+- **File Name:** `test_login_registration_features.py`
 - **Test Framework:** `pytest`
 
 ## Purpose
@@ -74,7 +74,7 @@ The tests use an in-memory SQLite database to prevent any impact on production d
 To execute the tests, run the following command in the terminal:
 
 ```bash
-pytest -v test_1_app.py
+pytest -v test_login_registration_features.py
 ```
 
 ## Test Results
