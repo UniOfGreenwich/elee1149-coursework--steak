@@ -35,7 +35,7 @@ function LoginScreen() {
                 navigate('/account-setup', { state: { userId } });
             } else {
                 // Redirect to the dashboard or appropriate page
-                navigate('/', { state: { userId } });
+                navigate('/dashboard', { state: { userId } });
             }
         } catch (error) {
             if (error.response) {
