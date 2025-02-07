@@ -82,16 +82,16 @@ pytest -v test_account_features.py
 The unit tests for setup form creation, updating new status, and total balance display were successfully executed, confirming that the application correctly handles these processes, ensuring data integrity and accurate calculations.
 
 ```bash
- ================================================= test session starts =================================================
+================================================== test session starts ==================================================
 platform win32 -- Python 3.13.1, pytest-8.3.4, pluggy-1.5.0 -- C:\Python313\python.exe
 cachedir: .pytest_cache
-rootdir:C:\Users\harri\OneDrive\Documents\GitHub\elee1149-coursework--steak\steakinc-web-app\steakinc-web-app\python_backend
+rootdir: C:\Users\harri\OneDrive\Documents\GitHub\elee1149-coursework--steak\steakinc-web-app\steakinc-web-app\python_backend
 plugins: flask-1.3.0
 collected 3 items
 
-test_account_features.py::test_setup_form_creation PASSED                                                                         [ 33%]
-test_account_features.py::test_update_new_status PASSED                                                                           [ 66%]
-test_account_features.py::test_total_balance_display PASSED                                                                       [100%]
+test_2_app.py::test_setup_form_creation PASSED                                                                     [ 33%]
+test_2_app.py::test_update_new_status PASSED                                                                       [ 66%]
+test_2_app.py::test_total_balance_display PASSED                                                                   [100%]
 ```
 
 Conclusion
