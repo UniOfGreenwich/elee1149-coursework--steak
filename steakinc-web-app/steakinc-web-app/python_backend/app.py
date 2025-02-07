@@ -21,13 +21,13 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.utcnow)
     new = db.Column(db.Boolean, default=True)
     security_1 = db.Column(db.String(100), nullable=True)
     security_2 = db.Column(db.String(100), nullable=True)
     security_3 = db.Column(db.String(100), nullable=True)
-
+ 
 # Define the Account model
 class Account(db.Model):
     account_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -35,10 +35,11 @@ class Account(db.Model):
     account_name = db.Column(db.String(50), nullable=False)
     account_type = db.Column(db.String(20), nullable=False)
     balance = db.Column(db.Numeric(15, 2), nullable=False)
-    after_jar_total = db.Column(db.Numeric(15, 2), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False, onupdate=datetime.utcnow)
-
+    after_jar_total = db.Column(db.Numeric(15, 2), nullable=False, default=0.0)  # New column
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.now)
+    is_deleted = db.Column(db.Boolean, default=False)
+ 
 # Define the Transaction model
 class Transaction(db.Model):
     transaction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -48,10 +49,12 @@ class Transaction(db.Model):
     transaction_date = db.Column(db.DateTime, nullable=False)
     amount = db.Column(db.Numeric(15, 2), nullable=False)
     transaction_type = db.Column(db.String(10), nullable=False)
+    pre_account_total = db.Column(db.Numeric(15, 2), nullable=False)
+    post_account_total = db.Column(db.Numeric(15, 2), nullable=False)
     category = db.Column(db.String(50), nullable=True)
     description = db.Column(db.Text, nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+ 
 # Define the Jar model
 class Jar(db.Model):
     jar_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -60,28 +63,35 @@ class Jar(db.Model):
     jar_name = db.Column(db.String(50), nullable=False)
     allocated_amount = db.Column(db.Numeric(15, 2), nullable=False)
     current_balance = db.Column(db.Numeric(15, 2), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False, onupdate=datetime.utcnow)
-
+    target_amount = db.Column(db.Numeric(15, 2), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.now)
+    is_deleted = db.Column(db.Boolean, default=False)
+ 
 # Define the Income model
 class Income(db.Model):
     income_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     amount = db.Column(db.Numeric(15, 2), nullable=False)
     income_date = db.Column(db.DateTime, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    is_deleted = db.Column(db.Boolean, default=False)
+ 
 # Define the Budget model
 class Budget(db.Model):
     budget_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    income_id = db.Column(db.Integer, db.ForeignKey('income.income_id'), nullable=False)
+    expense = db.Column(db.String(100), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Numeric(15, 2), nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.now)
+    is_deleted = db.Column(db.Boolean, default=False)
 
 # Function to create tables
 def create_tables():
@@ -217,11 +227,23 @@ def update_new_status(user_id):
         return jsonify({'message': 'User status updated.'}), 200
     return jsonify({'error': 'User not found.'}), 404
 
+@app.route('/total_balance/<int:user_id>', methods=['GET'])
+def total_balance(user_id):
+    try:
+        accounts = Account.query.filter_by(user_id=user_id, is_deleted=False).all()
+        account_details = [{'account_id': account.account_id, 'name': account.account_name, 'balance': float(account.balance), 'available_funds': float(account.after_jar_total), 'account_type': account.account_type} for account in accounts]
+        total_balance = sum(account['balance'] for account in account_details)
+        available_total = sum(account['available_funds'] for account in account_details)
+ 
+        return jsonify({
+            'total_balance': total_balance,
+            'accounts': account_details,
+            'available_total': available_total
+        }), 200
+    except Exception as e:
+        logging.error(f"Error calculating total balance: {e}")
+        return jsonify({'error': 'An error occurred while calculating total balance'}), 500
 
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts
     app.run(debug=True)
-
-
-
-

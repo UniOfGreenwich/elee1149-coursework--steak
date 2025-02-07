@@ -7,6 +7,7 @@ import LoginScreen from './LoginScreen/LoginScreen.jsx';
 import RegisterScreen from './RegisterScreen/RegisterScreen.jsx';
 import ForgotPasswordScreen from './ForgotPasswordScreen/ForgotPasswordScreen.jsx';
 import AcountInfoScreen from './AccountInfoScreen/AccountInfoScreen.jsx'
+import DashboardScreen from './DashboardScreen/DashboardScreen.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/register" element={<RegisterScreen />} />
         <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
         <Route path="/account-setup" element={<AcountInfoScreen />} />
+        <Route path="/dashboard" element={<DashboardScreen />} />
       </Routes>
     </Router>
   </StrictMode>
