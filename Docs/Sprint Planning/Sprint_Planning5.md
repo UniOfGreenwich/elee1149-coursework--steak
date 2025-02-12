@@ -27,6 +27,10 @@
 7. **Add Advert to Image Carousel:**
    - **Description:** Implement functionality to add the advert that plays in the home page carousel.
 
+8. **QA User action Testing:**
+   - **Assigned To:** Lewis
+   - **Decription:** Work through user actions to spot any bugs from the frontend.
+
 ### Documentation Tasks
 
 1. **Read ME Development:**
