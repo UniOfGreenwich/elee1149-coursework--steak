@@ -243,6 +243,99 @@ def total_balance(user_id):
     except Exception as e:
         logging.error(f"Error calculating total balance: {e}")
         return jsonify({'error': 'An error occurred while calculating total balance'}), 500
+    
+@app.route('/create_jar', methods=['POST'])
+def create_jar():
+    data = request.json
+    user_id = data.get('user_id')
+    account_id = data.get('account_id')
+    jar_name = data.get('jar_name')
+    allocated_amount = data.get('allocated_amount')
+    target_amount = data.get('target_amount')
+
+    if not user_id or not account_id or not jar_name or not allocated_amount:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    # Fetch the account from the database
+    account = Account.query.filter_by(account_id=account_id, user_id=user_id, is_deleted=False).first()
+    print(f"Received account_id: {account_id}, user_id: {user_id}")
+    
+    if not account:
+        return jsonify({'error': 'Account not found'}), 404
+    
+    # Check if the allocated amount is less than or equal to the after_jar_total
+    if float(allocated_amount) > float(account.after_jar_total):
+        return jsonify({'error': 'Allocated amount exceeds available balance after accounting for jars'}), 400
+
+    # Create a new jar object
+    new_jar = Jar(
+        user_id=user_id,
+        account_id=account_id,
+        jar_name=jar_name,
+        allocated_amount=allocated_amount,
+        current_balance=allocated_amount,  # Assuming the jar starts with the allocated amount
+        target_amount=target_amount,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
+    )
+
+    # Add the jar to the database
+    db.session.add(new_jar)
+    db.session.commit()
+
+    # Update the after_jar_total for the account
+    total_jar_balance = db.session.query(db.func.sum(Jar.current_balance)).filter_by(account_id=account_id, is_deleted=False).scalar() or 0.0
+    account.after_jar_total = account.balance - total_jar_balance
+    db.session.commit()
+
+    return jsonify({'message': 'Jar created successfully', 'jar_id': new_jar.jar_id}), 201
+
+@app.route('/user_jars/<int:user_id>', methods=['GET'])
+def get_user_jars(user_id):
+    try:
+        jars = Jar.query.filter_by(user_id=user_id, is_deleted=False).all()
+        jar_details = [{'jar_id': jar.jar_id, 'jar_name': jar.jar_name, 'allocated_amount': float(jar.allocated_amount), 'current_balance': float(jar.current_balance), 'target_amount': float(jar.target_amount or 0), 'account_id': jar.account_id} for jar in jars]
+        
+        return jsonify({'jars': jar_details}), 200
+    except Exception as e:
+        logging.error(f"Error fetching jars: {e}")
+        return jsonify({'error': 'An error occurred while fetching jars'}), 500
+
+@app.route('/update_jar/<int:jar_id>', methods=['PUT'])
+def update_jar(jar_id):
+    data = request.json
+    jar_name = data.get('jar_name')
+    target_amount = data.get('target_amount')
+
+    jar = Jar.query.get(jar_id)
+    if not jar:
+        return jsonify({'error': 'Jar not found'}), 404
+
+    if jar_name:
+        jar.jar_name = jar_name
+    if target_amount is not None:
+        jar.target_amount = target_amount
+    if target_amount == '':
+        jar.target_amount = None
+
+    db.session.commit()
+    return jsonify({'message': 'Jar updated successfully'}), 200
+
+@app.route('/delete_jar/<int:jar_id>', methods=['DELETE'])
+def delete_jar(jar_id):
+    jar = Jar.query.get(jar_id)
+    if not jar:
+        return jsonify({'error': 'Jar not found'}), 404
+
+    # Update the account's after_jar_total
+    account = Account.query.get(jar.account_id)
+    account.after_jar_total += jar.current_balance
+
+    # Soft delete the jar
+    jar.is_deleted = True
+    db.session.commit()
+
+    return jsonify({'message': 'Jar deleted successfully'}), 200
 
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts
