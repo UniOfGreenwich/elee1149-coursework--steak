@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 425px;
+    height: 500px;
     overflow-y: auto;
 }
  
@@ -22,18 +22,36 @@
     margin-top: 100px
 }
  
-.add-account-button {
+.add-account-button{
     color: #ffffff;
     border: 3px solid #ffffff;
     background-color: transparent;
     font-size: 20px;
     font-weight: 800;
     border-radius: 10px;
-    padding: 3px 10px 3px 10px;
-    margin: 10px 195px 0 0;
-    cursor: pointer;
+    padding: 3px 12px;
+}
+
+.remove-account-button {
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 10px;
+    padding: 5px 14px;
+    margin-left: 5px;
 }
  
+.account-type-input {
+    margin-bottom: 20px;
+}
+
+.account-button-wrapper {
+    display: flex;
+    margin: 10px 0 0 144px;
+}
+
 .button-wrapper {
     display: flex;
     margin-top: 50px;
@@ -53,29 +71,6 @@
     margin-right: 15px;
 }
 
-.input-field-account {
-    margin: 10px 5px 0px 5px;
-    width: 220px;
-    background: none;
-    border: 3px solid #DA4259;
-    border-radius: 12px;
-    padding: 5px;
-}
-
-.account-form-item:last-child{
-    margin-bottom: 16px;
-}
-
-.input-field-account:focus {
-    border: 3px solid #ffffff;
-    outline: none;
-}
-
-.input-field-account::placeholder {
-    color: #e9e9e9;
-}
- 
- 
 @media (min-width: 768px) {
     .account-logo {
         height: 80px;
@@ -97,6 +92,18 @@
     .account-message-text {
         font-size: 34px;
     }
- 
+
+    .account-name-input {
+        width: calc(100% - 40px);
+    }
+
+    .account-type-input {
+        margin-bottom: 30px;
+    }
+
+    .account-button-wrapper {
+        display: flex;
+        justify-content: right;
+        margin-left: 540px;
+    }
 }
- 
