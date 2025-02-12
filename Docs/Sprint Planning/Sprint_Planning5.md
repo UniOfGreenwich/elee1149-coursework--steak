@@ -24,8 +24,8 @@
 6. **Unit Test 3: Jars:**
    - **Description:** Conduct unit tests for the Jars feature to ensure functionality and reliability.
 
-7. **Add Song to Dashboard Loading:**
-   - **Description:** Implement functionality to add a song that plays while the dashboard loads.
+7. **Add Advert to Image Carousel:**
+   - **Description:** Implement functionality to add the advert that plays in the home page carousel.
 
 ### Documentation Tasks
 
