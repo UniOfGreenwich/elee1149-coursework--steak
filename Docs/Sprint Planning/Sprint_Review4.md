@@ -13,13 +13,13 @@
 
 2. **System Diagrams:**
    - Developed comprehensive system diagrams including class, data flow, sequence, and activity diagrams. 
-   - [View System Modeling Documentation](../Documentation/place)
+   - [View System Modeling Documentation](/Docs/System%20Modelling)
 
 3. **Coding Tasks:**
    - **Dashboard Template Generation:** Successfully integrated the Python backend with the dashboard template and developed a simple JSX interface.
    - **Database Changes:** Implemented necessary database changes and ensured they were reflected in the design.
    - **Unit Test 2:** Conducted unit tests for the account form, updating new status, and dashboard display.
-   - [View Unit Test Documentation](../Documentation/place)
+   - [View Unit Test 2 Documentation](/Docs/Unit%20Tests/Test_2_Account_info.md)
 
 ## Team Reflections
 
