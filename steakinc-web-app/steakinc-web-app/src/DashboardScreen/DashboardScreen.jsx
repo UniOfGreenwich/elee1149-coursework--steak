@@ -4,10 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import './DashboardScreen.css'; // Import the CSS file
- 
+
 // Register the necessary Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
- 
+
 function Dashboard() {
     const [totalBalance, setTotalBalance] = useState(null);
     const [accounts, setAccounts] = useState([]);
@@ -15,7 +15,7 @@ function Dashboard() {
     const location = useLocation();
     const userId = location.state?.userId;
     const navigate = useNavigate();
- 
+
     useEffect(() => {
         const fetchAccountSummary = async () => {
             if (userId) {
@@ -30,7 +30,7 @@ function Dashboard() {
                 console.error("User ID is not defined");
             }
         };
- 
+
         const fetchNewsHeadlines = async () => {
             try {
                 const response = await axios.get('https://newsapi.org/v2/everything', {
@@ -50,11 +50,11 @@ function Dashboard() {
         fetchAccountSummary();
         fetchNewsHeadlines()
     }, [userId]);
- 
+
     const formatNumber = (number) => {
         return number.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     };
- 
+
     const pieData = {
         labels: accounts.map(account => account.name),
         datasets: [{
@@ -82,7 +82,7 @@ function Dashboard() {
             hoverBorderColor: '#fff'
         }]
     };
- 
+
     const pieOptions = {
         maintainAspectRatio: false,
         responsive: true,
@@ -95,35 +95,40 @@ function Dashboard() {
             }
         }
     };
- 
+
     return (
-<div>
-<h1 className="white-text">Dashboard</h1>
-<h2 className="white-text">Total Balance: {totalBalance !== null && !isNaN(totalBalance) ? `£${formatNumber(totalBalance)}` : 'Loading...'}</h2>
-<h3 className="white-text">Accounts Breakdown:</h3>
-<ul>
+        <div>
+            <h1 className="white-text">Dashboard</h1>
+            <h2 className="white-text">Total Balance: {totalBalance !== null && !isNaN(totalBalance) ? `£${formatNumber(totalBalance)}` : 'Loading...'}</h2>
+            <h3 className="white-text">Accounts Breakdown:</h3>
+            <ul>
                 {accounts.map((account, index) => (
-<li key={index} className="white-text">
+                    <li key={index} className="white-text">
                         {account.name}: £{formatNumber(account.balance)}
-</li>
+                    </li>
                 ))}
-</ul>
-<div style={{ width: '50%', height: '400px', margin: '0 auto' }}>
-<Pie data={pieData} options={pieOptions} />
-</div>
- 
+            </ul>
+            <div style={{ width: '50%', height: '400px', margin: '0 auto' }}>
+                <Pie data={pieData} options={pieOptions} />
+            </div>
+
             <h3 className="white-text">Top Financial News:</h3>
-<ul>
+            <ul>
                 {newsHeadlines.map((article, index) => (
-<li key={index} className="white-text">
-<a href={article.url} target="_blank" rel="noopener noreferrer" className="white-text">
+                    <li key={index} className="white-text">
+                        <a href={article.url} target="_blank" rel="noopener noreferrer" className="white-text">
                             {article.title}
-</a>
-</li>
+                        </a>
+                    </li>
                 ))}
-</ul>
-</div>
+            </ul>
+
+            {/* New Navigation Buttons */}
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <button onClick={() => navigate('/jars', { state: { userId } })} style={{ marginRight: '10px' }}>Go to Jars</button>
+            </div>
+        </div>
     );
 }
- 
+
 export default Dashboard;
