@@ -16,6 +16,12 @@ function AccountInformationForm() {
     const handleAddAccount = () => {
         setAccounts([...accounts, { accountName: '', accountType: '', balance: '', monthlyIncome: '' }]);
     };
+
+    const handleRemoveAccount = () => {
+        if (accounts.length > 1) {
+            setAccounts(accounts.slice(0, -1));
+        }
+    }
  
     const handleAccountChange = (index, event) => {
         const newAccounts = accounts.map((account, i) =>
@@ -61,7 +67,18 @@ function AccountInformationForm() {
                                     value={account.accountName}
                                     onChange={(e) => handleAccountChange(index, e)}
                                     required
-                                    className='input-field-account'
+                                    className='input-field account-name-input'
+                                />
+                            </div>
+                            <div className="account-form-item">
+                            <input
+                                    type="number"
+                                    name="balance"
+                                    placeholder="Balance"
+                                    value={account.balance}
+                                    onChange={(e) => handleAccountChange(index, e)}
+                                    required
+                                    className='input-field'
                                 />
                                 <input
                                     type="text"
@@ -70,23 +87,15 @@ function AccountInformationForm() {
                                     value={account.accountType}
                                     onChange={(e) => handleAccountChange(index, e)}
                                     required
-                                    className='input-field-account'
-                                />
-                            </div>
-                            <div className="account-form-item">
-                                <input
-                                    type="number"
-                                    name="balance"
-                                    placeholder="Balance"
-                                    value={account.balance}
-                                    onChange={(e) => handleAccountChange(index, e)}
-                                    required
-                                    className='input-field-account'
+                                    className='input-field account-type-input'
                                 />
                             </div>
                         </div>
                     ))}
-                    <button type="button" className='add-account-button'  onClick={handleAddAccount}>+</button>
+                    <div className="account-button-wrapper">
+                        <button type="button" className='add-account-button'  onClick={handleAddAccount}>+</button>
+                        <button type="button" className='remove-account-button'  onClick={handleRemoveAccount}>-</button>
+                    </div>
                 </form>
             </div>
             <div className="button-wrapper">
