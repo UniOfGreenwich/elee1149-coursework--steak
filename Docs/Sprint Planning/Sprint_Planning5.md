@@ -29,7 +29,7 @@
 
 8. **QA User action Testing:**
    - **Assigned To:** Lewis
-   - **Decription:** Work through user actions to spot any bugs from the frontend.
+   - **Decription:** Work through user actions to spot any bugs from the frontend with a focus on accessibility (tab index).
 
 ### Documentation Tasks
 
