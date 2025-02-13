@@ -123,3 +123,106 @@ sequenceDiagram
         Frontend ->> User: Display success message
     end
 ```
+
+## Total Balance
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Request total balance
+    Frontend ->> Backend: GET /total_balance/{user_id}
+    alt Error fetching accounts
+        Backend ->> Frontend: Return error (500)
+        Frontend ->> User: Display error
+    else Successful fetch
+        Backend ->> Backend: Calculate total balance and available total
+        Backend ->> Frontend: Return total balance and account details (200)
+        Frontend ->> User: Display balance information
+    end
+```
+
+## Create Jar
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Submit jar creation form
+    Frontend ->> Backend: POST /create_jar
+    alt Missing required fields
+        Backend ->> Frontend: Return error (400)
+        Frontend ->> User: Display error
+    else Account not found
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error
+    else Allocated amount exceeds available balance
+        Backend ->> Frontend: Return error (400)
+        Frontend ->> User: Display error
+    else Valid request
+        Backend ->> Backend: Create new Jar
+        Backend ->> Backend: Update account's after_jar_total
+        Backend ->> Frontend: Jar created successfully (201)
+        Frontend ->> User: Display success message
+    end
+```
+
+## Get User Jars
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Request user jars
+    Frontend ->> Backend: GET /user_jars/{user_id}
+    alt Error fetching jars
+        Backend ->> Frontend: Return error (500)
+        Frontend ->> User: Display error
+    else Successful fetch
+        Backend ->> Frontend: Return jar details (200)
+        Frontend ->> User: Display jar information
+    end
+```
+
+## Update Jar
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Submit jar update form
+    Frontend ->> Backend: PUT /update_jar/{jar_id}
+    alt Jar not found
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error
+    else Jar found
+        Backend ->> Backend: Update jar details
+        Backend ->> Frontend: Jar updated successfully (200)
+        Frontend ->> User: Display success message
+    end
+```
+
+## Delete Jar
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Request to delete jar
+    Frontend ->> Backend: DELETE /delete_jar/{jar_id}
+    alt Jar not found
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error
+    else Jar found
+        Backend ->> Backend: Soft delete jar
+        Backend ->> Backend: Update account's after_jar_total
+        Backend ->> Frontend: Jar deleted successfully (200)
+        Frontend ->> User: Display success message
+    end
+
+```
