@@ -77,7 +77,7 @@ To execute the tests, run the following command in the terminal:
 pytest -v test_account_features.py
 ```
 
-##Test Results
+## Test Results
 
 The unit tests for setup form creation, updating new status, and total balance display were successfully executed, confirming that the application correctly handles these processes, ensuring data integrity and accurate calculations.
 
@@ -94,6 +94,6 @@ test_2_app.py::test_update_new_status PASSED                                    
 test_2_app.py::test_total_balance_display PASSED                                                                   [100%]
 ```
 
-Conclusion
+## Conclusion
 
 These unit tests ensure that the critical account operations of setup form creation, updating new status, and total balance display are functioning correctly, providing secure and reliable interactions with the database.
