@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import './JarsScreen.css'; // Assuming your CSS is in this file
+import NavSideBar from './NavSideBar';
+import './JarsScreen.css'; 
+import Lid from './Lid';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 function JarScreen() {
     const [jarName, setJarName] = useState('');
@@ -18,6 +24,19 @@ function JarScreen() {
     const [transactions, setTransactions] = useState([]); // State for transactions related to the selected jar
     const location = useLocation();
     const userId = location.state?.userId;
+    const [isAccountInfoVisible, setIsAccountInfoVisible] = useState(false);
+
+    const toggleAccountInfo = () => {
+        setIsAccountInfoVisible(!isAccountInfoVisible);
+    };
+
+    const settings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1
+    };
 
     useEffect(() => {
         const fetchAccountsAndJars = async () => {
@@ -149,39 +168,97 @@ function JarScreen() {
 
     return (
         <div>
-            <h1 className="white-text">Create a New Jar</h1>
-            <button onClick={() => setShowModal(true)}>Open Jar Form</button>
-
-            <div>
-                <h2 className="white-text">Available Total: £{availableTotal.toFixed(2)}</h2>
-                {accounts.map(account => (
-                    <p className="white-text" key={account.account_id}>
-                        {account.name}: £{account.available_funds.toFixed(2)}
-                    </p>
-                ))}
+            <NavSideBar />
+            <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
+            <div className="content-container">
+                <div className='account-background'>
+                    <h2 className="account-total-container">
+                        <div className="account-total">£{availableTotal.toFixed(2)}</div>
+                        <div onClick={toggleAccountInfo} className="dropdown-arrow">
+                            {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
+                        </div>
+                    </h2>
+                    {isAccountInfoVisible && (
+                        <ul className='account-list-container'>
+                            {accounts.map(account => (
+                                <li className="account-item" key={account.account_id}>
+                                    {account.name}: £{account.available_funds.toFixed(2)}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+                <div className="jar-carousel-container">
+                    <Slider {...settings} className="jar-container">
+                        {jars.map(jar => (
+                            <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
+                                <Lid />
+                                <span className="jar-name">{jar.jar_name}</span>
+                                <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
             </div>
-
             {selectedJar && (
-                <div className="jar-details">
-                    <h2 className="white-text">Jar Details</h2>
-                    <p className="white-text">Jar Name: {selectedJar.jar_name}</p>
-                    <p className="white-text">Current Balance: £{selectedJar.current_balance.toFixed(2)}</p>
-                    <p className="white-text">Goal: {selectedJar.target_amount}</p>
-                    <button onClick={() => setShowEditModal(true)}>Edit</button>
+                    <div className="jar-details">
+                        <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
+                        <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
+                        <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
+                        <div className="progress-bar-wrapper">
+                            {selectedJar.current_balance < selectedJar.target_amount && (
+                                <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
+                            )}
+                        <div className="progress-bar-container">
+                            <div className="progress-bar" style={{ 
+                                width: `${(selectedJar.current_balance / selectedJar.target_amount) * 100}%`, 
+                                backgroundColor: selectedJar.current_balance >= selectedJar.target_amount ? 'green' : '#ffffff' 
+                            }}>
+                                {selectedJar.current_balance >= selectedJar.target_amount && <span className="progress-completed">Completed</span>}
+                            </div>
+                        </div>
+                        {selectedJar.current_balance < selectedJar.target_amount && (
+                            <span className="progress-percentage">{((selectedJar.current_balance / selectedJar.target_amount) * 100).toFixed(2)}%</span>
+                        )}
+                    </div>
                 </div>
             )}
-
-            <div>
-                <h2 className="white-text">Your Jars</h2>
-                <ul className="white-text">
-                    {jars.map(jar => (
-                        <li key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
-                            {jar.jar_name}: Current Balance £{jar.current_balance.toFixed(2)}, Target £{(jar.target_amount ?? 0).toFixed(2)}
-                        </li>
-                    ))}
-                </ul>
+            <div className="transactions-wrapper">
+                <div className="transactions-title-wrapper">
+                    <h2>Transactions</h2>
+                    <button type="button" className='add-transactions-button'>+</button>
+                </div>
+                <div className="transactions-items-wrapper">
+                    <div className="transactions-item">
+                        <p className='transactions-withdrawal'>Withdrawal</p>
+                        <p className='transactions-withdrawal'>- £5.11</p>
+                    </div>
+                    <div className="transactions-item">
+                        <p className='transactions-withdrawal'>Withdrawal</p>
+                        <p className='transactions-withdrawal'>- £81.71</p>
+                    </div>
+                    <div className="transactions-item">
+                        <p className='transactions-deposit'>Deposit</p>
+                        <p className='transactions-deposit'>+ £821.62</p>
+                    </div>
+                    <div className="transactions-item">
+                        <p className='transactions-deposit'>Deposit</p>
+                        <p className='transactions-deposit'>+ £800.56</p>
+                    </div>
+                    <div className="transactions-item">
+                        <p className='transactions-deposit'>Deposit</p>
+                        <p className='transactions-deposit'>+ £2.50</p>
+                    </div>
+                    <div className="transactions-item">
+                        <p className='transactions-withdrawal'>Withdrawal</p>
+                        <p className='transactions-withdrawal'>- £27.91</p>
+                    </div>
+                    <div className="transactions-item">
+                        <p className='transactions-deposit'>Deposit</p>
+                        <p className='transactions-deposit'>+ £1120.50</p>
+                    </div>
+                </div>
             </div>
-
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
@@ -219,7 +296,6 @@ function JarScreen() {
                     </div>
                 </div>
             )}
-
             {showEditModal && selectedJar && (
                 <div className="modal">
                     <div className="modal-content">

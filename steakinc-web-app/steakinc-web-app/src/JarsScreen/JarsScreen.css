@@ -4,11 +4,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure the modal is on top */
+    z-index: 1000;
 }
 
 .modal-content {
@@ -21,7 +21,233 @@
     z-index: 1001; /* Ensure content is above the overlay */
 }
 
-/* Dashboard.css */
 .white-text {
     color: white;
+}
+
+.content-container {
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.jar-container {
+    display: flex;
+    padding: 0;
+    color: #ffffff;
+}
+
+.jar {
+    display: flex !important;
+    flex-direction: column;
+    margin: 20px 10px 0 10px;
+    padding: 15px;
+    background-color: transparent;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 60px !important;
+    border: 3px solid #DA4259;
+    text-align: center;
+}
+
+.jar-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+.jar:hover {
+    transform: scale(1.05);
+}
+
+.jar-value {
+    color: #ccc;
+}
+
+.dropdown-arrow {
+    margin: 8px 8px 0 0;
+    cursor: pointer;
+}
+
+.dropdown-arrow svg {
+    font-size: 26px;
+    color: white;
+}
+
+.account-total {
+    margin: 4px 0 0 20px;
+}
+
+.account-total-container {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    background-color: #DA4259;
+    border-radius: 10px;
+}
+
+.account-item {
+    color: #ffffff;
+    list-style: none;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-left: -40px;
+}
+
+.account-list-container {
+    background-color: #c22d44;
+    border-radius: 10px;
+    margin-top: -20px;
+}
+
+.account-background {
+    background-color: #DA4259;
+    border-radius: 10px;
+}
+
+.slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.slick-list {
+    height: 120px;
+}
+
+.jar-carousel-container {
+    width: 350px;
+    margin: 0 auto; 
+    background-color: #0B1739;
+    border-radius: 10px;
+}
+
+.jar-details {
+    background-color: #0B1739;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.create-jar-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 14px 0 0 320px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 3px solid #DA4259;
+}
+
+.edit-jar-button {
+    background-color: #DA4259;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 350px;
+    right: 30px;
+    width: 70px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.jar-details-name {
+    font-weight: 400;
+    color: #bdbcbc;
+    margin: 16px 0 0 20px;
+    font-size: 40px;
+    width: 200px;
+}
+
+.jar-details-balance {
+    color: #ffffff;
+    margin: 0 0 0 50px;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.jar-details-goal {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.progress-bar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.jar-details-goal {
+    margin-right: 10px;
+}
+
+.progress-bar-container {
+    flex-grow: 1;
+    background-color:  #818080;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+}
+
+.progress-percentage {
+    margin-left: 10px;
+    color: #ffffff;
+}
+
+.progress-completed {
+    position: absolute;
+    text-align: center;
+    width: 90%;
+    color: #ffffff;
+}
+
+.add-transactions-button {
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.transactions-wrapper {
+    background-color: #0B1739;
+    height: 300px;
+    padding: 10px;
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+.transactions-title-wrapper {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+.transactions-item {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+}
+
+.transactions-withdrawal {
+    color: #c22d44;
+}
+
+.transactions-deposit {
+    color: #03db8c;
 }
