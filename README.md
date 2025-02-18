@@ -1,4 +1,4 @@
-<img src="/SteakAd.gif" alt="SteakAd" width="80" height="80">
+![SteakAd](SteakAd.gif)
 
 <!-- PROJECT LOGO -->
 <br />
