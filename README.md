@@ -1,4 +1,3 @@
-![SteakAd.gif](./SteakAd.gif)
 
 <!-- PROJECT LOGO -->
 <br />
