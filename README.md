@@ -1,3 +1,4 @@
+<img src="/SteakAd.gif" alt="advert" width=100%>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -47,8 +48,6 @@
 ## About The Project
 
 <img src="/dashboard.png" alt="dashboard" width="600">
-
-<img src="/SteakAd.gif" alt="advert" width="600">
 
 Write a brief description of your project here.  Explain what it does and why it's useful.
 
