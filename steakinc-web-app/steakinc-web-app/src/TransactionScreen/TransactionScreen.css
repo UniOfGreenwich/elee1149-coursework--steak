@@ -1,0 +1,32 @@
+
+.modal-content {
+    background-color: white; /* Keep this white for contrast with text input */
+    color: black; /* Ensure text inside the modal is readable */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001; /* Ensure content is above the overlay */
+}
+
+.modal input, .modal select, .modal textarea, .modal button {
+    color: black; /* Ensure form elements have readable text */
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is on top */
+}
+
+.white-text {
+    color: white;
+}
