@@ -53,10 +53,10 @@ Overall, Sprint 5 was productive, with significant advancements in the Jars feat
 
 ## Final Designs and Diagrams
 
-- **Jars and Dashboard Activity Diagram:**
+- **Diagrams:**
 
-![Sprint 5 Activity Diagram](../Images/Sprints/Sprint5_Activity_Diagram.png)
+[View System Modeling Documentation](/Docs/System%20Modelling)
 
-- **Jars and Dashboard Sequence Diagram:**
+- **Unit Test 3:**
 
-![Sprint 5 Sequence Diagram](../Images/Sprints/Sprint5_Sequence_Diagram.png)
+[View Unit Test 3 Documentation](/Docs/Unit%20Tests/Test_3_Jar_Screen.md)
