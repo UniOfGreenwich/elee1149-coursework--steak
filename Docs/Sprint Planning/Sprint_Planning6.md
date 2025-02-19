@@ -36,6 +36,9 @@
 7. **Unit Test 4: Transactions:**
    - **Description:** Conduct unit tests for the Transactions feature to ensure functionality and reliability.
 
+8. **Transactions Integrated into Jars Page:**
+   - **Description:** Append Jars Page to show transactions.
+
 ### Documentation Tasks
 
 1. **Unit Test 4: Transactions Documentation:**
