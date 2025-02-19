@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from sqlalchemy.orm import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import logging
+from decimal import Decimal
 
 app = Flask(__name__)
 CORS(app)
@@ -27,7 +29,7 @@ class User(db.Model):
     security_1 = db.Column(db.String(100), nullable=True)
     security_2 = db.Column(db.String(100), nullable=True)
     security_3 = db.Column(db.String(100), nullable=True)
- 
+
 # Define the Account model
 class Account(db.Model):
     account_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -39,7 +41,7 @@ class Account(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.now)
     is_deleted = db.Column(db.Boolean, default=False)
- 
+
 # Define the Transaction model
 class Transaction(db.Model):
     transaction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -54,7 +56,7 @@ class Transaction(db.Model):
     category = db.Column(db.String(50), nullable=True)
     description = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
- 
+
 # Define the Jar model
 class Jar(db.Model):
     jar_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -67,28 +69,24 @@ class Jar(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.now)
     is_deleted = db.Column(db.Boolean, default=False)
- 
+
 # Define the Income model
 class Income(db.Model):
     income_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
-    account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     amount = db.Column(db.Numeric(15, 2), nullable=False)
     income_date = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     is_deleted = db.Column(db.Boolean, default=False)
- 
+
 # Define the Budget model
 class Budget(db.Model):
     budget_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
-    income_id = db.Column(db.Integer, db.ForeignKey('income.income_id'), nullable=False)
     expense = db.Column(db.String(100), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Numeric(15, 2), nullable=False)
-    start_date = db.Column(db.DateTime, nullable=False)
-    end_date = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.now)
     is_deleted = db.Column(db.Boolean, default=False)
@@ -190,7 +188,6 @@ def forgot_password():
 
     return jsonify({'message': 'Password updated successfully'}), 200
 
-# Setup endpoint
 @app.route('/setup', methods=['POST'])
 def setup():
     data = request.json
@@ -203,18 +200,48 @@ def setup():
 
     account_name = data.get('accountName')
     account_type = data.get('accountType')
-    balance = data.get('balance')
+    balance = Decimal(data.get('balance'))
 
     try:
-        # Save account details with initial after_jar_total equal to balance
-        new_account = Account(user_id=user_id, account_name=account_name, account_type=account_type, balance=balance, after_jar_total=balance)
+        # Fetch all existing accounts for the user to calculate pre_account_total
+        accounts = Account.query.filter_by(user_id=user_id).all()
+        pre_account_total = sum(account.balance for account in accounts)
+
+        # Create the new account
+        new_account = Account(
+            user_id=user_id,
+            account_name=account_name,
+            account_type=account_type,
+            balance=balance,
+            after_jar_total=balance
+        )
         db.session.add(new_account)
         db.session.commit()  # Commit to get account_id
+
+        # Calculate the post_account_total (including the new account)
+        post_account_total = pre_account_total + balance
+
+        # Record the transaction for account creation
+        transaction = Transaction(
+            account_id=new_account.account_id,
+            user_id=user_id,
+            transaction_date=datetime.now(),
+            amount=balance,
+            transaction_type='ingoing',
+            pre_account_total=pre_account_total,
+            post_account_total=post_account_total,
+            category='account',
+            description='Initial balance on account creation'
+        )
+        db.session.add(transaction)
+
+        db.session.commit()
         return jsonify({'message': 'Setup completed successfully.'}), 200
     except Exception as e:
         db.session.rollback()  # Rollback in case of error
         logging.error(f"Error during setup: {e}")
         return jsonify({'error': 'An error occurred during setup'}), 500
+
 
 
 # Update 'new' status endpoint
@@ -227,6 +254,7 @@ def update_new_status(user_id):
         return jsonify({'message': 'User status updated.'}), 200
     return jsonify({'error': 'User not found.'}), 404
 
+
 @app.route('/total_balance/<int:user_id>', methods=['GET'])
 def total_balance(user_id):
     try:
@@ -234,7 +262,7 @@ def total_balance(user_id):
         account_details = [{'account_id': account.account_id, 'name': account.account_name, 'balance': float(account.balance), 'available_funds': float(account.after_jar_total), 'account_type': account.account_type} for account in accounts]
         total_balance = sum(account['balance'] for account in account_details)
         available_total = sum(account['available_funds'] for account in account_details)
- 
+
         return jsonify({
             'total_balance': total_balance,
             'accounts': account_details,
@@ -243,7 +271,8 @@ def total_balance(user_id):
     except Exception as e:
         logging.error(f"Error calculating total balance: {e}")
         return jsonify({'error': 'An error occurred while calculating total balance'}), 500
-    
+
+
 @app.route('/create_jar', methods=['POST'])
 def create_jar():
     data = request.json
@@ -336,6 +365,125 @@ def delete_jar(jar_id):
     db.session.commit()
 
     return jsonify({'message': 'Jar deleted successfully'}), 200
+
+
+@app.route('/create_transaction', methods=['POST'])
+def create_transaction():
+    data = request.json
+    account_id = data.get('account_id')
+    jar_id = data.get('jar_id')
+    amount = Decimal(data.get('amount'))  # Convert amount to Decimal
+    transaction_type = data.get('transaction_type')
+    user_id = data.get('user_id')
+    overflow = False
+    
+     # Use the session to get the account
+    session: Session = db.session
+    account = session.get(Account, account_id)
+
+    # Check if the transaction is outgoing and there are sufficient funds
+    if transaction_type == 'outgoing' and not jar_id:
+        if account.after_jar_total < amount:
+            return jsonify({'error': 'Insufficient funds in account'}), 400
+            overflow = True
+    elif transaction_type == 'outgoing' and jar_id:
+            jar = Jar.query.get(jar_id)
+            if jar.current_balance < amount:
+                return jsonify({'error': 'Insufficient funds in jar'}), 400
+                overflow = True
+
+    # Calculate pre_account_total (sum of all account balances)
+    accounts = Account.query.filter_by(user_id=user_id, is_deleted=False).all()
+    pre_account_total = sum(account.balance for account in accounts)
+
+    # Apply the transaction
+    if transaction_type == 'ingoing':
+        account.balance += amount
+        if jar_id:
+            jar = Jar.query.get(jar_id)
+            jar.current_balance += amount
+    elif transaction_type == 'outgoing' and overflow == False:
+        account.balance -= amount
+        if jar_id:
+            jar = Jar.query.get(jar_id)
+            jar.current_balance -= amount
+
+    # Commit changes to account and jar to ensure balances are updated
+    db.session.commit()
+
+    # Calculate post_account_total (sum of all account balances after transaction)
+    post_account_total = sum(account.balance for account in accounts)
+
+    # Update after_jar_total if no jar is specified
+    if not jar_id:
+        total_jar_balance = db.session.query(db.func.sum(Jar.current_balance)).filter_by(account_id=account_id).scalar() or Decimal('0.0')
+        account.after_jar_total = account.balance - Decimal(total_jar_balance)
+
+    # Create and save the transaction
+    transaction = Transaction(
+        account_id=account_id,
+        user_id=user_id,
+        jar_id=jar_id,
+        transaction_date=datetime.now(),
+        amount=amount,
+        transaction_type=transaction_type,
+        pre_account_total=pre_account_total,
+        post_account_total=post_account_total,
+        category=data.get('category'),
+        description=data.get('description')
+    )
+    db.session.add(transaction)
+    db.session.commit()
+
+    return jsonify({'message': 'Transaction created successfully'}), 201
+
+@app.route('/user_transactions/<int:user_id>', methods=['GET'])
+def get_user_transactions(user_id):
+    try:
+        # Query to get all transactions for the user ordered by date
+        transactions = Transaction.query.filter_by(user_id=user_id).order_by(Transaction.transaction_date.desc()).all()
+        
+        # Convert transaction objects to dictionaries
+        transaction_list = [{
+            'transaction_id': transaction.transaction_id,
+            'transaction_date': transaction.transaction_date.strftime("%Y-%m-%d %H:%M:%S.%f"),
+            'amount': float(transaction.amount),
+            'category': transaction.category,
+            'description': transaction.description,
+            'pre_account_total': float(transaction.pre_account_total),
+            'post_account_total': float(transaction.post_account_total)
+        } for transaction in transactions]
+
+        return jsonify({'transactions': transaction_list}), 200
+
+    except Exception as e:
+        # Log the error and return a generic error message
+        print(f"Error fetching transactions for user {user_id}: {e}")
+        return jsonify({'error': 'An error occurred while fetching transactions'}), 500
+    
+@app.route('/user_jar_transactions/<int:user_id>/<int:jar_id>', methods=['GET'])
+def get_user_jar_transactions(user_id, jar_id):
+    try:
+        # Query to get all transactions for the user and specific jar ordered by date
+        transactions = Transaction.query.filter_by(user_id=user_id, jar_id=jar_id).order_by(Transaction.transaction_date.desc()).all()
+        
+        # Convert transaction objects to dictionaries
+        transaction_list = [{
+            'transaction_id': transaction.transaction_id,
+            'transaction_date': transaction.transaction_date,
+            'amount': float(transaction.amount),
+            'category': transaction.category,
+            'description': transaction.description,
+            'pre_account_total': float(transaction.pre_account_total),
+            'post_account_total': float(transaction.post_account_total)
+        } for transaction in transactions]
+
+        return jsonify({'transactions': transaction_list}), 200
+
+    except Exception as e:
+        # Log the error and return a generic error message
+        print(f"Error fetching transactions for user {user_id} and jar {jar_id}: {e}")
+        return jsonify({'error': 'An error occurred while fetching transactions'}), 500
 
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts

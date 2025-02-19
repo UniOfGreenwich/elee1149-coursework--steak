@@ -126,6 +126,7 @@ function Dashboard() {
             {/* New Navigation Buttons */}
             <div style={{ textAlign: 'center', marginTop: '20px' }}>
                 <button onClick={() => navigate('/jars', { state: { userId } })} style={{ marginRight: '10px' }}>Go to Jars</button>
+                <button onClick={() => navigate('/transactions', { state: { userId } })}>Go to Transactions</button>
             </div>
         </div>
     );
