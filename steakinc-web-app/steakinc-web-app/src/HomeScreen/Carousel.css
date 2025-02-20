@@ -2,45 +2,53 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 30px;
 }
-  
+
 .carousel-inner {
     display: flex;
     align-items: center;
+    position: relative;
 }
-  
+
 .carousel-images {
     display: flex;
     align-items: center;
+    position: relative;
 }
-  
+
 .carousel-image,
 .carousel-video {
     transition: transform 0.3s ease-in-out;
     border-radius: 16px;
     border: 2px solid white; /* Adds a visible border */
+    object-fit: fill; /* Ensure content covers the area */
 }
 
 /* Small images (left & right) */
 .carousel-image.small,
 .carousel-video.small {
-    width: 400px;
-    height: auto;
+    width: 480px; /* Maintain the width */
+    height: 270px; /* 400 / 16 * 9 */
     opacity: 0.7;
     border: 1px solid white; /* Slightly smaller border for small images */
+    z-index: 1; /* Ensure small images are behind */
+    position: relative;
+    transform: translateY(-60px); /* Move side images slightly up */
 }
 
 /* Main centered image/video */
 .carousel-image.large,
 .carousel-video.large {
-    width: 600px;
-    height: auto;
+    width: 600px; /* Maintain the width */
+    height: 337.5px; /* 600 / 16 * 9 */
     opacity: 1;
     border: 2px solid white;
-    object-fit: cover;
+    z-index: 2; /* Ensure the main image is in front */
+    position: relative;
+    margin-left: -50px; /* Adjust these values to overlap sides */
+    margin-right: -50px;
 }
-
 
 .carousel-button {
     background: none;
@@ -53,13 +61,13 @@
     margin: 0 10px;
     color: #ffffff;
 }
-  
+
 .carousel-dots {
     display: flex;
     justify-content: center;
     margin-top: 10px;
 }
-  
+
 .dot {
     height: 10px;
     width: 10px;
@@ -69,7 +77,7 @@
     display: inline-block;
     cursor: pointer;
 }
-  
+
 .dot.active {
     background-color: #ffffff;
 }
@@ -81,8 +89,8 @@
 
 .mute-overlay {
     position: absolute;
-    top: 10px; 
-    right: 10px;
+    top: 10px;
+    right: -30px;
     background: rgba(0, 0, 0, 0.6);
     color: white;
     font-size: 24px;
@@ -94,12 +102,12 @@
     align-items: center;
     justify-content: center;
     transition: background 0.3s ease-in-out;
+    z-index: 3;
 }
 
 .mute-overlay:hover {
     background: rgba(0, 0, 0, 0.8);
 }
-
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -117,26 +125,31 @@
     .carousel-image.small,
     .carousel-video.small {
         width: 0px;
+        height: 0px; /* Hide small items */
     }
 
     .carousel-image.large,
     .carousel-video.large {
-        width: 500px; 
+        width: 500px;
+        height: 281.25px; /* 500 / 16 * 9 */
     }
 }
 
 @media (min-width: 1101px) and (max-width: 1529px) {
     .carousel-container {
-        width: 100%; 
+        width: 100%;
     }
 
     .carousel-image.small,
     .carousel-video.small {
-        width: 250px; 
+        width: 300px;
+        height: 168.75px; /* 250 / 16 * 9 */
+        transform: translateY(-60px); /* Move side images slightly up */
     }
 
     .carousel-image.large,
     .carousel-video.large {
-        width: 425px; 
+        width: 425px;
+        height: 239.0625px; /* 425 / 16 * 9 */
     }
 }

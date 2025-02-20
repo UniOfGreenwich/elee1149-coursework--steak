@@ -31,7 +31,7 @@
 
 .login-wrapper {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .button-wrapper {
@@ -39,32 +39,25 @@
     justify-content: center;
 }
 
-.login-button-home {
+.login-button-home, .register-button-home {
+    flex: 1;
+    max-width: 200px; /* Optional: set a max-width if you want to limit the button size */
     background-color: #DA4259;
     color: #ffffff;
     border: none;
-    padding: 20px 45px;
+    padding: 20px 0; /* Ensure equal vertical padding */
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
-    margin: 20px 0 0 5px;
+    margin: 20px 5px 0 5px; /* Adjust margin for equal spacing */
     cursor: pointer;
     border-radius: 15px;
+    transition: background-color 0.3s;
 }
 
 .register-button-home {
     background-color: transparent;
-    color: #ffffff;
-    border: none;
-    padding: 10px 35px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 20px 5px 0 0;
-    cursor: pointer;
-    border-radius: 15px;
     border: #DA4259 3px solid;
 }
 
@@ -80,11 +73,11 @@
     }
 
     .login-wrapper {
-        margin-top: 50px;
+        margin-top: 35px;
     }
 
-    .login-button-home .register-button-home {
-        font-size: 24px;
+    .login-button-home, .register-button-home {
+        font-size: 20px;
     }
 }
 
@@ -93,7 +86,7 @@
         text-align: center;
         justify-content: center;
         font-size: 34px;
-        margin: 20px 0 0 0;
+        margin: 79px 0 0 0;
     }
 
     .logo-home {
@@ -101,16 +94,11 @@
     }
 
     .login-wrapper {
-        margin-top: 50px;
+        margin-top: 35px;
     }
 
-    .login-button-home {
-        font-size: 24px;
-        padding: 15px 55px;
-    }
-
-    .register-button-home {
+    .login-button-home, .register-button-home {
         font-size: 20px;
-        padding: 15px 55px;
+        padding: 15px 0; /* Ensure equal vertical padding */
     }
 }

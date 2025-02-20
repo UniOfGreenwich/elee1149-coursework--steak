@@ -64,9 +64,6 @@ const Carousel = () => {
   return (
     <div className="carousel-container">
       <div className="carousel-inner">
-        <button className="carousel-button prev" onClick={prevSlide}>
-          &lt;
-        </button>
         <div className="carousel-images">
           {items[getPrevIndex()].type === 'video' ? (
             <div className="video-container small">
@@ -128,9 +125,6 @@ const Carousel = () => {
             />
           )}
         </div>
-        <button className="carousel-button next" onClick={nextSlide}>
-          &gt;
-        </button>
       </div>
       <div className="carousel-dots">
         {items.map((_, index) => (
