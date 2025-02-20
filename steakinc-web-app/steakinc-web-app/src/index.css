@@ -4,6 +4,9 @@ body {
   }
 
 button {
-    background-color: #081028;
     font-family: "Jost", serif;
+}
+
+input {
+  font-family: "Jost", serif;
 }
