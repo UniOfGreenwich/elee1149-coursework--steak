@@ -140,3 +140,53 @@ flowchart TD
     G --> H[End Delete Jar]
     D --> H
 ```
+
+## Create Transaction Process
+
+```mermaid
+flowchart TD
+    A[Start Create Transaction] --> B[Validate request data]
+    B --> C{Are fields missing?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Fetch account]
+    E --> F{Is transaction outgoing?}
+    F -- Yes --> G{Sufficient funds?}
+    G -- No --> H[Display error message]
+    G -- Yes --> I[Calculate pre_account_total]
+    F -- No --> I
+    I --> J[Apply transaction]
+    J --> K[Commit changes]
+    K --> L[Calculate post_account_total]
+    L --> M[Update after_jar_total]
+    M --> N[Create and save transaction record]
+    N --> O[Display success message]
+    O --> P[End Create Transaction]
+    D --> P
+    H --> P
+```
+
+## Get User Transactions Process
+
+```mermaid
+flowchart TD
+    A[Start Get User Transactions] --> B[Fetch transactions for user]
+    B --> C{Error fetching transactions?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Return transaction list]
+    E --> F[Display transaction history]
+    F --> G[End Get User Transactions]
+    D --> G
+```
+
+## Get User Jar Transactions Process
+
+```mermaid
+flowchart TD
+    A[Start Get User Jar Transactions] --> B[Fetch transactions for user and jar]
+    B --> C{Error fetching transactions?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Return transaction list]
+    E --> F[Display transaction history]
+    F --> G[End Get User Jar Transactions]
+    D --> G
+```
