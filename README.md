@@ -47,9 +47,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="/dashboard.png" alt="dashboard" width="600">
+<a href="https://www.figma.com/design/vXN8MF0XHdS9KF5yII9ag2/Steak?node-id=0-1&t=a8jZ7VVYewacFEQS-1" target="_blank">
+    <img src="/dashboard.png" alt="dashboard" width="600">
+</a>
 
-Write a brief description of your project here.  Explain what it does and why it's useful.
+Write a brief description of your project here.  Explain what it does and why it's useful. Click Image for figma board.
 
 
 ### Built With
