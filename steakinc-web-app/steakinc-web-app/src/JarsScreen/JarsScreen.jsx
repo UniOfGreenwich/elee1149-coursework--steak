@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+
 function JarScreen() {
     const [jarName, setJarName] = useState('');
     const [allocatedAmount, setAllocatedAmount] = useState('');
@@ -30,12 +31,23 @@ function JarScreen() {
         setIsAccountInfoVisible(!isAccountInfoVisible);
     };
 
-    const settings = {
+    const horizontalSettings = {
         dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1
+    };
+
+    const verticalSettings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        vertical: true,
+        verticalSwiping: true,
+        arrows: true
     };
 
     useEffect(() => {
@@ -188,8 +200,8 @@ function JarScreen() {
                         </ul>
                     )}
                 </div>
-                <div className="jar-carousel-container">
-                    <Slider {...settings} className="jar-container">
+                <div className="jar-carousel-container horizontal-carousel">
+                    <Slider {...horizontalSettings} className="jar-container">
                         {jars.map(jar => (
                             <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
                                 <Lid />
@@ -200,6 +212,17 @@ function JarScreen() {
                     </Slider>
                 </div>
             </div>
+            <div className="jar-carousel-container vertical-carousel">
+                    <Slider {...verticalSettings} className="jar-container">
+                        {jars.map(jar => (
+                            <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
+                                <Lid />
+                                <span className="jar-name">{jar.jar_name}</span>
+                                <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
             {selectedJar && (
                     <div className="jar-details">
                         <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
@@ -260,38 +283,53 @@ function JarScreen() {
                 </div>
             </div>
             {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="create-overlay-container">
+                    <div className="create-overlay-content">
                         <form onSubmit={handleSubmit}>
-                            <label>
-                                Jar Name:
-                                <input type="text" value={jarName} onChange={(e) => setJarName(e.target.value)} required />
+                            <div className="create-item">
+                                <label>
+                                    <select className='input-field-dropdown' value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required>
+                                        <option value="" disabled>Select account</option>
+                                        {accounts.map((account, index) => (
+                                            <option key={index} value={account.account_id}>
+                                                {account.name} - £{(account.available_funds).toFixed(2)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                                <label>
+                                <input
+                                    className='input-field' 
+                                    type="text" value={jarName} 
+                                    onChange={(e) => setJarName(e.target.value)} required 
+                                    placeholder='Jar Name'
+                                />
                             </label>
-                            <br />
-                            <label>
-                                Allocated Amount:
-                                <input type="number" value={allocatedAmount} onChange={(e) => setAllocatedAmount(e.target.value)} required />
-                            </label>
-                            <br />
-                            <label>
-                                Target Amount (optional):
-                                <input type="number" value={targetAmount} onChange={(e) => setTargetAmount(e.target.value)} />
-                            </label>
-                            <br />
-                            <label>
-                                Select Account:
-                                <select value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required>
-                                    <option value="" disabled>Select account</option>
-                                    {accounts.map((account, index) => (
-                                        <option key={index} value={account.account_id}>
-                                            {account.name} - £{(account.available_funds).toFixed(2)}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                            <br />
-                            <button type="submit">Create Jar</button>
-                            <button type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                            </div>
+                            <div className="create-item">
+                                <label>
+                                    <input 
+                                        className='input-field' 
+                                        type="number" 
+                                        value={allocatedAmount} 
+                                        onChange={(e) => setAllocatedAmount(e.target.value)} required 
+                                        placeholder='Allocated Amount'
+                                    />
+                                </label>
+                                <label>
+                                    <input 
+                                        className='input-field' 
+                                        type="number" 
+                                        value={targetAmount} 
+                                        onChange={(e) => setTargetAmount(e.target.value)} 
+                                        placeholder='Target Amount (optional)'
+                                    />
+                                </label>
+                            </div>
+                            <div className="create-button-wrapper">
+                                <button className='back-button' type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                                <button className='login-submit-button' type="submit">Create Jar</button>
+                            </div>
                         </form>
                     </div>
                 </div>

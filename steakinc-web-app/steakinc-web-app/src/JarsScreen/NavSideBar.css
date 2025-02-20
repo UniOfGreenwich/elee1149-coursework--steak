@@ -37,7 +37,7 @@
     position: fixed;
     top: 0;
     left: -400px; 
-    width: 400px; 
+    width: 300px; 
     height: 100%;
     background-color: #0B1739; 
     padding: 20px;
@@ -96,4 +96,14 @@
     align-items: center;
     color: white;
     cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+    .nav-sidebar {
+        left: 0;
+    }
+
+    .burger-menu {
+        display: none;
+    }
 }
