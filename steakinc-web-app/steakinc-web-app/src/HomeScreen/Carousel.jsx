@@ -19,42 +19,41 @@ const Carousel = () => {
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    // Autoplay video only if it's the current main (middle) image
     if (items[currentIndex].type === 'video' && videoRef.current) {
       videoRef.current.play();
-      videoRef.current.onended = () => nextSlide();  // Move to the next slide after video ends
+      videoRef.current.onended = () => nextSlide();
     } else {
-      startAutoPlay();  // For images, start the slideshow cycle
+      startAutoPlay();
     }
 
-    return () => clearInterval(intervalRef.current);  // Cleanup the interval
+    return () => clearInterval(intervalRef.current);
   }, [currentIndex]);
 
   const startAutoPlay = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       nextSlide();
-    }, 3000);  // Slide change every 3 seconds for images
+    }, 3000);
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);  // Go to next image/video
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? items.length - 1 : prevIndex - 1
-    );  // Go to previous image/video
+    );
   };
 
   const handleDotClick = (index) => {
-    setCurrentIndex(index);  // Change slide on dot click
+    setCurrentIndex(index);
   };
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
     if (videoRef.current) {
-      videoRef.current.muted = !isMuted;  // Toggle mute on click
+      videoRef.current.muted = !isMuted;
     }
   };
 
@@ -66,7 +65,7 @@ const Carousel = () => {
       <div className="carousel-inner">
         <div className="carousel-images">
           {items[getPrevIndex()].type === 'video' ? (
-            <div className="video-container small">
+            <div className="video-container small" onClick={prevSlide}>
               <video
                 className="carousel-video small"
                 src={items[getPrevIndex()].src}
@@ -80,6 +79,7 @@ const Carousel = () => {
               className="carousel-image small"
               src={items[getPrevIndex()].src}
               alt={items[getPrevIndex()].alt}
+              onClick={prevSlide}
             />
           )}
 
@@ -94,7 +94,6 @@ const Carousel = () => {
                 muted={isMuted}
                 onClick={toggleMute}
               />
-              {/* Mute/Unmute Icon Overlay */}
               <div className="mute-overlay" onClick={toggleMute}>
                 {isMuted ? '🔇' : '🔊'}
               </div>
@@ -108,7 +107,7 @@ const Carousel = () => {
           )}
 
           {items[getNextIndex()].type === 'video' ? (
-            <div className="video-container small">
+            <div className="video-container small" onClick={nextSlide}>
               <video
                 className="carousel-video small"
                 src={items[getNextIndex()].src}
@@ -122,6 +121,7 @@ const Carousel = () => {
               className="carousel-image small"
               src={items[getNextIndex()].src}
               alt={items[getNextIndex()].alt}
+              onClick={nextSlide}
             />
           )}
         </div>
