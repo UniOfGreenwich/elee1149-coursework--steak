@@ -224,5 +224,72 @@ sequenceDiagram
         Backend ->> Frontend: Jar deleted successfully (200)
         Frontend ->> User: Display success message
     end
+```
 
+## Create Transaction Process
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Submit transaction form
+    Frontend ->> Backend: POST /create_transaction
+    Backend ->> Backend: Validate request data
+    alt Missing required fields
+        Backend ->> Frontend: Return error (400)
+        Frontend ->> User: Display error message
+    else Fetch account
+        Backend ->> Backend: Check sufficient funds (if outgoing)
+        alt Insufficient funds
+            Backend ->> Frontend: Return error (400)
+            Frontend ->> User: Display error message
+        else Calculate pre_account_total
+            Backend ->> Backend: Apply transaction
+            Backend ->> Backend: Commit changes
+            Backend ->> Backend: Calculate post_account_total
+            Backend ->> Backend: Update after_jar_total (if applicable)
+            Backend ->> Backend: Create and save transaction record
+            Backend ->> Frontend: Transaction created successfully (201)
+            Frontend ->> User: Display success message
+        end
+    end
+```
+
+## Get User Transactions Process
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Request transaction history
+    Frontend ->> Backend: GET /user_transactions/{user_id}
+    Backend ->> Backend: Fetch transactions for user
+    alt Error fetching transactions
+        Backend ->> Frontend: Return error (500)
+        Frontend ->> User: Display error message
+    else Successful fetch
+        Backend ->> Frontend: Return transaction list (200)
+        Frontend ->> User: Display transaction history
+    end
+```
+
+## Get User Jar Transactions Process
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    User ->> Frontend: Request jar transaction history
+    Frontend ->> Backend: GET /user_jar_transactions/{user_id}/{jar_id}
+    Backend ->> Backend: Fetch transactions for user and jar
+    alt Error fetching transactions
+        Backend ->> Frontend: Return error (500)
+        Frontend ->> User: Display error message
+    else Successful fetch
+        Backend ->> Frontend: Return transaction list (200)
+        Frontend ->> User: Display transaction history
+    end
 ```
