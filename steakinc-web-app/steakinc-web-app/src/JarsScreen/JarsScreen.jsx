@@ -77,6 +77,26 @@ function JarScreen() {
         fetchAccountsAndJars();
     }, [userId]);
 
+    useEffect(() => {
+        if (selectedJar) {
+            fetchJarTransactions(selectedJar.jar_id);
+        }
+    }, [selectedJar]);
+
+    const fetchJarTransactions = async (jarId) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/user_jar_transactions/${userId}/${jarId}`);
+            if (response.data.transactions) {
+                setTransactions(response.data.transactions);
+                console.log("Transactions fetched:", response.data.transactions); // Debugging log
+            } else {
+                console.error("Transactions not found in response");
+            }
+        } catch (error) {
+            console.error("Error fetching transactions:", error);
+        }
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
     
@@ -235,19 +255,13 @@ function JarScreen() {
                         </tr>
                     </thead>
                     <tbody>
-                        {[
-                            { date: '2023-01-01', amount: '50.00', category: 'Groceries', description: 'Supermarket', accountTotal: '950.00' },
-                            { date: '2023-01-02', amount: '20.00', category: 'Transport', description: 'Bus ticket', accountTotal: '930.00' },
-                            { date: '2023-01-03', amount: '100.00', category: 'Entertainment', description: 'Concert ticket', accountTotal: '830.00' },
-                            { date: '2023-01-04', amount: '30.00', category: 'Dining', description: 'Restaurant', accountTotal: '800.00' },
-                            { date: '2023-01-05', amount: '200.00', category: 'Rent', description: 'Monthly rent', accountTotal: '600.00' }
-                        ].map((transaction, index) => (
-                            <tr key={index} className="transactions-row">
-                                <td className="transactions-cell">{transaction.date}</td>
-                                <td className="transactions-cell">£{transaction.amount}</td>
-                                <td className="transactions-cell">{transaction.category}</td>
-                                <td className="transactions-cell">{transaction.description}</td>
-                                <td className="transactions-cell">£{transaction.accountTotal}</td>
+                        {transactions.map(transaction => (
+                            <tr key={transaction.transaction_id}>
+                                <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                                <td>{transaction.amount}</td>
+                                <td>{transaction.category}</td>
+                                <td>{transaction.description}</td>
+                                <td>{transaction.post_account_total}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -270,7 +284,7 @@ function JarScreen() {
                                 </label>
                                 <label>
                                 <input
-                                    className='input-field' 
+                                    className='input-field jar-form-input-field' 
                                     type="text" value={jarName} 
                                     onChange={(e) => setJarName(e.target.value)} required 
                                     placeholder='Jar Name'
@@ -280,7 +294,7 @@ function JarScreen() {
                             <div className="create-item">
                                 <label>
                                     <input 
-                                        className='input-field' 
+                                        className='input-field jar-form-input-field' 
                                         type="number" 
                                         value={allocatedAmount} 
                                         onChange={(e) => setAllocatedAmount(e.target.value)} required 
@@ -289,7 +303,7 @@ function JarScreen() {
                                 </label>
                                 <label>
                                     <input 
-                                        className='input-field' 
+                                        className='input-field jar-form-input-field' 
                                         type="number" 
                                         value={targetAmount} 
                                         onChange={(e) => setTargetAmount(e.target.value)} 
@@ -318,7 +332,7 @@ function JarScreen() {
                                         value={selectedJar.jar_name}
                                         onChange={(e) => setSelectedJar({ ...selectedJar, jar_name: e.target.value })}
                                         required
-                                        className='input-field'
+                                        className='input-field jar-form-input-field'
                                     />
                                 </label>
                                 <label>
@@ -327,7 +341,7 @@ function JarScreen() {
                                         type="number"
                                         value={selectedJar.target_amount}
                                         onChange={(e) => setSelectedJar({ ...selectedJar, target_amount: e.target.value })}
-                                        className='input-field'
+                                        className='input-field jar-form-input-field'
                                     />
                                 </label>
                             </div>
