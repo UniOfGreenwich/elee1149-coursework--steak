@@ -67,7 +67,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 15px 0 0 0;
+    margin: 15px 0 0 0 !important;
     cursor: pointer;
     border-radius: 15px;
 }
@@ -126,11 +126,11 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     }
 
     .forgot-password-button, .join-us-button {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .login-form {
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
     .logo-login {
@@ -151,7 +151,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     .login-submit-button {
         font-size: 20px;
         padding: 20px 45px;
-        margin: 0 0 0 8px;
+        margin: 0 0 0 8px !important;
     }
 
     .back-button {
@@ -171,7 +171,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     }
 
     .login-form {
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
     .login-message {
