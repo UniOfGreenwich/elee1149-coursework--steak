@@ -12,7 +12,7 @@
 
 .security-title-wrapper {
     color: #ffffff;
-    margin: 45px 0 0 0;
+    margin: 4px 0 0 0 !important;
 }
 
 .security-title-text {
@@ -96,6 +96,7 @@
 }
 
 .register-button {
+    width: 200px; /* Set a fixed width for the button */
     background-color: #DA4259;
     color: #ffffff;
     border: none;
@@ -113,6 +114,7 @@
     .register-title-wrapper {
         font-size: 34px;
         margin-top: 20px;
+        margin-left: 15px;
     }
 
     .logo-register {
@@ -129,7 +131,7 @@
     }
 
     .input-field-password, .input-field {
-        margin: 10px 0 0 10px;
+        margin: 10px 0 0 -10px !important;
         width: 250px;
     }
 
@@ -147,6 +149,7 @@
     }
 
     .register-button {
+        width: 200px; /* Ensure the width is consistent */
         font-size: 18px;
         padding: 15px 55px;
         margin: 0;
@@ -166,6 +169,7 @@
     .register-title-wrapper {
         font-size: 30px;
         margin-top: 20px;
+        margin-left: 15px;
     }
 
     .logo-register {
@@ -178,6 +182,7 @@
     }
 
     .register-button {
+        width: 200px; /* Ensure the width is consistent */
         font-size: 20px;
         padding: 15px 55px;
     }
