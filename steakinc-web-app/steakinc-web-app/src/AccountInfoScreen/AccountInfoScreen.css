@@ -45,6 +45,12 @@
  
 .account-type-input {
     margin-bottom: 20px;
+    margin: 8px 0 0 8px !important;
+}
+
+.account-amount-input {
+    margin-bottom: 20px;
+    margin: 8px 0 0 8px !important;
 }
 
 .account-button-wrapper {
@@ -71,6 +77,7 @@
     margin-right: 15px;
 }
 
+
 @media (min-width: 768px) {
     .account-logo {
         height: 80px;
@@ -95,6 +102,7 @@
 
     .account-name-input {
         width: calc(100% - 40px);
+        margin: 8px 0 0 8px !important;
     }
 
     .account-type-input {
@@ -105,5 +113,11 @@
         display: flex;
         justify-content: right;
         margin-left: 540px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+        font-size: 20px;
+        padding: 12px;
+        color: #ffffff;
     }
 }

@@ -78,7 +78,7 @@ function AccountInformationForm() {
                                     value={account.balance}
                                     onChange={(e) => handleAccountChange(index, e)}
                                     required
-                                    className='input-field'
+                                    className='input-field account-amount-input'
                                 />
                                 <input
                                     type="text"
