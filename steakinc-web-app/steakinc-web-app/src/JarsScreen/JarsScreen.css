@@ -367,10 +367,6 @@
         display: flex;
     }
 
-    .edit-jar-button {
-        margin-right: 10px;
-    }
-
     .create-item {
         display: flex;
         margin-top: 20px;
@@ -426,7 +422,6 @@
     .edit-jar-button {
         position: absolute;
         top: 10px; /* Ensure the button stays at the top */
-        right: 10px; /* Ensure the button stays on the right */
         width: 100px;
     }
 
