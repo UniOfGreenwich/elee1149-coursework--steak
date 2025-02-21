@@ -314,6 +314,27 @@
     justify-content: space-evenly;
 }
 
+.jar-popup-button {
+    width: 200px; /* Set a fixed width for the button */
+    font-size: 20px;
+    padding: 15px 55px;
+    background-color: #DA4259;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 3px solid #DA4259;
+    margin: 0 2.5px 0 10px;
+}
+
+.jar-popup-button--transparent {
+    background-color: transparent;
+    border: 3px solid #DA4259;
+}
+
 @media (min-width: 768px) {
     .edit-jar-button-wrapper {
         justify-content: center;

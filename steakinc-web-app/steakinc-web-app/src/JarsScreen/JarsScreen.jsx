@@ -11,7 +11,6 @@ import Slider from "react-slick";
 import { CustomNextArrow, CustomPrevArrow } from './CustomArrows';
 import VerticalCarousel from './VerticalCarousel';
 
-
 function JarScreen() {
     const [jarName, setJarName] = useState('');
     const [allocatedAmount, setAllocatedAmount] = useState('');
@@ -312,8 +311,8 @@ function JarScreen() {
                                 </label>
                             </div>
                             <div className="create-button-wrapper">
-                                <button className='back-button' type="button" onClick={() => setShowModal(false)}>Cancel</button>
-                                <button className='login-submit-button' type="submit">Create Jar</button>
+                                <button className='jar-popup-button jar-popup-button--transparent' type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                                <button className='jar-popup-button' type="submit">Create Jar</button>
                             </div>
                         </form>
                     </div>
@@ -323,7 +322,7 @@ function JarScreen() {
                 <div className="overlay-container">
                     <div className="overlay-content">
                         <form onSubmit={(e) => { e.preventDefault(); handleEditJar(); }}>
-                        <button className='delete-jar-button' type="button" onClick={handleDeleteJar}>Delete</button>
+                        <button className='jar-popup-button jar-popup-button--transparent' type="button" onClick={handleDeleteJar}>Delete</button>
                             <div className="edit-content-wrapper">
                                 <label>
                                 <h2 className='edit-jar-header'>Jar Name</h2>
@@ -346,8 +345,8 @@ function JarScreen() {
                                 </label>
                             </div>
                             <div className="edit-jar-button-wrapper">
-                                <button className="back-button" type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
-                                <button className='login-submit-button' type="submit">Save</button>
+                                <button className="jar-popup-button jar-popup-button--transparent" type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                                <button className='jar-popup-button' type="submit">Save</button>
                             </div>
                         </form>
                     </div>
