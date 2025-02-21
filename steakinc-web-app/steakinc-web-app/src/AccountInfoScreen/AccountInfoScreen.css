@@ -84,8 +84,9 @@
     }
  
     .account-title-text {
-        font-size: 34px;
+        font-size: 54px;
         font-weight: 450;
+        margin: 0;
     }
  
     .add-account-button {
