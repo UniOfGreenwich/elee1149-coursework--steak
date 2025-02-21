@@ -256,7 +256,7 @@ function JarScreen() {
                     </thead>
                     <tbody>
                         {transactions.map(transaction => (
-                            <tr key={transaction.transaction_id}>
+                            <tr key={transaction.transaction_id} className="transactions-row">
                                 <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
                                 <td>{transaction.amount}</td>
                                 <td>{transaction.category}</td>
