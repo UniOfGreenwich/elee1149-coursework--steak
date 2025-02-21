@@ -143,12 +143,8 @@
     z-index: 1002;
 }
 
-.slick-prev:hover, .slick-next:hover {
-    background-color: #c22d44; /* Optional: change background color on hover */
-}
-
 .jar-carousel-container {
-    width: 350px;
+    width: 375px;
     margin: 0 auto; 
     background-color: #0B1739;
     border-radius: 10px;
@@ -262,7 +258,6 @@
 
 .transactions-wrapper {
     background-color: #0B1739;
-    height: 300px;
     padding: 10px;
     margin-top: 25px;
     border-radius: 10px;
@@ -276,18 +271,26 @@
     color: #ffffff;
 }
 
-.transactions-item {
-    display: flex;
-    justify-content: space-between;
-    height: 30px;
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.transactions-withdrawal {
-    color: #c22d44;
+.transactions-header {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding: 8px;
+    font-size: 0.9em;
 }
 
-.transactions-deposit {
-    color: #03db8c;
+.transactions-row {
+    border-bottom: 1px solid #ffffff;
+}
+
+.transactions-cell {
+    color: #ffffff;
+    padding: 8px;
+    font-size: 0.9em;
 }
 
 .delete-jar-button {
@@ -415,8 +418,9 @@
     }
 
     .transactions-wrapper {
-        margin-right: 500px;
-        margin-left: 420px;
+        min-width: none;
+        width: 40%;
+        margin: 50px  auto;
         padding: 20px 50px;
     }
 }

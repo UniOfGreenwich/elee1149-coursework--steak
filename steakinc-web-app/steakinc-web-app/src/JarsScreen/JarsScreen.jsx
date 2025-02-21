@@ -224,36 +224,34 @@ function JarScreen() {
                     <h2>Transactions</h2>
                     <button type="button" className='add-transactions-button'>+</button>
                 </div>
-                <div className="transactions-items-wrapper">
-                    <div className="transactions-item">
-                        <p className='transactions-withdrawal'>Withdrawal</p>
-                        <p className='transactions-withdrawal'>- £5.11</p>
-                    </div>
-                    <div className="transactions-item">
-                        <p className='transactions-withdrawal'>Withdrawal</p>
-                        <p className='transactions-withdrawal'>- £81.71</p>
-                    </div>
-                    <div className="transactions-item">
-                        <p className='transactions-deposit'>Deposit</p>
-                        <p className='transactions-deposit'>+ £821.62</p>
-                    </div>
-                    <div className="transactions-item">
-                        <p className='transactions-deposit'>Deposit</p>
-                        <p className='transactions-deposit'>+ £800.56</p>
-                    </div>
-                    <div className="transactions-item">
-                        <p className='transactions-deposit'>Deposit</p>
-                        <p className='transactions-deposit'>+ £2.50</p>
-                    </div>
-                    <div className="transactions-item">
-                        <p className='transactions-withdrawal'>Withdrawal</p>
-                        <p className='transactions-withdrawal'>- £27.91</p>
-                    </div>
-                    <div className="transactions-item">
-                        <p className='transactions-deposit'>Deposit</p>
-                        <p className='transactions-deposit'>+ £1120.50</p>
-                    </div>
-                </div>
+                <table className="transactions-table">
+                    <thead>
+                        <tr>
+                        <th className="transactions-header">Date</th>
+                            <th className="transactions-header">Amount</th>
+                            <th className="transactions-header">Category</th>
+                            <th className="transactions-header">Description</th>
+                            <th className="transactions-header">Account total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {[
+                            { date: '2023-01-01', amount: '50.00', category: 'Groceries', description: 'Supermarket', accountTotal: '950.00' },
+                            { date: '2023-01-02', amount: '20.00', category: 'Transport', description: 'Bus ticket', accountTotal: '930.00' },
+                            { date: '2023-01-03', amount: '100.00', category: 'Entertainment', description: 'Concert ticket', accountTotal: '830.00' },
+                            { date: '2023-01-04', amount: '30.00', category: 'Dining', description: 'Restaurant', accountTotal: '800.00' },
+                            { date: '2023-01-05', amount: '200.00', category: 'Rent', description: 'Monthly rent', accountTotal: '600.00' }
+                        ].map((transaction, index) => (
+                            <tr key={index} className="transactions-row">
+                                <td className="transactions-cell">{transaction.date}</td>
+                                <td className="transactions-cell">£{transaction.amount}</td>
+                                <td className="transactions-cell">{transaction.category}</td>
+                                <td className="transactions-cell">{transaction.description}</td>
+                                <td className="transactions-cell">£{transaction.accountTotal}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
             {showModal && (
                 <div className="overlay-container">
