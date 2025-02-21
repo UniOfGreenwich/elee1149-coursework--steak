@@ -59,54 +59,46 @@ function ForgotPasswordScreen() {
                     <h1 className="password-title-text">Steak</h1>
                 </div>
                 <form className="password-form" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        className="input-field"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="password"
-                        name="newPassword"
-                        placeholder="New Password"
-                        className="input-field"
-                        value={formData.newPassword}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        className="input-field"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                    />
-                    <div className="security-title-wrapper">
-                        <h2 className='security-title-text'>Security Question</h2>
+                    <div className="question-wrapper">   
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Username"
+                            className="input-field"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="password"
+                            name="newPassword"
+                            placeholder="New Password"
+                            className="input-field"
+                            value={formData.newPassword}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="security_1_answer"
+                            className="input-field"
+                            placeholder='Favorite book or movie?'
+                            value={formData.security_1_answer}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            className="input-field"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
                     <div className="register-security-wrapper">
                         <div className="register-security-item">
-                            <input
-                                type="text"
-                                name="security_1"
-                                className="input-field-security"
-                                placeholder='Favorite book or movie?'
-                                readOnly
-                            />
-                            <input
-                                type="text"
-                                name="security_1_answer"
-                                className="input-field-security-answer"
-                                placeholder='Answer'
-                                value={formData.security_1_answer}
-                                onChange={handleChange}
-                                required
-                            />
                             {message && <p className='login-message'>{message}</p>}
                         </div>
                     </div>
