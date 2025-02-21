@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { CustomNextArrow, CustomPrevArrow } from './CustomArrows';
+import VerticalCarousel from './VerticalCarousel';
 
 
 function JarScreen() {
@@ -37,20 +38,8 @@ function JarScreen() {
         infinite: false,
         speed: 500,
         slidesToShow: 3,
-        slidesToScroll: 1
-    };
-
-    const verticalSettings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
         slidesToScroll: 1,
-        vertical: true,
-        verticalSwiping: true,
-        arrows: true,
-        prevArrow: <CustomPrevArrow />,
-        nextArrow: <CustomNextArrow />
+        arrows: false
     };
 
     useEffect(() => {
@@ -205,20 +194,8 @@ function JarScreen() {
                         ))}
                     </Slider>
                 </div>
-            </div>7
-            <div className="vertical-carousel-wrapper">
-                <div className="jar-carousel-container vertical-carousel">
-                    <Slider {...verticalSettings} className="jar-container">
-                        {jars.map(jar => (
-                            <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
-                                <Lid />
-                                <span className="jar-name">{jar.jar_name}</span>
-                                <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
             </div>
+            <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
             {selectedJar && (
                     <div className="jar-details">
                         <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
@@ -357,8 +334,8 @@ function JarScreen() {
                                 </label>
                             </div>
                             <div className="edit-jar-button-wrapper">
-                                <button className='login-submit-button' type="submit">Save</button>
                                 <button className="back-button" type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                                <button className='login-submit-button' type="submit">Save</button>
                             </div>
                         </form>
                     </div>
