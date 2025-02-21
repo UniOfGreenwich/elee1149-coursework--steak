@@ -183,7 +183,6 @@ function JarScreen() {
     return (
         <div>
             <NavSideBar />
-            <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
             <div className="content-container">
                 <div className='account-background'>
                     <h2 className="account-total-container">
@@ -191,6 +190,7 @@ function JarScreen() {
                         <div onClick={toggleAccountInfo} className="dropdown-arrow">
                             {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
                         </div>
+                        <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
                     </h2>
                     {isAccountInfoVisible && (
                         <ul className='account-list-container'>
@@ -216,14 +216,14 @@ function JarScreen() {
             </div>
             <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
             {selectedJar && (
-                    <div className="jar-details">
-                        <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
-                        <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
-                        <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
-                        <div className="progress-bar-wrapper">
-                            {selectedJar.current_balance < selectedJar.target_amount && (
-                                <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
-                            )}
+                <div className="jar-details">
+                    <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
+                    <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
+                    <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
+                    <div className="progress-bar-wrapper">
+                        {selectedJar.current_balance < selectedJar.target_amount && (
+                            <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
+                        )}
                         <div className="progress-bar-container">
                             <div className="progress-bar" style={{ 
                                 width: `${(selectedJar.current_balance / selectedJar.target_amount) * 100}%`, 
@@ -236,36 +236,36 @@ function JarScreen() {
                             <span className="progress-percentage">{((selectedJar.current_balance / selectedJar.target_amount) * 100).toFixed(2)}%</span>
                         )}
                     </div>
+                    <div className="transactions-wrapper">
+                        <div className="transactions-title-wrapper">
+                            <h2>Transactions</h2>
+                            <button type="button" className='add-transactions-button'>+</button>
+                        </div>
+                        <table className="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th className="transactions-header">Date</th>
+                                    <th className="transactions-header">Amount</th>
+                                    <th className="transactions-header">Category</th>
+                                    <th className="transactions-header">Description</th>
+                                    <th className="transactions-header">Account total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {transactions.map(transaction => (
+                                    <tr key={transaction.transaction_id} className="transactions-row">
+                                        <td className="transactions-cell">{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                                        <td className="transactions-cell">{transaction.amount}</td>
+                                        <td className="transactions-cell">{transaction.category}</td>
+                                        <td className="transactions-cell">{transaction.description}</td>
+                                        <td className="transactions-cell">{transaction.post_account_total}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )}
-            <div className="transactions-wrapper">
-                <div className="transactions-title-wrapper">
-                    <h2>Transactions</h2>
-                    <button type="button" className='add-transactions-button'>+</button>
-                </div>
-                <table className="transactions-table">
-                    <thead>
-                        <tr>
-                        <th className="transactions-header">Date</th>
-                            <th className="transactions-header">Amount</th>
-                            <th className="transactions-header">Category</th>
-                            <th className="transactions-header">Description</th>
-                            <th className="transactions-header">Account total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {transactions.map(transaction => (
-                            <tr key={transaction.transaction_id} className="transactions-row">
-                                <td className="transactions-cell">{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                                <td className="transactions-cell">{transaction.amount}</td>
-                                <td className="transactions-cell">{transaction.category}</td>
-                                <td className="transactions-cell">{transaction.description}</td>
-                                <td className="transactions-cell">{transaction.post_account_total}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
             {showModal && (
                 <div className="overlay-container">
                     <div className="overlay-content">

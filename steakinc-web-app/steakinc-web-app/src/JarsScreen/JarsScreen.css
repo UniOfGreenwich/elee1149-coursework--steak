@@ -84,18 +84,24 @@
 .dropdown-arrow svg {
     font-size: 26px;
     color: white;
+    margin-top: 90px;
 }
 
 .account-total {
     margin: 4px 0 0 20px;
+    color: white;
 }
 
 .account-total-container {
     display: flex;
     justify-content: space-between;
-    color: #ffffff;
-    background-color: #DA4259;
+    align-items: center;
+    padding: 10px;
+    background-color: #DA4259; /* Revert to original background color */
     border-radius: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    margin-top: -40px;
 }
 
 .account-item {
@@ -154,21 +160,22 @@
     background-color: #0B1739;
     border-radius: 10px;
     padding: 10px;
+    height: calc(100vh - 260px); /* Adjust height to span the screen */
+    overflow-y: auto; /* Add scroll if content overflows */
+    position: relative; /* Ensure the edit button is positioned correctly */
 }
 
 .create-jar-button {
-    background-color: transparent;
+    background-color: #DA4259;
     color: #ffffff;
-    border: none;
+    border: 3px solid white;
     border-radius: 10px;
     padding: 10px;
-    margin: 14px 0 0 320px;
+    position: absolute;
+    top: 10px; /* Position the button at the top */
+    right: 10px; /* Position the button on the right */
     cursor: pointer;
     font-size: 16px;
-    border: 3px solid #DA4259;
-    position: absolute;
-    right: 10px;
-
 }
 
 .edit-jar-button {
@@ -178,7 +185,7 @@
     border-radius: 10px;
     padding: 10px;
     position: absolute;
-    top: 355px; /* Move the button up */
+    top: 10px; /* Position the button at the top */
     right: 10px; /* Position the button on the right */
     width: 75px;
     cursor: pointer;
@@ -203,13 +210,18 @@
 .jar-details-goal {
     color: #ffffff;
     font-weight: 400;
+    margin-left: 10px;
 }
 
 .progress-bar-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 30px;
+    border: 1px solid white;
+    border-radius: 25px;
+    height: 9%;
+    width: 93%;
 }
 
 .jar-details-goal {
@@ -239,6 +251,7 @@
 .progress-percentage {
     margin-left: 10px;
     color: #ffffff;
+    margin-right: 10px;
 }
 
 .progress-completed {
@@ -258,9 +271,10 @@
 
 .transactions-wrapper {
     background-color: #0B1739;
-    padding: 10px;
     margin-top: 25px;
     border-radius: 10px;
+    width: 100%; /* Ensure it takes full width of the container */
+    overflow-x: auto; /* Add horizontal scroll if content overflows */
 }
 
 .transactions-title-wrapper {
@@ -274,6 +288,7 @@
 .transactions-table {
     width: 100%;
     border-collapse: collapse;
+    margin: 0; /* Remove left margin */
 }
 
 .transactions-header {
@@ -378,11 +393,15 @@
 @media (min-width: 1024px) {
     .progress-bar-wrapper {
         margin: 0 auto;
+        height: 9%;
+        margin-top: 30px;
+        width: 93%;
     }
 
     .create-jar-button {
         position: absolute;
-        margin: 80px 260px 0 0;
+        top: 10px;
+        right: 10px;
         width: 100px;
     }
 
@@ -397,6 +416,7 @@
     .account-total {
         margin-top: 15px;
         font-size: 65px;
+        color: white;
     }
 
     .account-item {
@@ -405,8 +425,8 @@
 
     .edit-jar-button {
         position: absolute;
-        margin: 150px 260px 0 0;
-        top: 0;
+        top: 10px; /* Ensure the button stays at the top */
+        right: 10px; /* Ensure the button stays on the right */
         width: 100px;
     }
 
@@ -424,8 +444,9 @@
     }
 
     .jar-details {
-        margin-right: 410px;
+        margin-right: 320px;
         margin-left: 320px;
+        height: calc(100vh - 260px); /* Ensure it spans the height of the screen */
     }
 
     .jar-container {
@@ -443,8 +464,7 @@
 
     .transactions-wrapper {
         min-width: none;
-        width: 40%;
-        margin: 50px  auto;
-        padding: 20px 50px;
+        width: 100%; /* Ensure it takes full width of the container */
+        margin: 50px 0; /* Adjust margin for better spacing */
     }
 }
