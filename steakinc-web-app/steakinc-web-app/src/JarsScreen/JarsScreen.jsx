@@ -226,7 +226,7 @@ function JarScreen() {
                         )}
                         <div className="progress-bar-container">
                             <div className="progress-bar" style={{ 
-                                width: `${(selectedJar.current_balance / selectedJar.target_amount) * 100}%`, 
+                                width: `${Math.min((selectedJar.current_balance / selectedJar.target_amount) * 100, 100)}%`, 
                                 backgroundColor: selectedJar.current_balance >= selectedJar.target_amount ? 'green' : '#ffffff' 
                             }}>
                                 {selectedJar.current_balance >= selectedJar.target_amount && <span className="progress-completed">Completed</span>}

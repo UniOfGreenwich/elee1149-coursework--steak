@@ -33,7 +33,7 @@
 
 .content-container {
     flex: 1;
-    padding: 20px;
+    padding-top: 20px;
     margin-top: 10px;
 }
 
@@ -439,8 +439,8 @@
     }
     
     .content-container {
-        margin-right: 390px; /* Ensure content does not go behind the carousel */
-        margin-left: 300px;
+        margin-right: 320px; /* Ensure content does not go behind the carousel */
+        margin-left: 320px;
     }
 
     .jar-details {
