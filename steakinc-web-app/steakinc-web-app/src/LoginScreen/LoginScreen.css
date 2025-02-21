@@ -58,32 +58,29 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     flex-direction: column;
 }
 
-.login-submit-button {
+.login-submit-button, .back-button {
+    width: 200px; /* Set a fixed width for both buttons */
+    font-size: 20px;
+    padding: 20px 45px;
+    margin: 0 8px 0 0;
     background-color: #DA4259;
     color: #ffffff;
     border: none;
-    padding: 15px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 15px 0 0 0 !important;
     cursor: pointer;
     border-radius: 15px;
 }
 
+.login-submit-button {
+    margin: 15px 0 0 0 !important;
+}
+
 .back-button {
     background-color: transparent;
-    color: #ffffff;
-    border: none;
-    padding: 15px 40px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 15px;
     border: #DA4259 3px solid;
+    margin: 0 8px 0 0;
 }
 
 .forgot-password-button, .join-us-button{

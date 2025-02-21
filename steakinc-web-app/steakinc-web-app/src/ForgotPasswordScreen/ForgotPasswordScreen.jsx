@@ -68,26 +68,24 @@ function ForgotPasswordScreen() {
                         onChange={handleChange}
                         required
                     />
-                    <div className="password-inputs-wrapper">
-                        <input
-                            type="password"
-                            name="newPassword"
-                            placeholder="New Password"
-                            className="input-field"
-                            value={formData.newPassword}
-                            onChange={handleChange}
-                            required
-                        />
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="Confirm Password"
-                            className="input-field"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+                    <input
+                        type="password"
+                        name="newPassword"
+                        placeholder="New Password"
+                        className="input-field"
+                        value={formData.newPassword}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        className="input-field"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
                     <div className="security-title-wrapper">
                         <h2 className='security-title-text'>Security Question</h2>
                     </div>
