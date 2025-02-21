@@ -285,12 +285,15 @@
 
 .transactions-row {
     border-bottom: 1px solid #ffffff;
+    text-align: center; /* Center the text horizontally */
 }
 
 .transactions-cell {
     color: #ffffff;
     padding: 8px;
     font-size: 0.9em;
+    text-align: center; /* Center the text horizontally */
+    vertical-align: middle; /* Center the text vertically */
 }
 
 .delete-jar-button {

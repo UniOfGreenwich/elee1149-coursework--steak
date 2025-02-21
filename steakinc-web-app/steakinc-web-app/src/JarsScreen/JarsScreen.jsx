@@ -256,11 +256,11 @@ function JarScreen() {
                     <tbody>
                         {transactions.map(transaction => (
                             <tr key={transaction.transaction_id} className="transactions-row">
-                                <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                                <td>{transaction.amount}</td>
-                                <td>{transaction.category}</td>
-                                <td>{transaction.description}</td>
-                                <td>{transaction.post_account_total}</td>
+                                <td className="transactions-cell">{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                                <td className="transactions-cell">{transaction.amount}</td>
+                                <td className="transactions-cell">{transaction.category}</td>
+                                <td className="transactions-cell">{transaction.description}</td>
+                                <td className="transactions-cell">{transaction.post_account_total}</td>
                             </tr>
                         ))}
                     </tbody>
