@@ -1,27 +1,426 @@
-.modal {
+.overlay-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure the modal is on top */
+    z-index: 1000;
 }
 
-.modal-content {
-    background-color: white;
+.overlay-content {
+    display: flex;
+    justify-content: center;
+    background-color: #081028;
+    text-align: center;
     padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 100%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 600px;
+    width: 70%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
     z-index: 1001; /* Ensure content is above the overlay */
 }
 
-/* Dashboard.css */
-.white-text {
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.content-container {
+    flex: 1;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.carousel-container {
+    flex: 0 0 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jar-container {
+    display: flex;
+    padding: 0;
+    color: #ffffff;
+}
+
+.jar {
+    display: flex !important;
+    flex-direction: column;
+    margin: 20px 10px 0 10px;
+    padding: 15px;
+    background-color: transparent;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 60px !important;
+    border: 3px solid #DA4259;
+    text-align: center;
+}
+
+.jar-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.jar:hover {
+    transform: scale(1.05);
+}
+
+.jar-value {
+    color: #ccc;
+}
+
+.dropdown-arrow {
+    margin: 8px 8px 0 0;
+    cursor: pointer;
+}
+
+.dropdown-arrow svg {
+    font-size: 26px;
     color: white;
+}
+
+.account-total {
+    margin: 4px 0 0 20px;
+}
+
+.account-total-container {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    background-color: #DA4259;
+    border-radius: 10px;
+}
+
+.account-item {
+    color: #ffffff;
+    list-style: none;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-left: -40px;
+}
+
+.account-list-container {
+    background-color: #c22d44;
+    border-radius: 10px;
+    margin-top: -20px;
+}
+
+.account-background {
+    background-color: #DA4259;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+
+.slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the slide takes full height */
+}
+
+.slick-list {
+    height: 120px;
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.slick-prev, .slick-next {
+    background-color: #DA4259; /* Set background color */
+    color: white; /* Set arrow color */
+    border-radius: 50%; /* Optional: make the buttons circular */
+    width: 40px; /* Optional: set width */
+    height: 40px; /* Optional: set height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+}
+
+.jar-carousel-container {
+    width: 375px;
+    margin: 0 auto; 
+    background-color: #0B1739;
+    border-radius: 10px;
+}
+
+.jar-details {
+    background-color: #0B1739;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.create-jar-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 14px 0 0 320px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 3px solid #DA4259;
+    position: absolute;
+    right: 10px;
+
+}
+
+.edit-jar-button {
+    background-color: #DA4259;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 355px; /* Move the button up */
+    right: 10px; /* Position the button on the right */
+    width: 75px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.jar-details-name {
+    font-weight: 400;
+    color: #bdbcbc;
+    margin: 16px 0 0 20px;
+    font-size: 40px;
+    width: 200px;
+}
+
+.jar-details-balance {
+    color: #ffffff;
+    margin: 0 0 0 50px;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.jar-details-goal {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.progress-bar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.jar-details-goal {
+    margin-right: 10px;
+}
+
+.progress-bar-container {
+    flex-grow: 1;
+    background-color: #818080;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 10px;
+    position: relative;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.progress-percentage {
+    margin-left: 10px;
+    color: #ffffff;
+}
+
+.progress-completed {
+    text-align: center;
+    color: #ffffff;
+}
+
+.add-transactions-button {
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.transactions-wrapper {
+    background-color: #0B1739;
+    padding: 10px;
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+.transactions-title-wrapper {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transactions-header {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding: 8px;
+    font-size: 0.9em;
+}
+
+.transactions-row {
+    border-bottom: 1px solid #ffffff;
+}
+
+.transactions-cell {
+    color: #ffffff;
+    padding: 8px;
+    font-size: 0.9em;
+}
+
+.delete-jar-button {
+    color: #ffffff;
+    background: none;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+    margin-left: 240px;
+    cursor: pointer;
+}
+
+.edit-jar-header {
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.edit-jar-button-wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media (min-width: 768px) {
+    .edit-jar-button-wrapper {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .delete-jar-button {
+        margin-left: 480px;
+    }
+
+    .edit-content-wrapper {
+        display: flex;
+    }
+
+    .edit-jar-button {
+        margin-right: 10px;
+    }
+
+    .create-item {
+        display: flex;
+        margin-top: 20px;
+    }
+
+    .create-item:first-child {
+        margin-bottom: -30px;
+    }
+
+    .overlay-content {
+        width: 100%;
+        height: 300px;
+    }
+
+    .create-button-wrapper {
+        margin-top: 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .progress-bar-wrapper {
+        margin: 0 auto;
+    }
+
+    .create-jar-button {
+        position: absolute;
+        margin: 80px 260px 0 0;
+        width: 100px;
+    }
+
+    .jar-details-goal, .progress-percentage {
+        font-size: 20px;
+    }
+
+    .account-total-container {
+        height: 120px;
+    }
+
+    .account-total {
+        margin-top: 15px;
+        font-size: 65px;
+    }
+
+    .account-item {
+        font-size: 25px;
+    }
+
+    .edit-jar-button {
+        position: absolute;
+        margin: 150px 260px 0 0;
+        top: 0;
+        width: 100px;
+    }
+
+    .content-wrapper {
+        flex-direction: row;
+    }
+
+    .horizontal-carousel {
+        display: none;
+    }
+    
+    .content-container {
+        margin-right: 390px; /* Ensure content does not go behind the carousel */
+        margin-left: 300px;
+    }
+
+    .jar-details {
+        margin-right: 410px;
+        margin-left: 320px;
+    }
+
+    .jar-container {
+        margin: 75px 0 50px 80px;
+        width: 100%;
+    }
+
+    .slick-slide {
+        height: 20% !important;
+    }
+
+    .slick-track {
+        height: 100% !important;
+    }
+
+    .transactions-wrapper {
+        min-width: none;
+        width: 40%;
+        margin: 50px  auto;
+        padding: 20px 50px;
+    }
 }

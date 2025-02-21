@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import './JarsScreen.css'; // Assuming your CSS is in this file
+import NavSideBar from './NavSideBar';
+import './JarsScreen.css'; 
+import Lid from './Lid';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { CustomNextArrow, CustomPrevArrow } from './CustomArrows';
+import VerticalCarousel from './VerticalCarousel';
+
 
 function JarScreen() {
     const [jarName, setJarName] = useState('');
@@ -18,6 +27,20 @@ function JarScreen() {
     const [transactions, setTransactions] = useState([]); // State for transactions related to the selected jar
     const location = useLocation();
     const userId = location.state?.userId;
+    const [isAccountInfoVisible, setIsAccountInfoVisible] = useState(false);
+
+    const toggleAccountInfo = () => {
+        setIsAccountInfoVisible(!isAccountInfoVisible);
+    };
+
+    const horizontalSettings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: false
+    };
 
     useEffect(() => {
         const fetchAccountsAndJars = async () => {
@@ -87,7 +110,6 @@ function JarScreen() {
             const response = await axios.post('http://localhost:5000/create_jar', payload);
     
             if (response.status === 201) {
-                alert('Jar created successfully');
                 window.location.reload(); // Refresh the page to update dropdowns
             } else {
                 console.error("Unexpected response status:", response.status);
@@ -96,10 +118,8 @@ function JarScreen() {
         } catch (error) {
             if (error.response) {
                 console.error("Error response data:", error.response.data);
-                alert(`Error: ${error.response.data.error}`);
             } else {
                 console.error("Error creating jar:", error);
-                alert('Failed to create jar. Please try again.');
             }
         }
     };
@@ -118,15 +138,12 @@ function JarScreen() {
             });
 
             if (response.status === 200) {
-                alert('Jar updated successfully');
                 window.location.reload();
             } else {
                 console.error("Unexpected response status:", response.status);
-                alert('Failed to update jar. Please try again.');
             }
         } catch (error) {
             console.error("Error updating jar:", error);
-            alert('Failed to update jar. Please try again.');
         }
     };
 
@@ -135,118 +152,189 @@ function JarScreen() {
             const response = await axios.delete(`http://localhost:5000/delete_jar/${selectedJar.jar_id}`);
 
             if (response.status === 200) {
-                alert('Jar deleted successfully');
                 window.location.reload();
             } else {
                 console.error("Unexpected response status:", response.status);
-                alert('Failed to delete jar. Please try again.');
             }
         } catch (error) {
             console.error("Error deleting jar:", error);
-            alert('Failed to delete jar. Please try again.');
         }
     };
 
     return (
         <div>
-            <h1 className="white-text">Create a New Jar</h1>
-            <button onClick={() => setShowModal(true)}>Open Jar Form</button>
-
-            <div>
-                <h2 className="white-text">Available Total: £{availableTotal.toFixed(2)}</h2>
-                {accounts.map(account => (
-                    <p className="white-text" key={account.account_id}>
-                        {account.name}: £{account.available_funds.toFixed(2)}
-                    </p>
-                ))}
+            <NavSideBar />
+            <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
+            <div className="content-container">
+                <div className='account-background'>
+                    <h2 className="account-total-container">
+                        <div className="account-total">£{availableTotal.toFixed(2)}</div>
+                        <div onClick={toggleAccountInfo} className="dropdown-arrow">
+                            {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
+                        </div>
+                    </h2>
+                    {isAccountInfoVisible && (
+                        <ul className='account-list-container'>
+                            {accounts.map(account => (
+                                <li className="account-item" key={account.account_id}>
+                                    {account.name}: £{account.available_funds.toFixed(2)}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+                <div className="jar-carousel-container horizontal-carousel">
+                    <Slider {...horizontalSettings} className="jar-container">
+                        {jars.map(jar => (
+                            <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
+                                <Lid />
+                                <span className="jar-name">{jar.jar_name}</span>
+                                <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
             </div>
-
+            <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
             {selectedJar && (
-                <div className="jar-details">
-                    <h2 className="white-text">Jar Details</h2>
-                    <p className="white-text">Jar Name: {selectedJar.jar_name}</p>
-                    <p className="white-text">Current Balance: £{selectedJar.current_balance.toFixed(2)}</p>
-                    <p className="white-text">Goal: {selectedJar.target_amount}</p>
-                    <button onClick={() => setShowEditModal(true)}>Edit</button>
+                    <div className="jar-details">
+                        <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
+                        <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
+                        <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
+                        <div className="progress-bar-wrapper">
+                            {selectedJar.current_balance < selectedJar.target_amount && (
+                                <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
+                            )}
+                        <div className="progress-bar-container">
+                            <div className="progress-bar" style={{ 
+                                width: `${(selectedJar.current_balance / selectedJar.target_amount) * 100}%`, 
+                                backgroundColor: selectedJar.current_balance >= selectedJar.target_amount ? 'green' : '#ffffff' 
+                            }}>
+                                {selectedJar.current_balance >= selectedJar.target_amount && <span className="progress-completed">Completed</span>}
+                            </div>
+                        </div>
+                        {selectedJar.current_balance < selectedJar.target_amount && (
+                            <span className="progress-percentage">{((selectedJar.current_balance / selectedJar.target_amount) * 100).toFixed(2)}%</span>
+                        )}
+                    </div>
                 </div>
             )}
-
-            <div>
-                <h2 className="white-text">Your Jars</h2>
-                <ul className="white-text">
-                    {jars.map(jar => (
-                        <li key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
-                            {jar.jar_name}: Current Balance £{jar.current_balance.toFixed(2)}, Target £{(jar.target_amount ?? 0).toFixed(2)}
-                        </li>
-                    ))}
-                </ul>
+            <div className="transactions-wrapper">
+                <div className="transactions-title-wrapper">
+                    <h2>Transactions</h2>
+                    <button type="button" className='add-transactions-button'>+</button>
+                </div>
+                <table className="transactions-table">
+                    <thead>
+                        <tr>
+                        <th className="transactions-header">Date</th>
+                            <th className="transactions-header">Amount</th>
+                            <th className="transactions-header">Category</th>
+                            <th className="transactions-header">Description</th>
+                            <th className="transactions-header">Account total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {[
+                            { date: '2023-01-01', amount: '50.00', category: 'Groceries', description: 'Supermarket', accountTotal: '950.00' },
+                            { date: '2023-01-02', amount: '20.00', category: 'Transport', description: 'Bus ticket', accountTotal: '930.00' },
+                            { date: '2023-01-03', amount: '100.00', category: 'Entertainment', description: 'Concert ticket', accountTotal: '830.00' },
+                            { date: '2023-01-04', amount: '30.00', category: 'Dining', description: 'Restaurant', accountTotal: '800.00' },
+                            { date: '2023-01-05', amount: '200.00', category: 'Rent', description: 'Monthly rent', accountTotal: '600.00' }
+                        ].map((transaction, index) => (
+                            <tr key={index} className="transactions-row">
+                                <td className="transactions-cell">{transaction.date}</td>
+                                <td className="transactions-cell">£{transaction.amount}</td>
+                                <td className="transactions-cell">{transaction.category}</td>
+                                <td className="transactions-cell">{transaction.description}</td>
+                                <td className="transactions-cell">£{transaction.accountTotal}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
-
             {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="overlay-container">
+                    <div className="overlay-content">
                         <form onSubmit={handleSubmit}>
-                            <label>
-                                Jar Name:
-                                <input type="text" value={jarName} onChange={(e) => setJarName(e.target.value)} required />
+                            <div className="create-item">
+                                <label>
+                                    <select className='input-field-dropdown' value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required>
+                                        <option value="" disabled>Select account</option>
+                                        {accounts.map((account, index) => (
+                                            <option key={index} value={account.account_id}>
+                                                {account.name} - £{(account.available_funds).toFixed(2)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                                <label>
+                                <input
+                                    className='input-field' 
+                                    type="text" value={jarName} 
+                                    onChange={(e) => setJarName(e.target.value)} required 
+                                    placeholder='Jar Name'
+                                />
                             </label>
-                            <br />
-                            <label>
-                                Allocated Amount:
-                                <input type="number" value={allocatedAmount} onChange={(e) => setAllocatedAmount(e.target.value)} required />
-                            </label>
-                            <br />
-                            <label>
-                                Target Amount (optional):
-                                <input type="number" value={targetAmount} onChange={(e) => setTargetAmount(e.target.value)} />
-                            </label>
-                            <br />
-                            <label>
-                                Select Account:
-                                <select value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required>
-                                    <option value="" disabled>Select account</option>
-                                    {accounts.map((account, index) => (
-                                        <option key={index} value={account.account_id}>
-                                            {account.name} - £{(account.available_funds).toFixed(2)}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                            <br />
-                            <button type="submit">Create Jar</button>
-                            <button type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                            </div>
+                            <div className="create-item">
+                                <label>
+                                    <input 
+                                        className='input-field' 
+                                        type="number" 
+                                        value={allocatedAmount} 
+                                        onChange={(e) => setAllocatedAmount(e.target.value)} required 
+                                        placeholder='Allocated Amount'
+                                    />
+                                </label>
+                                <label>
+                                    <input 
+                                        className='input-field' 
+                                        type="number" 
+                                        value={targetAmount} 
+                                        onChange={(e) => setTargetAmount(e.target.value)} 
+                                        placeholder='Target Amount (optional)'
+                                    />
+                                </label>
+                            </div>
+                            <div className="create-button-wrapper">
+                                <button className='back-button' type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                                <button className='login-submit-button' type="submit">Create Jar</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             )}
-
             {showEditModal && selectedJar && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>Edit Jar</h2>
+                <div className="overlay-container">
+                    <div className="overlay-content">
                         <form onSubmit={(e) => { e.preventDefault(); handleEditJar(); }}>
-                            <label>
-                                Jar Name:
-                                <input
-                                    type="text"
-                                    value={selectedJar.jar_name}
-                                    onChange={(e) => setSelectedJar({ ...selectedJar, jar_name: e.target.value })}
-                                    required
-                                />
-                            </label>
-                            <br />
-                            <label>
-                                Target Amount:
-                                <input
-                                    type="number"
-                                    value={selectedJar.target_amount}
-                                    onChange={(e) => setSelectedJar({ ...selectedJar, target_amount: e.target.value })}
-                                />
-                            </label>
-                            <br />
-                            <button type="submit">Save Changes</button>
-                            <button type="button" onClick={handleDeleteJar}>Delete Jar</button>
-                            <button type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                        <button className='delete-jar-button' type="button" onClick={handleDeleteJar}>Delete</button>
+                            <div className="edit-content-wrapper">
+                                <label>
+                                <h2 className='edit-jar-header'>Jar Name</h2>
+                                    <input
+                                        type="text"
+                                        value={selectedJar.jar_name}
+                                        onChange={(e) => setSelectedJar({ ...selectedJar, jar_name: e.target.value })}
+                                        required
+                                        className='input-field'
+                                    />
+                                </label>
+                                <label>
+                                    <h2 className='edit-jar-header'>Jar Goal</h2>
+                                    <input
+                                        type="number"
+                                        value={selectedJar.target_amount}
+                                        onChange={(e) => setSelectedJar({ ...selectedJar, target_amount: e.target.value })}
+                                        className='input-field'
+                                    />
+                                </label>
+                            </div>
+                            <div className="edit-jar-button-wrapper">
+                                <button className="back-button" type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                                <button className='login-submit-button' type="submit">Save</button>
+                            </div>
                         </form>
                     </div>
                 </div>
