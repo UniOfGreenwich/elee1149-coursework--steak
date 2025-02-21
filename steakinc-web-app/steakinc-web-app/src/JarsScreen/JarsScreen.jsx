@@ -8,6 +8,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { CustomNextArrow, CustomPrevArrow } from './CustomArrows';
 
 
 function JarScreen() {
@@ -47,7 +48,9 @@ function JarScreen() {
         slidesToScroll: 1,
         vertical: true,
         verticalSwiping: true,
-        arrows: true
+        arrows: true,
+        prevArrow: <CustomPrevArrow />,
+        nextArrow: <CustomNextArrow />
     };
 
     useEffect(() => {
@@ -118,7 +121,6 @@ function JarScreen() {
             const response = await axios.post('http://localhost:5000/create_jar', payload);
     
             if (response.status === 201) {
-                alert('Jar created successfully');
                 window.location.reload(); // Refresh the page to update dropdowns
             } else {
                 console.error("Unexpected response status:", response.status);
@@ -127,10 +129,8 @@ function JarScreen() {
         } catch (error) {
             if (error.response) {
                 console.error("Error response data:", error.response.data);
-                alert(`Error: ${error.response.data.error}`);
             } else {
                 console.error("Error creating jar:", error);
-                alert('Failed to create jar. Please try again.');
             }
         }
     };
@@ -149,15 +149,12 @@ function JarScreen() {
             });
 
             if (response.status === 200) {
-                alert('Jar updated successfully');
                 window.location.reload();
             } else {
                 console.error("Unexpected response status:", response.status);
-                alert('Failed to update jar. Please try again.');
             }
         } catch (error) {
             console.error("Error updating jar:", error);
-            alert('Failed to update jar. Please try again.');
         }
     };
 
@@ -166,15 +163,12 @@ function JarScreen() {
             const response = await axios.delete(`http://localhost:5000/delete_jar/${selectedJar.jar_id}`);
 
             if (response.status === 200) {
-                alert('Jar deleted successfully');
                 window.location.reload();
             } else {
                 console.error("Unexpected response status:", response.status);
-                alert('Failed to delete jar. Please try again.');
             }
         } catch (error) {
             console.error("Error deleting jar:", error);
-            alert('Failed to delete jar. Please try again.');
         }
     };
 
@@ -211,8 +205,9 @@ function JarScreen() {
                         ))}
                     </Slider>
                 </div>
-            </div>
-            <div className="jar-carousel-container vertical-carousel">
+            </div>7
+            <div className="vertical-carousel-wrapper">
+                <div className="jar-carousel-container vertical-carousel">
                     <Slider {...verticalSettings} className="jar-container">
                         {jars.map(jar => (
                             <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
@@ -223,6 +218,7 @@ function JarScreen() {
                         ))}
                     </Slider>
                 </div>
+            </div>
             {selectedJar && (
                     <div className="jar-details">
                         <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
@@ -283,8 +279,8 @@ function JarScreen() {
                 </div>
             </div>
             {showModal && (
-                <div className="create-overlay-container">
-                    <div className="create-overlay-content">
+                <div className="overlay-container">
+                    <div className="overlay-content">
                         <form onSubmit={handleSubmit}>
                             <div className="create-item">
                                 <label>
@@ -335,32 +331,35 @@ function JarScreen() {
                 </div>
             )}
             {showEditModal && selectedJar && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>Edit Jar</h2>
+                <div className="overlay-container">
+                    <div className="overlay-content">
                         <form onSubmit={(e) => { e.preventDefault(); handleEditJar(); }}>
-                            <label>
-                                Jar Name:
-                                <input
-                                    type="text"
-                                    value={selectedJar.jar_name}
-                                    onChange={(e) => setSelectedJar({ ...selectedJar, jar_name: e.target.value })}
-                                    required
-                                />
-                            </label>
-                            <br />
-                            <label>
-                                Target Amount:
-                                <input
-                                    type="number"
-                                    value={selectedJar.target_amount}
-                                    onChange={(e) => setSelectedJar({ ...selectedJar, target_amount: e.target.value })}
-                                />
-                            </label>
-                            <br />
-                            <button type="submit">Save Changes</button>
-                            <button type="button" onClick={handleDeleteJar}>Delete Jar</button>
-                            <button type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                        <button className='delete-jar-button' type="button" onClick={handleDeleteJar}>Delete</button>
+                            <div className="edit-content-wrapper">
+                                <label>
+                                <h2 className='edit-jar-header'>Jar Name</h2>
+                                    <input
+                                        type="text"
+                                        value={selectedJar.jar_name}
+                                        onChange={(e) => setSelectedJar({ ...selectedJar, jar_name: e.target.value })}
+                                        required
+                                        className='input-field'
+                                    />
+                                </label>
+                                <label>
+                                    <h2 className='edit-jar-header'>Jar Goal</h2>
+                                    <input
+                                        type="number"
+                                        value={selectedJar.target_amount}
+                                        onChange={(e) => setSelectedJar({ ...selectedJar, target_amount: e.target.value })}
+                                        className='input-field'
+                                    />
+                                </label>
+                            </div>
+                            <div className="edit-jar-button-wrapper">
+                                <button className='login-submit-button' type="submit">Save</button>
+                                <button className="back-button" type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-.create-overlay-container {
+.overlay-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     z-index: 1000;
 }
 
-.create-overlay-content {
+.overlay-content {
     display: flex;
     justify-content: center;
     background-color: #081028;
@@ -234,6 +234,10 @@
     background-color: #ffffff;
     border-radius: 5px;
     transition: width 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .progress-percentage {
@@ -242,9 +246,7 @@
 }
 
 .progress-completed {
-    position: absolute;
     text-align: center;
-    width: 90%;
     color: #ffffff;
 }
 
@@ -292,7 +294,40 @@
     display: none;
 }
 
+.delete-jar-button {
+    color: #ffffff;
+    background: none;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+    margin-left: 240px;
+}
+
+.edit-jar-header {
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.edit-jar-button-wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 @media (min-width: 768px) {
+    .edit-jar-button-wrapper {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .delete-jar-button {
+        margin-left: 480px;
+    }
+
+    .edit-content-wrapper {
+        display: flex;
+    }
+
     .edit-jar-button {
         margin-right: 10px;
     }
@@ -306,7 +341,7 @@
         margin-bottom: -30px;
     }
 
-    .create-overlay-content {
+    .overlay-content {
         width: 100%;
         height: 300px;
     }
@@ -357,62 +392,90 @@
         display: none;
     }
 
-    .vertical-carousel {
+    .vertical-carousel .jar {
+        width: 100px !important; /* Keep the current size of the jars */
+        height: 100px; /* Fixed height for each jar */
+        margin: 0; /* Remove additional margin */
+        font-size: 20px;
+    }
+    
+    .vertical-carousel .slick-prev, .vertical-carousel .slick-next {
+        position: fixed; /* Fix the position of the arrows */
+        width: 40px;
+        height: 40px;
+        z-index: 1000; /* Ensure arrows are above other elements */
+        display: none; /* Hide arrows by default */
+    }
+    
+    .vertical-carousel .slick-prev {
+        top: 20px; /* Position the previous arrow at the top of the screen */
+        right: 50px; /* Position the previous arrow to the right of the screen */
+        transform: translateX(-50%);
+    }
+    
+    .vertical-carousel .slick-next {
+        bottom: 20px; /* Position the next arrow at the bottom of the screen */
+        right: 50px; /* Position the next arrow to the right of the screen */
+        transform: translateX(-50%);
+    }
+    
+    .vertical-carousel .slick-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start; /* Align jars to the start */
+        height: 100% !important; /* Ensure the list takes full height */
+        overflow: auto; /* Allow scrolling if there are more jars */
+    }
+    
+    .vertical-carousel .slick-track {
+        display: flex;
+        flex-direction: column;
+        height: auto !important; /* Ensure the track height adjusts to content */
+    }
+    
+    .vertical-carousel .slick-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150px !important; /* Fixed height for each jar */
+        margin-bottom: 10px; /* Add consistent margin between jars */
+    }
+    
+    .vertical-carousel-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         position: fixed;
-        right: 0;
-        top: 0;
-        height: 100%;
+        right: 20px; /* Add some gap from the right side */
+        top: 20px; /* Add some gap from the top */
+        bottom: 20px; /* Add some gap from the bottom */
+        height: calc(100% - 40px); /* Adjust height to account for top and bottom gaps */
         width: 250px;
         background-color: #0B1739;
         border-radius: 10px;
-        border: 1px solid grey;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add some shadow for better visibility */
+        overflow: hidden; /* Prevent overflow */
     }
-
-    .vertical-carousel .slick-list {
+    
+    .vertical-carousel {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 75% !important; /* Carousel takes up 75% of the height */
+        height: 100%; /* Carousel takes up 100% of the height */
+        width: 100%;
+        padding-top: 10px; /* Add padding to ensure the first jar is not cut off */
+        overflow: hidden; /* Prevent overflow */
     }
 
-    .vertical-carousel .slick-slide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 25% !important; /* Each jar takes 25% of the height to fit 4 jars */
+    .vertical-carousel .slick-list:has(.slick-slide:nth-child(n+5)) .slick-prev,
+    .vertical-carousel .slick-list:has(.slick-slide:nth-child(n+5)) .slick-next {
+        display: block; /* Show arrows when there are more than 4 jars */
     }
-
-    .vertical-carousel .jar {
-        width: 100px !important; /* Keep the current size of the jars */
-        height: 100px; /* Adjust height as needed */
-        margin: 10px 25px; /* Add margin to center jars vertically */
-        font-size: 20px;
-    }
-
-
-    .vertical-carousel .slick-prev, .vertical-carousel .slick-next {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-    }
-
-    .vertical-carousel .slick-prev {
-        top: -35px;
-        left: 38%;
-        transform: translateX(-50%);
-    }
-
-    .vertical-carousel .slick-next {
-        top: 885px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
+    
     .content-container {
         margin-right: 390px; /* Ensure content does not go behind the carousel */
         margin-left: 300px;
