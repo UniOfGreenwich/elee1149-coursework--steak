@@ -101,7 +101,6 @@
     border-radius: 10px;
     margin-bottom: 20px;
     position: relative;
-    margin-top: -40px;
 }
 
 .account-item {
@@ -135,6 +134,7 @@
     height: 120px;
     display: flex;
     align-items: center; /* Center items vertically */
+    margin-bottom: 20px;
 }
 
 .slick-prev, .slick-next {
@@ -407,6 +407,7 @@
 
     .account-total-container {
         height: 120px;
+        margin-top: -40px;
     }
 
     .account-total {
