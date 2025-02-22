@@ -58,7 +58,7 @@
     background-color: transparent;
     border-radius: 25px;
     cursor: pointer;
-    width: 70px !important;
+    width: 60px !important;
     border: 3px solid #DA4259;
     text-align: center;
 }
@@ -391,6 +391,10 @@
 
     .create-button-wrapper {
         margin-top: 60px;
+    }
+
+    .jar {
+        width: 70px !important;
     }
 }
 
