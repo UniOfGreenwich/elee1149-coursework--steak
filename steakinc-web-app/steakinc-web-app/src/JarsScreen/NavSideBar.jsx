@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
 import { FaHome, FaPiggyBank, FaChartPie, FaExchangeAlt, FaUser, FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './NavSideBar.css';
 
 function NavSideBar() {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const userId = location.state?.userId;
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
+    };
+    
+    const navigateToHome = () => {
+        navigate('/dashboard', { state: { userId } });
+    };
+
+    const navigateToTransactions = () => {
+        navigate('/transactions', { state: { userId } });
+    };
+
+    const navigateToJars = () => {
+        navigate('/jars', { state: { userId } });
     };
 
     return (
@@ -25,11 +41,11 @@ function NavSideBar() {
                     )}
                 </div>
                 <ul className="nav-list">
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={navigateToHome}>
                         <FaHome className="nav-icon" />
                         <span>Home</span>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={navigateToJars}>
                         <FaPiggyBank className="nav-icon" />
                         <span>Money Jars</span>
                     </li>
@@ -37,7 +53,7 @@ function NavSideBar() {
                         <FaChartPie className="nav-icon" />
                         <span>Budgeting</span>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={navigateToTransactions}>
                         <FaExchangeAlt className="nav-icon" />
                         <span>Transactions</span>
                     </li>
