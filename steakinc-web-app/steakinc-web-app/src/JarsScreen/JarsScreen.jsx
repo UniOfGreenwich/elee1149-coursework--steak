@@ -186,6 +186,7 @@ function JarScreen() {
             <div className="content-container">
                 <div className='account-background'>
                     <h2 className="account-total-container">
+                        <div className="account-total-label">Available Total:</div> {/* Added this line */}
                         <div className="account-total">£{availableTotal.toFixed(2)}</div>
                         <div onClick={toggleAccountInfo} className="dropdown-arrow">
                             {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}

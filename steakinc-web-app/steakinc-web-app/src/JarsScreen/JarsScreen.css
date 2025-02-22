@@ -103,6 +103,14 @@
     position: relative;
 }
 
+.account-total-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    color: white;
+}
+
 .account-item {
     color: #ffffff;
     list-style: none;
