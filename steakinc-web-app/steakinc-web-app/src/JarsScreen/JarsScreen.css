@@ -136,13 +136,14 @@
     justify-content: center;
     align-items: center;
     height: 100%; /* Ensure the slide takes full height */
+    width: auto !important;
 }
 
 .slick-list {
     height: 120px;
     display: flex;
     align-items: center; /* Center items vertically */
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 
 .slick-prev, .slick-next {
@@ -158,7 +159,6 @@
 }
 
 .jar-carousel-container {
-    width: 375px;
     margin: 0 auto; 
     background-color: #0B1739;
     border-radius: 10px;
@@ -443,14 +443,15 @@
     }
     
     .content-container {
-        margin-right: 320px; /* Ensure content does not go behind the carousel */
-        margin-left: 320px;
+        margin-right: 270px; /* Ensure content does not go behind the carousel */
+        margin-left: 335px;
     }
 
     .jar-details {
-        margin-right: 320px;
-        margin-left: 320px;
+        margin-right: 270px;
+        margin-left: 335px;
         height: calc(100vh - 260px); /* Ensure it spans the height of the screen */
+        border: 1px solid grey;
     }
 
     .jar-container {
