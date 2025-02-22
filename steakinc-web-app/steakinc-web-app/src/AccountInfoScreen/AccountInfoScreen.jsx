@@ -40,7 +40,7 @@ function AccountInformationForm() {
                 });
             }
             await axios.post(`http://localhost:5000/update_new_status/${userId}`, { new: false });
-            navigate('/');  // Redirect to user dashboard
+            navigate('/dashboard', { state: { userId } });  // Redirect to user dashboard
         } catch (error) {
             console.error('Error submitting account information', error);
         }
