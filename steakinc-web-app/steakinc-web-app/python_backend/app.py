@@ -398,11 +398,12 @@ def create_transaction():
 
     # Apply the transaction
     if transaction_type == 'ingoing':
-        account.balance += amount
         if jar_id:
             jar = Jar.query.get(jar_id)
             jar.current_balance += amount
             account.after_jar_total -= amount  # Reduce the available total of the account
+        else:
+            account.balance += amount
     elif transaction_type == 'outgoing' and overflow == False:
         account.balance -= amount
         if jar_id:
@@ -429,7 +430,7 @@ def create_transaction():
         amount=amount,
         transaction_type=transaction_type,
         pre_account_total=pre_account_total,
-        post_account_total=post_account_total,
+        post_account_total=post_account_total if not jar_id else pre_account_total,  # Do not change post_account_total if incoming to a jar
         category=data.get('category'),
         description=data.get('description')
     )

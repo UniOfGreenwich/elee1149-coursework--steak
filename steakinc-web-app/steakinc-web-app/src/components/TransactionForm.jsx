@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmit }) => {
+const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmit, disableDropdowns }) => {
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState('ingoing');
     const [selectedAccount, setSelectedAccount] = useState('');
@@ -46,7 +46,7 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                 <form onSubmit={handleSubmit}>
                     <div className="create-item">
                         <label>
-                            <select className='input-field-dropdown' value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required disabled>
+                            <select className='input-field-dropdown' value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required disabled={disableDropdowns}>
                                 <option value="" disabled>Select account</option>
                                 {accounts.map((account, index) => (
                                     <option key={index} value={account.account_id}>
@@ -56,7 +56,7 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                             </select>
                         </label>
                         <label>
-                            <select className='input-field-dropdown' value={selectedJar?.jar_id || ''} onChange={(e) => setSelectedJar(jars.find(jar => jar.jar_id === e.target.value))} required disabled>
+                            <select className='input-field-dropdown' value={selectedJar?.jar_id || ''} onChange={(e) => setSelectedJar(jars.find(jar => jar.jar_id === e.target.value))} disabled={disableDropdowns}>
                                 <option value="" disabled>Select jar</option>
                                 {jars.map((jar, index) => (
                                     <option key={index} value={jar.jar_id}>

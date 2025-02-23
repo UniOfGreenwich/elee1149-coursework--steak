@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
+import TransactionForm from '../components/TransactionForm'; // Import the TransactionForm component
 
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend);
@@ -78,46 +79,9 @@ function TransactionsScreen() {
         }
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (!amount || !selectedAccount) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-
-        if (!userId) {
-            alert('User ID is not defined.');
-            return;
-        }
-
-        try {
-            const response = await axios.post('http://localhost:5000/create_transaction', {
-                user_id: userId,
-                account_id: selectedAccount,
-                jar_id: selectedJar || null,
-                amount: parseFloat(amount),
-                transaction_type: transactionType,
-                category,
-                description,
-            });
-
-            if (response.status === 201) {
-                alert('Transaction added successfully');
-                setShowModal(false);
-                window.location.reload(); // Refresh the transactions list after adding a new one
-            } else {
-                console.error("Unexpected response status:", response.status);
-                alert('Failed to add transaction. Please try again.');
-            }
-        } catch (error) {
-            if (error.response) {
-                console.error("Error response data:", error.response.data);
-                alert(`Error: ${error.response.data.error}`);
-            } else {
-                console.error("Error adding transaction:", error);
-                alert('Failed to add transaction. Please try again.');
-            }
-        }
+    const handleSubmit = async () => {
+        setShowModal(false);
+        window.location.reload(); // Refresh the transactions list after adding a new one
     };
 
     // Sort transactions by date for the chart (ascending order)
@@ -146,63 +110,15 @@ function TransactionsScreen() {
             <button onClick={() => setShowModal(true)}>Add Transaction</button>
 
             {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <form onSubmit={handleSubmit}>
-                            <label>
-                                Amount:
-                                <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required />
-                            </label>
-                            <br />
-                            <label>
-                                Transaction Type:
-                                <select value={transactionType} onChange={(e) => setTransactionType(e.target.value)}>
-                                    <option value="ingoing">Ingoing</option>
-                                    <option value="outgoing">Outgoing</option>
-                                </select>
-                            </label>
-                            <br />
-                            <label>
-                                Select Account:
-                                <select value={selectedAccount} onChange={(e) => handleAccountChange(e.target.value)} required>
-                                    <option value="" disabled>Select account</option>
-                                    {accounts.map(account => (
-                                        <option key={account.account_id} value={account.account_id}>
-                                            {account.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                            <br />
-                            {selectedAccount && (
-                                <label>
-                                    Select Jar (optional):
-                                    <select value={selectedJar} onChange={(e) => setSelectedJar(e.target.value)}>
-                                        <option value="">None</option>
-                                        {jars.map(jar => (
-                                            <option key={jar.jar_id} value={jar.jar_id}>
-                                                {jar.jar_name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </label>
-                            )}
-                            <br />
-                            <label>
-                                Category:
-                                <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
-                            </label>
-                            <br />
-                            <label>
-                                Description:
-                                <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-                            </label>
-                            <br />
-                            <button type="submit">Add Transaction</button>
-                            <button type="button" onClick={() => setShowModal(false)}>Cancel</button>
-                        </form>
-                    </div>
-                </div>
+                <TransactionForm
+                    userId={userId}
+                    selectedJar={selectedJar}
+                    accounts={accounts}
+                    jars={jars}
+                    onClose={() => setShowModal(false)}
+                    onSubmit={handleSubmit}
+                    disableDropdowns={false} // Allow dropdowns to be editable
+                />
             )}
 
             <h2 className="white-text">Transaction List</h2>
