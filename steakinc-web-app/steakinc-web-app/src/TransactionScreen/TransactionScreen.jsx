@@ -28,7 +28,7 @@ function TransactionsScreen() {
             console.error("User ID is not defined");
             return;
         }
-
+    
         const fetchAccounts = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/total_balance/${userId}`);
@@ -42,11 +42,11 @@ function TransactionsScreen() {
                 console.error("Error fetching accounts:", error);
             }
         };
-
+    
         const fetchTransactions = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/user_transactions/${userId}`);
-                console.log("Transactions response:", response.data); // Debugging
+                console.log("Transactions response:", response.data);
                 if (response.data.transactions) {
                     setTransactions(response.data.transactions);
                 } else {
@@ -56,10 +56,26 @@ function TransactionsScreen() {
                 console.error("Error fetching transactions:", error);
             }
         };
-
+    
+        const fetchJars = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/user_jars/${userId}`);
+                console.log("Jars response:", response.data);
+                if (response.data.jars) {
+                    setJars(response.data.jars); // Set all jars
+                } else {
+                    console.error("Jars not found in response");
+                }
+            } catch (error) {
+                console.error("Error fetching jars:", error);
+            }
+        };
+    
         fetchAccounts();
         fetchTransactions();
-    }, [userId]);
+        fetchJars(); // Fetch jars immediately
+    
+    }, [userId]);    
 
     const handleAccountChange = async (accountId) => {
         setSelectedAccount(accountId);
@@ -113,6 +129,7 @@ function TransactionsScreen() {
                 <TransactionForm
                     userId={userId}
                     selectedJar={selectedJar}
+                    setSelectedJar={setSelectedJar} 
                     accounts={accounts}
                     jars={jars}
                     onClose={() => setShowModal(false)}
