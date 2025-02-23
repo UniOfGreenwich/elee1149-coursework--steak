@@ -44,6 +44,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     border-radius: 12px;
     padding: 5px;
     margin-bottom: 20px;
+    height: 75%;
 }
 
 select {

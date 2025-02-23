@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './TransactionForm.css'; // Import the new CSS file
 
 const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmit, disableDropdowns }) => {
     const [amount, setAmount] = useState('');
@@ -46,7 +47,7 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                 <form onSubmit={handleSubmit}>
                     <div className="create-item">
                         <label>
-                            <select className='input-field-dropdown' value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required disabled={disableDropdowns}>
+                            <select className='input-field-dropdown transaction-input-field' value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required disabled={disableDropdowns}>
                                 <option value="" disabled>Select account</option>
                                 {accounts.map((account, index) => (
                                     <option key={index} value={account.account_id}>
@@ -56,7 +57,7 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                             </select>
                         </label>
                         <label>
-                            <select className='input-field-dropdown' value={selectedJar?.jar_id || ''} onChange={(e) => setSelectedJar(jars.find(jar => jar.jar_id === e.target.value))} disabled={disableDropdowns}>
+                            <select className='input-field-dropdown transaction-input-field' value={selectedJar?.jar_id || ''} onChange={(e) => setSelectedJar(jars.find(jar => jar.jar_id === e.target.value))} disabled={disableDropdowns}>
                                 <option value="" disabled>Select jar</option>
                                 {jars.map((jar, index) => (
                                     <option key={index} value={jar.jar_id}>
@@ -68,14 +69,14 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                     </div>
                     <div className="create-item">
                         <label>
-                            <select className='input-field-dropdown' value={transactionType} onChange={(e) => setTransactionType(e.target.value)} required>
+                            <select className='input-field-dropdown transaction-input-field' value={transactionType} onChange={(e) => setTransactionType(e.target.value)} required>
                                 <option value="ingoing">Ingoing</option>
                                 <option value="outgoing">Outgoing</option>
                             </select>
                         </label>
                         <label>
                             <input
-                                className='input-field jar-form-input-field'
+                                className='input-field transaction-input-field'
                                 type="number"
                                 value={amount}
                                 onChange={(e) => setAmount(e.target.value)}
@@ -83,9 +84,11 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                                 placeholder='Amount'
                             />
                         </label>
+                    </div>
+                    <div className="create-item bottom-row">
                         <label>
                             <input
-                                className='input-field jar-form-input-field'
+                                className='input-field transaction-input-field'
                                 type="text"
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
@@ -93,11 +96,9 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                                 placeholder='Category'
                             />
                         </label>
-                    </div>
-                    <div className="create-item">
                         <label>
                             <input
-                                className='input-field jar-form-input-field'
+                                className='input-field transaction-input-field'
                                 type="text"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
@@ -107,8 +108,8 @@ const TransactionForm = ({ userId, selectedJar, accounts, jars, onClose, onSubmi
                         </label>
                     </div>
                     <div className="create-button-wrapper">
-                        <button className='jar-popup-button jar-popup-button--transparent' type="button" onClick={onClose}>Cancel</button>
-                        <button className='jar-popup-button' type="submit">Create Transaction</button>
+                        <button className='transaction-button transaction-button--transparent' type="button" onClick={onClose}>Cancel</button>
+                        <button className='transaction-button' type="submit">Create</button>
                     </div>
                 </form>
             </div>
