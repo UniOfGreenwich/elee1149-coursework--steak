@@ -397,6 +397,7 @@
 
     .create-item:first-child {
         margin-bottom: -30px;
+        margin-top: 8px;
     }
 
     .overlay-content {
