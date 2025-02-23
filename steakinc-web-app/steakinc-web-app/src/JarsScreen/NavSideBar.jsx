@@ -33,6 +33,12 @@ function NavSideBar() {
         navigate('/accounts', { state: { userId } });
     };
 
+    const handleLogout = () => {
+        // Clear any user-related data from the state or local storage
+        localStorage.removeItem('userId');
+        // Navigate back to the login page
+        navigate('/login');
+    };
 
     return (
         <div>
@@ -72,7 +78,7 @@ function NavSideBar() {
                     </li>
                 </ul>
                 <div className="nav-footer">
-                    <button type='button' className='logout-button'>Logout</button>
+                    <button type='button' className='logout-button' onClick={handleLogout}>Logout</button>
                 </div>
             </div>
         </div>
