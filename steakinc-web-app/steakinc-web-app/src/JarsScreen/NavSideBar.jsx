@@ -17,13 +17,22 @@ function NavSideBar() {
         navigate('/dashboard', { state: { userId } });
     };
 
+    const navigateToJars = () => {
+        navigate('/jars', { state: { userId } });
+    };
+
+    const navigateToBudgeting = () => {
+        navigate('/budget', { state: { userId } });
+    };
+
     const navigateToTransactions = () => {
         navigate('/transactions', { state: { userId } });
     };
 
-    const navigateToJars = () => {
-        navigate('/jars', { state: { userId } });
+    const navigateToAccounts = () => {
+        navigate('/accounts', { state: { userId } });
     };
+
 
     return (
         <div>
@@ -49,7 +58,7 @@ function NavSideBar() {
                         <FaPiggyBank className="nav-icon" />
                         <span>Money Jars</span>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={navigateToBudgeting}>
                         <FaChartPie className="nav-icon" />
                         <span>Budgeting</span>
                     </li>
@@ -57,7 +66,7 @@ function NavSideBar() {
                         <FaExchangeAlt className="nav-icon" />
                         <span>Transactions</span>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={navigateToAccounts}>
                         <FaUser className="nav-icon" />
                         <span>Accounts</span>
                     </li>
