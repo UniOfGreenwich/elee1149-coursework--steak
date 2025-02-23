@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { CustomNextArrow, CustomPrevArrow } from './CustomArrows';
 import VerticalCarousel from './VerticalCarousel';
+import TransactionForm from '../components/TransactionForm'; // Import the TransactionForm
 
 function JarScreen() {
     const [jarName, setJarName] = useState('');
@@ -23,6 +24,7 @@ function JarScreen() {
     const [showModal, setShowModal] = useState(false);
     const [selectedJar, setSelectedJar] = useState(null); // State for selected jar
     const [showEditModal, setShowEditModal] = useState(false); // State for edit modal
+    const [showTransactionModal, setShowTransactionModal] = useState(false); // State for transaction modal
     const [transactions, setTransactions] = useState([]); // State for transactions related to the selected jar
     const location = useLocation();
     const userId = location.state?.userId;
@@ -186,7 +188,7 @@ function JarScreen() {
             <div className="content-container">
                 <div className='account-background'>
                     <h2 className="account-total-container">
-                        <div className="account-total-label">Available Total:</div> {/* Added this line */}
+                        <div className="account-total-label">Available Total:</div>
                         <div className="account-total">£{availableTotal.toFixed(2)}</div>
                         <div onClick={toggleAccountInfo} className="dropdown-arrow">
                             {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
@@ -240,7 +242,7 @@ function JarScreen() {
                     <div className="transactions-wrapper">
                         <div className="transactions-title-wrapper">
                             <h2>Transactions</h2>
-                            <button type="button" className='add-transactions-button'>+</button>
+                            <button type="button" className='add-transactions-button' onClick={() => setShowTransactionModal(true)}>+</button>
                         </div>
                         <table className="transactions-table">
                             <thead>
@@ -352,6 +354,19 @@ function JarScreen() {
                         </form>
                     </div>
                 </div>
+            )}
+            {showTransactionModal && selectedJar && (
+                <TransactionForm
+                    userId={userId}
+                    accounts={accounts}
+                    jars={jars}
+                    selectedJar={selectedJar}
+                    onClose={() => setShowTransactionModal(false)}
+                    onSubmit={() => {
+                        fetchJarTransactions(selectedJar.jar_id);
+                        setShowTransactionModal(false);
+                    }}
+                />
             )}
         </div>
     );

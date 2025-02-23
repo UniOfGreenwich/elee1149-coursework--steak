@@ -377,7 +377,7 @@ def create_transaction():
     user_id = data.get('user_id')
     overflow = False
     
-     # Use the session to get the account
+    # Use the session to get the account
     session: Session = db.session
     account = session.get(Account, account_id)
 
@@ -402,6 +402,7 @@ def create_transaction():
         if jar_id:
             jar = Jar.query.get(jar_id)
             jar.current_balance += amount
+            account.after_jar_total -= amount  # Reduce the available total of the account
     elif transaction_type == 'outgoing' and overflow == False:
         account.balance -= amount
         if jar_id:
