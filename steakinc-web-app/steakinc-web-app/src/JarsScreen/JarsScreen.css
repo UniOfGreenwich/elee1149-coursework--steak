@@ -169,9 +169,8 @@
     border-radius: 10px;
     padding: 10px;
     height: calc(100vh - 260px); /* Adjust height to span the screen */
-    overflow-y: auto; /* Add scroll if content overflows */
     position: relative; /* Ensure the edit button is positioned correctly */
-}
+    }
 
 .create-jar-button {
     background-color: #DA4259;
@@ -282,6 +281,7 @@
     margin-top: 25px;
     border-radius: 10px;
     width: 100%; /* Ensure it takes full width of the container */
+    max-height: 320px; /* Set a max height for the transactions table */
     overflow-x: auto; /* Add horizontal scroll if content overflows */
 }
 
@@ -297,6 +297,7 @@
     width: 100%;
     border-collapse: collapse;
     margin: 0; /* Remove left margin */
+    table-layout: fixed; /* Ensure fixed table layout */
 }
 
 .transactions-header {
@@ -304,9 +305,23 @@
     border-bottom: 2px solid #ffffff;
     padding: 8px;
     font-size: 0.9em;
+    position: sticky; /* Fix the header */
+    top: 0;
+    background-color: #0B1739; /* Match the background color */
+    z-index: 1; /* Ensure it stays above the body */
+}
+
+.transactions-body {
+    display: block;
+    max-height: 220px; /* Adjust this value as needed */
+    overflow-y: auto; /* Make the transactions table body scrollable */
+    width: 500%;
 }
 
 .transactions-row {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
     border-bottom: 1px solid #ffffff;
     text-align: center; /* Center the text horizontally */
 }

@@ -185,90 +185,92 @@ function JarScreen() {
     return (
         <div>
             <NavSideBar />
-            <div className="content-container">
-                <div className='account-background'>
-                    <h2 className="account-total-container">
-                        <div className="account-total-label">Available Total:</div>
-                        <div className="account-total">£{availableTotal.toFixed(2)}</div>
-                        <div onClick={toggleAccountInfo} className="dropdown-arrow">
-                            {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
-                        </div>
-                        <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
-                    </h2>
-                    {isAccountInfoVisible && (
-                        <ul className='account-list-container'>
-                            {accounts.map(account => (
-                                <li className="account-item" key={account.account_id}>
-                                    {account.name}: £{account.available_funds.toFixed(2)}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-                <div className="jar-carousel-container horizontal-carousel">
-                    <Slider {...horizontalSettings} className="jar-container">
-                        {jars.map(jar => (
-                            <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
-                                <Lid />
-                                <span className="jar-name">{jar.jar_name}</span>
-                                <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+            <div className="main-container"> {/* Added this line */}
+                <div className="content-container">
+                    <div className='account-background'>
+                        <h2 className="account-total-container">
+                            <div className="account-total-label">Available Total:</div>
+                            <div className="account-total">£{availableTotal.toFixed(2)}</div>
+                            <div onClick={toggleAccountInfo} className="dropdown-arrow">
+                                {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
                             </div>
-                        ))}
-                    </Slider>
-                </div>
-            </div>
-            <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
-            {selectedJar && (
-                <div className="jar-details">
-                    <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
-                    <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
-                    <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
-                    <div className="progress-bar-wrapper">
-                        {selectedJar.current_balance < selectedJar.target_amount && (
-                            <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
-                        )}
-                        <div className="progress-bar-container">
-                            <div className="progress-bar" style={{ 
-                                width: `${Math.min((selectedJar.current_balance / selectedJar.target_amount) * 100, 100)}%`, 
-                                backgroundColor: selectedJar.current_balance >= selectedJar.target_amount ? 'green' : '#ffffff' 
-                            }}>
-                                {selectedJar.current_balance >= selectedJar.target_amount && <span className="progress-completed">Completed</span>}
-                            </div>
-                        </div>
-                        {selectedJar.current_balance < selectedJar.target_amount && (
-                            <span className="progress-percentage">{((selectedJar.current_balance / selectedJar.target_amount) * 100).toFixed(2)}%</span>
-                        )}
-                    </div>
-                    <div className="transactions-wrapper">
-                        <div className="transactions-title-wrapper">
-                            <h2>Transactions</h2>
-                            <button type="button" className='add-transactions-button' onClick={() => setShowTransactionModal(true)}>+</button>
-                        </div>
-                        <table className="transactions-table">
-                            <thead>
-                                <tr>
-                                    <th className="transactions-header">Date</th>
-                                    <th className="transactions-header">Amount</th>
-                                    <th className="transactions-header">Category</th>
-                                    <th className="transactions-header">Description</th>
-                                    <th className="transactions-header">Account total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {transactions.map(transaction => (
-                                    <tr key={transaction.transaction_id} className="transactions-row">
-                                        <td className="transactions-cell">{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                                        <td className="transactions-cell">{transaction.amount}</td>
-                                        <td className="transactions-cell">{transaction.category}</td>
-                                        <td className="transactions-cell">{transaction.description}</td>
-                                        <td className="transactions-cell">{transaction.post_account_total}</td>
-                                    </tr>
+                            <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
+                        </h2>
+                        {isAccountInfoVisible && (
+                            <ul className='account-list-container'>
+                                {accounts.map(account => (
+                                    <li className="account-item" key={account.account_id}>
+                                        {account.name}: £{account.available_funds.toFixed(2)}
+                                    </li>
                                 ))}
-                            </tbody>
-                        </table>
+                            </ul>
+                        )}
+                    </div>
+                    <div className="jar-carousel-container horizontal-carousel">
+                        <Slider {...horizontalSettings} className="jar-container">
+                            {jars.map(jar => (
+                                <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
+                                    <Lid />
+                                    <span className="jar-name">{jar.jar_name}</span>
+                                    <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                                </div>
+                            ))}
+                        </Slider>
                     </div>
                 </div>
-            )}
+                <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
+                {selectedJar && (
+                    <div className="jar-details">
+                        <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
+                        <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
+                        <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
+                        <div className="progress-bar-wrapper">
+                            {selectedJar.current_balance < selectedJar.target_amount && (
+                                <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
+                            )}
+                            <div className="progress-bar-container">
+                                <div className="progress-bar" style={{ 
+                                    width: `${Math.min((selectedJar.current_balance / selectedJar.target_amount) * 100, 100)}%`, 
+                                    backgroundColor: selectedJar.current_balance >= selectedJar.target_amount ? 'green' : '#ffffff' 
+                                }}>
+                                    {selectedJar.current_balance >= selectedJar.target_amount && <span className="progress-completed">Completed</span>}
+                                </div>
+                            </div>
+                            {selectedJar.current_balance < selectedJar.target_amount && (
+                                <span className="progress-percentage">{((selectedJar.current_balance / selectedJar.target_amount) * 100).toFixed(2)}%</span>
+                            )}
+                        </div>
+                        <div className="transactions-wrapper">
+                            <div className="transactions-title-wrapper">
+                                <h2>Transactions</h2>
+                                <button type="button" className='add-transactions-button' onClick={() => setShowTransactionModal(true)}>+</button>
+                            </div>
+                            <table className="transactions-table">
+                                <thead>
+                                    <tr>
+                                        <th className="transactions-header">Date</th>
+                                        <th className="transactions-header">Amount</th>
+                                        <th className="transactions-header">Category</th>
+                                        <th className="transactions-header">Description</th>
+                                        <th className="transactions-header">Account total</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="transactions-body">
+                                    {transactions.map(transaction => (
+                                        <tr key={transaction.transaction_id} className="transactions-row">
+                                            <td className="transactions-cell">{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                                            <td className="transactions-cell">{transaction.amount}</td>
+                                            <td className="transactions-cell">{transaction.category}</td>
+                                            <td className="transactions-cell">{transaction.description}</td>
+                                            <td className="transactions-cell">{transaction.post_account_total}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
+            </div> {/* Added this line */}
             {showModal && (
                 <div className="overlay-container">
                     <div className="overlay-content">
@@ -362,10 +364,7 @@ function JarScreen() {
                     jars={jars}
                     selectedJar={selectedJar}
                     onClose={() => setShowTransactionModal(false)}
-                    onSubmit={() => {
-                        fetchJarTransactions(selectedJar.jar_id);
-                        setShowTransactionModal(false);
-                    }}
+                    onSubmit={() => { window.location.reload(); }}
                 />
             )}
         </div>
