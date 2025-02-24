@@ -363,6 +363,7 @@ function JarScreen() {
                     accounts={accounts}
                     jars={jars}
                     selectedJar={selectedJar}
+                    setSelectedJar={setSelectedJar} 
                     onClose={() => setShowTransactionModal(false)}
                     onSubmit={() => { window.location.reload(); }}
                     disableDropdowns={true} // Disable dropdowns when creating a transaction from the jars page

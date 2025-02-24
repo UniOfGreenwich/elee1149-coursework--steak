@@ -15,8 +15,15 @@ const TransactionForm = ({
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState('ingoing');
     const [selectedAccount, setSelectedAccount] = useState('');
+    const [sourceAccount, setSourceAccount] = useState('');
+    const [destinationAccount, setDestinationAccount] = useState('');
+    const [sourceJar, setSourceJar] = useState('');
+    const [destinationJar, setDestinationJar] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
+    const [filteredJars, setFilteredJars] = useState([]);
+    const [filteredSourceJars, setFilteredSourceJars] = useState([]);
+    const [filteredDestinationJars, setFilteredDestinationJars] = useState([]);
 
     // Debug: Check if jars array is populated
     useEffect(() => {
@@ -30,16 +37,47 @@ const TransactionForm = ({
         }
     }, [selectedJar]);
 
+    useEffect(() => {
+        if (selectedAccount) {
+            const accountJars = jars.filter(jar => jar.account_id === parseInt(selectedAccount));
+            setFilteredJars(accountJars);
+        } else {
+            setFilteredJars([]);
+        }
+    }, [selectedAccount, jars]);
+
+    useEffect(() => {
+        if (sourceAccount) {
+            const accountJars = jars.filter(jar => jar.account_id === parseInt(sourceAccount));
+            setFilteredSourceJars(accountJars);
+        } else {
+            setFilteredSourceJars([]);
+        }
+    }, [sourceAccount, jars]);
+
+    useEffect(() => {
+        if (destinationAccount) {
+            const accountJars = jars.filter(jar => jar.account_id === parseInt(destinationAccount));
+            setFilteredDestinationJars(accountJars);
+        } else {
+            setFilteredDestinationJars([]);
+        }
+    }, [destinationAccount, jars]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const payload = {
             user_id: userId,
             account_id: selectedAccount,
-            jar_id: selectedJar?.jar_id, // Ensure it's not undefined
+            jar_id: selectedJar?.jar_id,
             amount: parseFloat(amount),
             transaction_type: transactionType,
             category,
             description,
+            source_account_id: sourceAccount,
+            destination_account_id: destinationAccount,
+            source_jar_id: sourceJar?.jar_id,
+            destination_jar_id: destinationJar?.jar_id,
         };
 
         try {
@@ -61,67 +99,35 @@ const TransactionForm = ({
             <div className="overlay-content">
                 <form onSubmit={handleSubmit}>
                     <div className="create-item">
-                        {/* Account Selection */}
                         <label>
-                            <select 
-                                className='input-field-dropdown transaction-input-field' 
-                                value={selectedAccount} 
-                                onChange={(e) => setSelectedAccount(e.target.value)} 
-                                required 
-                                disabled={disableDropdowns}
-                            >
+                            <select className='input-field-dropdown transaction-input-field' value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)} required disabled={disableDropdowns}>
                                 <option value="" disabled>Select account</option>
-                                {accounts.map((account) => (
-                                    <option key={account.account_id} value={account.account_id}>
+                                {accounts.map((account, index) => (
+                                    <option key={index} value={account.account_id}>
                                         {account.name} - £{(account.available_funds).toFixed(2)}
                                     </option>
                                 ))}
                             </select>
                         </label>
-
-                        {/* Jar Selection */}
                         <label>
-                            <select 
-                                className='input-field-dropdown transaction-input-field' 
-                                value={selectedJar?.jar_id || ''} 
-                                onChange={(e) => {
-                                    console.log("Selected Jar ID:", e.target.value); // Debugging log
-                                    const newJar = jars.find(jar => jar.jar_id.toString() === e.target.value);
-                                    if (newJar) {
-                                        console.log("Selected Jar Object:", newJar); // Debugging log
-                                        setSelectedJar(newJar); // ✅ Ensure state is updated
-                                    }
-                                }} 
-                                disabled={disableDropdowns}
-                            >
+                            <select className='input-field-dropdown transaction-input-field' value={selectedJar?.jar_id || ''} onChange={(e) => setSelectedJar(filteredJars.find(jar => jar.jar_id === parseInt(e.target.value)))} disabled={disableDropdowns}>
                                 <option value="" disabled>Select jar</option>
-                                {jars
-                                    .filter(jar => jar.account_id.toString() === selectedAccount.toString()) // Ensure correct filtering
-                                    .map((jar) => (
-                                        <option key={jar.jar_id} value={jar.jar_id}>
-                                            {jar.jar_name} - £{jar.current_balance.toFixed(2)}
-                                        </option>
-                                    ))
-                                }
+                                {filteredJars.map((jar, index) => (
+                                    <option key={index} value={jar.jar_id}>
+                                        {jar.jar_name} - £{(jar.current_balance).toFixed(2)}
+                                    </option>
+                                ))}
                             </select>
                         </label>
                     </div>
-
                     <div className="create-item">
-                        {/* Transaction Type Selection */}
                         <label>
-                            <select 
-                                className='input-field-dropdown transaction-input-field' 
-                                value={transactionType} 
-                                onChange={(e) => setTransactionType(e.target.value)} 
-                                required
-                            >
+                            <select className='input-field-dropdown transaction-input-field' value={transactionType} onChange={(e) => setTransactionType(e.target.value)} required>
                                 <option value="ingoing">Ingoing</option>
                                 <option value="outgoing">Outgoing</option>
+                                <option value="transfer">Transfer</option>
                             </select>
                         </label>
-
-                        {/* Amount Input */}
                         <label>
                             <input
                                 className='input-field transaction-input-field'
@@ -133,9 +139,55 @@ const TransactionForm = ({
                             />
                         </label>
                     </div>
-
+                    {transactionType === 'transfer' && (
+                        <>
+                            <div className="create-item">
+                                <label>
+                                    <select className='input-field-dropdown transaction-input-field' value={sourceAccount} onChange={(e) => setSourceAccount(e.target.value)} required>
+                                        <option value="" disabled>Select source account</option>
+                                        {accounts.map((account, index) => (
+                                            <option key={index} value={account.account_id}>
+                                                {account.name} - £{(account.available_funds).toFixed(2)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                                <label>
+                                    <select className='input-field-dropdown transaction-input-field' value={sourceJar?.jar_id || ''} onChange={(e) => setSourceJar(filteredSourceJars.find(jar => jar.jar_id === parseInt(e.target.value)))}>
+                                        <option value="" disabled>Select source jar</option>
+                                        {filteredSourceJars.map((jar, index) => (
+                                            <option key={index} value={jar.jar_id}>
+                                                {jar.jar_name} - £{(jar.current_balance).toFixed(2)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                            </div>
+                            <div className="create-item">
+                                <label>
+                                    <select className='input-field-dropdown transaction-input-field' value={destinationAccount} onChange={(e) => setDestinationAccount(e.target.value)} required>
+                                        <option value="" disabled>Select destination account</option>
+                                        {accounts.map((account, index) => (
+                                            <option key={index} value={account.account_id}>
+                                                {account.name} - £{(account.available_funds).toFixed(2)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                                <label>
+                                    <select className='input-field-dropdown transaction-input-field' value={destinationJar?.jar_id || ''} onChange={(e) => setDestinationJar(filteredDestinationJars.find(jar => jar.jar_id === parseInt(e.target.value)))}>
+                                        <option value="" disabled>Select destination jar</option>
+                                        {filteredDestinationJars.map((jar, index) => (
+                                            <option key={index} value={jar.jar_id}>
+                                                {jar.jar_name} - £{(jar.current_balance).toFixed(2)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                            </div>
+                        </>
+                    )}
                     <div className="create-item bottom-row">
-                        {/* Category Input */}
                         <label>
                             <input
                                 className='input-field transaction-input-field'
@@ -146,8 +198,6 @@ const TransactionForm = ({
                                 placeholder='Category'
                             />
                         </label>
-
-                        {/* Description Input */}
                         <label>
                             <input
                                 className='input-field transaction-input-field'
@@ -159,15 +209,8 @@ const TransactionForm = ({
                             />
                         </label>
                     </div>
-
                     <div className="create-button-wrapper">
-                        <button 
-                            className='transaction-button transaction-button--transparent' 
-                            type="button" 
-                            onClick={onClose}
-                        >
-                            Cancel
-                        </button>
+                        <button className='transaction-button transaction-button--transparent' type="button" onClick={onClose}>Cancel</button>
                         <button className='transaction-button' type="submit">Create</button>
                     </div>
                 </form>

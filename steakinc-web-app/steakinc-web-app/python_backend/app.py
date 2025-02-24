@@ -56,6 +56,10 @@ class Transaction(db.Model):
     category = db.Column(db.String(50), nullable=True)
     description = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    source_account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=True)
+    destination_account_id = db.Column(db.Integer, db.ForeignKey('account.account_id'), nullable=True)
+    source_jar_id = db.Column(db.Integer, db.ForeignKey('jar.jar_id'), nullable=True)
+    destination_jar_id = db.Column(db.Integer, db.ForeignKey('jar.jar_id'), nullable=True)
 
 # Define the Jar model
 class Jar(db.Model):
@@ -375,6 +379,12 @@ def create_transaction():
     amount = Decimal(data.get('amount'))  # Convert amount to Decimal
     transaction_type = data.get('transaction_type')
     user_id = data.get('user_id')
+    category = data.get('category')
+    description = data.get('description')
+    source_account_id = data.get('source_account_id')
+    destination_account_id = data.get('destination_account_id')
+    source_jar_id = data.get('source_jar_id')
+    destination_jar_id = data.get('destination_jar_id')
     overflow = False
     
     # Use the session to get the account
@@ -401,14 +411,56 @@ def create_transaction():
         if jar_id:
             jar = Jar.query.get(jar_id)
             jar.current_balance += amount
-            account.after_jar_total -= amount  # Reduce the available total of the account
+            account.balance += amount
         else:
             account.balance += amount
+
     elif transaction_type == 'outgoing' and overflow == False:
         account.balance -= amount
         if jar_id:
             jar = Jar.query.get(jar_id)
             jar.current_balance -= amount
+    elif transaction_type == 'transfer':
+        source_account = Account.query.get(source_account_id)
+        destination_account = Account.query.get(destination_account_id)
+        source_jar = Jar.query.get(source_jar_id) if source_jar_id else None
+        destination_jar = Jar.query.get(destination_jar_id) if destination_jar_id else None
+
+        if source_jar and destination_jar:
+            # Jar to Jar transfer
+            if source_jar.current_balance < amount:
+                return jsonify({'error': 'Insufficient funds in source jar'}), 400
+            source_jar.current_balance -= amount
+            if source_jar.account_id == destination_jar.account_id:
+                destination_jar.current_balance += amount
+            else:
+                source_account.balance -= amount
+                destination_account.balance += amount
+                destination_jar.current_balance += amount
+        elif source_jar and not destination_jar:
+            # Jar to Account transfer
+            if source_jar.current_balance < amount:
+                return jsonify({'error': 'Insufficient funds in source jar'}), 400
+            source_jar.current_balance -= amount
+            source_account.balance -= amount
+            destination_account.balance += amount
+            destination_account.after_jar_total += amount
+        elif not source_jar and destination_jar:
+            # Account to Jar transfer
+            if source_account.balance < amount:
+                return jsonify({'error': 'Insufficient funds in source account'}), 400
+            source_account.balance -= amount
+            source_account.after_jar_total -= amount
+            destination_account.balance += amount
+            destination_jar.current_balance += amount
+        else:
+            # Account to Account transfer
+            if source_account.balance < amount:
+                return jsonify({'error': 'Insufficient funds in source account'}), 400
+            source_account.balance -= amount
+            source_account.after_jar_total -= amount
+            destination_account.balance += amount
+            destination_account.after_jar_total += amount
 
     # Commit changes to account and jar to ensure balances are updated
     db.session.commit()
@@ -431,8 +483,12 @@ def create_transaction():
         transaction_type=transaction_type,
         pre_account_total=pre_account_total,
         post_account_total=post_account_total if not jar_id else pre_account_total,  # Do not change post_account_total if incoming to a jar
-        category=data.get('category'),
-        description=data.get('description')
+        category=category,
+        description=description,
+        source_account_id=source_account_id,
+        destination_account_id=destination_account_id,
+        source_jar_id=source_jar_id,
+        destination_jar_id=destination_jar_id
     )
     db.session.add(transaction)
     db.session.commit()
