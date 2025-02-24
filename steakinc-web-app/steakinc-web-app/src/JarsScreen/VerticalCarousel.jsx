@@ -23,19 +23,21 @@ const VerticalCarousel = ({ jars, setSelectedJar }) => {
 
     return (
         <div className="vertical-carousel-wrapper">
-            <CustomPrevArrow onClick={handlePrev} className="custom-arrow" />
-            <div className="jar-carousel-container vertical-carousel">
-                <div className="jar-container" ref={carouselRef}>
-                    {jars.map((jar, index) => (
-                        <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
-                            <Lid />
-                            <span className="jar-name">{jar.jar_name}</span>
-                            <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
-                        </div>
-                    ))}
+            <div className="vertical-carousel-container">
+                <CustomPrevArrow onClick={handlePrev} className="custom-arrow" />
+                <div className="jar-carousel-container vertical-carousel">
+                    <div className="jar-container" ref={carouselRef}>
+                        {jars.map((jar, index) => (
+                            <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
+                                <Lid />
+                                <span className="jar-name">{jar.jar_name}</span>
+                                <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
+                <CustomNextArrow onClick={handleNext} className="custom-arrow" />
             </div>
-            <CustomNextArrow onClick={handleNext} className="custom-arrow" />
         </div>
     );
 };

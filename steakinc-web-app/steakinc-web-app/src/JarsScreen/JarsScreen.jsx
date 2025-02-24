@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { CustomNextArrow, CustomPrevArrow } from './CustomArrows';
 import VerticalCarousel from './VerticalCarousel';
-
+import TransactionForm from '../components/TransactionForm'; // Import the TransactionForm
 
 function JarScreen() {
     const [jarName, setJarName] = useState('');
@@ -24,6 +24,7 @@ function JarScreen() {
     const [showModal, setShowModal] = useState(false);
     const [selectedJar, setSelectedJar] = useState(null); // State for selected jar
     const [showEditModal, setShowEditModal] = useState(false); // State for edit modal
+    const [showTransactionModal, setShowTransactionModal] = useState(false); // State for transaction modal
     const [transactions, setTransactions] = useState([]); // State for transactions related to the selected jar
     const location = useLocation();
     const userId = location.state?.userId;
@@ -76,6 +77,26 @@ function JarScreen() {
 
         fetchAccountsAndJars();
     }, [userId]);
+
+    useEffect(() => {
+        if (selectedJar) {
+            fetchJarTransactions(selectedJar.jar_id);
+        }
+    }, [selectedJar]);
+
+    const fetchJarTransactions = async (jarId) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/user_jar_transactions/${userId}/${jarId}`);
+            if (response.data.transactions) {
+                setTransactions(response.data.transactions);
+                console.log("Transactions fetched:", response.data.transactions); // Debugging log
+            } else {
+                console.error("Transactions not found in response");
+            }
+        } catch (error) {
+            console.error("Error fetching transactions:", error);
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -164,95 +185,92 @@ function JarScreen() {
     return (
         <div>
             <NavSideBar />
-            <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
-            <div className="content-container">
-                <div className='account-background'>
-                    <h2 className="account-total-container">
-                        <div className="account-total">£{availableTotal.toFixed(2)}</div>
-                        <div onClick={toggleAccountInfo} className="dropdown-arrow">
-                            {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
-                        </div>
-                    </h2>
-                    {isAccountInfoVisible && (
-                        <ul className='account-list-container'>
-                            {accounts.map(account => (
-                                <li className="account-item" key={account.account_id}>
-                                    {account.name}: £{account.available_funds.toFixed(2)}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-                <div className="jar-carousel-container horizontal-carousel">
-                    <Slider {...horizontalSettings} className="jar-container">
-                        {jars.map(jar => (
-                            <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
-                                <Lid />
-                                <span className="jar-name">{jar.jar_name}</span>
-                                <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+            <div className="main-container"> {/* Added this line */}
+                <div className="content-container">
+                    <div className='account-background'>
+                        <h2 className="account-total-container">
+                            <div className="account-total-label">Available Total:</div>
+                            <div className="account-total">£{availableTotal.toFixed(2)}</div>
+                            <div onClick={toggleAccountInfo} className="dropdown-arrow">
+                                {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
                             </div>
-                        ))}
-                    </Slider>
+                            <button className='create-jar-button' onClick={() => setShowModal(true)}>Create</button>
+                        </h2>
+                        {isAccountInfoVisible && (
+                            <ul className='account-list-container'>
+                                {accounts.map(account => (
+                                    <li className="account-item" key={account.account_id}>
+                                        {account.name}: £{account.available_funds.toFixed(2)}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    <div className="jar-carousel-container horizontal-carousel">
+                        <Slider {...horizontalSettings} className="jar-container">
+                            {jars.map(jar => (
+                                <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
+                                    <Lid />
+                                    <span className="jar-name">{jar.jar_name}</span>
+                                    <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                                </div>
+                            ))}
+                        </Slider>
+                    </div>
                 </div>
-            </div>
-            <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
-            {selectedJar && (
+                <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
+                {selectedJar && (
                     <div className="jar-details">
-                        <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
                         <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
+                        <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
                         <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
                         <div className="progress-bar-wrapper">
                             {selectedJar.current_balance < selectedJar.target_amount && (
                                 <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
                             )}
-                        <div className="progress-bar-container">
-                            <div className="progress-bar" style={{ 
-                                width: `${(selectedJar.current_balance / selectedJar.target_amount) * 100}%`, 
-                                backgroundColor: selectedJar.current_balance >= selectedJar.target_amount ? 'green' : '#ffffff' 
-                            }}>
-                                {selectedJar.current_balance >= selectedJar.target_amount && <span className="progress-completed">Completed</span>}
+                            <div className="progress-bar-container">
+                                <div className="progress-bar" style={{ 
+                                    width: `${Math.min((selectedJar.current_balance / selectedJar.target_amount) * 100, 100)}%`, 
+                                    backgroundColor: selectedJar.current_balance >= selectedJar.target_amount ? 'green' : '#ffffff' 
+                                }}>
+                                    {selectedJar.current_balance >= selectedJar.target_amount && <span className="progress-completed">Completed</span>}
+                                </div>
                             </div>
+                            {selectedJar.current_balance < selectedJar.target_amount && (
+                                <span className="progress-percentage">{((selectedJar.current_balance / selectedJar.target_amount) * 100).toFixed(2)}%</span>
+                            )}
                         </div>
-                        {selectedJar.current_balance < selectedJar.target_amount && (
-                            <span className="progress-percentage">{((selectedJar.current_balance / selectedJar.target_amount) * 100).toFixed(2)}%</span>
-                        )}
+                        <div className="transactions-wrapper">
+                            <div className="transactions-title-wrapper">
+                                <h2>Transactions</h2>
+                                <button type="button" className='add-transactions-button' onClick={() => setShowTransactionModal(true)}>+</button>
+                            </div>
+                            <table className="transactions-table">
+                                <thead>
+                                    <tr>
+                                        <th className="transactions-header">Date</th>
+                                        <th className="transactions-header">Amount</th>
+                                        <th className="transactions-header">Category</th>
+                                        <th className="transactions-header">Description</th>
+                                        <th className="transactions-header">Account total</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="transactions-body">
+                                    {transactions.map(transaction => (
+                                        <tr key={transaction.transaction_id} className="transactions-row">
+                                            <td className="transactions-cell">{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                                            <td className="transactions-cell">{transaction.amount}</td>
+                                            <td className="transactions-cell">{transaction.category}</td>
+                                            <td className="transactions-cell">{transaction.description}</td>
+                                            <td className="transactions-cell">{transaction.post_account_total}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            )}
-            <div className="transactions-wrapper">
-                <div className="transactions-title-wrapper">
-                    <h2>Transactions</h2>
-                    <button type="button" className='add-transactions-button'>+</button>
-                </div>
-                <table className="transactions-table">
-                    <thead>
-                        <tr>
-                        <th className="transactions-header">Date</th>
-                            <th className="transactions-header">Amount</th>
-                            <th className="transactions-header">Category</th>
-                            <th className="transactions-header">Description</th>
-                            <th className="transactions-header">Account total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {[
-                            { date: '2023-01-01', amount: '50.00', category: 'Groceries', description: 'Supermarket', accountTotal: '950.00' },
-                            { date: '2023-01-02', amount: '20.00', category: 'Transport', description: 'Bus ticket', accountTotal: '930.00' },
-                            { date: '2023-01-03', amount: '100.00', category: 'Entertainment', description: 'Concert ticket', accountTotal: '830.00' },
-                            { date: '2023-01-04', amount: '30.00', category: 'Dining', description: 'Restaurant', accountTotal: '800.00' },
-                            { date: '2023-01-05', amount: '200.00', category: 'Rent', description: 'Monthly rent', accountTotal: '600.00' }
-                        ].map((transaction, index) => (
-                            <tr key={index} className="transactions-row">
-                                <td className="transactions-cell">{transaction.date}</td>
-                                <td className="transactions-cell">£{transaction.amount}</td>
-                                <td className="transactions-cell">{transaction.category}</td>
-                                <td className="transactions-cell">{transaction.description}</td>
-                                <td className="transactions-cell">£{transaction.accountTotal}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                )}
+            </div> {/* Added this line */}
             {showModal && (
                 <div className="overlay-container">
                     <div className="overlay-content">
@@ -270,7 +288,7 @@ function JarScreen() {
                                 </label>
                                 <label>
                                 <input
-                                    className='input-field' 
+                                    className='input-field jar-form-input-field' 
                                     type="text" value={jarName} 
                                     onChange={(e) => setJarName(e.target.value)} required 
                                     placeholder='Jar Name'
@@ -280,7 +298,7 @@ function JarScreen() {
                             <div className="create-item">
                                 <label>
                                     <input 
-                                        className='input-field' 
+                                        className='input-field jar-form-input-field' 
                                         type="number" 
                                         value={allocatedAmount} 
                                         onChange={(e) => setAllocatedAmount(e.target.value)} required 
@@ -289,7 +307,7 @@ function JarScreen() {
                                 </label>
                                 <label>
                                     <input 
-                                        className='input-field' 
+                                        className='input-field jar-form-input-field' 
                                         type="number" 
                                         value={targetAmount} 
                                         onChange={(e) => setTargetAmount(e.target.value)} 
@@ -298,8 +316,8 @@ function JarScreen() {
                                 </label>
                             </div>
                             <div className="create-button-wrapper">
-                                <button className='back-button' type="button" onClick={() => setShowModal(false)}>Cancel</button>
-                                <button className='login-submit-button' type="submit">Create Jar</button>
+                                <button className='jar-popup-button jar-popup-button--transparent' type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                                <button className='jar-popup-button' type="submit">Create Jar</button>
                             </div>
                         </form>
                     </div>
@@ -309,7 +327,7 @@ function JarScreen() {
                 <div className="overlay-container">
                     <div className="overlay-content">
                         <form onSubmit={(e) => { e.preventDefault(); handleEditJar(); }}>
-                        <button className='delete-jar-button' type="button" onClick={handleDeleteJar}>Delete</button>
+                        <button className='jar-popup-button jar-popup-button--transparent' type="button" onClick={handleDeleteJar}>Delete</button>
                             <div className="edit-content-wrapper">
                                 <label>
                                 <h2 className='edit-jar-header'>Jar Name</h2>
@@ -318,7 +336,7 @@ function JarScreen() {
                                         value={selectedJar.jar_name}
                                         onChange={(e) => setSelectedJar({ ...selectedJar, jar_name: e.target.value })}
                                         required
-                                        className='input-field'
+                                        className='input-field jar-form-input-field'
                                     />
                                 </label>
                                 <label>
@@ -327,17 +345,29 @@ function JarScreen() {
                                         type="number"
                                         value={selectedJar.target_amount}
                                         onChange={(e) => setSelectedJar({ ...selectedJar, target_amount: e.target.value })}
-                                        className='input-field'
+                                        className='input-field jar-form-input-field'
                                     />
                                 </label>
                             </div>
                             <div className="edit-jar-button-wrapper">
-                                <button className="back-button" type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
-                                <button className='login-submit-button' type="submit">Save</button>
+                                <button className="jar-popup-button jar-popup-button--transparent" type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                                <button className='jar-popup-button' type="submit">Save</button>
                             </div>
                         </form>
                     </div>
                 </div>
+            )}
+            {showTransactionModal && selectedJar && (
+                <TransactionForm
+                    userId={userId}
+                    accounts={accounts}
+                    jars={jars}
+                    selectedJar={selectedJar}
+                    setSelectedJar={setSelectedJar} 
+                    onClose={() => setShowTransactionModal(false)}
+                    onSubmit={() => { window.location.reload(); }}
+                    disableDropdowns={true} // Disable dropdowns when creating a transaction from the jars page
+                />
             )}
         </div>
     );

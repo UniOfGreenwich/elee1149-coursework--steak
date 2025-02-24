@@ -132,8 +132,8 @@
     }
 
     .input-field-password, .input-field {
-        margin: 10px 0 0 -10px !important;
         width: 250px;
+        margin-left: 10px;
     }
 
     .input-field-security {

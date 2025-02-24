@@ -67,6 +67,7 @@
     color: white;
     font-size: 44px;
     margin-left: 20px;
+    font-weight: 450;
 }
 
 .nav-list {
@@ -96,6 +97,8 @@
     align-items: center;
     color: white;
     cursor: pointer;
+    justify-content: center;
+    margin-left: -20px;
 }
 
 .logout-button {

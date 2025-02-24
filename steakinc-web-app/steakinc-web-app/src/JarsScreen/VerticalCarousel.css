@@ -4,7 +4,8 @@
     right: 20px;
     top: 40px;
     height: 100%;
-    width: 200px; 
+    width: 200px;
+    margin-right: 15px;
 }
 
 @media (min-width: 1024px) {
@@ -35,11 +36,23 @@
         align-items: center;
     }
 
+    .vertical-carousel-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #0B1739;
+        width: 100%;
+        height: 90.5%;
+        position: relative;
+        border: 1px grey solid;
+        border-radius: 10px;
+    }
+
     .jar-carousel-container.vertical-carousel {
         overflow: hidden;
         height: 800px;
         width: 100%;
-        border: 1px grey solid;
+        position: relative; /* Ensure arrows are positioned within this container */
     }
 
     .jar-container {
@@ -56,7 +69,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 70px; 
+        height: 70px;
         margin: 20px auto;
         padding: 20px;
     }
@@ -66,13 +79,17 @@
         font-size: 20px;
     }
 
-    .carousel-button.prev-button {
+    .custom-prev-arrow {
         position: absolute;
-        top: 0;
+        top: 10px; /* Position the previous arrow at the top */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%);
     }
 
-    .carousel-button.next-button {
+    .custom-next-arrow {
         position: absolute;
-        bottom: 0;
+        bottom: 10px; /* Position the next arrow at the bottom */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%);
     }
 }

@@ -33,7 +33,7 @@
 
 .content-container {
     flex: 1;
-    padding: 20px;
+    padding-top: 20px;
     margin-top: 10px;
 }
 
@@ -84,18 +84,31 @@
 .dropdown-arrow svg {
     font-size: 26px;
     color: white;
+    margin-top: 90px;
 }
 
 .account-total {
     margin: 4px 0 0 20px;
+    color: white;
 }
 
 .account-total-container {
     display: flex;
     justify-content: space-between;
-    color: #ffffff;
-    background-color: #DA4259;
+    align-items: center;
+    padding: 10px;
+    background-color: #DA4259; /* Revert to original background color */
     border-radius: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.account-total-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    color: white;
 }
 
 .account-item {
@@ -123,12 +136,14 @@
     justify-content: center;
     align-items: center;
     height: 100%; /* Ensure the slide takes full height */
+    width: auto !important;
 }
 
 .slick-list {
     height: 120px;
     display: flex;
     align-items: center; /* Center items vertically */
+    margin-bottom: 20px !important;
 }
 
 .slick-prev, .slick-next {
@@ -144,7 +159,6 @@
 }
 
 .jar-carousel-container {
-    width: 375px;
     margin: 0 auto; 
     background-color: #0B1739;
     border-radius: 10px;
@@ -154,21 +168,21 @@
     background-color: #0B1739;
     border-radius: 10px;
     padding: 10px;
-}
+    height: calc(100vh - 260px); /* Adjust height to span the screen */
+    position: relative; /* Ensure the edit button is positioned correctly */
+    }
 
 .create-jar-button {
-    background-color: transparent;
+    background-color: #DA4259;
     color: #ffffff;
-    border: none;
+    border: 3px solid white;
     border-radius: 10px;
     padding: 10px;
-    margin: 14px 0 0 320px;
+    position: absolute;
+    top: 10px; /* Position the button at the top */
+    right: 10px; /* Position the button on the right */
     cursor: pointer;
     font-size: 16px;
-    border: 3px solid #DA4259;
-    position: absolute;
-    right: 10px;
-
 }
 
 .edit-jar-button {
@@ -178,7 +192,7 @@
     border-radius: 10px;
     padding: 10px;
     position: absolute;
-    top: 355px; /* Move the button up */
+    top: 10px; /* Position the button at the top */
     right: 10px; /* Position the button on the right */
     width: 75px;
     cursor: pointer;
@@ -203,13 +217,17 @@
 .jar-details-goal {
     color: #ffffff;
     font-weight: 400;
+    margin-left: 10px;
 }
 
 .progress-bar-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 30px;
+    border: 1px solid white;
+    border-radius: 25px;
+    height: 9%;
 }
 
 .jar-details-goal {
@@ -239,6 +257,7 @@
 .progress-percentage {
     margin-left: 10px;
     color: #ffffff;
+    margin-right: 10px;
 }
 
 .progress-completed {
@@ -258,9 +277,11 @@
 
 .transactions-wrapper {
     background-color: #0B1739;
-    padding: 10px;
     margin-top: 25px;
     border-radius: 10px;
+    width: 100%; /* Ensure it takes full width of the container */
+    max-height: 320px; /* Set a max height for the transactions table */
+    overflow-x: auto; /* Add horizontal scroll if content overflows */
 }
 
 .transactions-title-wrapper {
@@ -274,6 +295,8 @@
 .transactions-table {
     width: 100%;
     border-collapse: collapse;
+    margin: 0; /* Remove left margin */
+    table-layout: fixed; /* Ensure fixed table layout */
 }
 
 .transactions-header {
@@ -281,16 +304,33 @@
     border-bottom: 2px solid #ffffff;
     padding: 8px;
     font-size: 0.9em;
+    position: sticky; /* Fix the header */
+    top: 0;
+    background-color: #0B1739; /* Match the background color */
+    z-index: 1; /* Ensure it stays above the body */
+}
+
+.transactions-body {
+    display: block;
+    max-height: 220px; /* Adjust this value as needed */
+    overflow-y: auto; /* Make the transactions table body scrollable */
+    width: 500%;
 }
 
 .transactions-row {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
     border-bottom: 1px solid #ffffff;
+    text-align: center; /* Center the text horizontally */
 }
 
 .transactions-cell {
     color: #ffffff;
     padding: 8px;
     font-size: 0.9em;
+    text-align: center; /* Center the text horizontally */
+    vertical-align: middle; /* Center the text vertically */
 }
 
 .delete-jar-button {
@@ -314,6 +354,27 @@
     justify-content: space-evenly;
 }
 
+.jar-popup-button {
+    width: 200px; /* Set a fixed width for the button */
+    font-size: 20px;
+    padding: 15px 55px;
+    background-color: #DA4259;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 3px solid #DA4259;
+    margin: 0 2.5px 0 10px;
+}
+
+.jar-popup-button--transparent {
+    background-color: transparent;
+    border: 3px solid #DA4259;
+}
+
 @media (min-width: 768px) {
     .edit-jar-button-wrapper {
         justify-content: center;
@@ -328,10 +389,6 @@
         display: flex;
     }
 
-    .edit-jar-button {
-        margin-right: 10px;
-    }
-
     .create-item {
         display: flex;
         margin-top: 20px;
@@ -339,26 +396,35 @@
 
     .create-item:first-child {
         margin-bottom: -30px;
+        margin-top: 8px;
     }
 
     .overlay-content {
         width: 100%;
-        height: 300px;
+        height: auto;
     }
 
     .create-button-wrapper {
         margin-top: 60px;
+    }
+
+    .jar {
+        width: 70px !important;
     }
 }
 
 @media (min-width: 1024px) {
     .progress-bar-wrapper {
         margin: 0 auto;
+        height: 9%;
+        margin-top: 30px;
+        width: 93%;
     }
 
     .create-jar-button {
         position: absolute;
-        margin: 80px 260px 0 0;
+        top: 10px;
+        right: 10px;
         width: 100px;
     }
 
@@ -368,11 +434,13 @@
 
     .account-total-container {
         height: 120px;
+        margin-top: -40px;
     }
 
     .account-total {
         margin-top: 15px;
         font-size: 65px;
+        color: white;
     }
 
     .account-item {
@@ -381,8 +449,7 @@
 
     .edit-jar-button {
         position: absolute;
-        margin: 150px 260px 0 0;
-        top: 0;
+        top: 10px; /* Ensure the button stays at the top */
         width: 100px;
     }
 
@@ -395,13 +462,15 @@
     }
     
     .content-container {
-        margin-right: 390px; /* Ensure content does not go behind the carousel */
-        margin-left: 300px;
+        margin-right: 270px; /* Ensure content does not go behind the carousel */
+        margin-left: 335px;
     }
 
     .jar-details {
-        margin-right: 410px;
-        margin-left: 320px;
+        margin-right: 270px;
+        margin-left: 335px;
+        height: calc(100vh - 260px); /* Ensure it spans the height of the screen */
+        border: 1px solid grey;
     }
 
     .jar-container {
@@ -419,8 +488,7 @@
 
     .transactions-wrapper {
         min-width: none;
-        width: 40%;
-        margin: 50px  auto;
-        padding: 20px 50px;
+        width: 100%; /* Ensure it takes full width of the container */
+        margin: 50px 0; /* Adjust margin for better spacing */
     }
 }
