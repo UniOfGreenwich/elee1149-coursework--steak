@@ -293,3 +293,85 @@ sequenceDiagram
         Frontend ->> User: Display transaction history
     end
 ```
+
+## Create Account
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Submit account creation form
+    Frontend ->> Backend: POST /create_account with form data
+    Backend ->> Backend: Validate request data
+    alt Missing required fields
+        Backend ->> Frontend: Return error (400)
+        Frontend ->> User: Display error message
+    else Fetch existing accounts
+        Backend ->> Database: Query existing accounts for user
+        Database ->> Backend: Return account list
+        Backend ->> Backend: Calculate pre_account_total
+        Backend ->> Database: Insert new account
+        Database ->> Backend: Confirm account added
+        Backend ->> Backend: Calculate post_account_total
+        Backend ->> Database: Record transaction for account creation
+        Database ->> Backend: Confirm transaction recorded
+        Backend ->> Frontend: Return success message (201)
+        Frontend ->> User: Display success message
+    end
+```
+
+## Update Account
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Submit account update form
+    Frontend ->> Backend: PUT /update_account/{account_id} with form data
+    Backend ->> Database: Fetch account by ID
+    alt Account not found
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error message
+    else Account found
+        Backend ->> Backend: Update account details
+        Backend ->> Database: Commit changes
+        Database ->> Backend: Confirm update
+        Backend ->> Frontend: Return success message (200)
+        Frontend ->> User: Display success message
+    end
+```
+
+## Delete Account
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Request account deletion
+    Frontend ->> Backend: DELETE /delete_account/{account_id}
+    Backend ->> Database: Fetch account by ID
+    alt Account not found
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error message
+    else Account found
+        Backend ->> Backend: Calculate pre_account_total
+        Backend ->> Backend: Calculate post_account_total
+        Backend ->> Database: Record transaction for account deletion
+        Backend ->> Database: Fetch and delete related jars
+        Database ->> Backend: Confirm jars deleted
+        Backend ->> Backend: Soft delete account
+        Backend ->> Database: Commit changes
+        Database ->> Backend: Confirm account deleted
+        Backend ->> Frontend: Return success message (200)
+        Frontend ->> User: Display success message
+    end
+```
