@@ -190,3 +190,51 @@ flowchart TD
     F --> G[End Get User Jar Transactions]
     D --> G
 ```
+## Create Account Process
+
+```mermaid
+flowchart TD
+    A[Start Create Account] --> B[Validate request data]
+    B --> C{Are fields missing?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Fetch existing accounts for user]
+    E --> F[Calculate pre_account_total]
+    F --> G[Create new account]
+    G --> H[Calculate post_account_total]
+    H --> I[Record transaction for account creation]
+    I --> J[Display success message]
+    J --> K[End Create Account]
+    D --> K
+```
+
+## Update Account Process
+
+```mermaid
+flowchart TD
+    A[Start Update Account] --> B[Fetch account by ID]
+    B --> C{Is account found?}
+    C -- No --> D[Display error message]
+    C -- Yes --> E[Update account details]
+    E --> F[Commit changes]
+    F --> G[Display success message]
+    G --> H[End Update Account]
+    D --> H
+```
+
+## Delete Account Process
+
+```mermaid
+flowchart TD
+    A[Start Delete Account] --> B[Fetch account by ID]
+    B --> C{Is account found?}
+    C -- No --> D[Display error message]
+    C -- Yes --> E[Calculate pre_account_total]
+    E --> F[Calculate post_account_total]
+    F --> G[Record transaction for account deletion]
+    G --> H[Fetch and delete related jars]
+    H --> I[Soft delete account]
+    I --> J[Commit changes]
+    J --> K[Display success message]
+    K --> L[End Delete Account]
+    D --> L
+```
