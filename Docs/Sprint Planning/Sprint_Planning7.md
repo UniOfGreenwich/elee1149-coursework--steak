@@ -61,11 +61,17 @@
 1. **Sign-up Tabbing Format:**
    - **Description:** Address and correct the tabbing format for the sign-up process.
 
-2. **Task 2:**
-   - **Description:** 
+2. **Enter Key needs functionality:**
+   - **Description:** Add enter key function to sign-up, login and forgot password.
 
-3. **Task 3:**
-   - **Description:** 
+3. **Add password security:**
+   - **Description:** add password specifications to forgot passowrd and sign up.
+
+4. **Ask random security question:**
+   - **Description:** Add random question selection for forgot password.
+  
+5. **Add '£' symbols where money is shown:**
+   - **Description:** Add symbok to any reference of money.
 
 ### Documentation Tasks
 
