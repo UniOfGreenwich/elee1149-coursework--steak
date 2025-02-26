@@ -10,7 +10,7 @@ import AcountInfoScreen from './AccountInfoScreen/AccountInfoScreen.jsx'
 import DashboardScreen from './DashboardScreen/DashboardScreen.jsx';
 import JarsScreen from './JarsScreen/JarsScreen.jsx';
 import TransactionsScreen from './TransactionScreen/TransactionScreen.jsx';
-import AccountScreen from './AccountScreen/AccountScreen.jsx';
+import AccountsScreen from './AccountScreen/AccountScreen.jsx';
 import BudgetScreen from './BudgetScreen/BudgetScreen.jsx';
 
 createRoot(document.getElementById('root')).render(
@@ -25,7 +25,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/dashboard" element={<DashboardScreen />} />
         <Route path="/jars" element={<JarsScreen />} />
         <Route path="/transactions" element={<TransactionsScreen />} />
-        <Route path="/accounts" element={<AccountScreen />} />
+        <Route path="/accounts" element={<AccountsScreen />} />
         <Route path="/budget" element={<BudgetScreen />} />
       </Routes>
     </Router>

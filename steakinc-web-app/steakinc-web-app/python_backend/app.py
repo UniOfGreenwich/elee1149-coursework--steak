@@ -543,6 +543,109 @@ def get_user_jar_transactions(user_id, jar_id):
         print(f"Error fetching transactions for user {user_id} and jar {jar_id}: {e}")
         return jsonify({'error': 'An error occurred while fetching transactions'}), 500
 
+@app.route('/create_account', methods=['POST'])
+def create_account():
+    data = request.json
+    user_id = data.get('user_id')
+    account_name = data.get('account_name')
+    account_type = data.get('account_type')
+    balance = Decimal(data.get('balance'))
+
+    if not user_id or not account_name or not account_type or not balance:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    # Calculate the pre_account_total for the user
+    accounts = Account.query.filter_by(user_id=user_id, is_deleted=False).all()
+    pre_account_total = sum(account.balance for account in accounts)
+
+    # Create the new account
+    new_account = Account(
+        user_id=user_id,
+        account_name=account_name,
+        account_type=account_type,
+        balance=balance,
+        after_jar_total=balance
+    )
+
+    db.session.add(new_account)
+    db.session.commit()
+
+    # Calculate the post_account_total (including the new account)
+    post_account_total = pre_account_total + balance
+
+    # Record the transaction for account creation
+    transaction = Transaction(
+        account_id=new_account.account_id,
+        user_id=user_id,
+        transaction_date=datetime.now(),
+        amount=balance,
+        transaction_type='ingoing',
+        pre_account_total=pre_account_total,
+        post_account_total=post_account_total,
+        category='account',
+        description='Initial balance on account creation'
+    )
+    db.session.add(transaction)
+    db.session.commit()
+
+    return jsonify({'message': 'Account created successfully', 'account_id': new_account.account_id}), 201
+
+@app.route('/update_account/<int:account_id>', methods=['PUT'])
+def update_account(account_id):
+    data = request.json
+    account_name = data.get('account_name')
+    account_type = data.get('account_type')
+
+    account = Account.query.get(account_id)
+    if not account:
+        return jsonify({'error': 'Account not found'}), 404
+
+    if account_name:
+        account.account_name = account_name
+    if account_type:
+        account.account_type = account_type
+
+    db.session.commit()
+    return jsonify({'message': 'Account updated successfully'}), 200
+
+@app.route('/delete_account/<int:account_id>', methods=['DELETE'])
+def delete_account(account_id):
+    account = Account.query.get(account_id)
+    if not account:
+        return jsonify({'error': 'Account not found'}), 404
+
+    # Calculate the pre_account_total for the user
+    accounts = Account.query.filter_by(user_id=account.user_id).all()
+    pre_account_total = sum(acc.balance for acc in accounts)
+
+    # Calculate the post_account_total (excluding the account being deleted)
+    post_account_total = pre_account_total - account.balance
+
+    # Record the transaction for account deletion
+    transaction = Transaction(
+        account_id=account_id,
+        user_id=account.user_id,
+        transaction_date=datetime.now(),
+        amount=account.balance,
+        transaction_type='outgoing',
+        category='account',
+        pre_account_total=pre_account_total,
+        post_account_total=post_account_total,
+        description='Account closure'
+    )
+    db.session.add(transaction)
+
+    # Delete all jars related to this account
+    jars = Jar.query.filter_by(account_id=account_id, is_deleted=False).all()
+    for jar in jars:
+        jar.is_deleted = True
+
+    # Soft delete the account
+    account.is_deleted = True
+    db.session.commit()
+
+    return jsonify({'message': 'Account and related jars deleted successfully'}), 200
+
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts
     app.run(debug=True)
