@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import TransactionForm from '../components/TransactionForm'; // Import the TransactionForm component
+import NavSideBar from '../JarsScreen/NavSideBar';
+import './TransactionScreen.css';
 
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend);
@@ -74,6 +76,7 @@ function TransactionsScreen() {
         fetchAccounts();
         fetchTransactions();
         fetchJars(); // Fetch jars immediately
+
     
     }, [userId]);    
 
@@ -114,58 +117,70 @@ function TransactionsScreen() {
                 label: 'Post Account Total',
                 data: sortedForChart.map(transaction => transaction.post_account_total),
                 fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgb(218, 66, 89)',
                 tension: 0.1
             }
         ]
     };
 
     return (
-        <div>
-            <h1 className="white-text">Transactions</h1>
-            <button onClick={() => setShowModal(true)}>Add Transaction</button>
-
-            {showModal && (
-                <TransactionForm
-                    userId={userId}
-                    selectedJar={selectedJar}
-                    setSelectedJar={setSelectedJar} 
-                    accounts={accounts}
-                    jars={jars}
-                    onClose={() => setShowModal(false)}
-                    onSubmit={handleSubmit}
-                    disableDropdowns={false} // Allow dropdowns to be editable
-                />
-            )}
-
-            <h2 className="white-text">Transaction List</h2>
-            <table className="white-text">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Pre Account Total</th>
-                        <th>Post Account Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sortedForTable.map(transaction => (
-                        <tr key={transaction.transaction_id}>
-                            <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                            <td>{transaction.amount}</td>
-                            <td>{transaction.category}</td>
-                            <td>{transaction.description}</td>
-                            <td>{transaction.pre_account_total}</td>
-                            <td>{transaction.post_account_total}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <h2 className="white-text">Post Account Total Over Time</h2>
-            <Line data={chartData} />
+        <div className='transation-wrapper'>
+            <NavSideBar />
+            <div className='transaction-container'>
+                <div className="transaction-title-container">
+                    <h1 className="transaction-title">Transactions</h1>
+                </div>
+                {showModal && (
+                    <TransactionForm
+                        userId={userId}
+                        selectedJar={selectedJar}
+                        setSelectedJar={setSelectedJar} 
+                        accounts={accounts}
+                        jars={jars}
+                        onClose={() => setShowModal(false)}
+                        onSubmit={handleSubmit}
+                        disableDropdowns={false} // Allow dropdowns to be editable
+                    />
+                )}
+                <h2 className="line-chart-title">Account Total Over Time</h2>
+                <div className="line-chart-container">
+                    <Line data={chartData} />
+                </div>
+                <div className="transaction-table-add-container">
+                            <h2 className="transaction-table-title">Transaction List</h2>
+                            <button className='add-transaction-button' onClick={() => setShowModal(true)}>Add</button>
+                    </div>
+                <div className="transaction-table-wrapper">
+                    <table className="transaction-table-container">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Account Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortedForTable.map(transaction => (
+                                <tr key={transaction.transaction_id}>
+                                    <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                                    <td className={transaction.type === 'ingoing' ? 'transaction-type-ingoing' : 'transaction-type-outgoing'}>
+                                        {transaction.type === 'ingoing' ? `+£${transaction.amount}` : `-£${transaction.amount}`}
+                                    </td>
+                                    <td className={transaction.type === 'ingoing' ? 'transaction-type-ingoing' : 'transaction-type-outgoing'}>
+                                        {transaction.type}
+                                    </td>
+                                    <td>{transaction.category}</td>
+                                    <td>{transaction.description}</td>
+                                    <td>£{transaction.post_account_total}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 }

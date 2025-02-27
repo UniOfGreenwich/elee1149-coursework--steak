@@ -270,7 +270,7 @@ function JarScreen() {
                         </div>
                     </div>
                 )}
-            </div> {/* Added this line */}
+            </div>
             {showModal && (
                 <div className="overlay-container">
                     <div className="overlay-content">

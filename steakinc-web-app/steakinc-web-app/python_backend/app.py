@@ -506,6 +506,7 @@ def get_user_transactions(user_id):
             'transaction_id': transaction.transaction_id,
             'transaction_date': transaction.transaction_date.strftime("%Y-%m-%d %H:%M:%S.%f"),
             'amount': float(transaction.amount),
+            'type': transaction.transaction_type,
             'category': transaction.category,
             'description': transaction.description,
             'pre_account_total': float(transaction.pre_account_total),

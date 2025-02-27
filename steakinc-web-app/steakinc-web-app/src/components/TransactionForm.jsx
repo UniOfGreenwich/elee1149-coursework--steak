@@ -95,8 +95,8 @@ const TransactionForm = ({
     };
 
     return (
-        <div className="overlay-container">
-            <div className="overlay-content">
+        <div className="overlay-transactions-container">
+            <div className="overlay-transactions-content">
                 <form onSubmit={handleSubmit}>
                     <div className="create-item">
                         <label>

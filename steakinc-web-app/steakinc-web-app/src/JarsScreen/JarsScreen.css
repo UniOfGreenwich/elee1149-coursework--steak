@@ -301,7 +301,6 @@
 
 .transactions-header {
     color: #ffffff;
-    border-bottom: 2px solid #ffffff;
     padding: 8px;
     font-size: 0.9em;
     position: sticky; /* Fix the header */
@@ -321,7 +320,6 @@
     display: table;
     width: 100%;
     table-layout: fixed;
-    border-bottom: 1px solid #ffffff;
     text-align: center; /* Center the text horizontally */
 }
 
