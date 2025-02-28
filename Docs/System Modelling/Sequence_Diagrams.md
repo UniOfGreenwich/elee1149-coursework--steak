@@ -375,3 +375,165 @@ sequenceDiagram
         Frontend ->> User: Display success message
     end
 ```
+
+## Get Incomes
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Request to view incomes
+    Frontend ->> Backend: GET /user_incomes/{user_id}
+    Backend ->> Database: Query incomes for user
+    Database ->> Backend: Return income list
+    Backend ->> Frontend: Return incomes (200)
+    Frontend ->> User: Display income list
+```
+
+## Get Expenses
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Request to view expenses
+    Frontend ->> Backend: GET /user_expenses/{user_id}
+    Backend ->> Database: Query expenses for user
+    Database ->> Backend: Return expense list
+    Backend ->> Frontend: Return expenses (200)
+    Frontend ->> User: Display expense list
+```
+
+## Add Income
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Submit new income form
+    Frontend ->> Backend: POST /add_income with form data
+    Backend ->> Database: Insert new income record
+    Database ->> Backend: Confirm income added
+    Backend ->> Frontend: Return success message (201)
+    Frontend ->> User: Display success message
+```
+
+## Add Expense
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Submit new expense form
+    Frontend ->> Backend: POST /add_expense with form data
+    Backend ->> Database: Insert new expense record
+    Database ->> Backend: Confirm expense added
+    Backend ->> Frontend: Return success message (201)
+    Frontend ->> User: Display success message
+```
+
+## Delete Income
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Request to delete income
+    Frontend ->> Backend: DELETE /delete_income/{income_id}
+    Backend ->> Database: Fetch income by ID
+    alt Income not found or already deleted
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error message
+    else Income found
+        Backend ->> Database: Soft delete income
+        Database ->> Backend: Confirm income deleted
+        Backend ->> Frontend: Return success message (200)
+        Frontend ->> User: Display success message
+    end
+```
+
+## Delete Expense
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Request to delete expense
+    Frontend ->> Backend: DELETE /delete_expense/{budget_id}
+    Backend ->> Database: Fetch expense by ID
+    alt Expense not found or already deleted
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error message
+    else Expense found
+        Backend ->> Database: Soft delete expense
+        Database ->> Backend: Confirm expense deleted
+        Backend ->> Frontend: Return success message (200)
+        Frontend ->> User: Display success message
+    end
+```
+
+## Update Income
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Submit income update form
+    Frontend ->> Backend: PUT /update_income/{income_id} with form data
+    Backend ->> Database: Fetch income by ID
+    alt Income not found or already deleted
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error message
+    else Income found
+        Backend ->> Backend: Update income details
+        Backend ->> Database: Commit changes
+        Database ->> Backend: Confirm update
+        Backend ->> Frontend: Return success message (200)
+        Frontend ->> User: Display success message
+    end
+```
+
+## Update Expense
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Database
+
+    User ->> Frontend: Submit expense update form
+    Frontend ->> Backend: PUT /update_expense/{budget_id} with form data
+    Backend ->> Database: Fetch expense by ID
+    alt Expense not found or already deleted
+        Backend ->> Frontend: Return error (404)
+        Frontend ->> User: Display error message
+    else Expense found
+        Backend ->> Backend: Update expense details
+        Backend ->> Database: Commit changes
+        Database ->> Backend: Confirm update
+        Backend ->> Frontend: Return success message (200)
+        Frontend ->> User: Display success message
+    end
+```

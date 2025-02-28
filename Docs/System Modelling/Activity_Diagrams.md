@@ -238,3 +238,113 @@ flowchart TD
     K --> L[End Delete Account]
     D --> L
 ```
+
+## Get Incomes Process
+
+```mermaid
+flowchart TD
+    A[Start Get Incomes] --> B[Fetch incomes for user]
+    B --> C{Error fetching incomes?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Return income list]
+    E --> F[Display income list]
+    F --> G[End Get Incomes]
+    D --> G
+```
+
+## Get Expenses Process
+
+```mermaid
+flowchart TD
+    A[Start Get Expenses] --> B[Fetch expenses for user]
+    B --> C{Error fetching expenses?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Return expense list]
+    E --> F[Display expense list]
+    F --> G[End Get Expenses]
+    D --> G
+```
+
+## Add Income Process
+
+```mermaid
+flowchart TD
+    A[Start Add Income] --> B[Validate request data]
+    B --> C{Are fields missing?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Insert new income record]
+    E --> F[Commit changes]
+    F --> G[Display success message]
+    G --> H[End Add Income]
+    D --> H
+```
+
+## Add Expense Process
+
+```mermaid
+flowchart TD
+    A[Start Add Expense] --> B[Validate request data]
+    B --> C{Are fields missing?}
+    C -- Yes --> D[Display error message]
+    C -- No --> E[Insert new expense record]
+    E --> F[Commit changes]
+    F --> G[Display success message]
+    G --> H[End Add Expense]
+    D --> H
+```
+
+## Delete Income Process
+
+```mermaid
+flowchart TD
+    A[Start Delete Income] --> B[Fetch income by ID]
+    B --> C{Is income found or already deleted?}
+    C -- No --> D[Display error message]
+    C -- Yes --> E[Soft delete income]
+    E --> F[Commit changes]
+    F --> G[Display success message]
+    G --> H[End Delete Income]
+    D --> H
+```
+
+## Delete Expense Process
+
+```mermaid
+flowchart TD
+    A[Start Delete Expense] --> B[Fetch expense by ID]
+    B --> C{Is expense found or already deleted?}
+    C -- No --> D[Display error message]
+    C -- Yes --> E[Soft delete expense]
+    E --> F[Commit changes]
+    F --> G[Display success message]
+    G --> H[End Delete Expense]
+    D --> H
+```
+
+## Update Income Process
+
+```mermaid
+flowchart TD
+    A[Start Update Income] --> B[Fetch income by ID]
+    B --> C{Is income found or already deleted?}
+    C -- No --> D[Display error message]
+    C -- Yes --> E[Update income details]
+    E --> F[Commit changes]
+    F --> G[Display success message]
+    G --> H[End Update Income]
+    D --> H
+```
+
+## Update Expense Process
+
+```mermaid
+flowchart TD
+    A[Start Update Expense] --> B[Fetch expense by ID]
+    B --> C{Is expense found or already deleted?}
+    C -- No --> D[Display error message]
+    C -- Yes --> E[Update expense details]
+    E --> F[Commit changes]
+    F --> G[Display success message]
+    G --> H[End Update Expense]
+    D --> H
+```
