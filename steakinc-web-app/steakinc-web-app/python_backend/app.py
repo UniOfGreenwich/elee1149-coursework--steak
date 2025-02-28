@@ -647,6 +647,89 @@ def delete_account(account_id):
 
     return jsonify({'message': 'Account and related jars deleted successfully'}), 200
 
+@app.route('/user_incomes/<int:user_id>', methods=['GET'])
+def get_incomes(user_id):
+    incomes = Income.query.filter_by(user_id=user_id, is_deleted=False).all()
+    return jsonify({'incomes': [{'income_id': inc.income_id, 'name': inc.name, 'amount': float(inc.amount)} for inc in incomes]})
+
+@app.route('/user_expenses/<int:user_id>', methods=['GET'])
+def get_expenses(user_id):
+    expenses = Budget.query.filter_by(user_id=user_id, is_deleted=False).all()
+    return jsonify({'expenses': [{'budget_id': exp.budget_id, 'expense': exp.expense, 'category': exp.category, 'amount': float(exp.amount)} for exp in expenses]})
+
+@app.route('/add_income', methods=['POST'])
+def add_income():
+    data = request.json
+    new_income = Income(
+        user_id=data['user_id'],
+        name=data['name'],
+        amount=data['amount'],
+        income_date=datetime.now()
+    )
+    db.session.add(new_income)
+    db.session.commit()
+    return jsonify({'message': 'Income added successfully'}), 201
+
+@app.route('/add_expense', methods=['POST'])
+def add_expense():
+    data = request.json
+    new_expense = Budget(
+        user_id=data['user_id'],
+        expense=data['expense'],
+        category=data['category'],
+        amount=data['amount'],
+    )
+    db.session.add(new_expense)
+    db.session.commit()
+    return jsonify({'message': 'Expense added successfully'}), 201
+
+# Created for later development of the frontend.
+@app.route('/delete_income/<int:income_id>', methods=['DELETE'])
+def delete_income(income_id):
+    income = Income.query.get(income_id)
+    if not income or income.is_deleted:
+        return jsonify({'error': 'Income not found'}), 404
+
+    income.is_deleted = True
+    db.session.commit()
+    return jsonify({'message': 'Income deleted successfully'}), 200
+
+# Created for later development of the frontend.
+@app.route('/delete_expense/<int:budget_id>', methods=['DELETE'])
+def delete_expense(budget_id):
+    expense = Budget.query.get(budget_id)
+    if not expense or expense.is_deleted:
+        return jsonify({'error': 'Expense not found'}), 404
+
+    expense.is_deleted = True
+    db.session.commit()
+    return jsonify({'message': 'Expense deleted successfully'}), 200
+
+@app.route('/update_income/<int:income_id>', methods=['PUT'])
+def update_income(income_id):
+    data = request.json
+    income = Income.query.get(income_id)
+    if not income or income.is_deleted:
+        return jsonify({'error': 'Income not found'}), 404
+
+    income.name = data.get('name', income.name)
+    income.amount = data.get('amount', income.amount)
+    db.session.commit()
+    return jsonify({'message': 'Income updated successfully'}), 200
+
+@app.route('/update_expense/<int:budget_id>', methods=['PUT'])
+def update_expense(budget_id):
+    data = request.json
+    expense = Budget.query.get(budget_id)
+    if not expense or expense.is_deleted:
+        return jsonify({'error': 'Expense not found'}), 404
+
+    expense.expense = data.get('expense', expense.expense)
+    expense.category = data.get('category', expense.category)
+    expense.amount = data.get('amount', expense.amount)
+    db.session.commit()
+    return jsonify({'message': 'Expense updated successfully'}), 200
+
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts
     app.run(debug=True)
