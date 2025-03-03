@@ -65,13 +65,13 @@
    - **Description:** Add enter key function to sign-up, login and forgot password.
 
 3. **Add password security:**
-   - **Description:** add password specifications to forgot passowrd and sign up.
+   - **Description:** add password specifications to forgot password and sign up.
 
 4. **Ask random security question:**
    - **Description:** Add random question selection for forgot password.
   
 5. **Add '£' symbols where money is shown:**
-   - **Description:** Add symbok to any reference of money.
+   - **Description:** Add symbol to any reference of money.
 
 ### Documentation Tasks
 
