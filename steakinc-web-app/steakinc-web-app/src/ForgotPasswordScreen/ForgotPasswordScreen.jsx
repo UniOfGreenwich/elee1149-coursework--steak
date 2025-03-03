@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ForgotPasswordScreen.css';
@@ -8,11 +8,22 @@ function ForgotPasswordScreen() {
         username: '',
         newPassword: '',
         confirmPassword: '',
-        security_1_answer: ''
+        security_answer: ''
     });
 
     const [message, setMessage] = useState(null);
+    const [securityQuestion, setSecurityQuestion] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const questions = [
+            "Favorite book or movie?",
+            "Name of birthplace?",
+            "Mother's maiden name?"
+        ];
+        const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+        setSecurityQuestion(randomQuestion);
+    }, []);
 
     const handleBackClick = () => {
         navigate('/');
@@ -34,7 +45,8 @@ function ForgotPasswordScreen() {
                 username: formData.username,
                 new_password: formData.newPassword,
                 confirm_password: formData.confirmPassword,
-                security_1_answer: formData.security_1_answer
+                security_answer: formData.security_answer,
+                security_question: securityQuestion
             });
             setMessage(response.data.message);
             
@@ -80,10 +92,10 @@ function ForgotPasswordScreen() {
                         />
                         <input
                             type="text"
-                            name="security_1_answer"
+                            name="security_answer"
                             className="input-field"
-                            placeholder='Favorite book or movie?'
-                            value={formData.security_1_answer}
+                            placeholder={securityQuestion}
+                            value={formData.security_answer}
                             onChange={handleChange}
                             required
                         />
@@ -103,7 +115,7 @@ function ForgotPasswordScreen() {
                         </div>
                     </div>
                     <div className="password-button-wrapper">
-                        <button className="back-button" onClick={handleBackClick}>Back</button>
+                        <button type="button" className="back-button" onClick={handleBackClick}>Back</button>
                         <button type="submit" className="password-submit-button">Confirm</button>
                     </div>
                 </form>

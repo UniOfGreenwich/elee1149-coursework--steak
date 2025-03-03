@@ -169,9 +169,10 @@ def forgot_password():
     username = data.get('username')
     new_password = data.get('new_password')
     confirm_password = data.get('confirm_password')
-    security_1_answer = data.get('security_1_answer')
+    security_answer = data.get('security_answer')
+    security_question = data.get('security_question')
 
-    if not username or not new_password or not confirm_password or not security_1_answer:
+    if not username or not new_password or not confirm_password or not security_answer or not security_question:
         return jsonify({'error': 'Missing required fields'}), 400
 
     if new_password != confirm_password:
@@ -183,7 +184,11 @@ def forgot_password():
         return jsonify({'error': 'User not found'}), 404
 
     # Verify security question answer
-    if not check_password_hash(user.security_1, security_1_answer):
+    if security_question == "Favorite book or movie?" and not check_password_hash(user.security_1, security_answer):
+        return jsonify({'error': 'Incorrect security answer'}), 401
+    elif security_question == "Name of birthplace?" and not check_password_hash(user.security_2, security_answer):
+        return jsonify({'error': 'Incorrect security answer'}), 401
+    elif security_question == "Mother's maiden name?" and not check_password_hash(user.security_3, security_answer):
         return jsonify({'error': 'Incorrect security answer'}), 401
 
     # Update the user's password

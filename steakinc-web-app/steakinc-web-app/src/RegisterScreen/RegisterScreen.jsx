@@ -34,6 +34,13 @@ function RegisterScreen() {
             return;
         }
 
+        // Check if password meets the specifications
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(registrationData.password)) {
+            setMessage('Password must be at least 8 characters long, contain at least one number, one uppercase letter, and one special character.');
+            return;
+        }
+
         // Prepare the data to send to the backend
         const dataToSend = {
             username: registrationData.username,
@@ -79,6 +86,7 @@ function RegisterScreen() {
                             value={registrationData.username}
                             onChange={handleRegistrationChange}
                             required
+                            tabIndex={1}
                         />
                         <input
                             type="password"
@@ -88,6 +96,7 @@ function RegisterScreen() {
                             value={registrationData.password}
                             onChange={handleRegistrationChange}
                             required
+                            tabIndex={3}
                         />
                         <input
                             type="email"
@@ -97,6 +106,7 @@ function RegisterScreen() {
                             value={registrationData.email}
                             onChange={handleRegistrationChange}
                             required
+                            tabIndex={2}
                         />
                         <input
                             type="password"
@@ -106,6 +116,7 @@ function RegisterScreen() {
                             value={registrationData.confirmPassword}
                             onChange={handleRegistrationChange}
                             required
+                            tabIndex={4}
                         />
                     </div>
                     <div className="security-title-wrapper">
@@ -120,6 +131,7 @@ function RegisterScreen() {
                                     placeholder='Favorite book or movie?'
                                     required
                                     readOnly
+                                    tabIndex={-1}
                             />
                             <input
                                 type="text"
@@ -139,6 +151,7 @@ function RegisterScreen() {
                                 placeholder='Name of birthplace?'
                                 required
                                 readOnly
+                                tabIndex={-1}
                             />
                             <input
                                 type="text"
@@ -158,6 +171,7 @@ function RegisterScreen() {
                                 placeholder="Mother's maiden name?"
                                 required
                                 readOnly
+                                tabIndex={-1}
                             />
                             <input
                                 type="text"
@@ -172,7 +186,7 @@ function RegisterScreen() {
                         </div>
                     </div>
                     <div className="register-button-wrapper">
-                        <button className="back-button" onClick={handleBackClick}>Back</button>
+                        <button type="button" className="back-button" onClick={handleBackClick}>Back</button>
                         <button type="submit" className="register-button">Sign Up</button>
                     </div>
                 </form>

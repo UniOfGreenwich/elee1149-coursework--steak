@@ -74,7 +74,7 @@ function LoginScreen() {
                     />
                     {message && <p className='login-message'>{message}</p>}
                     <div className="login-button-wrapper">
-                        <button className="back-button" onClick={handleBackClick}>Back</button>
+                        <button type="button" className="back-button" onClick={handleBackClick}>Back</button>
                         <button type="submit" className="login-submit-button">Login</button>
                     </div>
                 </form>
