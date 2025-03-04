@@ -4,9 +4,13 @@ import { useLocation } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import './AccountScreen.css';
-
+import NavSideBar from '../JarsScreen/NavSideBar';
+import VerticalCarouselAccounts from './VerticalCarouselAccounts';
+import useWindowDimensions from './useWindowDimensions';
+import HorizontalCarouselAccounts from './HorizontalCarouselAccounts';
+ 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
+ 
 function AccountsScreen() {
     const [accounts, setAccounts] = useState([]);
     const [selectedAccount, setSelectedAccount] = useState(null);
@@ -14,16 +18,17 @@ function AccountsScreen() {
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const { width } = useWindowDimensions();
     const location = useLocation();
     const userId = location.state?.userId;
-
+ 
     useEffect(() => {
         const fetchAccounts = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/total_balance/${userId}`);
                 const fetchedAccounts = response.data.accounts;
                 setAccounts(fetchedAccounts);
-
+ 
                 // Set the first account as the default selected account
                 if (fetchedAccounts.length > 0) {
                     setSelectedAccount(fetchedAccounts[0]);
@@ -32,10 +37,10 @@ function AccountsScreen() {
                 console.error("Error fetching accounts:", error);
             }
         };
-
+ 
         fetchAccounts();
     }, [userId]);
-
+ 
     const handleCreateAccount = async (newAccount) => {
         try {
             const response = await axios.post('http://localhost:5000/create_account', {
@@ -46,13 +51,13 @@ function AccountsScreen() {
                 alert('Account created successfully');
                 setAccounts([...accounts, { ...newAccount, account_id: response.data.account_id }]);
                 setShowCreateModal(false);
-                window.location.reload(); // Refresh the page 
+                window.location.reload(); // Refresh the page
             }
         } catch (error) {
             console.error("Error creating account:", error);
         }
     };
-
+ 
     const handleEditAccount = async (updatedAccount) => {
         try {
             const response = await axios.put(`http://localhost:5000/update_account/${selectedAccount.account_id}`, updatedAccount);
@@ -60,20 +65,20 @@ function AccountsScreen() {
                 alert('Account updated successfully');
                 setAccounts(accounts.map(account => account.account_id === selectedAccount.account_id ? { ...selectedAccount, ...updatedAccount } : account));
                 setShowEditModal(false);
-                window.location.reload(); // Refresh the page 
+                window.location.reload(); // Refresh the page
             }
         } catch (error) {
             console.error("Error updating account:", error);
         }
     };
-
+ 
     const handleDeleteAccount = async () => {
         if (accounts.length <= 1) {
             setErrorMessage('At least one account is necessary at all times.');
             setShowDeleteConfirmation(false);
             return;
         }
-
+ 
         try {
             const response = await axios.delete(`http://localhost:5000/delete_account/${selectedAccount.account_id}`);
             if (response.status === 200) {
@@ -83,13 +88,13 @@ function AccountsScreen() {
                 setSelectedAccount(updatedAccounts.length > 0 ? updatedAccounts[0] : null);
                 setShowDeleteConfirmation(false);
                 setShowEditModal(false);
-                window.location.reload(); // Refresh the page 
+                window.location.reload(); // Refresh the page
             }
         } catch (error) {
             console.error("Error deleting account:", error);
         }
     };
-
+ 
     const pieData = {
         labels: accounts.map(account => account.name),
         datasets: [{
@@ -101,7 +106,7 @@ function AccountsScreen() {
             hoverBorderColor: '#fff'
         }]
     };
-
+ 
     const pieOptions = {
         maintainAspectRatio: false,
         responsive: true,
@@ -114,84 +119,91 @@ function AccountsScreen() {
             }
         }
     };
-
+ 
     return (
         <div>
-            <h1 className="white-text">Accounts</h1>
-            <button onClick={() => setShowCreateModal(true)}>Create Account</button>
-            <div class="white-text">
-                {accounts.map(account => (
-                    <div key={account.account_id} onClick={() => setSelectedAccount(account)}>
-                        <p>{account.name}: £{account.balance}</p>
+            <h1 className="accounts-title-text">Accounts</h1>
+            <NavSideBar />
+            <div className="accounts-wrapper">
+                <div className="account-summary-container">
+                    <div className="account-selected-container">
+                        {selectedAccount && (
+                            <div class="account-selected-item">
+                                <p className='account-selected-title'>{selectedAccount.name}</p>
+                                <p className='account-selected-balance'>£{selectedAccount.balance}</p>
+                                <div className="account-selected-button-container">
+                                    <button className='account-selected-create-button' onClick={() => setShowCreateModal(true)}>Create</button>
+                                    <button className='account-selected-edit-button' onClick={() => setShowEditModal(true)}>Edit</button>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                ))}
-            </div>
-            {selectedAccount && (
-                <div class="white-text">
-                    <h2>Account Details</h2>
-                    <p>Name: {selectedAccount.name}</p>
-                    <p>Type: {selectedAccount.account_type}</p>
-                    <p>Balance: £{selectedAccount.balance}</p>
-                    <button onClick={() => setShowEditModal(true)}>Edit</button>
+                    <div className="pie-chart-container">
+                        <div className="pie-chart">
+                            <Pie data={pieData} options={pieOptions} />
+                        </div>
+                    </div>
                 </div>
-            )}
-            <div style={{ width: '50%', height: '400px', margin: '0 auto' }}>
-                <Pie data={pieData} options={pieOptions} />
-            </div>
+            {width >= 1024 ? (
+                    <VerticalCarouselAccounts accounts={accounts} setSelectedAccount={setSelectedAccount} />
+                ) : (
+                    <HorizontalCarouselAccounts accounts={accounts} setSelectedAccount={setSelectedAccount} />
+                )}
             {showEditModal && selectedAccount && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>Edit Account</h2>
-                        <form onSubmit={(e) => { e.preventDefault(); handleEditAccount({ account_name: selectedAccount.name, account_type: selectedAccount.account_type }); }}>
+                <div className="edit-account-overlay">
+                    <div className="edit-account-content">
+                        <h2 className='edit-account-title'>Edit Account</h2>
+                        <form className='edit-account-form' onSubmit={(e) => { e.preventDefault(); handleEditAccount({ account_name: selectedAccount.name, account_type: selectedAccount.account_type }); }}>
                             <label>
-                                Account Name:
-                                <input type="text" value={selectedAccount.name} onChange={(e) => setSelectedAccount({ ...selectedAccount, name: e.target.value })} required />
+                                Account Name
+                                <input className='input-field' type="text" value={selectedAccount.name} onChange={(e) => setSelectedAccount({ ...selectedAccount, name: e.target.value })} required />
                             </label>
                             <br />
                             <label>
-                                Account Type:
-                                <input type="text" value={selectedAccount.account_type} onChange={(e) => setSelectedAccount({ ...selectedAccount, account_type: e.target.value })} required />
+                                Account Type
+                                <input className='input-field' type="text" value={selectedAccount.account_type} onChange={(e) => setSelectedAccount({ ...selectedAccount, account_type: e.target.value })} required />
                             </label>
                             <br />
-                            <button type="submit">Save Changes</button>
-                            <button type="button" onClick={() => setShowDeleteConfirmation(true)}>Delete Account</button>
-                            <button type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                            <div className="edit-account-button-container">
+                                <button className='edit-account-cancel-button' type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                                <button className='edit-account-delete-button' type="button" onClick={() => setShowDeleteConfirmation(true)}>Delete</button>
+                                <button className='edit-account-submit-button' type="submit">Save</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             )}
             {showDeleteConfirmation && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="delete-account-overlay">
+                    <div className="delete-account-content">
                         <h2>Delete Account</h2>
                         <p>All jars related to this account will be deleted. Would you like to continue?</p>
-                        <button onClick={handleDeleteAccount}>Continue</button>
-                        <button onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+                        <button className='delete-account-cancel-button' onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+                        <button className='delete-account-submit-button' onClick={handleDeleteAccount}>Continue</button>
                     </div>
                 </div>
             )}
             {showCreateModal && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="create-account-overlay">
+                    <div className="create-account-content">
                         <h2>Create Account</h2>
                         <form onSubmit={(e) => { e.preventDefault(); handleCreateAccount({ account_name: e.target.account_name.value, account_type: e.target.account_type.value, balance: e.target.balance.value }); }}>
                             <label>
-                                Account Name:
-                                <input type="text" name="account_name" required />
+                                <input className='input-field' type="text" name="account_name" placeholder='Account Name' required />
                             </label>
                             <br />
                             <label>
-                                Account Type:
-                                <input type="text" name="account_type" required />
+                                <input className='input-field' type="text" name="account_type" placeholder='Account Type' required />
                             </label>
                             <br />
                             <label>
-                                Balance:
-                                <input type="number" name="balance" required />
+                                <input className='input-field' type="number" name="balance" placeholder='Balance' required />
                             </label>
                             <br />
-                            <button type="submit">Create Account</button>
-                            <button type="button" onClick={() => setShowCreateModal(false)}>Cancel</button>
+                            <div className="create-account-button-container">
+                                <button className='create-account-cancel-button' type="button" onClick={() => setShowCreateModal(false)}>Cancel</button>
+                                <button className='create-account-submit-button' type="submit">Create</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -202,8 +214,9 @@ function AccountsScreen() {
                     <button onClick={() => setErrorMessage('')}>Close</button>
                 </div>
             )}
+            </div>
         </div>
     );
 }
-
+ 
 export default AccountsScreen;

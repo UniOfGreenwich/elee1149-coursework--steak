@@ -1,26 +1,324 @@
-.modal {
+.create-account-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure the modal is on top */
+    z-index: 1000;
 }
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
+ 
+.delete-account-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1001; /* Ensure content is above the overlay */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
-
-.white-text {
+ 
+.delete-account-content {
+    background-color: #0B1739;;
+    padding: 40px;
+    color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+}
+ 
+.create-account-content {
+    background-color: #0B1739;;
+    padding: 40px;
+    color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+}
+ 
+.edit-account-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+ 
+.edit-account-content {
+    background-color: #0B1739;;
+    padding: 20px;
+    color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+}
+ 
+.edit-account-title {
+    font-size: 30px;
+    margin: 0 0 20px 0;
+}
+ 
+.edit-account-form label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+ 
+.edit-account-form label input {
+    margin: 10px auto;
+}
+ 
+.edit-account-button-container {
+    display: flex;
+    justify-content: space-between;
+}
+ 
+.edit-account-submit-button {
+    background-color: #DA4259;
     color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 75px;
+}
+ 
+.edit-account-cancel-button {
+    background: none;
+    color: white;
+    border: 3px solid #DA4259 ;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 75px;
+}
+ 
+.edit-account-delete-button {
+    background: none;
+    color: white;
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 75px;
+    margin: 0 30px;
+}
+ 
+.delete-account-cancel-button {
+    background: none;
+    color: white;
+    border: 3px solid #DA4259 ;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    width: 75px;
+}
+ 
+.delete-account-submit-button {
+    background-color: #DA4259;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 75px;
+    margin-left: 20px;
+}
+ 
+.accounts-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+ 
+.accounts-title-text {
+    font-weight: bold;
+    color: #ffffff;
+    margin: 20px 0 20px 60px;
+}
+ 
+.account-selected-container {
+    background-color: #0B1739;
+    border: 1px solid white;
+    border-radius: 10px;
+    height: 200px;
+}
+ 
+.pie-chart-container {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    background-color: #0B1739;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+ 
+.pie-chart {
+    margin-top: 20px;
+}
+ 
+.pie-chart-container > canvas {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+ 
+.account-summary-container {
+    display: block;
+}
+ 
+.account-selected-item {
+    color: #ffffff;;
+}
+ 
+.account-selected-title {
+    font-size: 20px;
+    margin: 5px 0 0 5px;
+    color: gray;
+}
+ 
+.account-selected-balance {
+    font-size: 44px;
+    margin: 30px 10px 10px 10px;
+}
+ 
+.account-selected-edit-button {
+    background-color: #DA4259;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px 10px 10px 0;
+    cursor: pointer;
+    width: 75px;
+}
+ 
+.account-selected-create-button {
+    background: none;
+    color: white;
+    border: 3px solid #DA4259;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px 10px 10px 0;
+    cursor: pointer;
+    width: 75px;
+}
+ 
+.create-account-submit-button {
+    background-color: #DA4259;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 75px;
+}
+ 
+.create-account-cancel-button {
+    background: none;
+    color: white;
+    border: 3px solid #DA4259 ;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    width: 75px;
+    margin-right: 30px;
+}
+ 
+.account-selected-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+}
+ 
+.create-account-button-container {
+    margin-top: 30px;
+    text-align: center;
+}
+ 
+@media (min-width: 768px) {
+    .account-selected-container, .pie-chart-container {
+        width: 300px;
+    }
+ 
+    .create-account-content {
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+ 
+    .create-account-cancel-button,.create-account-submit-button {
+        font-size: 20px;
+        padding: 14px;
+        width: 100px;
+    }
+ 
+    .create-account-content h2 {
+        margin: 0 0 20px 30px;
+        font-size: 30px;
+    }
+ 
+    .edit-account-content {
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+ 
+    .edit-account-cancel-button, .edit-account-delete-button, .edit-account-submit-button {
+        font-size: 20px;
+        padding: 14px;
+        width: 100px;
+    }
+ 
+    .edit-account-title {
+        font-size: 30px;
+        margin: 0 0 20px 90px;
+    }
+}
+ 
+@media (min-width: 1224px) {
+    .accounts-title-text {
+        margin-left: 320px;
+    }
+ 
+    .account-summary-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+ 
+    .account-selected-container, .pie-chart-container {
+        width: 300px;
+    }
+ 
+    .pie-chart-container {
+        margin: 0 0 0 20px;
+    }
+ 
+    .account-selected-container {
+        margin-left: 50px;
+    }
+}
+ 
+@media (min-width: 1500px) and (max-width: 1700px) {
+    .account-selected-container, .pie-chart-container {
+        width: 400px;
+    }
+}
+ 
+@media (min-width: 1701px) {
+    .account-selected-container, .pie-chart-container {
+        width: 500px;
+    }
 }
