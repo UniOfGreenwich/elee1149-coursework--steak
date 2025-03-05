@@ -59,20 +59,12 @@
 
 Overall, Sprint 7 was productive, with most objectives achieved. The team will focus on completing the Budgeting frontend styling in the next sprint.
 
-## Final Designs and Diagrams
+## Final Diagrams and Testing
 
-- **Accounts Activity Diagram:**
+- **Diagrams:**
 
-![Sprint 7 Accounts Activity Diagram](../Images/Sprints/Sprint7_Accounts_Activity_Diagram.png)
+[View System Modeling Documentation](/Docs/System%20Modelling)
 
-- **Accounts Sequence Diagram:**
+- **Unit Test 3:**
 
-![Sprint 7 Accounts Sequence Diagram](../Images/Sprints/Sprint7_Accounts_Sequence_Diagram.png)
-
-- **Budgeting Activity Diagram:**
-
-![Sprint 7 Budgeting Activity Diagram](../Images/Sprints/Sprint7_Budgeting_Activity_Diagram.png)
-
-- **Budgeting Sequence Diagram:**
-
-![Sprint 7 Budgeting Sequence Diagram](../Images/Sprints/Sprint7_Budgeting_Sequence_Diagram.png)
+[View Unit Test 3 Documentation](/Docs/Unit%20Tests/Test_4_Jar_Screen.md)
