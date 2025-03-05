@@ -1,0 +1,36 @@
+.horizontal-carousel-wrapper {
+    width: 410px;
+    margin: 20px auto;
+    padding-top: 20px;
+    background-color: #0B1739;
+    border-radius: 10px;
+}
+ 
+.horizontal-account-container {
+    width: 70px !important;
+    height: 70px;
+    margin: 0 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #DA4259;
+    color: #ffffff;
+    border-radius: 30px;
+   
+    p {
+        font-size: 15px;
+        text-align: center;
+    }
+}
+ 
+.horizontal-account-name {
+    margin-top: 10px;
+    font-size: 20px;
+}
+ 
+.horizontal-account-value {
+    margin-top: 5px;
+    font-size: 20px;
+}
