@@ -32,6 +32,10 @@
 5. **Register Password Bug Fix:**
    - **Assigned To:** Harrison
    - **Description:** Fix the bug related to password functionality during registration.
+  
+6. **Complete Template Frontend for Dashboard Screen:**
+   - **Assigned To:** Harrison
+   - **Description:** Add all backend features and functions to the dashboard JSX for ease of styling.
 
 ### Documentation Tasks
 
