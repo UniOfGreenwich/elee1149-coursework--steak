@@ -5,12 +5,13 @@ import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import './AccountScreen.css';
 import NavSideBar from '../JarsScreen/NavSideBar';
+import TransactionsChart from '../components/TransactionsChart';
 import VerticalCarouselAccounts from './VerticalCarouselAccounts';
 import useWindowDimensions from './useWindowDimensions';
 import HorizontalCarouselAccounts from './HorizontalCarouselAccounts';
- 
+
 ChartJS.register(ArcElement, Tooltip, Legend);
- 
+
 function AccountsScreen() {
     const [accounts, setAccounts] = useState([]);
     const [selectedAccount, setSelectedAccount] = useState(null);
@@ -18,17 +19,18 @@ function AccountsScreen() {
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [transactions, setTransactions] = useState([]);
     const { width } = useWindowDimensions();
     const location = useLocation();
     const userId = location.state?.userId;
- 
+
     useEffect(() => {
         const fetchAccounts = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/total_balance/${userId}`);
                 const fetchedAccounts = response.data.accounts;
                 setAccounts(fetchedAccounts);
- 
+
                 // Set the first account as the default selected account
                 if (fetchedAccounts.length > 0) {
                     setSelectedAccount(fetchedAccounts[0]);
@@ -37,10 +39,20 @@ function AccountsScreen() {
                 console.error("Error fetching accounts:", error);
             }
         };
- 
+
+        const fetchTransactions = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/user_transactions/${userId}`);
+                setTransactions(response.data.transactions);
+            } catch (error) {
+                console.error("Error fetching transactions:", error);
+            }
+        };
+
+        fetchTransactions();
         fetchAccounts();
     }, [userId]);
- 
+
     const handleCreateAccount = async (newAccount) => {
         try {
             const response = await axios.post('http://localhost:5000/create_account', {
@@ -57,7 +69,7 @@ function AccountsScreen() {
             console.error("Error creating account:", error);
         }
     };
- 
+
     const handleEditAccount = async (updatedAccount) => {
         try {
             const response = await axios.put(`http://localhost:5000/update_account/${selectedAccount.account_id}`, updatedAccount);
@@ -71,14 +83,14 @@ function AccountsScreen() {
             console.error("Error updating account:", error);
         }
     };
- 
+
     const handleDeleteAccount = async () => {
         if (accounts.length <= 1) {
             setErrorMessage('At least one account is necessary at all times.');
             setShowDeleteConfirmation(false);
             return;
         }
- 
+
         try {
             const response = await axios.delete(`http://localhost:5000/delete_account/${selectedAccount.account_id}`);
             if (response.status === 200) {
@@ -94,7 +106,7 @@ function AccountsScreen() {
             console.error("Error deleting account:", error);
         }
     };
- 
+
     const pieData = {
         labels: accounts.map(account => account.name),
         datasets: [{
@@ -106,7 +118,7 @@ function AccountsScreen() {
             hoverBorderColor: '#fff'
         }]
     };
- 
+
     const pieOptions = {
         maintainAspectRatio: false,
         responsive: true,
@@ -119,7 +131,7 @@ function AccountsScreen() {
             }
         }
     };
- 
+
     return (
         <div>
             <h1 className="accounts-title-text">Accounts</h1>
@@ -128,7 +140,7 @@ function AccountsScreen() {
                 <div className="account-summary-container">
                     <div className="account-selected-container">
                         {selectedAccount && (
-                            <div class="account-selected-item">
+                            <div className="account-selected-item">
                                 <p className='account-selected-title'>{selectedAccount.name}</p>
                                 <p className='account-selected-balance'>£{selectedAccount.balance}</p>
                                 <div className="account-selected-button-container">
@@ -144,79 +156,82 @@ function AccountsScreen() {
                         </div>
                     </div>
                 </div>
-            {width >= 1024 ? (
+                <div className="transactions-chart-container">
+                    <TransactionsChart transactions={transactions} />
+                </div>
+                {width >= 1024 ? (
                     <VerticalCarouselAccounts accounts={accounts} setSelectedAccount={setSelectedAccount} />
                 ) : (
                     <HorizontalCarouselAccounts accounts={accounts} setSelectedAccount={setSelectedAccount} />
                 )}
-            {showEditModal && selectedAccount && (
-                <div className="edit-account-overlay">
-                    <div className="edit-account-content">
-                        <h2 className='edit-account-title'>Edit Account</h2>
-                        <form className='edit-account-form' onSubmit={(e) => { e.preventDefault(); handleEditAccount({ account_name: selectedAccount.name, account_type: selectedAccount.account_type }); }}>
-                            <label>
-                                Account Name
-                                <input className='input-field' type="text" value={selectedAccount.name} onChange={(e) => setSelectedAccount({ ...selectedAccount, name: e.target.value })} required />
-                            </label>
-                            <br />
-                            <label>
-                                Account Type
-                                <input className='input-field' type="text" value={selectedAccount.account_type} onChange={(e) => setSelectedAccount({ ...selectedAccount, account_type: e.target.value })} required />
-                            </label>
-                            <br />
-                            <div className="edit-account-button-container">
-                                <button className='edit-account-cancel-button' type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
-                                <button className='edit-account-delete-button' type="button" onClick={() => setShowDeleteConfirmation(true)}>Delete</button>
-                                <button className='edit-account-submit-button' type="submit">Save</button>
-                            </div>
-                        </form>
+                {showEditModal && selectedAccount && (
+                    <div className="edit-account-overlay">
+                        <div className="edit-account-content">
+                            <h2 className='edit-account-title'>Edit Account</h2>
+                            <form className='edit-account-form' onSubmit={(e) => { e.preventDefault(); handleEditAccount({ account_name: selectedAccount.name, account_type: selectedAccount.account_type }); }}>
+                                <label>
+                                    Account Name
+                                    <input className='input-field' type="text" value={selectedAccount.name} onChange={(e) => setSelectedAccount({ ...selectedAccount, name: e.target.value })} required />
+                                </label>
+                                <br />
+                                <label>
+                                    Account Type
+                                    <input className='input-field' type="text" value={selectedAccount.account_type} onChange={(e) => setSelectedAccount({ ...selectedAccount, account_type: e.target.value })} required />
+                                </label>
+                                <br />
+                                <div className="edit-account-button-container">
+                                    <button className='edit-account-cancel-button' type="button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                                    <button className='edit-account-delete-button' type="button" onClick={() => setShowDeleteConfirmation(true)}>Delete</button>
+                                    <button className='edit-account-submit-button' type="submit">Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            )}
-            {showDeleteConfirmation && (
-                <div className="delete-account-overlay">
-                    <div className="delete-account-content">
-                        <h2>Delete Account</h2>
-                        <p>All jars related to this account will be deleted. Would you like to continue?</p>
-                        <button className='delete-account-cancel-button' onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
-                        <button className='delete-account-submit-button' onClick={handleDeleteAccount}>Continue</button>
+                )}
+                {showDeleteConfirmation && (
+                    <div className="delete-account-overlay">
+                        <div className="delete-account-content">
+                            <h2>Delete Account</h2>
+                            <p>All jars related to this account will be deleted. Would you like to continue?</p>
+                            <button className='delete-account-cancel-button' onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+                            <button className='delete-account-submit-button' onClick={handleDeleteAccount}>Continue</button>
+                        </div>
                     </div>
-                </div>
-            )}
-            {showCreateModal && (
-                <div className="create-account-overlay">
-                    <div className="create-account-content">
-                        <h2>Create Account</h2>
-                        <form onSubmit={(e) => { e.preventDefault(); handleCreateAccount({ account_name: e.target.account_name.value, account_type: e.target.account_type.value, balance: e.target.balance.value }); }}>
-                            <label>
-                                <input className='input-field' type="text" name="account_name" placeholder='Account Name' required />
-                            </label>
-                            <br />
-                            <label>
-                                <input className='input-field' type="text" name="account_type" placeholder='Account Type' required />
-                            </label>
-                            <br />
-                            <label>
-                                <input className='input-field' type="number" name="balance" placeholder='Balance' required />
-                            </label>
-                            <br />
-                            <div className="create-account-button-container">
-                                <button className='create-account-cancel-button' type="button" onClick={() => setShowCreateModal(false)}>Cancel</button>
-                                <button className='create-account-submit-button' type="submit">Create</button>
-                            </div>
-                        </form>
+                )}
+                {showCreateModal && (
+                    <div className="create-account-overlay">
+                        <div className="create-account-content">
+                            <h2>Create Account</h2>
+                            <form onSubmit={(e) => { e.preventDefault(); handleCreateAccount({ account_name: e.target.account_name.value, account_type: e.target.account_type.value, balance: e.target.balance.value }); }}>
+                                <label>
+                                    <input className='input-field' type="text" name="account_name" placeholder='Account Name' required />
+                                </label>
+                                <br />
+                                <label>
+                                    <input className='input-field' type="text" name="account_type" placeholder='Account Type' required />
+                                </label>
+                                <br />
+                                <label>
+                                    <input className='input-field' type="number" name="balance" placeholder='Balance' required />
+                                </label>
+                                <br />
+                                <div className="create-account-button-container">
+                                    <button className='create-account-cancel-button' type="button" onClick={() => setShowCreateModal(false)}>Cancel</button>
+                                    <button className='create-account-submit-button' type="submit">Create</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            )}
-            {errorMessage && (
-                <div className="error-message">
-                    <p>{errorMessage}</p>
-                    <button onClick={() => setErrorMessage('')}>Close</button>
-                </div>
-            )}
+                )}
+                {errorMessage && (
+                    <div className="error-message">
+                        <p>{errorMessage}</p>
+                        <button onClick={() => setErrorMessage('')}>Close</button>
+                    </div>
+                )}
             </div>
         </div>
     );
 }
- 
+
 export default AccountsScreen;

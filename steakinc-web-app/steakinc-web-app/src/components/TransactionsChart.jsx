@@ -5,7 +5,7 @@ import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Catego
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend);
 
-const TransactionsChart = ({ transactions }) => {
+const TransactionsChart = ({ transactions = [] }) => {
     // Sort transactions by date for the chart (ascending order)
     const sortedTransactions = [...transactions].sort((a, b) => new Date(a.transaction_date) - new Date(b.transaction_date));
 
