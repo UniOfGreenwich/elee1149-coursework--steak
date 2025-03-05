@@ -35,7 +35,7 @@ function RegisterScreen() {
         }
 
         // Check if password meets the specifications
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
         if (!passwordRegex.test(registrationData.password)) {
             setMessage('Password must be at least 8 characters long, contain at least one number, one uppercase letter, and one special character.');
             return;
