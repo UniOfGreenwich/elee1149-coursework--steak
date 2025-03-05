@@ -75,6 +75,22 @@ function Dashboard() {
         return number.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     };
 
+    const handleExportData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/export_data/${userId}`, {
+                responseType: 'blob',
+            });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'user_data.csv');
+            document.body.appendChild(link);
+            link.click();
+        } catch (error) {
+            console.error("Error exporting data:", error);
+        }
+    };
+
     return (
         <div>
             <h1 className="white-text">Dashboard</h1>
@@ -117,6 +133,7 @@ function Dashboard() {
                 <button onClick={() => navigate('/transactions', { state: { userId } })}>Go to Transactions</button>
                 <button onClick={() => navigate('/accounts', { state: { userId } })}>Go to Accounts</button>
                 <button onClick={() => navigate('/budget', { state: { userId } })}>Go to Budget</button>
+                <button onClick={handleExportData} style={{ marginLeft: '10px' }}>Export Data</button>
             </div>
         </div>
     );
