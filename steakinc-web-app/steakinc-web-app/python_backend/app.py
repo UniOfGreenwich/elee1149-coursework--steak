@@ -6,6 +6,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import logging
 from decimal import Decimal
+import csv
+from io import StringIO
 
 app = Flask(__name__)
 CORS(app)
@@ -734,6 +736,70 @@ def update_expense(budget_id):
     expense.amount = data.get('amount', expense.amount)
     db.session.commit()
     return jsonify({'message': 'Expense updated successfully'}), 200
+
+@app.route('/export_data/<int:user_id>', methods=['GET'])
+def export_data(user_id):
+    try:
+        # Fetch user data
+        user = User.query.get(user_id)
+        accounts = Account.query.filter_by(user_id=user_id, is_deleted=False).all()
+        transactions = Transaction.query.filter_by(user_id=user_id).all()
+        jars = Jar.query.filter_by(user_id=user_id, is_deleted=False).all()
+        incomes = Income.query.filter_by(user_id=user_id, is_deleted=False).all()
+        expenses = Budget.query.filter_by(user_id=user_id, is_deleted=False).all()
+
+        # Create a CSV file in memory
+        output = StringIO()
+        writer = csv.writer(output)
+
+        # Write user data
+        writer.writerow(['User ID', 'Username', 'Email'])
+        writer.writerow([user.user_id, user.username, user.email])
+
+        # Write accounts data
+        writer.writerow([])
+        writer.writerow(['Accounts'])
+        writer.writerow(['Account ID', 'Account Name', 'Account Type', 'Balance'])
+        for account in accounts:
+            writer.writerow([account.account_id, account.account_name, account.account_type, float(account.balance)])
+
+        # Write transactions data
+        writer.writerow([])
+        writer.writerow(['Transactions'])
+        writer.writerow(['Transaction ID', 'Account ID', 'Jar ID', 'Transaction Date', 'Amount', 'Type', 'Category', 'Description'])
+        for transaction in transactions:
+            writer.writerow([transaction.transaction_id, transaction.account_id, transaction.jar_id, transaction.transaction_date, float(transaction.amount), transaction.transaction_type, transaction.category, transaction.description])
+
+        # Write jars data
+        writer.writerow([])
+        writer.writerow(['Jars'])
+        writer.writerow(['Jar ID', 'Jar Name', 'Allocated Amount', 'Current Balance', 'Target Amount'])
+        for jar in jars:
+            writer.writerow([jar.jar_id, jar.jar_name, float(jar.allocated_amount), float(jar.current_balance), float(jar.target_amount or 0)])
+
+        # Write incomes data
+        writer.writerow([])
+        writer.writerow(['Incomes'])
+        writer.writerow(['Income ID', 'Name', 'Amount'])
+        for income in incomes:
+            writer.writerow([income.income_id, income.name, float(income.amount)])
+
+        # Write expenses data
+        writer.writerow([])
+        writer.writerow(['Expenses'])
+        writer.writerow(['Budget ID', 'Expense', 'Category', 'Amount'])
+        for expense in expenses:
+            writer.writerow([expense.budget_id, expense.expense, expense.category, float(expense.amount)])
+
+        # Return the CSV file as a response
+        output.seek(0)
+        return output.getvalue(), 200, {
+            'Content-Type': 'text/csv',
+            'Content-Disposition': 'attachment; filename=user_data.csv'
+        }
+    except Exception as e:
+        logging.error(f"Error exporting data for user {user_id}: {e}")
+        return jsonify({'error': 'An error occurred while exporting data'}), 500
 
 if __name__ == '__main__':
     create_tables()  # Ensure tables are created when the app starts

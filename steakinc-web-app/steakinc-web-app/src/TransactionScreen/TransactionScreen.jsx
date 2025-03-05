@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
+import TransactionsChart from '../components/TransactionsChart';
 import TransactionForm from '../components/TransactionForm'; // Import the TransactionForm component
 import NavSideBar from '../JarsScreen/NavSideBar';
 import './TransactionScreen.css';
-
-// Register necessary components for Chart.js
-ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend);
 
 function TransactionsScreen() {
     const [amount, setAmount] = useState('');
@@ -103,26 +99,6 @@ function TransactionsScreen() {
         window.location.reload(); // Refresh the transactions list after adding a new one
     };
 
-    // Sort transactions by date for the chart (ascending order)
-    const sortedForChart = [...transactions].sort((a, b) => new Date(a.transaction_date) - new Date(b.transaction_date));
-    console.log("Sorted transactions for chart:", sortedForChart);
-
-    // Sort transactions by date for the table (descending order)
-    const sortedForTable = [...transactions].sort((a, b) => new Date(b.transaction_date) - new Date(a.transaction_date));
-
-    const chartData = {
-        labels: sortedForChart.map(transaction => new Date(transaction.transaction_date).toLocaleDateString()),
-        datasets: [
-            {
-                label: 'Post Account Total',
-                data: sortedForChart.map(transaction => transaction.post_account_total),
-                fill: false,
-                borderColor: 'rgb(218, 66, 89)',
-                tension: 0.1
-            }
-        ]
-    };
-
     return (
         <div className='transation-wrapper'>
             <NavSideBar />
@@ -143,13 +119,11 @@ function TransactionsScreen() {
                     />
                 )}
                 <h2 className="line-chart-title">Account Total Over Time</h2>
-                <div className="line-chart-container">
-                    <Line data={chartData} />
-                </div>
+                <TransactionsChart transactions={transactions} />
                 <div className="transaction-table-add-container">
-                            <h2 className="transaction-table-title">Transaction List</h2>
-                            <button className='add-transaction-button' onClick={() => setShowModal(true)}>Add</button>
-                    </div>
+                    <h2 className="transaction-table-title">Transaction List</h2>
+                    <button className='add-transaction-button' onClick={() => setShowModal(true)}>Add</button>
+                </div>
                 <div className="transaction-table-wrapper">
                     <table className="transaction-table-container">
                         <thead>
@@ -163,7 +137,7 @@ function TransactionsScreen() {
                             </tr>
                         </thead>
                         <tbody>
-                            {sortedForTable.map(transaction => (
+                            {transactions.map(transaction => (
                                 <tr key={transaction.transaction_id}>
                                     <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
                                     <td className={transaction.type === 'ingoing' ? 'transaction-type-ingoing' : 'transaction-type-outgoing'}>
