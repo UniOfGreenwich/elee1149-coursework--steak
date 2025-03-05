@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import TransactionsChart from '../components/TransactionsChart';
+import TransactionsTable from '../components/TransactionsTable';
 import './DashboardScreen.css'; // Import the CSS file
-
-// Register the necessary Chart.js components
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Dashboard() {
     const [totalBalance, setTotalBalance] = useState(null);
     const [accounts, setAccounts] = useState([]);
+    const [transactions, setTransactions] = useState([]);
+    const [jars, setJars] = useState([]);
     const [newsHeadlines, setNewsHeadlines] = useState([]);
     const location = useLocation();
     const userId = location.state?.userId;
@@ -31,6 +30,24 @@ function Dashboard() {
             }
         };
 
+        const fetchTransactions = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/user_transactions/${userId}`);
+                setTransactions(response.data.transactions);
+            } catch (error) {
+                console.error("Error fetching transactions:", error);
+            }
+        };
+
+        const fetchJars = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/user_jars/${userId}`);
+                setJars(response.data.jars);
+            } catch (error) {
+                console.error("Error fetching jars:", error);
+            }
+        };
+
         const fetchNewsHeadlines = async () => {
             try {
                 const response = await axios.get('https://newsapi.org/v2/everything', {
@@ -44,56 +61,18 @@ function Dashboard() {
                 });
                 setNewsHeadlines(response.data.articles);
             } catch (error) {
-                console.error("Error fetching financial news headlines:", error);
+                console.error("Error fetching news headlines:", error);
             }
         };
+
         fetchAccountSummary();
-        fetchNewsHeadlines()
+        fetchTransactions();
+        fetchJars();
+        fetchNewsHeadlines();
     }, [userId]);
 
     const formatNumber = (number) => {
         return number.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    };
-
-    const pieData = {
-        labels: accounts.map(account => account.name),
-        datasets: [{
-            data: accounts.map(account => account.balance),
-            backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                '#8A2BE2',
-                '#FF4500',
-                '#00CED1',
-                '#ADFF2F'
-            ],
-            hoverBackgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                '#8A2BE2',
-                '#FF4500',
-                '#00CED1',
-                '#ADFF2F'
-            ],
-            borderWidth: 1,
-            borderColor: '#fff',
-            hoverBorderColor: '#fff'
-        }]
-    };
-
-    const pieOptions = {
-        maintainAspectRatio: false,
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels: {
-                    color: 'white' // Make the legend text white
-                }
-            }
-        }
     };
 
     return (
@@ -108,16 +87,25 @@ function Dashboard() {
                     </li>
                 ))}
             </ul>
-            <div style={{ width: '50%', height: '400px', margin: '0 auto' }}>
-                <Pie data={pieData} options={pieOptions} />
-            </div>
+            <h3 className="white-text">Jars:</h3>
+            <ul>
+                {jars.map((jar, index) => (
+                    <li key={index} className="white-text">
+                        {jar.jar_name}: £{formatNumber(jar.current_balance)}
+                    </li>
+                ))}
+            </ul>
+            <h3 className="white-text">Transactions Over Time:</h3>
+            <TransactionsChart transactions={transactions} />
+            <h3 className="white-text">Recent Transactions:</h3>
+            <TransactionsTable transactions={transactions} />
 
             <h3 className="white-text">Top Financial News:</h3>
             <ul>
                 {newsHeadlines.map((article, index) => (
                     <li key={index} className="white-text">
                         <a href={article.url} target="_blank" rel="noopener noreferrer" className="white-text">
-                            {article.title}
+                            {article.author}, {article.title}
                         </a>
                     </li>
                 ))}
