@@ -49,10 +49,10 @@ Overall, Sprint 6 was productive, with most objectives achieved. The team will f
 
 ## Final Designs and Diagrams
 
-- **Transactions Activity Diagram:**
+- **Diagrams:**
 
-![Sprint 6 Activity Diagram](../Images/Sprints/Sprint6_Activity_Diagram.png)
+[View System Modeling Documentation](/Docs/System%20Modelling)
 
-- **Transactions Sequence Diagram:**
+- **Unit Test 3:**
 
-![Sprint 6 Sequence Diagram](../Images/Sprints/Sprint6_Sequence_Diagram.png)
+[View Unit Test 3 Documentation](/Docs/Unit%20Tests/Test_4_Jar_Screen.md)
