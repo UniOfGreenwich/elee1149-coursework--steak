@@ -36,7 +36,11 @@
 6. **Complete Template Frontend for Dashboard Screen:**
    - **Assigned To:** Harrison
    - **Description:** Add all backend features and functions to the dashboard JSX for ease of styling.
-
+  
+7. **Style Transactions Chart found in Accounts Page:**
+   - **Assigned To:** Jack
+   - **Description:** Add all frontend styling to the chart in the accounts page. Must be responsive.
+     
 ### Documentation Tasks
 
 1. **QA Testing Documentation:**
