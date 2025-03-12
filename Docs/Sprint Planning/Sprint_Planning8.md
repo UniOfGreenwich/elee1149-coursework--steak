@@ -1,4 +1,4 @@
-# Sprint 8 Planning: March 5, 2025 - March 11, 2025
+# Sprint 8 Planning: March 5, 2025 - March 18, 2025
 
 **Sprint Goal:** Finalize the Budgeting frontend, enhance visualizations and styling, conduct QA testing, and update documentation.
 
