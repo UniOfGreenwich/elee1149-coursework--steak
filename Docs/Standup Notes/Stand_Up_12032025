@@ -1,0 +1,78 @@
+# Meeting Notes: Daily Standup
+
+**Date:** 12/03/2025
+
+**Attendees:** Harrison, Jack
+
+---
+
+### Agenda
+
+1. Update on transactions graphs adjustments.
+2. Plan for mobile and desktop view improvements.
+3. Discuss QA testing status.
+4. Ensure design consistency across budget pages.
+
+---
+
+### Meeting Notes
+
+#### Transactions Graphs Update
+
+- **Graph Height Adjustment:**
+  - Jack demonstrated changes to the graph height, which Harrison approved for better layout fit.
+
+- **Title Removal:**
+  - The title "Transactions" will be removed to save space, aligning with other sections.
+
+- **Blank Container Addition:**
+  - A blank container with a colored background will be added for desktop view to fill extra space.
+
+- **Graph Width Adjustment:**
+  - Adjustments will be made to center the graph better, with a blank container filling the space.
+
+#### Mobile and Desktop View Adjustments
+
+- **Mobile View Table:**
+  - The table will be longer to display more rows, improving scrollability.
+
+- **Desktop View Container:**
+  - A blank container will be added for desktop view, visible only in this mode.
+
+- **Graph Spacing:**
+  - Spacing between graphs will be reduced for a more compact layout.
+
+#### QA Testing Status
+
+- **Status Inquiry:**
+  - Harrison inquired about QA testing, but no update was available from Lewis at the time.
+
+#### Design Consistency
+
+- **White Borders:**
+  - White borders will be added to all relevant elements to ensure design consistency with the budget pages.
+
+---
+
+### Follow-up Tasks
+
+1. **Transactions Graph Title:**
+   - Remove the title "Transactions" from the transactions graph and leave the subtitles. *(Jack)*
+
+2. **Desktop View Container:**
+   - Create a blank container with a colored background, visible only on desktop view, to the right of the transactions table. *(Jack)*
+
+3. **Mobile View Table:**
+   - Make the transactions table longer in mobile view to display more rows. *(Jack)*
+
+4. **Spacing Adjustment:**
+   - Adjust the spacing of the transactions graph to make it smaller. *(Jack)*
+
+5. **Chart Title Spacing:**
+   - Adjust the spacing of the "accounts total over time" title to be further from the hamburger menu. *(Jack)*
+
+6. **Component Naming:**
+   - Change the container name for the transactions chart to avoid conflicts with other components. *(Jack)*
+
+7. **White Borders:**
+   - Add white borders to all elements as per the design specifications. *(Jack)*
