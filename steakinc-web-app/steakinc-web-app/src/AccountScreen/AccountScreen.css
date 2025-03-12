@@ -162,7 +162,7 @@
     border-radius: 10px;
     border: 1px solid #ffffff;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin: 20px 0;
 }
  
 .pie-chart {
@@ -178,6 +178,7 @@
  
 .account-summary-container {
     display: block;
+    margin-top: 10px;
 }
  
 .account-selected-item {
@@ -248,6 +249,16 @@
     margin-top: 30px;
     text-align: center;
 }
+
+.accounts-transaction-chart-container {
+    width: 100%;
+    min-height: 300px;
+    max-height: 600px; 
+    min-width: 200px;
+    max-width: 950px;
+    margin: 0 auto; 
+    border-radius: 10px; 
+}
  
 @media (min-width: 768px) {
     .account-selected-container, .pie-chart-container {
@@ -285,9 +296,24 @@
         font-size: 30px;
         margin: 0 0 20px 90px;
     }
+
+    .account-summary-container {
+        margin-bottom: 50px;
+    }
+
+    .accounts-transaction-chart-container {
+        min-width: 200px;
+        max-width: 350px;
+    }
 }
  
 @media (min-width: 1224px) {
+
+    .accounts-transaction-chart-container {
+        min-width: 500px;
+        max-width: 650px;
+    }
+
     .accounts-title-text {
         margin-left: 320px;
     }
@@ -315,10 +341,24 @@
     .account-selected-container, .pie-chart-container {
         width: 400px;
     }
+
+    .accounts-transaction-chart-container {
+        min-width: 500px;
+        max-width: 800px;
+    }
 }
  
 @media (min-width: 1701px) {
     .account-selected-container, .pie-chart-container {
-        width: 500px;
+        width: 475px;
+    }
+
+    .account-summary-container {
+        margin-right: 40px;
+    }
+
+    .accounts-transaction-chart-container {
+        min-width: 500px;
+        max-width: 950px;
     }
 }

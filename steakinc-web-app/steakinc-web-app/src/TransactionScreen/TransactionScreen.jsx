@@ -103,9 +103,6 @@ function TransactionsScreen() {
         <div className='transation-wrapper'>
             <NavSideBar />
             <div className='transaction-container'>
-                <div className="transaction-title-container">
-                    <h1 className="transaction-title">Transactions</h1>
-                </div>
                 {showModal && (
                     <TransactionForm
                         userId={userId}
@@ -119,7 +116,10 @@ function TransactionsScreen() {
                     />
                 )}
                 <h2 className="line-chart-title">Account Total Over Time</h2>
-                <TransactionsChart transactions={transactions} />
+                <div className="transactions-chart-container">
+                    <TransactionsChart transactions={transactions} />
+                    <div className="transactions-placeholder"></div>
+                </div>
                 <div className="transaction-table-add-container">
                     <h2 className="transaction-table-title">Transaction List</h2>
                     <button className='add-transaction-button' onClick={() => setShowModal(true)}>Add</button>

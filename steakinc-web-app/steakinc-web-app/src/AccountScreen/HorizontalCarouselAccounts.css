@@ -4,6 +4,7 @@
     padding-top: 20px;
     background-color: #0B1739;
     border-radius: 10px;
+    border: 1px solid #ffffff;
 }
  
 .horizontal-account-container {
@@ -18,6 +19,7 @@
     border: 3px solid #DA4259;
     color: #ffffff;
     border-radius: 30px;
+
    
     p {
         font-size: 15px;
