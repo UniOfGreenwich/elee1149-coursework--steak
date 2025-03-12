@@ -47,8 +47,9 @@
     color: #ffffff;
     background-color: #0B1739;
     border-radius: 10px;
-    max-height: 500px;
+    max-height: 450px;
     overflow-y: auto;
+    border: 1px solid #ffffff;
 }
 
 .transaction-table-container {
@@ -99,7 +100,7 @@
 
 .line-chart-title {
     color: #ffffff;
-    margin: 50px 0 20px 10px;
+    margin: 70px 0 20px 10px;
 }
 
 .transaction-type-ingoing {
@@ -135,6 +136,24 @@
     scrollbar-color: #ffffff #0B1739; 
 }
 
+.line-chart-container {
+    width: 100%;
+    min-height: 200px; 
+    max-height: 400px;  
+    border-radius: 10px; 
+    overflow: hidden; 
+    border: 1px solid #ffffff;
+}
+
+.transactions-placeholder {
+    display: none;
+    border: 1px solid #ffffff;
+}
+
+.transactions-chart-container {
+    display: flex;
+}
+
 @media (min-width: 1024px) {
     .transaction-container, .transaction-wrapper {
         margin: 0 10px 0 300px; 
@@ -146,8 +165,20 @@
     }
 
     .transaction-table-wrapper {
-        max-height: 500px;
+        max-height: 300px;
     }
 
-    
+    .line-chart-title {
+        margin-top: 30px;
+    }
+
+    .transactions-placeholder {
+        display: block;
+        background-color: #0B1739;
+        height: 400px;
+        width: 500px;
+        margin-left: 300px;
+        border-radius: 10px; 
+    }
+
 }

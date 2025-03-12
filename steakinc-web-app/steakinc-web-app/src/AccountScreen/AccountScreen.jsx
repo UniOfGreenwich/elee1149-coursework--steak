@@ -134,7 +134,6 @@ function AccountsScreen() {
 
     return (
         <div>
-            <h1 className="accounts-title-text">Accounts</h1>
             <NavSideBar />
             <div className="accounts-wrapper">
                 <div className="account-summary-container">
@@ -156,8 +155,10 @@ function AccountsScreen() {
                         </div>
                     </div>
                 </div>
-                <div className="transactions-chart-container">
-                    <TransactionsChart transactions={transactions} />
+                <div className="accounts-transaction-chart-container">
+                    <div className="accounts-transaction-chart">
+                        <TransactionsChart transactions={transactions} />
+                    </div>
                 </div>
                 {width >= 1024 ? (
                     <VerticalCarouselAccounts accounts={accounts} setSelectedAccount={setSelectedAccount} />
