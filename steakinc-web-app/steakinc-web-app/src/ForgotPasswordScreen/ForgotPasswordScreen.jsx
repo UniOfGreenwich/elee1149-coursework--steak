@@ -67,7 +67,7 @@ function ForgotPasswordScreen() {
         <div className="container">
             <div className="password-container">
                 <div className="password-title-wrapper">
-                    <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo-password" />
+                    <img src="/elee1149-coursework--steak/assets/highsteaks.png" alt="High Steaks Logo" className="logo-password" />
                     <h1 className="password-title-text">Steak</h1>
                 </div>
                 <form className="password-form" onSubmit={handleSubmit}>
