@@ -31,7 +31,7 @@ function BudgetScreen() {
 
     const fetchIncomes = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/user_incomes/${userId}`);
+            const response = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/user_incomes/${userId}`);
             setIncomes(response.data.incomes);
         } catch (error) {
             console.error("Error fetching incomes:", error);
@@ -40,7 +40,7 @@ function BudgetScreen() {
 
     const fetchExpenses = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/user_expenses/${userId}`);
+            const response = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/user_expenses/${userId}`);
             setExpenses(response.data.expenses);
         } catch (error) {
             console.error("Error fetching expenses:", error);
@@ -50,7 +50,7 @@ function BudgetScreen() {
     const handleAddIncome = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/add_income', {
+            await axios.post('http://plasma-torus-454810-h1.lm.r.appspot.com/add_income', {
                 user_id: userId,
                 name: incomeName,
                 amount: parseFloat(incomeAmount)
@@ -71,7 +71,7 @@ function BudgetScreen() {
             return;
         }
         try {
-            await axios.post('http://localhost:5000/add_expense', {
+            await axios.post('http://plasma-torus-454810-h1.lm.r.appspot.com/add_expense', {
                 user_id: userId,
                 expense: expenseName,
                 category: expenseCategory,
@@ -129,7 +129,7 @@ function BudgetScreen() {
 
         try {
             const endpoint = selectedEntry.type === 'Income' ? `update_income/${selectedEntry.id}` : `update_expense/${selectedEntry.id}`;
-            const response = await axios.put(`http://localhost:5000/${endpoint}`, selectedEntry);
+            const response = await axios.put(`http://plasma-torus-454810-h1.lm.r.appspot.com/${endpoint}`, selectedEntry);
             if (response.status === 200) {
                 alert(`${selectedEntry.type} updated successfully`);
                 selectedEntry.type === 'Income' ? fetchIncomes() : fetchExpenses();
@@ -160,7 +160,7 @@ function BudgetScreen() {
         
         try {
             const endpoint = selectedEntry.type === 'Income' ? `delete_income/${selectedEntry.id}` : `delete_expense/${selectedEntry.id}`;
-            const response = await axios.delete(`http://localhost:5000/${endpoint}`);
+            const response = await axios.delete(`http://plasma-torus-454810-h1.lm.r.appspot.com/${endpoint}`);
             if (response.status === 200) {
                 alert(`${selectedEntry.type} deleted successfully`);
                 selectedEntry.type === 'Income' ? fetchIncomes() : fetchExpenses();
