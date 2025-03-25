@@ -212,7 +212,7 @@ function JarScreen() {
                                 <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
                                     <Lid />
                                     <span className="jar-name">{jar.jar_name}</span>
-                                    <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                                    <span className="jar-value">£{typeof jar.current_balance === 'number' && !isNaN(jar.current_balance) ? jar.current_balance.toFixed(2) : 'N/A'}</span>
                                 </div>
                             ))}
                         </Slider>
