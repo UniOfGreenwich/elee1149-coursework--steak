@@ -32,13 +32,13 @@ jobs:
 
       - name: Fix Missing Build Directory
         run: |
-          if [ ! -d "steakinc-web-app/steakinc-web-app/build" ]; then
+          if [ ! -d "steakinc-web-app/steakinc-web-app/dist" ]; then
             echo "⚠️ Build folder missing! Creating an empty one..."
-            mkdir -p steakinc-web-app/steakinc-web-app/build
+            mkdir -p steakinc-web-app/steakinc-web-app/dist
           fi
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: steakinc-web-app/steakinc-web-app/build
+          folder: steakinc-web-app/steakinc-web-app/dist
