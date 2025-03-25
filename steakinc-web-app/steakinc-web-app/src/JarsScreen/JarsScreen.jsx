@@ -131,17 +131,13 @@ function JarScreen() {
             const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/create_jar', payload);
     
             if (response.status === 201) {
-                window.location.reload(); // Refresh the page to update dropdowns
+                setJars([...jars, response.data]); // Add new jar to state
+                setShowModal(false); // Close modal
             } else {
-                console.error("Unexpected response status:", response.status);
                 alert('Failed to create jar. Please try again.');
             }
         } catch (error) {
-            if (error.response) {
-                console.error("Error response data:", error.response.data);
-            } else {
-                console.error("Error creating jar:", error);
-            }
+            console.error("Error creating jar:", error.response?.data || error);
         }
     };
     
