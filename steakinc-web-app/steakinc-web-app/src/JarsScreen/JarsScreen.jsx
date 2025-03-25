@@ -132,8 +132,7 @@ function JarScreen() {
             const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/create_jar', payload);
     
             if (response.status === 201) {
-                setJars([...jars, response.data]); // Add new jar to state
-                setShowModal(false); // Close modal
+                //setShowModal(false); // Close modal
 
                 // Navigate back to the jars screen
                 navigate('/jars');
@@ -159,7 +158,10 @@ function JarScreen() {
             });
 
             if (response.status === 200) {
-                window.location.reload();
+                setShowModal(false); // Close modal
+
+                // Navigate back to the jars screen
+                navigate('/jars');
             } else {
                 console.error("Unexpected response status:", response.status);
             }
