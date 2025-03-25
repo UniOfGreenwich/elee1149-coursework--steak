@@ -1,14 +1,5 @@
-<img src="/SteakAd.gif" alt="advert" width=100%>
-
 <!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="#">
-  <img src="/steak.png" alt="Steak" width="80" height="80">
-  </a>
-
-  <h1 align="center">Steak</h3>
-
+<img src="/SteakAd.gif" alt="advert" width=100%>
   <p align="center">
     A simpler money management tool.
     <br />
