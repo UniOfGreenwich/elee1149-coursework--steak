@@ -109,6 +109,10 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
+@app.route('/')
+def home():
+    return 'Hello, World!'
+
 # Registration endpoint
 @app.route('/register', methods=['POST'])
 def register():
