@@ -132,7 +132,7 @@ function JarScreen() {
             const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/create_jar', payload);
     
             if (response.status === 201) {
-                setShowModal(false); // Close modal
+                //setShowModal(false); // Close modal
 
                 // Navigate back to the jars screen
                 navigate('/jars');
