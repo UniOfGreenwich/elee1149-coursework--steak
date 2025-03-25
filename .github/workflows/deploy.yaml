@@ -17,9 +17,11 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Dependencies
+      - name: Clean and Install Dependencies
         working-directory: steakinc-web-app/steakinc-web-app
-        run: npm install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Fix Vite Permissions
         run: chmod +x steakinc-web-app/steakinc-web-app/node_modules/.bin/vite
