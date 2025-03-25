@@ -130,12 +130,10 @@ function JarScreen() {
     
         try {
             const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/create_jar', payload);
-    
-            if (response.status === 201) {
+            
+            if (response.status === 201 && response.data.jar) {
+                setJars([...jars, response.data.jar]); // Add new jar to state
                 setShowModal(false); // Close modal
-
-                // Navigate back to the jars screen
-                navigate('/jars', { state: { userId: user.id } });
             } else {
                 alert('Failed to create jar. Please try again.');
             }
@@ -156,12 +154,12 @@ function JarScreen() {
                 jar_name: selectedJar.jar_name,
                 target_amount: selectedJar.target_amount
             });
-
+    
             if (response.status === 200) {
-                setShowModal(false); // Close modal
-
-                // Navigate back to the jars screen
-                navigate('/jars', { state: { userId: user.id } });
+                setJars(jars.map(jar => 
+                    jar.jar_id === selectedJar.jar_id ? { ...jar, jar_name: selectedJar.jar_name, target_amount: selectedJar.target_amount } : jar
+                )); // Update jar in state
+                setShowEditModal(false); // Close modal
             } else {
                 console.error("Unexpected response status:", response.status);
             }
@@ -173,9 +171,11 @@ function JarScreen() {
     const handleDeleteJar = async () => {
         try {
             const response = await axios.delete(`https://plasma-torus-454810-h1.lm.r.appspot.com/delete_jar/${selectedJar.jar_id}`);
-
+    
             if (response.status === 200) {
-                window.location.reload();
+                setJars(jars.filter(jar => jar.jar_id !== selectedJar.jar_id)); // Remove jar from state
+                setSelectedJar(null); // Clear selected jar
+                setShowEditModal(false); // Close modal
             } else {
                 console.error("Unexpected response status:", response.status);
             }
