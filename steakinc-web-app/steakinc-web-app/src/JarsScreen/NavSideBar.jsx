@@ -47,7 +47,7 @@ function NavSideBar() {
             </div>
             <div className={`nav-sidebar ${isOpen ? 'open' : ''}`}>
                 <div className="nav-header">
-                    <img src="/src/assets/highsteaks.png" alt="Logo" className="logo-jars" />
+                    <img src="/elee1149-coursework--steak/assets/highsteaks.png" alt="Logo" className="logo-jars" />
                     <h1 className="nav-title">Steak</h1>
                     {isOpen && (
                         <div className="burger-menu inside" onClick={toggleSidebar}>
