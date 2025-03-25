@@ -47,8 +47,8 @@ function JarScreen() {
         const fetchAccountsAndJars = async () => {
             if (userId) {
                 try {
-                    const accountResponse = await axios.get(`http://localhost:5000/total_balance/${userId}`);
-                    const jarResponse = await axios.get(`http://localhost:5000/user_jars/${userId}`);
+                    const accountResponse = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
+                    const jarResponse = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
                     
                     if (accountResponse.data.accounts) {
                         setAccounts(accountResponse.data.accounts);
@@ -86,7 +86,7 @@ function JarScreen() {
 
     const fetchJarTransactions = async (jarId) => {
         try {
-            const response = await axios.get(`http://localhost:5000/user_jar_transactions/${userId}/${jarId}`);
+            const response = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/user_jar_transactions/${userId}/${jarId}`);
             if (response.data.transactions) {
                 setTransactions(response.data.transactions);
                 console.log("Transactions fetched:", response.data.transactions); // Debugging log
@@ -128,7 +128,7 @@ function JarScreen() {
         console.log("Payload:", payload);
     
         try {
-            const response = await axios.post('http://localhost:5000/create_jar', payload);
+            const response = await axios.post('http://plasma-torus-454810-h1.lm.r.appspot.com/create_jar', payload);
     
             if (response.status === 201) {
                 window.location.reload(); // Refresh the page to update dropdowns
@@ -153,7 +153,7 @@ function JarScreen() {
         }
 
         try {
-            const response = await axios.put(`http://localhost:5000/update_jar/${selectedJar.jar_id}`, {
+            const response = await axios.put(`http://plasma-torus-454810-h1.lm.r.appspot.com/update_jar/${selectedJar.jar_id}`, {
                 jar_name: selectedJar.jar_name,
                 target_amount: selectedJar.target_amount
             });
@@ -170,7 +170,7 @@ function JarScreen() {
 
     const handleDeleteJar = async () => {
         try {
-            const response = await axios.delete(`http://localhost:5000/delete_jar/${selectedJar.jar_id}`);
+            const response = await axios.delete(`http://plasma-torus-454810-h1.lm.r.appspot.com/delete_jar/${selectedJar.jar_id}`);
 
             if (response.status === 200) {
                 window.location.reload();

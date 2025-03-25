@@ -29,7 +29,7 @@ function TransactionsScreen() {
     
         const fetchAccounts = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/total_balance/${userId}`);
+                const response = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
                 console.log("Accounts response:", response.data); // Debugging
                 if (response.data.accounts) {
                     setAccounts(response.data.accounts);
@@ -43,7 +43,7 @@ function TransactionsScreen() {
     
         const fetchTransactions = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/user_transactions/${userId}`);
+                const response = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/user_transactions/${userId}`);
                 console.log("Transactions response:", response.data);
                 if (response.data.transactions) {
                     setTransactions(response.data.transactions);
@@ -57,7 +57,7 @@ function TransactionsScreen() {
     
         const fetchJars = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/user_jars/${userId}`);
+                const response = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
                 console.log("Jars response:", response.data);
                 if (response.data.jars) {
                     setJars(response.data.jars); // Set all jars
@@ -80,7 +80,7 @@ function TransactionsScreen() {
         setSelectedAccount(accountId);
         console.log("Selected account ID:", accountId); // Debugging
         try {
-            const response = await axios.get(`http://localhost:5000/user_jars/${userId}`);
+            const response = await axios.get(`http://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
             console.log("Jars response:", response.data); // Debugging
             if (response.data.jars) {
                 const filteredJars = response.data.jars.filter(jar => jar.account_id === parseInt(accountId));

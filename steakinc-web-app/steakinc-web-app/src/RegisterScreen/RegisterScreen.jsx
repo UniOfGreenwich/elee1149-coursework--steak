@@ -41,7 +41,7 @@ function RegisterScreen() {
             return;
         }
 
-        // Prepare the data to send to the backend
+        // Prepare the data to send to the backend.
         const dataToSend = {
             username: registrationData.username,
             password: registrationData.password,
@@ -52,7 +52,7 @@ function RegisterScreen() {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/register', dataToSend);
+            const response = await axios.post('http://plasma-torus-454810-h1.lm.r.appspot.com/register', dataToSend);
             setMessage(response.data.message);
             console.log('User ID:', response.data.user_id);
 
