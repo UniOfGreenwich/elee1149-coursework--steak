@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Configure the database URI using environment variables for security
+# Configure the database URI using environment variables for security.
 # Replace 'your-public-ip', 'your-username', 'your-password', 'your-database-name' with actual values
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     f"postgresql://{os.getenv('DB_USERNAME', 'steak')}:"

@@ -41,7 +41,7 @@ function RegisterScreen() {
             return;
         }
 
-        // Prepare the data to send to the backend
+        // Prepare the data to send to the backend.
         const dataToSend = {
             username: registrationData.username,
             password: registrationData.password,
