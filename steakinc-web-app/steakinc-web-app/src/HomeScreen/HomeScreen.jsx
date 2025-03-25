@@ -19,7 +19,7 @@ function HomeScreen() {
         <img
           className="logo-home"
           onClick={logoSecret}
-          src="/elee1149-coursework--steak/assets/highsteaks.png"
+          src="src/assets/highsteaks.png"
           alt="steak"
         />
         <h1 className='title-text'>Steak</h1>
