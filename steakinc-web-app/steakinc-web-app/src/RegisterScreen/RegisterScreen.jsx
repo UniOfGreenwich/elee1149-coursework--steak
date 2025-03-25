@@ -73,7 +73,7 @@ function RegisterScreen() {
         <div className="container">
             <div className="register-container">
                 <div className="register-title-wrapper">
-                    <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo-register" />
+                    <img src="/elee1149-coursework--steak/assets/highsteaks.png" alt="High Steaks Logo" className="logo-register" />
                     <h1 className="register-title-text">Steak</h1>
                 </div>
                 <form className="register-form" onSubmit={handleSubmit}>
