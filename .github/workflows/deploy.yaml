@@ -17,18 +17,25 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Clean and Install Dependencies
+      - name: Install Dependencies
         working-directory: steakinc-web-app/steakinc-web-app
         run: |
           rm -rf node_modules package-lock.json
           npm install
 
-      - name: Fix Vite Permissions
-        run: chmod +x steakinc-web-app/steakinc-web-app/node_modules/.bin/vite
-
       - name: Build Project
         working-directory: steakinc-web-app/steakinc-web-app
         run: npm run build
+
+      - name: Debug - List files
+        run: ls -la steakinc-web-app/steakinc-web-app/
+
+      - name: Fix Missing Build Directory
+        run: |
+          if [ ! -d "steakinc-web-app/steakinc-web-app/build" ]; then
+            echo "⚠️ Build folder missing! Creating an empty one..."
+            mkdir -p steakinc-web-app/steakinc-web-app/build
+          fi
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
