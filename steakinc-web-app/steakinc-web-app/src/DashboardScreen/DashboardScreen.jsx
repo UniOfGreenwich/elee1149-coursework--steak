@@ -50,7 +50,7 @@ function Dashboard() {
 
         const fetchNewsHeadlines = async () => {
             try {
-                const response = await axios.get('httpss://newsapi.org/v2/everything', {
+                const response = await axios.get('https://newsapi.org/v2/everything', {
                     params: {
                         q: 'finance OR Stocks', // Search for finance-related articles
                         language: 'en', // Specify the language
