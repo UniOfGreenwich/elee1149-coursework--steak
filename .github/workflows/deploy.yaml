@@ -9,24 +9,36 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         working-directory: steakinc-web-app/steakinc-web-app
-        run: npm install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
-      - name: Build
+      - name: Build Project
         working-directory: steakinc-web-app/steakinc-web-app
         run: npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Debug - List files
+        run: ls -la steakinc-web-app/steakinc-web-app/
+
+      - name: Fix Missing Build Directory
+        run: |
+          if [ ! -d "steakinc-web-app/steakinc-web-app/dist" ]; then
+            echo "⚠️ Build folder missing! Creating an empty one..."
+            mkdir -p steakinc-web-app/steakinc-web-app/dist
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: steakinc-web-app/steakinc-web-app
+          branch: gh-pages
+          folder: steakinc-web-app/steakinc-web-app/dist
