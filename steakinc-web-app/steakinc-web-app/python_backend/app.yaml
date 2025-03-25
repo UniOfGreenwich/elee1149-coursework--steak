@@ -1,0 +1,15 @@
+runtime: python  # Use python312 instead of python311
+env: flex
+entrypoint: gunicorn -b :$PORT app:app
+
+runtime_config:
+  operating_system: "ubuntu22"  # Required for Python 3.8+
+  runtime_version: "3.12"  # Use python312 instead of python311
+
+manual_scaling:
+  instances: 1
+
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
