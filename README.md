@@ -1,4 +1,4 @@
-<img src="/SteakAd.gif" alt="advert" width=100%>
+<img src="/SteakA.gif" alt="advert" width=100%>
 
 <!-- PROJECT LOGO -->
 <br />
