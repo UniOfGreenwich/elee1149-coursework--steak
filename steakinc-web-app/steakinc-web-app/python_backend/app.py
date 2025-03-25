@@ -8,12 +8,19 @@ import logging
 from decimal import Decimal
 import csv
 from io import StringIO
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-# Configure the database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///steak_finance_tracker.db'
+# Configure the database URI using environment variables for security
+# Replace 'your-public-ip', 'your-username', 'your-password', 'your-database-name' with actual values
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"postgresql://{os.getenv('DB_USERNAME', 'steak')}:"
+    f"{os.getenv('DB_PASSWORD', 'steak')}@"
+    f"{os.getenv('DB_HOST', '34.147.212.73')}/"
+    f"{os.getenv('DB_NAME', 'steak')}"
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database
@@ -802,5 +809,9 @@ def export_data(user_id):
         return jsonify({'error': 'An error occurred while exporting data'}), 500
 
 if __name__ == '__main__':
-    create_tables()  # Ensure tables are created when the app starts
+    # Create tables if they don't exist
+    with app.app_context():
+        db.create_all()
+        print("Tables created successfully.")
+
     app.run(debug=True)
