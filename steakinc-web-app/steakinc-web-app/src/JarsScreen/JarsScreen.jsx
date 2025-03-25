@@ -135,7 +135,7 @@ function JarScreen() {
                 setShowModal(false); // Close modal
 
                 // Navigate back to the jars screen
-                navigate('/jars');
+                navigate('/jars', { state: { userId: user.id } });
             } else {
                 alert('Failed to create jar. Please try again.');
             }
@@ -161,7 +161,7 @@ function JarScreen() {
                 setShowModal(false); // Close modal
 
                 // Navigate back to the jars screen
-                navigate('/jars');
+                navigate('/jars', { state: { userId: user.id } });
             } else {
                 console.error("Unexpected response status:", response.status);
             }
