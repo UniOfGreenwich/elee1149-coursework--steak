@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
     f"postgresql://{os.getenv('DB_USERNAME', 'steak')}:"
     f"{os.getenv('DB_PASSWORD', 'steak')}@"
     f"{os.getenv('DB_HOST', '34.147.212.73')}/"
-    f"{os.getenv('DB_NAME', 'steak')}"
+    f"{os.getenv('DB_NAME', 'steak_prod')}"
 )
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -35,9 +35,9 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, nullable=False, onupdate=datetime.utcnow)
     new = db.Column(db.Boolean, default=True)
-    security_1 = db.Column(db.String(100), nullable=True)
-    security_2 = db.Column(db.String(100), nullable=True)
-    security_3 = db.Column(db.String(100), nullable=True)
+    security_1 = db.Column(db.String(256), nullable=True)
+    security_2 = db.Column(db.String(256), nullable=True)
+    security_3 = db.Column(db.String(256), nullable=True)
 
 # Define the Account model
 class Account(db.Model):
