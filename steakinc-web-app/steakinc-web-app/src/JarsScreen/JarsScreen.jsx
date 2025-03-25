@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NavSideBar from './NavSideBar';
 import './JarsScreen.css'; 
 import Lid from './Lid';
@@ -28,6 +28,7 @@ function JarScreen() {
     const [transactions, setTransactions] = useState([]); // State for transactions related to the selected jar
     const location = useLocation();
     const userId = location.state?.userId;
+    const navigate = useNavigate();
     const [isAccountInfoVisible, setIsAccountInfoVisible] = useState(false);
 
     const toggleAccountInfo = () => {
