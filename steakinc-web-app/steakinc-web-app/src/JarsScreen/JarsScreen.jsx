@@ -133,6 +133,9 @@ function JarScreen() {
             if (response.status === 201) {
                 setJars([...jars, response.data]); // Add new jar to state
                 setShowModal(false); // Close modal
+
+                // Navigate back to the jars screen
+                navigate('/jars');
             } else {
                 alert('Failed to create jar. Please try again.');
             }
