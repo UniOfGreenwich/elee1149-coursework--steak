@@ -41,7 +41,7 @@ function ForgotPasswordScreen() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/forgot-password', {
+            const response = await axios.post('http://plasma-torus-454810-h1.lm.r.appspot.com/forgot-password', {
                 username: formData.username,
                 new_password: formData.newPassword,
                 confirm_password: formData.confirmPassword,
