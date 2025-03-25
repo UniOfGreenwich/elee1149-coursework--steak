@@ -24,7 +24,7 @@ function LoginScreen() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://plasma-torus-454810-h1.lm.r.appspot.com/login', loginData);
+            const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/login', loginData);
             setMessage(response.data.message);
 
             const userId = response.data.user_id;

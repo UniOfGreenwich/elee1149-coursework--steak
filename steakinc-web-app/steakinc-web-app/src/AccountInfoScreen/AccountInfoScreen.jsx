@@ -48,9 +48,9 @@ function AccountInformationForm() {
                     balance: account.balance.replace('£', ''), // Remove £ symbol before sending to the database
                     userId
                 };
-                await axios.post('http://plasma-torus-454810-h1.lm.r.appspot.com/setup', accountData);
+                await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/setup', accountData);
             }
-            await axios.post(`http://plasma-torus-454810-h1.lm.r.appspot.com/update_new_status/${userId}`, { new: false });
+            await axios.post(`https://plasma-torus-454810-h1.lm.r.appspot.com/update_new_status/${userId}`, { new: false });
             navigate('/dashboard', { state: { userId } });  // Redirect to user dashboard
         } catch (error) {
             console.error('Error submitting account information', error);
