@@ -50,7 +50,7 @@ function LoginScreen() {
         <div className="container">
             <div className="login-container">
                 <div className="login-title-wrapper">
-                    <img src="/src/assets/highsteaks.png" alt="High Steaks Logo" className="logo-login" />
+                    <img src="/elee1149-coursework--steak/assets/highsteaks.png" alt="High Steaks Logo" className="logo-login" />
                     <h1 className="login-title-text">Steak</h1>
                 </div>
                 <form className="login-form" onSubmit={handleSubmit}>
