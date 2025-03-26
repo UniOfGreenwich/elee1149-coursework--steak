@@ -24,31 +24,31 @@ function AccountsScreen() {
     const location = useLocation();
     const userId = location.state?.userId;
 
+    const fetchAccounts = async () => {
+        try {
+            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
+            const fetchedAccounts = response.data.accounts;
+            setAccounts(fetchedAccounts);
+
+            // Set the first account as the default selected account
+            if (fetchedAccounts.length > 0) {
+                setSelectedAccount(fetchedAccounts[0]);
+            }
+        } catch (error) {
+            console.error("Error fetching accounts:", error);
+        }
+    };
+
+    const fetchTransactions = async () => {
+        try {
+            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_transactions/${userId}`);
+            setTransactions(response.data.transactions);
+        } catch (error) {
+            console.error("Error fetching transactions:", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchAccounts = async () => {
-            try {
-                const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
-                const fetchedAccounts = response.data.accounts;
-                setAccounts(fetchedAccounts);
-
-                // Set the first account as the default selected account
-                if (fetchedAccounts.length > 0) {
-                    setSelectedAccount(fetchedAccounts[0]);
-                }
-            } catch (error) {
-                console.error("Error fetching accounts:", error);
-            }
-        };
-
-        const fetchTransactions = async () => {
-            try {
-                const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_transactions/${userId}`);
-                setTransactions(response.data.transactions);
-            } catch (error) {
-                console.error("Error fetching transactions:", error);
-            }
-        };
-
         fetchTransactions();
         fetchAccounts();
     }, [userId]);
@@ -61,9 +61,9 @@ function AccountsScreen() {
             });
             if (response.status === 201) {
                 alert('Account created successfully');
-                setAccounts([...accounts, { ...newAccount, account_id: response.data.account_id }]);
-                setShowCreateModal(false);
-                window.location.reload(); // Refresh the page
+                await fetchAccounts(); // Fetch updated data
+                await fetchTransactions();
+                setShowCreateModal(false); // Close modal
             }
         } catch (error) {
             console.error("Error creating account:", error);
@@ -75,9 +75,8 @@ function AccountsScreen() {
             const response = await axios.put(`https://plasma-torus-454810-h1.lm.r.appspot.com/update_account/${selectedAccount.account_id}`, updatedAccount);
             if (response.status === 200) {
                 alert('Account updated successfully');
-                setAccounts(accounts.map(account => account.account_id === selectedAccount.account_id ? { ...selectedAccount, ...updatedAccount } : account));
-                setShowEditModal(false);
-                window.location.reload(); // Refresh the page
+                await fetchAccounts(); // Fetch updated data
+                setShowEditModal(false); // Close modal
             }
         } catch (error) {
             console.error("Error updating account:", error);
@@ -95,12 +94,10 @@ function AccountsScreen() {
             const response = await axios.delete(`https://plasma-torus-454810-h1.lm.r.appspot.com/delete_account/${selectedAccount.account_id}`);
             if (response.status === 200) {
                 alert('Account and related jars deleted successfully');
-                const updatedAccounts = accounts.filter(account => account.account_id !== selectedAccount.account_id);
-                setAccounts(updatedAccounts);
-                setSelectedAccount(updatedAccounts.length > 0 ? updatedAccounts[0] : null);
-                setShowDeleteConfirmation(false);
-                setShowEditModal(false);
-                window.location.reload(); // Refresh the page
+                await fetchAccounts(); // Fetch updated data
+                await fetchTransactions();
+                setShowDeleteConfirmation(false); // Close modal
+                setShowEditModal(false); // Close modal
             }
         } catch (error) {
             console.error("Error deleting account:", error);
