@@ -2,6 +2,10 @@
     height: 100px;
 }
 
+.carousel-wrapper {
+    visibility: hidden;
+}
+
 .logo-home:hover {
     animation: breathe 1s infinite alternate;
     cursor: pointer;
@@ -100,5 +104,9 @@
     .login-button-home, .register-button-home {
         font-size: 24px;
         padding: 15px 0; /* Ensure equal vertical padding */
+    }
+
+    .carousel-wrapper {
+        visibility: visible;
     }
 }

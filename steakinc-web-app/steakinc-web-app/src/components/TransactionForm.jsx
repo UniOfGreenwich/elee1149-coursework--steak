@@ -69,15 +69,15 @@ const TransactionForm = ({
         const payload = {
             user_id: userId,
             account_id: selectedAccount,
-            jar_id: selectedJar?.jar_id,
+            jar_id: selectedJar?.jar_id || null,
             amount: parseFloat(amount),
             transaction_type: transactionType,
             category,
             description,
-            source_account_id: sourceAccount,
-            destination_account_id: destinationAccount,
-            source_jar_id: sourceJar?.jar_id,
-            destination_jar_id: destinationJar?.jar_id,
+            source_account_id: sourceAccount || null,
+            destination_account_id: destinationAccount || null,
+            source_jar_id: sourceJar?.jar_id || null,
+            destination_jar_id: destinationJar?.jar_id || null,
         };
 
         try {
@@ -153,7 +153,7 @@ const TransactionForm = ({
                                     </select>
                                 </label>
                                 <label>
-                                    <select className='input-field-dropdown transaction-input-field' value={sourceJar?.jar_id || ''} onChange={(e) => setSourceJar(filteredSourceJars.find(jar => jar.jar_id === parseInt(e.target.value)))}>
+                                    <select className='input-field-dropdown transaction-input-field' value={sourceJar?.jar_id || ''} onChange={(e) => setSourceJar(filteredSourceJars.find(jar => jar.jar_id === parseInt(e.target.value)))} required>
                                         <option value="" disabled>Select source jar</option>
                                         {filteredSourceJars.map((jar, index) => (
                                             <option key={index} value={jar.jar_id}>
@@ -175,7 +175,7 @@ const TransactionForm = ({
                                     </select>
                                 </label>
                                 <label>
-                                    <select className='input-field-dropdown transaction-input-field' value={destinationJar?.jar_id || ''} onChange={(e) => setDestinationJar(filteredDestinationJars.find(jar => jar.jar_id === parseInt(e.target.value)))}>
+                                    <select className='input-field-dropdown transaction-input-field' value={destinationJar?.jar_id || ''} onChange={(e) => setDestinationJar(filteredDestinationJars.find(jar => jar.jar_id === parseInt(e.target.value)))} required>
                                         <option value="" disabled>Select destination jar</option>
                                         {filteredDestinationJars.map((jar, index) => (
                                             <option key={index} value={jar.jar_id}>

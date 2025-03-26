@@ -44,38 +44,38 @@ function JarScreen() {
         arrows: false
     };
 
-    useEffect(() => {
-        const fetchAccountsAndJars = async () => {
-            if (userId) {
-                try {
-                    const accountResponse = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
-                    const jarResponse = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
-                    
-                    if (accountResponse.data.accounts) {
-                        setAccounts(accountResponse.data.accounts);
-                        setAvailableTotal(accountResponse.data.available_total);
-                        console.log("Accounts fetched:", accountResponse.data.accounts); // Debugging log
-                    } else {
-                        console.error("Accounts not found in response");
-                    }
-
-                    if (jarResponse.data.jars) {
-                        setJars(jarResponse.data.jars);
-                        console.log("Jars fetched:", jarResponse.data.jars); // Debugging log
-                        if (jarResponse.data.jars.length > 0) {
-                            setSelectedJar(jarResponse.data.jars[0]); // Default to first jar
-                        }
-                    } else {
-                        console.error("Jars not found in response");
-                    }
-                } catch (error) {
-                    console.error("Error fetching data:", error);
+    const fetchAccountsAndJars = async () => {
+        if (userId) {
+            try {
+                const accountResponse = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
+                const jarResponse = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
+                
+                if (accountResponse.data.accounts) {
+                    setAccounts(accountResponse.data.accounts);
+                    setAvailableTotal(accountResponse.data.available_total);
+                    console.log("Accounts fetched:", accountResponse.data.accounts); // Debugging log
+                } else {
+                    console.error("Accounts not found in response");
                 }
-            } else {
-                console.error("User ID is not defined");
-            }
-        };
 
+                if (jarResponse.data.jars) {
+                    setJars(jarResponse.data.jars);
+                    console.log("Jars fetched:", jarResponse.data.jars); // Debugging log
+                    if (jarResponse.data.jars.length > 0) {
+                        setSelectedJar(jarResponse.data.jars[0]); // Default to first jar
+                    }
+                } else {
+                    console.error("Jars not found in response");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        } else {
+            console.error("User ID is not defined");
+        }
+    };
+
+    useEffect(() => {
         fetchAccountsAndJars();
     }, [userId]);
 
@@ -130,18 +130,23 @@ function JarScreen() {
     
         try {
             const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/create_jar', payload);
-            
-            if (response.status === 201 && response.data.jar) {
-                setJars([...jars, response.data.jar]); // Add new jar to state
+        
+            if (response.status === 201) {
+                await fetchAccountsAndJars(); // Fetch updated data
                 setShowModal(false); // Close modal
+                setJarName(''); // Reset form fields
+                setAllocatedAmount('');
+                setCurrentBalance('');
+                setTargetAmount('');
+                setSelectedAccount('');
             } else {
+                console.error("Unexpected API response structure:", response.data);
                 alert('Failed to create jar. Please try again.');
             }
         } catch (error) {
-            console.error("Error creating jar:", error.response?.data || error);
+            console.error("Error creating jar:", error.response?.data || error.message);
         }
     };
-    
 
     const handleEditJar = async () => {
         if (!selectedJar.jar_name) {
@@ -159,6 +164,7 @@ function JarScreen() {
                 setJars(jars.map(jar => 
                     jar.jar_id === selectedJar.jar_id ? { ...jar, jar_name: selectedJar.jar_name, target_amount: selectedJar.target_amount } : jar
                 )); // Update jar in state
+                await fetchAccountsAndJars();
                 setShowEditModal(false); // Close modal
             } else {
                 console.error("Unexpected response status:", response.status);
@@ -174,7 +180,8 @@ function JarScreen() {
     
             if (response.status === 200) {
                 setJars(jars.filter(jar => jar.jar_id !== selectedJar.jar_id)); // Remove jar from state
-                setSelectedJar(null); // Clear selected jar
+                setSelectedJar(null);
+                await fetchAccountsAndJars(); // Clear selected jar
                 setShowEditModal(false); // Close modal
             } else {
                 console.error("Unexpected response status:", response.status);

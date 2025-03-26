@@ -21,60 +21,58 @@ function TransactionsScreen() {
     const location = useLocation();
     const userId = location.state?.userId;
 
+    const fetchAccounts = async () => {
+        try {
+            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
+            console.log("Accounts response:", response.data); // Debugging
+            if (response.data.accounts) {
+                setAccounts(response.data.accounts);
+            } else {
+                console.error("Accounts not found in response");
+            }
+        } catch (error) {
+            console.error("Error fetching accounts:", error);
+        }
+    };
+
+    const fetchTransactions = async () => {
+        try {
+            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_transactions/${userId}`);
+            console.log("Transactions response:", response.data);
+            if (response.data.transactions) {
+                setTransactions(response.data.transactions);
+            } else {
+                console.error("Transactions not found in response");
+            }
+        } catch (error) {
+            console.error("Error fetching transactions:", error);
+        }
+    };
+
+    const fetchJars = async () => {
+        try {
+            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
+            console.log("Jars response:", response.data);
+            if (response.data.jars) {
+                setJars(response.data.jars); // Set all jars
+            } else {
+                console.error("Jars not found in response");
+            }
+        } catch (error) {
+            console.error("Error fetching jars:", error);
+        }
+    };
+
     useEffect(() => {
         if (!userId) {
             console.error("User ID is not defined");
             return;
         }
     
-        const fetchAccounts = async () => {
-            try {
-                const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
-                console.log("Accounts response:", response.data); // Debugging
-                if (response.data.accounts) {
-                    setAccounts(response.data.accounts);
-                } else {
-                    console.error("Accounts not found in response");
-                }
-            } catch (error) {
-                console.error("Error fetching accounts:", error);
-            }
-        };
-    
-        const fetchTransactions = async () => {
-            try {
-                const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_transactions/${userId}`);
-                console.log("Transactions response:", response.data);
-                if (response.data.transactions) {
-                    setTransactions(response.data.transactions);
-                } else {
-                    console.error("Transactions not found in response");
-                }
-            } catch (error) {
-                console.error("Error fetching transactions:", error);
-            }
-        };
-    
-        const fetchJars = async () => {
-            try {
-                const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
-                console.log("Jars response:", response.data);
-                if (response.data.jars) {
-                    setJars(response.data.jars); // Set all jars
-                } else {
-                    console.error("Jars not found in response");
-                }
-            } catch (error) {
-                console.error("Error fetching jars:", error);
-            }
-        };
-    
         fetchAccounts();
         fetchTransactions();
         fetchJars(); // Fetch jars immediately
-
-    
-    }, [userId]);    
+    }, [userId]);
 
     const handleAccountChange = async (accountId) => {
         setSelectedAccount(accountId);
@@ -96,7 +94,7 @@ function TransactionsScreen() {
 
     const handleSubmit = async () => {
         setShowModal(false);
-        window.location.reload(); // Refresh the transactions list after adding a new one
+        await fetchTransactions(); // Fetch updated transactions
     };
 
     return (
