@@ -42,7 +42,7 @@
     <img src="/dashboard.png" alt="dashboard" width="600">
 </a>
 
-Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input bank balances, incomes, and outcomes. Money can be assigned to "Jars", which essentially act as money pots for any desired purpose. Balances can be tracked over time, and are graphically translated for ease of interpretation.
+Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input their bank balances. Money can be assigned to "Jars", which act as savings pots for any specified purpose. A budgeting page is also present, allowing the user to allocate their monthly income, displaying the incoming/outgoings as a budgeting sheet and a corresponding pie chart. Balances can be tracked over time, and are graphically realised for ease of interpretation. Payment transactions can be tracked, with data exports for all the aforemented available for download at any time. All data is summarised on the dashboard, accompanied by a breaking financial news portal for those who are interested.
 
 
 ### Built With
