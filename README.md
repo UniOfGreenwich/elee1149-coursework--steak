@@ -42,7 +42,7 @@
     <img src="/dashboard.png" alt="dashboard" width="600">
 </a>
 
-Write a brief description of your project here.  Explain what it does and why it's useful. Click Image for figma board.
+Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input bank balances, incomes, and outcomes. Money can be assigned to "Jars", which essentially act as money pots for any desired purpose. Balances can be tracked over time, and are graphically translated for ease of interpretation.
 
 
 ### Built With
