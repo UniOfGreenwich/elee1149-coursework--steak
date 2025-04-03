@@ -45,13 +45,14 @@
 
 Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input their bank balances. Money can be assigned to "Jars", which act as savings pots for any specified purpose. A budgeting page is also present, allowing the user to allocate their monthly income, displaying the incoming/outgoings as a budgeting sheet and a corresponding pie chart. Balances can be tracked over time, and are graphically realised for ease of interpretation. Payment transactions can be tracked, with data exports for all the aforemented available for download at any time. All data is also summarised on the dashboard, accompanied by a breaking financial news portal for those who are interested.
 
-
 ### Built With
 
-* [Google Cloud Platform](https://cloud.google.com)
-* [Framework/Library 2][link2]
-* [Framework/Library 3][link3]
-
+- [Google Cloud Platform](https://cloud.google.com)
+- [PostgreSQL](https://www.postgresql.org/)
+- [SQLite](https://www.sqlite.org/)
+- [Python](https://www.python.org/)
+- [Javascript](https://www.javascript.com/)
+- [React](https://react.dev/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -97,13 +98,12 @@ Cancelled Project Features:
 <!-- PROJECT DOCUMENTS -->
 ## Project Documents
 
-[Sprint Planning](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Sprint%20Planning)
-[Standup Transcripts](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Standup%20Notes)
-[System Modelling](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/System%20Modelling)
-[Unit Tests](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Unit%20Tests)
-
-[Team Kanban](https://github.com/orgs/UniOfGreenwich/projects/32)
-[Team Roadmap](https://github.com/orgs/UniOfGreenwich/projects/32/views/4)
+- [Sprint Planning](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Sprint%20Planning)  
+- [Standup Transcripts](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Standup%20Notes)  
+- [System Modelling](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/System%20Modelling)  
+- [Unit Tests](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Unit%20Tests)  
+- [Team Kanban](https://github.com/orgs/UniOfGreenwich/projects/32)  
+- [Team Roadmap](https://github.com/orgs/UniOfGreenwich/projects/32/views/4)
 
 <!-- CONTRIBUTORS -->
 ## Contributors
