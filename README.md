@@ -41,13 +41,15 @@
 ## About The Project
 
 <a href="https://www.figma.com/design/vXN8MF0XHdS9KF5yII9ag2/Steak?node-id=0-1&t=a8jZ7VVYewacFEQS-1" target="_blank">
-    <img src="/dashboard.png" alt="dashboard" width="600">
+    <p align="center">
+    <img src="/dashboard.png" alt="dashboard" width="500">
+    </p>
 </a>
 
 Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input their bank balances. Money can be assigned to "Jars", which act as savings pots for any specified purpose. A budgeting page is also present, allowing the user to allocate their monthly income, displaying the incoming/outgoings as a budgeting sheet and a corresponding pie chart. Balances can be tracked over time, and are graphically realised for ease of interpretation. Payment transactions can be tracked, with data exports for all the aforemented available for download at any time. All data is also summarised on the dashboard, accompanied by a breaking financial news portal for those who are interested.
 
 <!-- FEATURES -->
-## Features
+### Features
 
 - Login & Signup
 - SQLite External Credential and Data Storage
@@ -85,7 +87,7 @@ Step-by-step instructions on how to install and set up your project.
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+### Usage
 
 Provide examples of how to use your project. Include screenshots, code snippets, or demos as needed.
 
