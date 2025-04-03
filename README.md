@@ -16,6 +16,7 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
+      <a href="#features">Features</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -29,7 +30,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#projectdocuments">Project Documents</a></li>
+    <li><a href="#project-documents">Project Documents</a></li>
     <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -44,6 +45,21 @@
 </a>
 
 Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input their bank balances. Money can be assigned to "Jars", which act as savings pots for any specified purpose. A budgeting page is also present, allowing the user to allocate their monthly income, displaying the incoming/outgoings as a budgeting sheet and a corresponding pie chart. Balances can be tracked over time, and are graphically realised for ease of interpretation. Payment transactions can be tracked, with data exports for all the aforemented available for download at any time. All data is also summarised on the dashboard, accompanied by a breaking financial news portal for those who are interested.
+
+<!-- FEATURES -->
+## Features
+
+- Login & Signup
+- SQLite External Credential and Data Storage
+- GCP Hosted
+- Mock Banking Integration
+- "Money Jar" Allocation
+- Integrated Budgeting App
+- Transaction Tracking
+- Dynamic Graphing
+- Live News Feed
+- Data Export
+- Product Advertisement Carousel
 
 ### Built With
 
