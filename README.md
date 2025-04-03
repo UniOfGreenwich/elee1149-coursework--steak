@@ -29,6 +29,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#projectdocuments">Project Documents</a></li>
     <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -75,7 +76,7 @@ Provide examples of how to use your project. Include screenshots, code snippets,
 <!-- ROADMAP -->
 ## Roadmap
 
-Planned, implemented and cancelled project features/milestones.
+Implemented Project Features:
 
 - [ ] User Login: Allows existing users to access their accounts.
 - [ ] User Registration: Enables new users to create accounts.
@@ -90,6 +91,18 @@ Planned, implemented and cancelled project features/milestones.
 - [ ] Net Worth Tracking: Calculate and track net worth over time.
 - [ ] Blog/Educational Content: Provide financial advice and educational resources.
 - [ ] Achievement Badges (Gamification): Award badges for reaching financial milestones.
+
+Cancelled Project Features:
+
+<!-- PROJECT DOCUMENTS -->
+## Project Documents
+
+[Sprint Planning](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Sprint%20Planning)
+[Standup Transcripts](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Standup%20Notes)
+[Unit Tests](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Unit%20Tests)
+
+[Team Kanban](https://github.com/orgs/UniOfGreenwich/projects/32)
+[Team Roadmap](https://github.com/orgs/UniOfGreenwich/projects/32/views/4)
 
 <!-- CONTRIBUTORS -->
 ## Contributors
