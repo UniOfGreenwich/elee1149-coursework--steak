@@ -2,10 +2,6 @@
     height: 100px;
 }
 
-.carousel-wrapper {
-    visibility: hidden;
-}
-
 .logo-home:hover {
     animation: breathe 1s infinite alternate;
     cursor: pointer;
@@ -106,7 +102,5 @@
         padding: 15px 0; /* Ensure equal vertical padding */
     }
 
-    .carousel-wrapper {
-        visibility: visible;
-    }
+
 }

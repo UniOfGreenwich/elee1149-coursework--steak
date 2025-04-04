@@ -19,7 +19,7 @@ function Dashboard() {
         const fetchAccountSummary = async () => {
             if (userId) {
                 try {
-                    const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
+                    const response = await axios.get(`http://localhost:5000/total_balance/${userId}`);
                     setTotalBalance(parseFloat(response.data.total_balance));
                     setAccounts(response.data.accounts); // Set account details
                 } catch (error) {
@@ -32,7 +32,7 @@ function Dashboard() {
 
         const fetchTransactions = async () => {
             try {
-                const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_transactions/${userId}`);
+                const response = await axios.get(`http://localhost:5000/user_transactions/${userId}`);
                 setTransactions(response.data.transactions);
             } catch (error) {
                 console.error("Error fetching transactions:", error);
@@ -41,7 +41,7 @@ function Dashboard() {
 
         const fetchJars = async () => {
             try {
-                const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_jars/${userId}`);
+                const response = await axios.get(`http://localhost:5000/user_jars/${userId}`);
                 setJars(response.data.jars);
             } catch (error) {
                 console.error("Error fetching jars:", error);
@@ -77,7 +77,7 @@ function Dashboard() {
 
     const handleExportData = async () => {
         try {
-            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/export_data/${userId}`, {
+            const response = await axios.get(`http://localhost:5000/export_data/${userId}`, {
                 responseType: 'blob',
             });
             const url = window.URL.createObjectURL(new Blob([response.data]));
