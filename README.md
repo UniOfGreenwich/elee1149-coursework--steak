@@ -44,6 +44,8 @@
     </p>
 </a>
 
+Click image for figma board access!
+
 Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input their bank balances. Money can be assigned to "Jars", which act as savings pots for any specified purpose. A budgeting page is also present, allowing the user to allocate their monthly income, displaying the incoming/outgoings as a budgeting sheet and a corresponding pie chart. Balances can be tracked over time, and are graphically realised for ease of interpretation. Payment transactions can be tracked, with data exports for all the aforemented available for download at any time. All data is also summarised on the dashboard, accompanied by a breaking financial news portal for those who are interested.
 
 <!-- FEATURES -->
@@ -83,21 +85,33 @@ Please follow the below step-by-step instructions to run the project:
 
 ### Backend Installation
 
-1. Check Python Version: Open the command prompt and use the command python --version to verify that Python is installed correctly.
-2. Install Packages: Use the command python -m pip install flask flask_sqlalchemy flask_cors werkzeug to install the necessary Python packages. A link to a list of required packages was provided in the chat (though the contents of that link aren't specified in these notes).
-3. Navigate to the Correct Directory: Use the command cd elee1149-coursework--steak\steakinc-web-app\steakinc-web-app\python_backend to navigate to the Python backend folder.
-4. Run the GCP Script: Use the command python gcp_app.py to start the application and verify functionality.
-5. If GCP is Expired, Run the Local Script: Use the command python local_app.py to start the application and verify functionality.
+1. Check Python Version: Open the command prompt and use the command `python --version` to verify that Python is installed correctly.
+2. Install Packages: Use the command `python -m pip install flask flask_sqlalchemy flask_cors werkzeug` to install the necessary Python packages. A link to a list of required packages was provided in the chat (though the contents of that link aren't specified in these notes).
+3. Navigate to the Correct Directory: Use the command `cd elee1149-coursework--steak\steakinc-web-app\steakinc-web-app\python_backend` to navigate to the Python backend folder.
+4. Run the GCP Script: Use the command `python gcp_app.py` to start the application and verify functionality.
+5. If GCP is Expired, Run the Local Script: Use the command `python local_app.py` to start the application and verify functionality.
 
 ### Frontend Installation
 
 1. Verify Node.js and npm Installations: Open the command prompt and use the following commands to check the versions and confirm installation:  
   
-    - node -v  
-    - npm -v
+    - `node -v`  
+    - `npm -v`
 
-3. Navigate to the Project Folder: Use the cd command in the command prompt to navigate to the root directory of the project.
-4. Run the Development Server: Execute the command npm run dev to start the development server.
+3. Navigate to the Project Folder: Use the cd command in the command prompt to navigate to the folder path "elee1149-coursework--steak/steakinc-web-app/steakinc-web-app".
+4. Run the command `npm install`
+5. Run the Development Server: Execute the command `npm run dev` to start the development server.
+
+### User Account
+In the interest of testing, credentials have been created that contain example data for you to use the application. Please find these below:
+
+**Username:** Example
+**Password:** Example123!
+**Security 1 answer:** Example
+**Security 2 answer:** Example
+**Security 3 answer:** Example
+
+**NOTE: THIS WILL ONLY WORK IF THE GCP SCRIPT IS CORRECTLY RUNNING AND THE TRIAL ACCOUNT HAS NOT EXPIRED. IF YOU RUN THE LOCAL BACKEND, YOU WILL HAVE TO MAKE YOUR OWN ACCOUNT!**
 
 <!-- ROADMAP -->
 ## Roadmap
