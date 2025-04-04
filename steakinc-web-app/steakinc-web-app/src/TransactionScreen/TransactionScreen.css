@@ -95,7 +95,6 @@
 .line-chart-container {
     background-color: #0B1739;
     border-radius: 10px;
-    padding: 10px;
 }
 
 .line-chart-title {
@@ -145,15 +144,72 @@
     border: 1px solid #ffffff;
 }
 
-.transactions-placeholder {
-    display: none;
-    border: 1px solid #ffffff;
-}
-
+/* Ensure the transactions-placeholder container is responsive */
 .transactions-chart-container {
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    justify-content: space-between; /* Space between the charts */
+    gap: 40px; /* Reduce the gap slightly for desktop view */
+    align-items: stretch; /* Ensure both containers stretch to the same height */
 }
 
+/* General styling for transactions-placeholder */
+.transactions-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Default height */
+    width: 100%; /* Full width of the parent container */
+    max-width: 100%; /* Prevent overflow */
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: #0B1739; /* Match the line chart container background */
+    overflow: hidden; /* Prevent content overflow */
+    padding: 10;
+}
+
+/* General styling for line-chart-container and transactions-placeholder */
+.line-chart-container,
+.transactions-placeholder {
+    flex: 1; /* Allow both containers to take equal width */
+    max-width: calc(48% - 20px); /* Each container takes 48% of the width minus half the gap */
+    height: 350px; /* Set a consistent height for both containers */
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ffffff;
+    background-color: #0B1739; /* Match the background color */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .transactions-chart-container {
+        flex-direction: column; /* Stack the charts vertically */
+        align-items: center; /* Center align the charts */
+        gap: 20px; /* Reduce the gap for smaller screens */
+    }
+
+    .transactions-placeholder {
+        margin-top: 20px; /* Add spacing below the line chart */
+        height: auto; /* Allow height to adjust dynamically */
+        width: 90%; /* Shrink width to fit smaller screens */
+        max-width: 400px; /* Optional: Limit the maximum width */
+    }
+
+    .line-chart-container {
+        width: 90%; /* Make the line chart responsive */
+        margin: 0 auto; /* Center the line chart */
+    }
+
+    .line-chart-container,
+    .transactions-placeholder {
+        width: 90%; /* Shrink width to fit smaller screens */
+        max-width: 400px; /* Optional: Limit the maximum width */
+        height: auto; /* Allow height to adjust dynamically */
+        margin: 0 auto; /* Center the containers */
+    }
+}
+
+/* Responsive styling for larger screens */
 @media (min-width: 1024px) {
     .transaction-container, .transaction-wrapper {
         margin: 0 10px 0 300px; 
@@ -176,9 +232,38 @@
         display: block;
         background-color: #0B1739;
         height: 400px;
-        width: 500px;
-        margin-left: 300px;
         border-radius: 10px; 
     }
 
+    .transactions-placeholder {
+        height: 400px; /* Increase height for larger screens */
+    }
+
+    .transactions-chart-container {
+        flex-direction: row; /* Align charts horizontally */
+        justify-content: space-between; /* Space between charts */
+    }
+
+    .transactions-chart-container {
+        flex-direction: row; /* Align charts horizontally */
+        gap: 50px; /* Add a 50px gap between the charts */
+    }
+
+    .line-chart-container,
+    .transactions-placeholder {
+        width: calc(50% - 25px); /* Each chart takes 50% of the width minus half the gap */
+        max-width: 600px; /* Optional: Limit the maximum width */
+        height: 350px; /* Ensure consistent height */
+    }
+
+    .line-chart-container,
+    .transactions-placeholder {
+        max-width: calc(48% - 20px); /* Increase the width slightly to bring the boxes closer together */
+        height: 350px; /* Ensure consistent height for both containers */
+    }
+
+    .line-chart-container,
+    .transactions-placeholder {
+        height: 350px; /* Ensure consistent height for both containers */
+    }
 }

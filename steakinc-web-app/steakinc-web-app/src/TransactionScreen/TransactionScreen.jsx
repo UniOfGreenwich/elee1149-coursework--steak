@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { Pie } from 'react-chartjs-2'; // Import Pie chart
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'; // Required for ChartJS
 import TransactionsChart from '../components/TransactionsChart';
 import TransactionForm from '../components/TransactionForm'; // Import the TransactionForm component
 import NavSideBar from '../JarsScreen/NavSideBar';
 import './TransactionScreen.css';
+
+ChartJS.register(ArcElement, Tooltip, Legend); // Register ChartJS components
 
 function TransactionsScreen() {
     const [amount, setAmount] = useState('');
@@ -17,6 +21,7 @@ function TransactionsScreen() {
     const [description, setDescription] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [transactions, setTransactions] = useState([]);
+    const [pieChartData, setPieChartData] = useState(null); // State for pie chart data
     
     const location = useLocation();
     const userId = location.state?.userId;
@@ -47,6 +52,7 @@ function TransactionsScreen() {
                 console.log("Transactions response:", response.data);
                 if (response.data.transactions) {
                     setTransactions(response.data.transactions);
+                    generatePieChartData(response.data.transactions); // Generate pie chart data
                 } else {
                     console.error("Transactions not found in response");
                 }
@@ -75,6 +81,43 @@ function TransactionsScreen() {
 
     
     }, [userId]);    
+
+    const generatePieChartData = (transactions) => {
+        const categoryTotals = transactions.reduce((acc, transaction) => {
+            const { category, amount } = transaction;
+            acc[category] = (acc[category] || 0) + amount;
+            return acc;
+        }, {});
+
+        const labels = Object.keys(categoryTotals);
+        const data = Object.values(categoryTotals);
+
+        setPieChartData({
+            labels,
+            datasets: [
+                {
+                    label: 'Transaction Categories',
+                    data,
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0',
+                        '#9966FF',
+                        '#FF9F40',
+                    ],
+                    hoverBackgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0',
+                        '#9966FF',
+                        '#FF9F40',
+                    ],
+                },
+            ],
+        });
+    };
 
     const handleAccountChange = async (accountId) => {
         setSelectedAccount(accountId);
@@ -118,7 +161,19 @@ function TransactionsScreen() {
                 <h2 className="line-chart-title">Account Total Over Time</h2>
                 <div className="transactions-chart-container">
                     <TransactionsChart transactions={transactions} />
-                    <div className="transactions-placeholder"></div>
+                    <div className="transactions-placeholder">
+                        {pieChartData ? (
+                            <Pie
+                                data={pieChartData}
+                                options={{
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                }}
+                            />
+                        ) : (
+                            <p>Loading chart...</p>
+                        )}
+                    </div>
                 </div>
                 <div className="transaction-table-add-container">
                     <h2 className="transaction-table-title">Transaction List</h2>
