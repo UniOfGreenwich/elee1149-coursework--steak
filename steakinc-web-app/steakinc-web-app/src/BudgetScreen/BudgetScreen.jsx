@@ -165,10 +165,25 @@ function BudgetScreen() {
     const totalIncome = incomes.reduce((sum, income) => sum + parseFloat(income.amount), 0);
     const totalExpenses = expenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0);
     const remainingBalance = totalIncome - totalExpenses;
+
+    // Function to group expenses by category
+    const groupExpensesByCategory = () => {
+        const grouped = expenses.reduce((acc, expense) => {
+            if (!acc[expense.category]) {
+                acc[expense.category] = 0;
+            }
+            acc[expense.category] += parseFloat(expense.amount);
+            return acc;
+        }, {});
+        return Object.entries(grouped).map(([category, total]) => ({ category, total }));
+    };
+
+    // Prepare data for the pie chart
+    const groupedExpenses = groupExpensesByCategory();
     const expensePieData = {
-        labels: expenses.map(expense => expense.category),
+        labels: groupedExpenses.map(item => item.category),
         datasets: [{
-            data: expenses.map(expense => expense.amount),
+            data: groupedExpenses.map(item => item.total),
             backgroundColor: ['#DA4259', '#36A2EB', '#FFCE56', '#8A2BE2', '#FF4500'],
             hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#8A2BE2', '#FF4500'],
             borderWidth: 1,
@@ -176,6 +191,7 @@ function BudgetScreen() {
             hoverBorderColor: '#fff'
         }]
     };
+
     return (
         <div>
             <NavSideBar />
