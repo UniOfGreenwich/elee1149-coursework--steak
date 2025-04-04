@@ -16,9 +16,9 @@ CORS(app)
 # Configure the database URI using environment variables for security.
 # Replace 'your-public-ip', 'your-username', 'your-password', 'your-database-name' with actual values
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    f"postgresql://{os.getenv('DB_USERNAME', 'steak')}:"
+    f"postgresql://{os.getenv('DB_USERNAME', 'postgres')}:"
     f"{os.getenv('DB_PASSWORD', 'steak')}@"
-    f"{os.getenv('DB_HOST', '34.147.212.73')}/"
+    f"{os.getenv('DB_HOST', '35.189.80.101')}/"
     f"{os.getenv('DB_NAME', 'steak_prod')}"
 )
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -404,6 +404,12 @@ def create_transaction():
     source_jar_id = data.get('source_jar_id')
     destination_jar_id = data.get('destination_jar_id')
     overflow = False
+
+    # Convert empty strings to None
+    if source_account_id == '':
+        source_account_id = None
+    if destination_account_id == '':
+        destination_account_id = None
     
     # Use the session to get the account
     session: Session = db.session
