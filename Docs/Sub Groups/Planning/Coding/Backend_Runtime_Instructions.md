@@ -45,9 +45,16 @@
     - To ensure they were in the correct directory.
 
   - **Running Script:**
-    - Ran the script using:
+    - Ran the GCP script using:
       ```bash
-      python app.py
+      python gcp_app.py
+      ```
+    - To start the application and verify functionality.
+   
+  - **Running Script if GCP expired:**
+    - Ran the local script using:
+      ```bash
+      python local_app.py
       ```
     - To start the application and verify functionality.
 
