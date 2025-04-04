@@ -142,8 +142,6 @@ Cancelled Project Functionality:
 - Lewis Bray - lb3011x@gre.ac.uk
 - Jack Buchanan - jb6522g@gre.ac.uk
 
-Project Link: [https://github.com/orgs/UniOfGreenwich/projects/32/views/1](https://github.com/orgs/UniOfGreenwich/projects/32/views/1)
-
 <!-- PROMOTIONAL VIDEO -->
 ## Promotional Videos
 
