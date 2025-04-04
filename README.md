@@ -51,9 +51,9 @@ Steak is a web-based tool, designed to simplify money management. Upon signing u
 <!-- FEATURES -->
 ### Features
 
-- Login & Signup
+- Secure Login & Signup
 - SQLite External Credential and Data Storage
-- GCP Hosted
+- GCP or Locally Hosted
 - Mock Banking Integration
 - "Money Jar" Allocation
 - Integrated Budgeting App
@@ -109,11 +109,12 @@ Provide examples of how to use your project. Include screenshots, code snippets,
 <!-- ROADMAP -->
 ## Roadmap
 
-Implemented Project Features:
+Implemented Project Functionality:
 
 - [ ] User Login: Allows existing users to access their accounts.
 - [ ] User Registration: Enables new users to create accounts.
 - [ ] User Logout: Enabling a different user to log in.
+- [ ] Account Security: Security question prompts upon signup.
 - [ ] Transaction History (View & Add):  View past transactions and add new ones.
 - [ ] Budgeting Tools: Create and manage budgets for different categories.
 - [ ] Savings Goals ("Money Jars"): Set and track progress towards financial goals.
@@ -122,8 +123,9 @@ Implemented Project Features:
 - [ ] Data Export: Allows users to download their data.
 - [ ] Forgot Password Functionality: Reset password if forgotten.
 - [ ] Net Worth Tracking: Calculate and track net worth over time.
+- [ ] Advertising Material
 
-Cancelled Project Features:
+Cancelled Project Functionality:
 
 - [ ] Account Linking (Bank Accounts): Connect bank accounts for automatic transaction import.
 - [ ] Blog/Educational Content: Provide financial advice and educational resources.
@@ -148,11 +150,5 @@ Cancelled Project Features:
 - Jack Buchanan - jb6522g@gre.ac.uk
 
 Project Link: [https://github.com/orgs/UniOfGreenwich/projects/32/views/1](https://github.com/orgs/UniOfGreenwich/projects/32/views/1)
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-List any resources, individuals, or projects that you'd like to thank.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
