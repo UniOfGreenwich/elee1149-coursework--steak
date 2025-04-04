@@ -393,6 +393,12 @@ def create_transaction():
     source_jar_id = data.get('source_jar_id')
     destination_jar_id = data.get('destination_jar_id')
     overflow = False
+
+    # Convert empty strings to None
+    if source_account_id == '':
+        source_account_id = None
+    if destination_account_id == '':
+        destination_account_id = None
     
     # Use the session to get the account
     session: Session = db.session
