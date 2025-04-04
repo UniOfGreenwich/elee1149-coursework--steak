@@ -14,15 +14,15 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <a href="#features">Features</a>
       <ul>
+        <li><a href="#features">Features</a>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Local Prerequisites</a></li>
+        <li><a href="#local-prerequisites">Local Prerequisites</a></li>
         <li><a href="#backend-installation">Backend Installation</a></li>
         <li><a href="#frontend-installation">Frontend Installation</a></li>
       </ul>
