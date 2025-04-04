@@ -1,0 +1,95 @@
+.vertical-carousel-wrapper {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 40px;
+    height: 100%;
+    width: 200px;
+    margin-right: 15px;
+}
+
+@media (min-width: 1024px) {
+    .lid {
+        margin-top: -40px;
+    }
+
+    .custom-arrow {
+        width: 30px;
+        height: 30px; 
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white; 
+        border-radius: 50%; 
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .custom-arrow:hover {
+        transform: scale(1.1);
+    }
+
+    .vertical-carousel-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vertical-carousel-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #0B1739;
+        width: 100%;
+        height: 90.5%;
+        position: relative;
+        border: 1px grey solid;
+        border-radius: 10px;
+    }
+
+    .jar-carousel-container.vertical-carousel {
+        overflow: hidden;
+        height: 800px;
+        width: 100%;
+        position: relative; /* Ensure arrows are positioned within this container */
+    }
+
+    .jar-container {
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.5s ease-in-out;
+        margin: 10px 0 0 0;
+        overflow-y: hidden;
+        user-select: none;
+    }
+
+    .jar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .jar-value, .jar-name {
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    .custom-prev-arrow {
+        position: absolute;
+        top: 10px; /* Position the previous arrow at the top */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%);
+    }
+
+    .custom-next-arrow {
+        position: absolute;
+        bottom: 10px; /* Position the next arrow at the bottom */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%);
+    }
+}

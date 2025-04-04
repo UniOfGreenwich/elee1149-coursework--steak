@@ -1,0 +1,275 @@
+.budget-edit-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is on top */
+}
+.budget-edit-content {
+    background-color: #0B1739;
+    padding: 40px 10px 20px 10px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 85%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+ 
+.budget-edit-form {
+    text-align: center;
+}
+ 
+.add-income-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is on top */
+}
+ 
+.add-income-content {
+    background-color: #0B1739;
+    padding: 40px 10px 20px 10px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+ 
+.add-expense-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is on top */
+}
+ 
+.add-expense-content {
+    background-color: #0B1739;
+    padding: 40px 10px 20px 10px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 85%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+ 
+.add-expense-form {
+    text-align: center;
+}
+ 
+.add-income-content h2, .add-expense-content h2, .budget-edit-content h2 {
+    margin: 0 0 20px 0;
+}
+ 
+.add-income-form-item input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+ 
+.budget-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0;
+}
+ 
+.budget-submit-button {
+    background-color: #DA4259;
+    color: #ffffff;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+.budget-cancel-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+.budget-header {
+    margin: 30px 0 0 0;
+}
+ 
+.income-container, .balance-container {
+    color: white;
+    background-color: #DA4259;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    margin: 0 60px;
+}
+ 
+.pie-chart-container {
+    background-color: #0B1739;
+    border-radius: 10px;
+}
+ 
+.pie-chart {
+    width: 50%;
+    height: 50%;
+    margin: 20px auto;
+}
+ 
+.budget-tables {
+    margin-top: 20px;
+}
+ 
+.income-table {
+    background-color: #0B1739;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    margin-bottom: 20px;
+}
+ 
+.income-table ul {
+    list-style: none;
+    padding: 0;
+    color: #ffffff;
+}
+ 
+.budget-edit-button {
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+ 
+.income-table ul li  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+ 
+.expense-table {
+    background-color: #0B1739;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #ffffff;
+}
+ 
+.expense-table {
+    margin: 0 auto;
+}
+ 
+.expense-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
+.expense-table td {
+    padding: 8px 0;
+    text-align: center;
+}
+ 
+.expense-table-header {
+    color: #ffffff;
+}
+ 
+.expense-table-item {
+    color: #ffffff;
+    text-align: center;
+}
+ 
+.add-button {
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+ 
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+ 
+@media (min-width: 768px) {
+    .expense-table {
+        width: 100%;
+        margin: 0 auto;
+    }
+ 
+    .add-income-content {
+        width: 100%;
+    }
+}
+ 
+@media (min-width: 1024px) {
+    .expense-table {
+        margin: 0 auto;
+    }
+   
+    .budget-main-container {
+        margin-left: 300px
+    }
+}
+ 
+@media (min-width: 1300px) {
+    .budget-header {
+        display: flex;
+    }
+ 
+    .budget-tables {
+        display: flex;
+    }
+ 
+    .expense-table {
+        margin: 0 auto 0 20px;
+        flex: 2;
+    }
+ 
+    .income-table {
+        margin: 0 auto;
+        flex: 1;
+    }
+ 
+    .balance-container, .income-container {
+        height: 150px;
+        width: 20%;
+    }
+ 
+    .pie-chart {
+        width: 100%;
+        height: 100%;
+        margin: 0 100px;
+    }
+ 
+    .pie-chart canvas {
+        width: 50% !important;
+        height: 50% !important;
+        margin: 0 auto;
+    }
+}
