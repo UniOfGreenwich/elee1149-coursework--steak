@@ -3,8 +3,6 @@
   <p align="center">
     A simpler money management tool.
     <br />
-    <a href="#"><strong>Explore »</strong></a>
-    <br />
     <br />
   </p>
 </div>
