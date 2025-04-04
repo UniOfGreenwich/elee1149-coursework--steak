@@ -105,11 +105,11 @@ Please follow the below step-by-step instructions to run the project:
 ### User Account
 In the interest of testing, credentials have been created that contain example data for you to use the application. Please find these below:
 
-**Username:** Example
-**Password:** Example123!
-**Security 1 answer:** Example
-**Security 2 answer:** Example
-**Security 3 answer:** Example
+- **Username:** Example
+- **Password:** Example123!
+- **Security 1 answer:** Example
+- **Security 2 answer:** Example
+- **Security 3 answer:** Example
 
 **NOTE: THIS WILL ONLY WORK IF THE GCP SCRIPT IS CORRECTLY RUNNING AND THE TRIAL ACCOUNT HAS NOT EXPIRED. IF YOU RUN THE LOCAL BACKEND, YOU WILL HAVE TO MAKE YOUR OWN ACCOUNT!**
 
