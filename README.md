@@ -32,7 +32,7 @@
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#project-documents">Project Documents</a></li>
     <li><a href="#contributors">Contributors</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#promotional-video">Promotional Video</a></li>
   </ol>
 </details>
 
@@ -150,5 +150,8 @@ Cancelled Project Functionality:
 - Jack Buchanan - jb6522g@gre.ac.uk
 
 Project Link: [https://github.com/orgs/UniOfGreenwich/projects/32/views/1](https://github.com/orgs/UniOfGreenwich/projects/32/views/1)
+
+<!-- PROMOTIONAL VIDEO -->
+## Promotional Video
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
