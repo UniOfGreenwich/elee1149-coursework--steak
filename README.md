@@ -99,11 +99,6 @@ Please follow the below step-by-step instructions to run the project.
 3. Navigate to the Project Folder: Use the cd command in the command prompt to navigate to the root directory of the project.
 4. Run the Development Server: Execute the command npm run dev to start the development server.
 
-<!-- USAGE EXAMPLES -->
-### Usage
-
-Provide examples of how to use your project. Include screenshots, code snippets, or demos as needed.
-
 <!-- ROADMAP -->
 ## Roadmap
 
