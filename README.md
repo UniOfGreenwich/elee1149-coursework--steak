@@ -32,7 +32,7 @@
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#project-documents">Project Documents</a></li>
     <li><a href="#contributors">Contributors</a></li>
-    <li><a href="#promotional-video">Promotional Video</a></li>
+    <li><a href="#promotional-videos">Promotional Videos</a></li>
   </ol>
 </details>
 
