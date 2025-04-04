@@ -152,10 +152,11 @@ Cancelled Project Functionality:
 Project Link: [https://github.com/orgs/UniOfGreenwich/projects/32/views/1](https://github.com/orgs/UniOfGreenwich/projects/32/views/1)
 
 <!-- PROMOTIONAL VIDEO -->
-## Promotional Video
+## Promotional Videos
 
 
 <img src="/SteakScreenshot.png" alt="screenshot" width=50%>
-https://youtu.be/JbbvTQxuzr0
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Promotional Video 1 - [Link](https://www.youtube.com/watch?v=JbbvTQxuzr0)
+
+Promotional Video 2 - [Link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
