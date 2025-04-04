@@ -154,4 +154,6 @@ Project Link: [https://github.com/orgs/UniOfGreenwich/projects/32/views/1](https
 <!-- PROMOTIONAL VIDEO -->
 ## Promotional Video
 
+[Youtube Link](https://youtu.be/JbbvTQxuzr0)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
