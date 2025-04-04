@@ -75,22 +75,36 @@ Steak is a web-based tool, designed to simplify money management. Upon signing u
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Instructions on setting up your project locally.
+Please follow the below step-by-step instructions to run the project.
 
-### Prerequisites
+### Local Prerequisites
 
-List any prerequisites needed to run your project (e.g., Node.js, Python, specific libraries).  Include installation commands if necessary.
+- [Project Repo Clone](https://github.com/UniOfGreenwich/elee1149-coursework--steak)  
+- [Python](https://www.python.org/)  
+- [NodeJS](https://nodejs.org/en)
 
-### Installation
+### Backend Installation
 
-Step-by-step instructions on how to install and set up your project.
+1. Check Python Version: Open the command prompt and use the command python --version to verify that Python is installed correctly.
+2. Install Packages: Use the command python -m pip install flask flask_sqlalchemy flask_cors werkzeug to install the necessary Python packages. A link to a list of required packages was provided in the chat (though the contents of that link aren't specified in these notes).
+3. Navigate to the Correct Directory: Use the command cd elee1149-coursework--steak\steakinc-web-app\steakinc-web-app\python_backend to navigate to the Python backend folder.
+4. Run the GCP Script: Use the command python gcp_app.py to start the application and verify functionality.
+5. If GCP is Expired, Run the Local Script: Use the command python local_app.py to start the application and verify functionality.
 
+### Frontend Installation
+
+1. Verify Node.js and npm Installations: Open the command prompt and use the following commands to check the versions and confirm installation:  
+  
+    - node -v  
+    - npm -v
+
+3. Navigate to the Project Folder: Use the cd command in the command prompt to navigate to the root directory of the project.
+4. Run the Development Server: Execute the command npm run dev to start the development server.
 
 <!-- USAGE EXAMPLES -->
 ### Usage
 
 Provide examples of how to use your project. Include screenshots, code snippets, or demos as needed.
-
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -99,19 +113,21 @@ Implemented Project Features:
 
 - [ ] User Login: Allows existing users to access their accounts.
 - [ ] User Registration: Enables new users to create accounts.
+- [ ] User Logout: Enabling a different user to log in.
 - [ ] Transaction History (View & Add):  View past transactions and add new ones.
 - [ ] Budgeting Tools: Create and manage budgets for different categories.
 - [ ] Savings Goals ("Money Jars"): Set and track progress towards financial goals.
 - [ ] Asset Tracking (Total Value):  View the total value of all assets.
 - [ ] Financial News Feed: Display relevant financial news articles.
 - [ ] Data Export: Allows users to download their data.
-- [ ] Account Linking (Bank Accounts): Connect bank accounts for automatic transaction import.
 - [ ] Forgot Password Functionality: Reset password if forgotten.
 - [ ] Net Worth Tracking: Calculate and track net worth over time.
-- [ ] Blog/Educational Content: Provide financial advice and educational resources.
-- [ ] Achievement Badges (Gamification): Award badges for reaching financial milestones.
 
 Cancelled Project Features:
+
+- [ ] Account Linking (Bank Accounts): Connect bank accounts for automatic transaction import.
+- [ ] Blog/Educational Content: Provide financial advice and educational resources.
+- [ ] Achievement Badges (Gamification): Award badges for reaching financial milestones.
 
 <!-- PROJECT DOCUMENTS -->
 ## Project Documents
