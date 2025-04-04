@@ -98,7 +98,7 @@ Please follow the below step-by-step instructions to run the project:
     - `node -v`  
     - `npm -v`
 
-3. Navigate to the Project Folder: Use the cd command in the command prompt to navigate to the folder path "elee1149-coursework--steak/steakinc-web-app/steakinc-web-app".
+3. Navigate to the Project Folder: Use the cd command in the command prompt to navigate to the folder path `cd elee1149-coursework--steak/steakinc-web-app/steakinc-web-app`.
 4. Run the command `npm install`
 5. Run the Development Server: Execute the command `npm run dev` to start the development server.
 
