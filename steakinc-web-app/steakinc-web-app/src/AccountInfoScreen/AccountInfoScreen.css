@@ -1,0 +1,125 @@
+.account-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 325px;
+    overflow-y: auto;
+}
+ 
+.account-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+ 
+.account-message-wrapper {
+    color: white;
+    text-align: center;
+    margin-top: 100px
+}
+ 
+.add-account-button{
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 10px;
+    padding: 3px 12px;
+}
+
+.remove-account-button {
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 10px;
+    padding: 5px 14px;
+    margin-left: 5px;
+}
+ 
+.account-type-input {
+    margin-bottom: 20px;
+    margin: 8px 0 0 8px !important;
+}
+
+.account-amount-input {
+    margin-bottom: 20px;
+    margin: 8px 0 0 8px !important;
+}
+
+.account-button-wrapper {
+    display: flex;
+    margin: 10px 0 0 144px;
+}
+
+.button-wrapper {
+    display: flex;
+    margin-top: 30px;
+}
+ 
+.login-submit-button {
+    margin: 0 0 0 10px;
+}
+ 
+.account-title-wrapper {
+    display: flex;
+    color: #ffffff;
+    margin-left: 15px;
+}
+ 
+.account-logo {
+    height: 75px;
+    margin-right: 15px;
+}
+
+
+@media (min-width: 768px) {
+    .account-logo {
+        height: 80px;
+    }
+ 
+    .account-title-text {
+        font-size: 54px;
+        font-weight: 450;
+        margin: 0;
+    }
+ 
+    .add-account-button {
+        margin-left: -280px;
+    }
+ 
+    .account-form-container {
+        width: 600px;
+        margin: 0 auto;
+    }
+ 
+    .account-message-text {
+        font-size: 34px;
+    }
+
+    .account-name-input {
+        width: calc(100% - 40px);
+        margin: 8px 0 0 8px !important;
+    }
+
+    .account-type-input {
+        margin-bottom: 30px;
+    }
+
+    .account-button-wrapper {
+        display: flex;
+        justify-content: right;
+        margin-left: 540px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+        font-size: 20px;
+        padding: 12px;
+        color: #ffffff;
+    }
+}

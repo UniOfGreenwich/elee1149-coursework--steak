@@ -1,0 +1,240 @@
+.login-title-wrapper {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fffcfc;
+    text-align: center;
+    margin: 250px 0 0 0;
+}
+  
+.logo-login {
+    height: 100px;
+}
+
+.login-title-text {
+    font-weight: 450;
+    margin: 0;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+    color: #ffffff;
+}
+
+.input-field {
+    margin-top: 10px;
+    background: none;
+    border: 3px solid #DA4259;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.input-field-dropdown {
+    margin-top: 10px;
+    width: 235px;
+    background: none;
+    border: 3px solid #DA4259;
+    border-radius: 12px;
+    padding: 5px;
+    margin-bottom: 20px;
+    height: 75%;
+}
+
+select {
+    color: #ffffff;
+}
+
+select option {
+    color: #000000;
+}
+
+.input-field:focus {
+    border: 3px solid #ffffff;
+    outline: none;
+}
+
+.input-field::placeholder {
+    color: #e9e9e9;
+}
+
+.login-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+.login-link-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-submit-button, .back-button {
+    width: 200px; /* Set a fixed width for both buttons */
+    font-size: 20px;
+    padding: 20px 45px;
+    margin: 0 8px 0 0;
+    background-color: #DA4259;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.login-submit-button {
+    margin: 15px 0 0 0 !important;
+}
+
+.back-button {
+    background-color: transparent;
+    border: #DA4259 3px solid;
+    margin: 0 8px 0 0;
+}
+
+.forgot-password-button, .join-us-button{
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+    width: 225px;
+    margin: 0 auto;
+}
+
+.forgot-password-button {
+    margin-top: 25px;
+}
+
+.join-us-button {
+    margin-top: 10px;
+}
+
+.login-message {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .login-title-wrapper {
+        justify-content: center;
+        font-size: 34px;
+        margin-top: 50px;
+    }
+
+    .login-button-wrapper {
+        flex-direction: row;
+        margin-top: 80px;
+    }
+
+    .forgot-password-button, .join-us-button {
+        font-size: 20px;
+    }
+
+    .login-form {
+        margin-top: 30px;
+    }
+
+    .logo-login {
+        width: 125px;
+        height: auto;
+    }
+
+    .input-field {
+        width: 220px;
+    }
+
+    .input-field-dropdown {
+        padding: 10px;
+        font-size: 18px;
+        width: 260px;
+        margin-left: 10px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+        font-size: 18px;
+        padding: 10px;
+        color: #ffffff;
+    }
+
+    .login-submit-button {
+        font-size: 20px;
+        padding: 20px 45px;
+        margin: 0 0 0 8px !important;
+    }
+
+    .back-button {
+        font-size: 20px;
+        padding: 20px 45px;
+        margin: 0 8px 0 0;
+    }
+
+    .login-message {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .forgot-password-button, .join-us-button {
+        font-size: 20px;
+    }
+
+    .login-form {
+        margin-top: 30px;
+    }
+
+    .login-message {
+        font-size: 24px;
+    }
+
+    .login-title-wrapper {
+        text-align: center;
+        justify-content: center;
+        font-size: 34px;
+        margin: 79px 0 0 0;
+    }
+
+    .logo-login {
+        width: 120px;
+    }
+
+    .input-field {
+        width: 230px;
+    }
+
+    .input-field-dropdown {
+        padding: 12px;
+        font-size: 20px;
+        width: 260px;
+        margin-left: 10px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+        font-size: 20px;
+        padding: 12px;
+        color: #ffffff;
+    }
+
+    .login-submit-button {
+        font-size: 24px;
+        padding: 15px 55px;
+    }
+
+    .back-button {
+        font-size: 24px;
+        padding: 15px 55px;
+    }
+}
