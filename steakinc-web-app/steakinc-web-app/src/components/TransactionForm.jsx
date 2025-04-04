@@ -81,7 +81,7 @@ const TransactionForm = ({
         };
 
         try {
-            const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/create_transaction', payload);
+            const response = await axios.post('http://localhost:5000/create_transaction', payload);
             if (response.status === 201) {
                 onSubmit();
                 onClose();

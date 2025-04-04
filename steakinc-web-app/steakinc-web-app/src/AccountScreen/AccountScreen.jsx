@@ -26,7 +26,7 @@ function AccountsScreen() {
 
     const fetchAccounts = async () => {
         try {
-            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/total_balance/${userId}`);
+            const response = await axios.get(`http://localhost:5000/total_balance/${userId}`);
             const fetchedAccounts = response.data.accounts;
             setAccounts(fetchedAccounts);
 
@@ -41,7 +41,7 @@ function AccountsScreen() {
 
     const fetchTransactions = async () => {
         try {
-            const response = await axios.get(`https://plasma-torus-454810-h1.lm.r.appspot.com/user_transactions/${userId}`);
+            const response = await axios.get(`http://localhost:5000/user_transactions/${userId}`);
             setTransactions(response.data.transactions);
         } catch (error) {
             console.error("Error fetching transactions:", error);
@@ -55,7 +55,7 @@ function AccountsScreen() {
 
     const handleCreateAccount = async (newAccount) => {
         try {
-            const response = await axios.post('https://plasma-torus-454810-h1.lm.r.appspot.com/create_account', {
+            const response = await axios.post('http://localhost:5000/create_account', {
                 user_id: userId,
                 ...newAccount
             });
@@ -72,7 +72,7 @@ function AccountsScreen() {
 
     const handleEditAccount = async (updatedAccount) => {
         try {
-            const response = await axios.put(`https://plasma-torus-454810-h1.lm.r.appspot.com/update_account/${selectedAccount.account_id}`, updatedAccount);
+            const response = await axios.put(`http://localhost:5000/update_account/${selectedAccount.account_id}`, updatedAccount);
             if (response.status === 200) {
                 alert('Account updated successfully');
                 await fetchAccounts(); // Fetch updated data
@@ -91,7 +91,7 @@ function AccountsScreen() {
         }
 
         try {
-            const response = await axios.delete(`https://plasma-torus-454810-h1.lm.r.appspot.com/delete_account/${selectedAccount.account_id}`);
+            const response = await axios.delete(`http://localhost:5000/delete_account/${selectedAccount.account_id}`);
             if (response.status === 200) {
                 alert('Account and related jars deleted successfully');
                 await fetchAccounts(); // Fetch updated data
