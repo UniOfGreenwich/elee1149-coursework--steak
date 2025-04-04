@@ -159,4 +159,4 @@ Project Link: [https://github.com/orgs/UniOfGreenwich/projects/32/views/1](https
 
 Promotional Video 1 - [Link](https://www.youtube.com/watch?v=JbbvTQxuzr0)
 
-Promotional Video 2 - [Link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+Promotional Video 2 - [Link](https://shattereddisk.github.io/rickroll/rickroll.mp4)
