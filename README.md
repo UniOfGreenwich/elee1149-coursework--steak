@@ -73,7 +73,7 @@ Steak is a web-based tool, designed to simplify money management. Upon signing u
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Please follow the below step-by-step instructions to run the project.
+Please follow the below step-by-step instructions to run the project:
 
 ### Local Prerequisites
 
