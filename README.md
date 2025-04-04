@@ -1,14 +1,5 @@
-<img src="/SteakAd.gif" alt="advert" width=100%>
-
 <!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="#">
-  <img src="/steak.png" alt="Steak" width="80" height="80">
-  </a>
-
-  <h1 align="center">Steak</h3>
-
+<img src="/SteakAd.gif" alt="advert" width=100%>
   <p align="center">
     A simpler money management tool.
     <br />
@@ -25,6 +16,7 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
+      <a href="#features">Features</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -38,6 +30,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#project-documents">Project Documents</a></li>
     <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -48,20 +41,36 @@
 ## About The Project
 
 <a href="https://www.figma.com/design/vXN8MF0XHdS9KF5yII9ag2/Steak?node-id=0-1&t=a8jZ7VVYewacFEQS-1" target="_blank">
-    <img src="/dashboard.png" alt="dashboard" width="600">
+    <p align="center">
+    <img src="/dashboard.png" alt="dashboard" width="500">
+    </p>
 </a>
 
-Write a brief description of your project here.  Explain what it does and why it's useful. Click Image for figma board.
+Steak is a web-based tool, designed to simplify money management. Upon signing up, users can input their bank balances. Money can be assigned to "Jars", which act as savings pots for any specified purpose. A budgeting page is also present, allowing the user to allocate their monthly income, displaying the incoming/outgoings as a budgeting sheet and a corresponding pie chart. Balances can be tracked over time, and are graphically realised for ease of interpretation. Payment transactions can be tracked, with data exports for all the aforemented available for download at any time. All data is also summarised on the dashboard, accompanied by a breaking financial news portal for those who are interested.
 
+<!-- FEATURES -->
+### Features
+
+- Login & Signup
+- SQLite External Credential and Data Storage
+- GCP Hosted
+- Mock Banking Integration
+- "Money Jar" Allocation
+- Integrated Budgeting App
+- Transaction Tracking
+- Dynamic Graphing
+- Live News Feed
+- Data Export
+- Product Advertisement Carousel
 
 ### Built With
 
-List the major frameworks/libraries used in your project.
-
-* [Framework/Library 1][link1]
-* [Framework/Library 2][link2]
-* [Framework/Library 3][link3]
-
+- [Google Cloud Platform](https://cloud.google.com)
+- [PostgreSQL](https://www.postgresql.org/)
+- [SQLite](https://www.sqlite.org/)
+- [Python](https://www.python.org/)
+- [Javascript](https://www.javascript.com/)
+- [React](https://react.dev/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -78,7 +87,7 @@ Step-by-step instructions on how to install and set up your project.
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+### Usage
 
 Provide examples of how to use your project. Include screenshots, code snippets, or demos as needed.
 
@@ -86,7 +95,7 @@ Provide examples of how to use your project. Include screenshots, code snippets,
 <!-- ROADMAP -->
 ## Roadmap
 
-Planned, implemented and cancelled project features/milestones.
+Implemented Project Features:
 
 - [ ] User Login: Allows existing users to access their accounts.
 - [ ] User Registration: Enables new users to create accounts.
@@ -101,6 +110,18 @@ Planned, implemented and cancelled project features/milestones.
 - [ ] Net Worth Tracking: Calculate and track net worth over time.
 - [ ] Blog/Educational Content: Provide financial advice and educational resources.
 - [ ] Achievement Badges (Gamification): Award badges for reaching financial milestones.
+
+Cancelled Project Features:
+
+<!-- PROJECT DOCUMENTS -->
+## Project Documents
+
+- [Sprint Planning](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Sprint%20Planning)  
+- [Standup Transcripts](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Standup%20Notes)  
+- [System Modelling](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/System%20Modelling)  
+- [Unit Tests](https://github.com/UniOfGreenwich/elee1149-coursework--steak/tree/main/Docs/Unit%20Tests)  
+- [Team Kanban](https://github.com/orgs/UniOfGreenwich/projects/32)  
+- [Team Roadmap](https://github.com/orgs/UniOfGreenwich/projects/32/views/4)
 
 <!-- CONTRIBUTORS -->
 ## Contributors
@@ -117,24 +138,5 @@ Project Link: [https://github.com/orgs/UniOfGreenwich/projects/32/views/1](https
 ## Acknowledgments
 
 List any resources, individuals, or projects that you'd like to thank.
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: #
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: #
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: #
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: #
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: #
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: #
-[product-screenshot]: images/screenshot.png
-[link1]: #
-[link2]: #
-[link3]: #
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
