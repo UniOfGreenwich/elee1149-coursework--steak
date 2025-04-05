@@ -224,42 +224,46 @@ function BudgetScreen() {
                 <div className="budget-tables">
                     <div className="income-table">
                         <button className="add-income-button" onClick={() => setShowIncomeModal(true)}>+ Add Income</button>
-                        <ul>
-                            {incomes.map(income => (
-                                <li key={income.income_id}>
-                                    {income.name}: £{income.amount}
-                                    <button className='budget-edit-button' onClick={() => openEditModal(income, 'Income')}>Edit</button>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="income-table-wrapper">
+                            <ul>
+                                {incomes.map(income => (
+                                    <li key={income.income_id}>
+                                        {income.name}: £{income.amount}
+                                        <button className='budget-edit-button' onClick={() => openEditModal(income, 'Income')}>Edit</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                    
                     <div className="expense-table">
                         <button className="add-expense-button" onClick={() => setShowCreateExpenseModal(true)}>+ Add Expense</button>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th className='expense-table-header'>Name</th>
-                                    <th className='expense-table-header'>Category</th>
-                                    <th className='expense-table-header'>Amount</th>
-                                    <th className='expense-table-header'>% of Total</th>
-                                    <th className='expense-table-header'>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {expenses.map(expense => (
-                                    <tr key={expense.budget_id}>
-                                        <td className='expense-table-item'>{expense.expense}</td>
-                                        <td className='expense-table-item'>{expense.category}</td>
-                                        <td className='expense-table-item'>£{expense.amount}</td>
-                                        <td className='expense-table-item'>{((expense.amount / totalIncome) * 100).toFixed(2)}%</td>
-                                        <td>
-                                            <button className='budget-edit-button' onClick={() => openEditModal(expense, 'Expense')}>Edit</button>
-                                        </td>
+                        <div className="expense-table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th className='expense-table-header'>Name</th>
+                                        <th className='expense-table-header'>Category</th>
+                                        <th className='expense-table-header'>Amount</th>
+                                        <th className='expense-table-header'>% of Total</th>
+                                        <th className='expense-table-header'>Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {expenses.map(expense => (
+                                        <tr key={expense.budget_id}>
+                                            <td className='expense-table-item'>{expense.expense}</td>
+                                            <td className='expense-table-item'>{expense.category}</td>
+                                            <td className='expense-table-item'>£{expense.amount}</td>
+                                            <td className='expense-table-item'>{((expense.amount / totalIncome) * 100).toFixed(2)}%</td>
+                                            <td>
+                                                <button className='budget-edit-button' onClick={() => openEditModal(expense, 'Expense')}>Edit</button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 {showIncomeModal && (

@@ -148,6 +148,7 @@
  
 .budget-tables {
     margin-top: 20px;
+    max-height: 358px;
 }
  
 .income-table, .expense-table {
@@ -224,6 +225,7 @@
     color: white;
     padding: 10px 20px;
     cursor: pointer;
+    
 }
 
 .add-expense-button {
@@ -241,6 +243,19 @@
 .error-message {
     color: red;
     margin-bottom: 10px;
+}
+
+/* Wrapper to clip the table content */
+.expense-table-wrapper {
+    max-height: 260px; /* Set the maximum height for the table content */
+    overflow-y: auto; /* Enable vertical scrolling for the table content */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.income-table-wrapper{
+    max-height: 260px; /* Set the maximum height for the table content */
+    overflow-y: auto; /* Enable vertical scrolling for the table content */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
  
 @media (min-width: 768px) {
