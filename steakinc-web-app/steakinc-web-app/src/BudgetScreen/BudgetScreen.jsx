@@ -201,7 +201,7 @@ function BudgetScreen() {
                         <h2>Monthly Income</h2>
                         <p>£{totalIncome.toFixed(2)}</p>
                     </div>
-                    <div className="pie-chart">
+                    <div className="budet-pie-chart">
                         <Pie data={expensePieData} />
                     </div>
                     <div className="balance-container">
@@ -211,7 +211,7 @@ function BudgetScreen() {
                 </div>
                 <div className="budget-tables">
                     <div className="income-table">
-                        <button className="add-button" onClick={() => setShowIncomeModal(true)}>+ Add Income</button>
+                        <button className="add-income-button" onClick={() => setShowIncomeModal(true)}>+ Add Income</button>
                         <ul>
                             {incomes.map(income => (
                                 <li key={income.income_id}>
@@ -223,7 +223,7 @@ function BudgetScreen() {
                     </div>
                    
                     <div className="expense-table">
-                        <button className="add-button" onClick={() => setShowCreateExpenseModal(true)}>+ Add Expense</button>
+                        <button className="add-expense-button" onClick={() => setShowCreateExpenseModal(true)}>+ Add Expense</button>
                         <table>
                             <thead>
                                 <tr>

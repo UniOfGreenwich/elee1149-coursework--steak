@@ -149,8 +149,8 @@ function AccountsScreen() {
                             </div>
                         )}
                     </div>
-                    <div className="pie-chart-container">
-                        <div className="pie-chart">
+                    <div className="pie-chart-container account-pie-chart">
+                        <div className="account-screen-pie-chart">
                             <Pie data={pieData} options={pieOptions} />
                         </div>
                     </div>
