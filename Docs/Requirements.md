@@ -84,22 +84,6 @@ This document outlines the requirements for a finance manager application named 
 *   **Backend:** Python (Flask)
 *   **Database:** SQLAlchemy (SQLite)
 
-## 7.  Milestones
-
-*   **Sprint 1:** Prepare documentation outlines, design a high-level system architecture, list requirements, database design (SQLAlchemy models), and compile basic feature flowcharts.
-*   **Sprint 2:** Complete the login and registration pages, design the landing page, and create the account information form.
-*   **Sprint 3:** 
-
-
-## 8.  Acceptance Criteria
-
-Relate to User stories .. if applicable.
-
-
-## 9. Glossary
-
-*   **TBD:** To be determined.
-
 
 ## 10. Appendices
 
