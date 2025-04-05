@@ -315,7 +315,7 @@ function JarScreen() {
                                     />
                                 </label>
                             </div>
-                            <div className="create-button-wrapper">
+                            <div className="jars-create-button-wrapper">
                                 <button className='jar-popup-button jar-popup-button--transparent' type="button" onClick={() => setShowModal(false)}>Cancel</button>
                                 <button className='jar-popup-button' type="submit">Create Jar</button>
                             </div>
