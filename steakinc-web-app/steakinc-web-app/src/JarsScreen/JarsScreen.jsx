@@ -190,7 +190,7 @@ function JarScreen() {
                     <div className='account-background'>
                         <h2 className="account-total-container">
                             <div className="account-total-label">Available Total:</div>
-                            <div className="account-total">£{availableTotal.toFixed(2)}</div>
+                            <div className="account-total">£{availableTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                             <div onClick={toggleAccountInfo} className="dropdown-arrow">
                                 {isAccountInfoVisible ? <FaChevronUp /> : <FaChevronDown />}
                             </div>
@@ -200,7 +200,7 @@ function JarScreen() {
                             <ul className='account-list-container'>
                                 {accounts.map(account => (
                                     <li className="account-item" key={account.account_id}>
-                                        {account.name}: £{account.available_funds.toFixed(2)}
+                                        {account.name}: £{account.available_funds.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                                     </li>
                                 ))}
                             </ul>
@@ -212,7 +212,7 @@ function JarScreen() {
                                 <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
                                     <Lid />
                                     <span className="jar-name">{jar.jar_name}</span>
-                                    <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                                    <span className="jar-value">£{jar.current_balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                                 </div>
                             ))}
                         </Slider>
@@ -223,10 +223,10 @@ function JarScreen() {
                     <div className="jar-details">
                         <button className='edit-jar-button' onClick={() => setShowEditModal(true)}>Edit</button>
                         <h3 className="jar-details-name">{selectedJar.jar_name}</h3>
-                        <h2 className="jar-details-balance">£{selectedJar.current_balance.toFixed(2)}</h2>
+                        <h2 className="jar-details-balance">£{selectedJar.current_balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
                         <div className="progress-bar-wrapper">
                             {selectedJar.current_balance < selectedJar.target_amount && (
-                                <h4 className="jar-details-goal">£{selectedJar.target_amount}</h4>
+                                <h4 className="jar-details-goal">£{selectedJar.target_amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h4>
                             )}
                             <div className="progress-bar-container">
                                 <div className="progress-bar" style={{ 
@@ -259,10 +259,10 @@ function JarScreen() {
                                     {transactions.map(transaction => (
                                         <tr key={transaction.transaction_id} className="transactions-row">
                                             <td className="transactions-cell">{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                                            <td className="transactions-cell">{transaction.amount}</td>
+                                            <td className="transactions-cell">{transaction.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                                             <td className="transactions-cell">{transaction.category}</td>
                                             <td className="transactions-cell">{transaction.description}</td>
-                                            <td className="transactions-cell">{transaction.post_account_total}</td>
+                                            <td className="transactions-cell">{transaction.post_account_total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                                         </tr>
                                     ))}
                                 </tbody>

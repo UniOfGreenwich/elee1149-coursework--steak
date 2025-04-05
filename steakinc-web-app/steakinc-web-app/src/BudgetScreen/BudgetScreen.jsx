@@ -199,7 +199,7 @@ function BudgetScreen() {
                 <div className="budget-header">
                     <div className="income-container">
                         <h2>Monthly Income</h2>
-                        <h2>£{totalIncome.toFixed(2)}</h2>
+                        <h2>£{totalIncome.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
                     </div>
                     <div className="budget-pie-chart">
                         <Pie
@@ -218,7 +218,7 @@ function BudgetScreen() {
                     </div>
                     <div className="balance-container">
                         <h2>Leftover Amount</h2>
-                        <h2>£{remainingBalance.toFixed(2)}</h2>
+                        <h2>£{remainingBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
                     </div>
                 </div>
                 <div className="budget-tables">
@@ -228,7 +228,7 @@ function BudgetScreen() {
                             <ul>
                                 {incomes.map(income => (
                                     <li key={income.income_id}>
-                                        {income.name}: £{income.amount}
+                                        {income.name}: £{income.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                                         <button className='budget-edit-button' onClick={() => openEditModal(income, 'Income')}>Edit</button>
                                     </li>
                                 ))}
@@ -254,7 +254,7 @@ function BudgetScreen() {
                                         <tr key={expense.budget_id}>
                                             <td className='expense-table-item'>{expense.expense}</td>
                                             <td className='expense-table-item'>{expense.category}</td>
-                                            <td className='expense-table-item'>£{expense.amount}</td>
+                                            <td className='expense-table-item'>£{expense.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                                             <td className='expense-table-item'>{((expense.amount / totalIncome) * 100).toFixed(2)}%</td>
                                             <td>
                                                 <button className='budget-edit-button' onClick={() => openEditModal(expense, 'Expense')}>Edit</button>

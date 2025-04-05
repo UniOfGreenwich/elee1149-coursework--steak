@@ -141,7 +141,7 @@ function AccountsScreen() {
                         {selectedAccount && (
                             <div className="account-selected-item">
                                 <p className='account-selected-title'>{selectedAccount.name}</p>
-                                <p className='account-selected-balance'>£{selectedAccount.balance}</p>
+                                <p className='account-selected-balance'>£{selectedAccount.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
                                 <div className="account-selected-button-container">
                                     <button className='account-selected-create-button' onClick={() => setShowCreateModal(true)}>Create</button>
                                     <button className='account-selected-edit-button' onClick={() => setShowEditModal(true)}>Edit</button>
