@@ -199,14 +199,14 @@ function BudgetScreen() {
                 <div className="budget-header">
                     <div className="income-container">
                         <h2>Monthly Income</h2>
-                        <p>£{totalIncome.toFixed(2)}</p>
+                        <h2>£{totalIncome.toFixed(2)}</h2>
                     </div>
                     <div className="budet-pie-chart">
                         <Pie data={expensePieData} />
                     </div>
                     <div className="balance-container">
                         <h2>Leftover Amount</h2>
-                        <p>£{remainingBalance.toFixed(2)}</p>
+                        <h2>£{remainingBalance.toFixed(2)}</h2>
                     </div>
                 </div>
                 <div className="budget-tables">
