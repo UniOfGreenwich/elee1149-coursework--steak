@@ -117,7 +117,6 @@
 .budget-header {
     display: flex;
     justify-content: space-between; /* Distribute space between the containers */
-    align-items: center; /* Align items vertically */
     margin: 30px 0;
 }
  
@@ -266,6 +265,18 @@
    
     .budget-main-container {
         margin-left: 300px
+    }
+
+    .budget-tables {
+        position: absolute; /* Position the container relative to the screen */
+        bottom: 40px; /* Ensure it is 20px above the bottom */
+        left: 0;
+        right: 0;
+    }
+
+    .budget-main-container {
+        position: relative; /* Ensure the parent container allows absolute positioning */
+        min-height: 100vh; /* Ensure the container spans the full height of the screen */
     }
 }
  
