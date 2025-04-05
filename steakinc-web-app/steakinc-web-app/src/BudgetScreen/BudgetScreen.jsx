@@ -199,55 +199,71 @@ function BudgetScreen() {
                 <div className="budget-header">
                     <div className="income-container">
                         <h2>Monthly Income</h2>
-                        <p>£{totalIncome.toFixed(2)}</p>
+                        <h2>£{totalIncome.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
                     </div>
-                    <div className="pie-chart">
-                        <Pie data={expensePieData} />
+                    <div className="budget-pie-chart">
+                        <Pie
+                            data={expensePieData}
+                            options={{
+                                responsive: true, // Ensure the chart is responsive
+                                maintainAspectRatio: false, // Allow CSS to control the aspect ratio
+                                plugins: {
+                                    legend: {
+                                        display: true, // Optional: Adjust legend display
+                                        position: 'bottom', // Optional: Position the legend
+                                    },
+                                },
+                            }}
+                        />
                     </div>
                     <div className="balance-container">
                         <h2>Leftover Amount</h2>
-                        <p>£{remainingBalance.toFixed(2)}</p>
+                        <h2>£{remainingBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
                     </div>
                 </div>
                 <div className="budget-tables">
                     <div className="income-table">
-                        <button className="add-button" onClick={() => setShowIncomeModal(true)}>+ Add Income</button>
-                        <ul>
-                            {incomes.map(income => (
-                                <li key={income.income_id}>
-                                    {income.name}: £{income.amount}
-                                    <button className='budget-edit-button' onClick={() => openEditModal(income, 'Income')}>Edit</button>
-                                </li>
-                            ))}
-                        </ul>
+                        <button className="add-income-button" onClick={() => setShowIncomeModal(true)}>+ Add Income</button>
+                        <div className="income-table-wrapper">
+                            <ul>
+                                {incomes.map(income => (
+                                    <li key={income.income_id}>
+                                        {income.name}: £{income.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                                        <button className='budget-edit-button' onClick={() => openEditModal(income, 'Income')}>Edit</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                    
                     <div className="expense-table">
-                        <button className="add-button" onClick={() => setShowCreateExpenseModal(true)}>+ Add Expense</button>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th className='expense-table-header'>Name</th>
-                                    <th className='expense-table-header'>Category</th>
-                                    <th className='expense-table-header'>Amount</th>
-                                    <th className='expense-table-header'>% of Total</th>
-                                    <th className='expense-table-header'>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {expenses.map(expense => (
-                                    <tr key={expense.budget_id}>
-                                        <td className='expense-table-item'>{expense.expense}</td>
-                                        <td className='expense-table-item'>{expense.category}</td>
-                                        <td className='expense-table-item'>£{expense.amount}</td>
-                                        <td className='expense-table-item'>{((expense.amount / totalIncome) * 100).toFixed(2)}%</td>
-                                        <td>
-                                            <button className='budget-edit-button' onClick={() => openEditModal(expense, 'Expense')}>Edit</button>
-                                        </td>
+                        <button className="add-expense-button" onClick={() => setShowCreateExpenseModal(true)}>+ Add Expense</button>
+                        <div className="expense-table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th className='expense-table-header'>Name</th>
+                                        <th className='expense-table-header'>Category</th>
+                                        <th className='expense-table-header'>Amount</th>
+                                        <th className='expense-table-header'>% of Total</th>
+                                        <th className='expense-table-header'>Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {expenses.map(expense => (
+                                        <tr key={expense.budget_id}>
+                                            <td className='expense-table-item'>{expense.expense}</td>
+                                            <td className='expense-table-item'>{expense.category}</td>
+                                            <td className='expense-table-item'>£{expense.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                                            <td className='expense-table-item'>{((expense.amount / totalIncome) * 100).toFixed(2)}%</td>
+                                            <td>
+                                                <button className='budget-edit-button' onClick={() => openEditModal(expense, 'Expense')}>Edit</button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 {showIncomeModal && (

@@ -409,6 +409,46 @@
     .jar {
         width: 70px !important;
     }
+
+    .jars-create-button-wrapper{
+        margin-top: 10px;
+    }
+}
+
+/* Add responsive styles for buttons on smaller screens */
+@media (max-width: 768px) {
+    .jars-create-button-wrapper .jar-popup-button {
+        width: 100%; /* Make the button take full width */
+        font-size: 14px; /* Reduce font size */
+        padding: 10px; /* Adjust padding */
+        margin: 5px 0; /* Add spacing between buttons */
+    }
+
+    .jars-create-button-wrapper .jar-popup-button--transparent {
+        width: 100%; /* Ensure consistency with other buttons */
+    }
+
+    .jars-create-button-wrapper {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: stretch; /* Stretch buttons to full width */
+        margin-top: 5px;
+    }
+
+    /* Responsive styles for edit jar buttons inside the popup form */
+    .overlay-content .edit-jar-button {
+        width: 100%; /* Make the button take full width */
+        font-size: 14px; /* Reduce font size */
+        padding: 10px; /* Adjust padding */
+        margin: 10px 0; /* Add spacing between buttons */
+        position: static; /* Remove absolute positioning */
+    }
+
+    .overlay-content .edit-jar-button-wrapper {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: stretch; /* Stretch buttons to full width */
+    }
 }
 
 @media (min-width: 1024px) {
