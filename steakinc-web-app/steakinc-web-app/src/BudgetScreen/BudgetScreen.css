@@ -162,6 +162,7 @@
     padding: 20px;
     border: 1px solid #ffffff;
     margin-bottom: 20px;
+    margin-top: 70px !important;
 }
  
 .income-table ul {
@@ -304,4 +305,5 @@
         height: 50% !important;
         margin: 0 auto;
     }
+
 }
