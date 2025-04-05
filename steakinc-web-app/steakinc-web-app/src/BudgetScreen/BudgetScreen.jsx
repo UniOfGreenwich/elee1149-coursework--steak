@@ -201,8 +201,20 @@ function BudgetScreen() {
                         <h2>Monthly Income</h2>
                         <h2>£{totalIncome.toFixed(2)}</h2>
                     </div>
-                    <div className="budet-pie-chart">
-                        <Pie data={expensePieData} />
+                    <div className="budget-pie-chart">
+                        <Pie
+                            data={expensePieData}
+                            options={{
+                                responsive: true, // Ensure the chart is responsive
+                                maintainAspectRatio: false, // Allow CSS to control the aspect ratio
+                                plugins: {
+                                    legend: {
+                                        display: true, // Optional: Adjust legend display
+                                        position: 'bottom', // Optional: Position the legend
+                                    },
+                                },
+                            }}
+                        />
                     </div>
                     <div className="balance-container">
                         <h2>Leftover Amount</h2>
