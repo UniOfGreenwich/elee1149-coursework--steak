@@ -155,7 +155,7 @@ function AccountsScreen() {
                         </div>
                     </div>
                 </div>
-                <div className="accounts-transaction-chart-container">
+                <div className="accounts-transaction-chart-container account-screen-chart">
                     <div className="accounts-transaction-chart">
                         <TransactionsChart transactions={transactions} />
                     </div>
