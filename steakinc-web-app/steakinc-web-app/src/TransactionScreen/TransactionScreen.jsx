@@ -159,6 +159,7 @@ function TransactionsScreen() {
                     />
                 )}
                 <h2 className="line-chart-title">Account Total Over Time</h2>
+                
                 <div className="transactions-chart-container">
                     <TransactionsChart transactions={transactions} />
                     <div className="transactions-placeholder">

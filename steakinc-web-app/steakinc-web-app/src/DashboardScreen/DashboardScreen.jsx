@@ -142,8 +142,10 @@ function Dashboard() {
                 <FeaturedJarsMobile jars={jars} setJars={setJars} />
                 <FeaturedJarsDesktop jars={jars} setJars={setJars} />
             </div>
-            <div className="dashboard-line-chart">
-                <TransactionsChart transactions={transactions} />
+            <div className="dashboard-transaction-chart-container dashboard-screen-chart">
+                <div className="dashboard-line-chart">
+                    <TransactionsChart transactions={transactions} />
+                </div>
             </div>
             <div className="recent-transactions-mobile">
                 <TransactionsTable transactions={transactions} />
