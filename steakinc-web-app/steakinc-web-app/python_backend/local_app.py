@@ -102,7 +102,12 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
-# Registration endpoint
+# Home route for testing the server
+@app.route('/')
+def home():
+    return 'Hello, World!'
+
+# Registration endpoint for new users
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -113,9 +118,11 @@ def register():
     security_2 = data.get('security_2')
     security_3 = data.get('security_3')
 
+    # Validate required fields
     if not username or not password or not email:
         return jsonify({'error': 'Missing required fields'}), 400
 
+    # Check if the username already exists
     if User.query.filter_by(username=username).first():
         return jsonify({'error': 'Username already exists'}), 409
 
@@ -143,28 +150,27 @@ def register():
 
     return jsonify({'message': 'User registered successfully'}), 201
 
-
-# Login endpoint
+# Login endpoint for user authentication
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
     username = data.get('username')
     password = data.get('password')
 
+    # Validate required fields
     if not username or not password:
         return jsonify({'error': 'Missing username or password'}), 400
 
     # Find the user by username
     user = User.query.filter_by(username=username).first()
 
+    # Check if the password matches
     if user and check_password_hash(user.password_hash, password):
-        # Authentication successful
         return jsonify({'message': 'Login successful', 'user_id': user.user_id, 'is_new': user.new}), 200
     else:
-        # Authentication failed
         return jsonify({'error': 'Invalid username or password'}), 401
 
-# Forgot password endpoint 
+# Forgot password endpoint
 @app.route('/forgot-password', methods=['POST'])
 def forgot_password():
     data = request.json
@@ -174,9 +180,11 @@ def forgot_password():
     security_answer = data.get('security_answer')
     security_question = data.get('security_question')
 
+    # Validate required fields
     if not username or not new_password or not confirm_password or not security_answer or not security_question:
         return jsonify({'error': 'Missing required fields'}), 400
 
+    # Check if the passwords match
     if new_password != confirm_password:
         return jsonify({'error': 'Passwords do not match'}), 400
 
@@ -185,7 +193,7 @@ def forgot_password():
     if not user:
         return jsonify({'error': 'User not found'}), 404
 
-    # Verify security question answer
+    # Verify the security question answer
     if security_question == "Favorite book or movie?" and not check_password_hash(user.security_1, security_answer):
         return jsonify({'error': 'Incorrect security answer'}), 401
     elif security_question == "Name of birthplace?" and not check_password_hash(user.security_2, security_answer):
@@ -332,25 +340,37 @@ def create_jar():
 
 @app.route('/user_jars/<int:user_id>', methods=['GET'])
 def get_user_jars(user_id):
+    # Fetch all jars for a specific user that are not marked as deleted
     try:
         jars = Jar.query.filter_by(user_id=user_id, is_deleted=False).all()
-        jar_details = [{'jar_id': jar.jar_id, 'jar_name': jar.jar_name, 'allocated_amount': float(jar.allocated_amount), 'current_balance': float(jar.current_balance), 'target_amount': float(jar.target_amount or 0), 'account_id': jar.account_id} for jar in jars]
-        
+        # Convert jar objects into a list of dictionaries for JSON response
+        jar_details = [{
+            'jar_id': jar.jar_id,
+            'jar_name': jar.jar_name,
+            'allocated_amount': float(jar.allocated_amount),
+            'current_balance': float(jar.current_balance),
+            'target_amount': float(jar.target_amount or 0),
+            'account_id': jar.account_id
+        } for jar in jars]
         return jsonify({'jars': jar_details}), 200
     except Exception as e:
+        # Log the error and return a generic error message
         logging.error(f"Error fetching jars: {e}")
         return jsonify({'error': 'An error occurred while fetching jars'}), 500
 
 @app.route('/update_jar/<int:jar_id>', methods=['PUT'])
 def update_jar(jar_id):
+    # Update the details of a specific jar
     data = request.json
     jar_name = data.get('jar_name')
     target_amount = data.get('target_amount')
 
+    # Fetch the jar by its ID
     jar = Jar.query.get(jar_id)
     if not jar:
         return jsonify({'error': 'Jar not found'}), 404
 
+    # Update the jar's name and target amount if provided
     if jar_name:
         jar.jar_name = jar_name
     if target_amount is not None:
@@ -358,6 +378,7 @@ def update_jar(jar_id):
     if target_amount == '':
         jar.target_amount = None
 
+    # Commit the changes to the database
     db.session.commit()
     return jsonify({'message': 'Jar updated successfully'}), 200
 
@@ -606,19 +627,23 @@ def create_account():
 
 @app.route('/update_account/<int:account_id>', methods=['PUT'])
 def update_account(account_id):
+    # Update the details of a specific account
     data = request.json
     account_name = data.get('account_name')
     account_type = data.get('account_type')
 
+    # Fetch the account by its ID
     account = Account.query.get(account_id)
     if not account:
         return jsonify({'error': 'Account not found'}), 404
 
+    # Update the account's name and type if provided
     if account_name:
         account.account_name = account_name
     if account_type:
         account.account_type = account_type
 
+    # Commit the changes to the database
     db.session.commit()
     return jsonify({'message': 'Account updated successfully'}), 200
 
@@ -662,36 +687,55 @@ def delete_account(account_id):
 
 @app.route('/user_incomes/<int:user_id>', methods=['GET'])
 def get_incomes(user_id):
+    # Fetch all incomes for a specific user that are not marked as deleted
     incomes = Income.query.filter_by(user_id=user_id, is_deleted=False).all()
-    return jsonify({'incomes': [{'income_id': inc.income_id, 'name': inc.name, 'amount': float(inc.amount)} for inc in incomes]})
+    # Convert income objects into a list of dictionaries for JSON response
+    return jsonify({'incomes': [{
+        'income_id': inc.income_id,
+        'name': inc.name,
+        'amount': float(inc.amount)
+    } for inc in incomes]})
 
 @app.route('/user_expenses/<int:user_id>', methods=['GET'])
 def get_expenses(user_id):
+    # Fetch all expenses for a specific user that are not marked as deleted
     expenses = Budget.query.filter_by(user_id=user_id, is_deleted=False).all()
-    return jsonify({'expenses': [{'budget_id': exp.budget_id, 'expense': exp.expense, 'category': exp.category, 'amount': float(exp.amount)} for exp in expenses]})
+    # Convert expense objects into a list of dictionaries for JSON response
+    return jsonify({'expenses': [{
+        'budget_id': exp.budget_id,
+        'expense': exp.expense,
+        'category': exp.category,
+        'amount': float(exp.amount)
+    } for exp in expenses]})
 
 @app.route('/add_income', methods=['POST'])
 def add_income():
+    # Add a new income entry for a user
     data = request.json
+    # Create a new Income object with the provided data
     new_income = Income(
         user_id=data['user_id'],
         name=data['name'],
         amount=data['amount'],
         income_date=datetime.now()
     )
+    # Add the new income to the database and commit the changes
     db.session.add(new_income)
     db.session.commit()
     return jsonify({'message': 'Income added successfully'}), 201
 
 @app.route('/add_expense', methods=['POST'])
 def add_expense():
+    # Add a new expense entry for a user
     data = request.json
+    # Create a new Budget object with the provided data
     new_expense = Budget(
         user_id=data['user_id'],
         expense=data['expense'],
         category=data['category'],
         amount=data['amount'],
     )
+    # Add the new expense to the database and commit the changes
     db.session.add(new_expense)
     db.session.commit()
     return jsonify({'message': 'Expense added successfully'}), 201
@@ -699,10 +743,12 @@ def add_expense():
 # Created for later development of the frontend.
 @app.route('/delete_income/<int:income_id>', methods=['DELETE'])
 def delete_income(income_id):
+    # Soft delete an income entry by marking it as deleted
     income = Income.query.get(income_id)
     if not income or income.is_deleted:
         return jsonify({'error': 'Income not found'}), 404
 
+    # Mark the income as deleted and commit the changes
     income.is_deleted = True
     db.session.commit()
     return jsonify({'message': 'Income deleted successfully'}), 200
@@ -710,21 +756,25 @@ def delete_income(income_id):
 # Created for later development of the frontend.
 @app.route('/delete_expense/<int:budget_id>', methods=['DELETE'])
 def delete_expense(budget_id):
+    # Soft delete an expense entry by marking it as deleted
     expense = Budget.query.get(budget_id)
     if not expense or expense.is_deleted:
         return jsonify({'error': 'Expense not found'}), 404
 
+    # Mark the expense as deleted and commit the changes
     expense.is_deleted = True
     db.session.commit()
     return jsonify({'message': 'Expense deleted successfully'}), 200
 
 @app.route('/update_income/<int:income_id>', methods=['PUT'])
 def update_income(income_id):
+    # Update the details of a specific income entry
     data = request.json
     income = Income.query.get(income_id)
     if not income or income.is_deleted:
         return jsonify({'error': 'Income not found'}), 404
 
+    # Update the income's name and amount if provided
     income.name = data.get('name', income.name)
     income.amount = data.get('amount', income.amount)
     db.session.commit()
@@ -732,11 +782,13 @@ def update_income(income_id):
 
 @app.route('/update_expense/<int:budget_id>', methods=['PUT'])
 def update_expense(budget_id):
+    # Update the details of a specific expense entry
     data = request.json
     expense = Budget.query.get(budget_id)
     if not expense or expense.is_deleted:
         return jsonify({'error': 'Expense not found'}), 404
 
+    # Update the expense's details if provided
     expense.expense = data.get('expense', expense.expense)
     expense.category = data.get('category', expense.category)
     expense.amount = data.get('amount', expense.amount)
