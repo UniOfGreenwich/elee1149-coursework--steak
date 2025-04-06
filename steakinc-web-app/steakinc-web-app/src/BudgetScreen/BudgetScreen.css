@@ -336,3 +336,27 @@
         margin: 0 auto; /* Center the chart */
     }
 }
+
+@media (max-width: 768px) {
+    .budget-header {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        gap: 20px; /* Add spacing between items */
+    }
+
+    .income-container, .balance-container, .budget-pie-chart {
+        width: 100%; /* Make items take full width */
+        text-align: center; /* Center text inside items */
+    }
+
+    .income-container, .balance-container {
+        width: calc(100% - 40px); /* Full width minus 5px gap on each side */
+        margin: 0 5px; /* Add 5px gap on both left and right sides */
+        text-align: center; /* Center text inside the containers */
+    }
+
+    .income-container {
+        margin-top: 40px; /* Keep the top margin for spacing */
+    }
+}
