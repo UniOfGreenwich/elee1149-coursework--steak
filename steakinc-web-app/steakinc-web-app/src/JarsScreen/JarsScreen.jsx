@@ -7,10 +7,10 @@ import Lid from './Lid';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import { CustomNextArrow, CustomPrevArrow } from './CustomArrows';
 import VerticalCarousel from './VerticalCarousel';
 import TransactionForm from '../components/TransactionForm'; // Import the TransactionForm
+import HorizontalCarousel from './HorizontalCarousel';
 
 function JarScreen() {
     const [jarName, setJarName] = useState('');
@@ -32,15 +32,6 @@ function JarScreen() {
 
     const toggleAccountInfo = () => {
         setIsAccountInfoVisible(!isAccountInfoVisible);
-    };
-
-    const horizontalSettings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        arrows: false
     };
 
     useEffect(() => {
@@ -206,18 +197,8 @@ function JarScreen() {
                             </ul>
                         )}
                     </div>
-                    <div className="jar-carousel-container horizontal-carousel">
-                        <Slider {...horizontalSettings} className="jar-container">
-                            {jars.map(jar => (
-                                <div className='jar' key={jar.jar_id} onClick={() => setSelectedJar(jar)}>
-                                    <Lid />
-                                    <span className="jar-name">{jar.jar_name}</span>
-                                    <span className="jar-value">£{jar.current_balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
-                                </div>
-                            ))}
-                        </Slider>
-                    </div>
                 </div>
+                <HorizontalCarousel jars={jars} setSelectedJar={setSelectedJar}/>
                 <VerticalCarousel jars={jars} setSelectedJar={setSelectedJar} />
                 {selectedJar && (
                     <div className="jar-details">
