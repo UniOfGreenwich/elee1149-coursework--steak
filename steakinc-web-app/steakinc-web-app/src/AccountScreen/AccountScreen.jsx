@@ -141,7 +141,7 @@ function AccountsScreen() {
                         {selectedAccount && (
                             <div className="account-selected-item">
                                 <p className='account-selected-title'>{selectedAccount.name}</p>
-                                <p className='account-selected-balance'>£{selectedAccount.balance}</p>
+                                <p className='account-selected-balance'>£{selectedAccount.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
                                 <div className="account-selected-button-container">
                                     <button className='account-selected-create-button' onClick={() => setShowCreateModal(true)}>Create</button>
                                     <button className='account-selected-edit-button' onClick={() => setShowEditModal(true)}>Edit</button>
@@ -149,13 +149,13 @@ function AccountsScreen() {
                             </div>
                         )}
                     </div>
-                    <div className="pie-chart-container">
-                        <div className="pie-chart">
+                    <div className="pie-chart-container account-pie-chart">
+                        <div className="account-screen-pie-chart">
                             <Pie data={pieData} options={pieOptions} />
                         </div>
                     </div>
                 </div>
-                <div className="accounts-transaction-chart-container">
+                <div className="accounts-transaction-chart-container account-screen-chart">
                     <div className="accounts-transaction-chart">
                         <TransactionsChart transactions={transactions} />
                     </div>

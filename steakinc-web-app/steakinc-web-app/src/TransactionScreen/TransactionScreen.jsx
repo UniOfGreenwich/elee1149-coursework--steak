@@ -196,14 +196,14 @@ function TransactionsScreen() {
                                 <tr key={transaction.transaction_id}>
                                     <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
                                     <td className={transaction.type === 'ingoing' ? 'transaction-type-ingoing' : 'transaction-type-outgoing'}>
-                                        {transaction.type === 'ingoing' ? `+£${transaction.amount}` : `-£${transaction.amount}`}
+                                        {transaction.type === 'ingoing' ? `+£${transaction.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : `-£${transaction.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
                                     </td>
                                     <td className={transaction.type === 'ingoing' ? 'transaction-type-ingoing' : 'transaction-type-outgoing'}>
                                         {transaction.type}
                                     </td>
                                     <td>{transaction.category}</td>
                                     <td>{transaction.description}</td>
-                                    <td>£{transaction.post_account_total}</td>
+                                    <td>£{transaction.post_account_total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                                 </tr>
                             ))}
                         </tbody>

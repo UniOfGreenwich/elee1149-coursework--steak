@@ -115,7 +115,9 @@
 }
  
 .budget-header {
-    margin: 30px 0 0 0;
+    display: flex;
+    justify-content: space-between; /* Distribute space between the containers */
+    margin: 30px 0;
 }
  
 .income-container, .balance-container {
@@ -127,27 +129,36 @@
     margin: 0 60px;
 }
  
+.income-container {
+    margin: 0; /* Remove extra margin to align with the income table */
+    margin-left: 20px;
+}
+ 
+.balance-container {
+    margin: 0; /* Remove extra margin */
+    margin-right: 20px;
+}
+ 
 .pie-chart-container {
     background-color: #0B1739;
     border-radius: 10px;
 }
  
-.pie-chart {
-    width: 50%;
-    height: 50%;
-    margin: 20px auto;
-}
+
  
 .budget-tables {
     margin-top: 20px;
+    max-height: 358px;
 }
  
-.income-table {
+.income-table, .expense-table {
+    position: relative;
     background-color: #0B1739;
     border-radius: 10px;
     padding: 20px;
     border: 1px solid #ffffff;
     margin-bottom: 20px;
+    margin-top: 70px !important;
 }
  
 .income-table ul {
@@ -169,13 +180,6 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-}
- 
-.expense-table {
-    background-color: #0B1739;
-    border-radius: 10px;
-    padding: 20px;
-    border: 1px solid #ffffff;
 }
  
 .expense-table {
@@ -211,9 +215,47 @@
     margin-bottom: 10px;
 }
  
+.add-income-button {
+    position: absolute;
+    top: -48px; /* Adjust as needed */
+    left: 1px; /* Align to the top-left */
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    
+}
+
+.add-expense-button {
+    position: absolute;
+    top: -48px; /* Adjust as needed */
+    right: 1px; /* Align to the top-right */
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
 .error-message {
     color: red;
     margin-bottom: 10px;
+}
+
+/* Wrapper to clip the table content */
+.expense-table-wrapper {
+    max-height: 260px; /* Set the maximum height for the table content */
+    overflow-y: auto; /* Enable vertical scrolling for the table content */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.income-table-wrapper{
+    max-height: 260px; /* Set the maximum height for the table content */
+    overflow-y: auto; /* Enable vertical scrolling for the table content */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
  
 @media (min-width: 768px) {
@@ -235,6 +277,18 @@
     .budget-main-container {
         margin-left: 300px
     }
+
+    .budget-tables {
+        position: absolute; /* Position the container relative to the screen */
+        bottom: 40px; /* Ensure it is 20px above the bottom */
+        left: 0;
+        right: 0;
+    }
+
+    .budget-main-container {
+        position: relative; /* Ensure the parent container allows absolute positioning */
+        min-height: 100vh; /* Ensure the container spans the full height of the screen */
+    }
 }
  
 @media (min-width: 1300px) {
@@ -244,6 +298,7 @@
  
     .budget-tables {
         display: flex;
+        padding: 20px;
     }
  
     .expense-table {
@@ -261,15 +316,47 @@
         width: 20%;
     }
  
-    .pie-chart {
+    .budget-pie-chart {
         width: 100%;
         height: 100%;
         margin: 0 100px;
     }
- 
-    .pie-chart canvas {
-        width: 50% !important;
-        height: 50% !important;
-        margin: 0 auto;
+
+    /* Ensure the pie chart height is 417px less than the screen width but not less than 100px */
+    .budget-pie-chart {
+        position: relative;
+        width: 100%; /* Ensure the container takes full width */
+        height: auto; /* Allow height to adjust dynamically */
+    }
+
+    .budget-pie-chart canvas {
+        height: calc(100vw - 1500px) !important; /* Dynamically adjust height */
+        max-width: 700px;
+        max-height: 900px;
+        margin: 0 auto; /* Center the chart */
+    }
+}
+
+@media (max-width: 768px) {
+    .budget-header {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        gap: 20px; /* Add spacing between items */
+    }
+
+    .income-container, .balance-container, .budget-pie-chart {
+        width: 100%; /* Make items take full width */
+        text-align: center; /* Center text inside items */
+    }
+
+    .income-container, .balance-container {
+        width: calc(100% - 40px); /* Full width minus 5px gap on each side */
+        margin: 0 5px; /* Add 5px gap on both left and right sides */
+        text-align: center; /* Center text inside the containers */
+    }
+
+    .income-container {
+        margin-top: 40px; /* Keep the top margin for spacing */
     }
 }
