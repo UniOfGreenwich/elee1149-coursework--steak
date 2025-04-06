@@ -58,6 +58,10 @@
 
 .dashboard-line-chart {
     max-width: 930px;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: #0B1739;
+    padding: 10px;
 }
 
 .recent-transactions-desktop {
