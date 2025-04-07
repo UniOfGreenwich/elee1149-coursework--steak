@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import TransactionsChart from '../components/TransactionsChart';
 import TransactionsTable from '../components/TransactionsTable';
 import './DashboardScreen.css'; // Import the CSS file
+import NavSideBar from '../JarsScreen/NavSideBar';
+import Lid from '../JarsScreen/Lid';
 
 function Dashboard() {
     const [totalBalance, setTotalBalance] = useState(null);
@@ -91,50 +93,90 @@ function Dashboard() {
         }
     };
 
-    return (
-        <div>
-            <h1 className="white-text">Dashboard</h1>
-            <h2 className="white-text">Total Balance: {totalBalance !== null && !isNaN(totalBalance) ? `£${formatNumber(totalBalance)}` : 'Loading...'}</h2>
-            <h3 className="white-text">Accounts Breakdown:</h3>
-            <ul>
-                {accounts.map((account, index) => (
-                    <li key={index} className="white-text">
-                        {account.name}: £{formatNumber(account.balance)}
-                    </li>
-                ))}
-            </ul>
-            <h3 className="white-text">Jars:</h3>
-            <ul>
-                {jars.map((jar, index) => (
-                    <li key={index} className="white-text">
-                        {jar.jar_name}: £{formatNumber(jar.current_balance)}
-                    </li>
-                ))}
-            </ul>
-            <h3 className="white-text">Transactions Over Time:</h3>
-            <TransactionsChart transactions={transactions} />
-            <h3 className="white-text">Recent Transactions:</h3>
-            <TransactionsTable transactions={transactions} />
+    const FeaturedJarsMobile = ({jars}) => {
+        const featuredJars = jars.slice(0, 3);
 
-            <h3 className="white-text">Top Financial News:</h3>
-            <ul>
+        return (
+            <div className="featured-jars-container mobile">
+                <div className="jar-dashboard-container">
+                    {featuredJars.map(jar => (
+                    <div className='jar jars-dashboard' key={jar.jar_id}>
+                        <Lid />
+                        <span className="jar-name">{jar.jar_name}</span>
+                        <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                    </div>
+                ))}
+                </div>
+        </div>
+        )
+    }
+
+    const FeaturedJarsDesktop = ({jars}) => {
+        const featuredJars = jars.slice(0, 4);
+
+        return (
+            <div className="featured-jars-container desktop">
+                <div className="jar-dashboard-container">
+                    {featuredJars.map(jar => (
+                    <div className='jar jars-dashboard' key={jar.jar_id}>
+                        <Lid />
+                        <span className="jar-name">{jar.jar_name}</span>
+                        <span className="jar-value">£{jar.current_balance.toFixed(2)}</span>
+                    </div>
+                ))}
+                </div>
+        </div>
+        )
+    }
+
+    return (
+        <div className='dashboard-wrapper'>
+            <NavSideBar />
+            <div className="dashboard-header-wrapper">
+                <div className="dashboard-section-wrapper">
+                    <ul className='dashboard-total-balance-container'>
+                        <div className="dashboard-total-balance-title">Total Assets:</div>
+                        <li className='dashboard-total-balance'>£{totalBalance}</li>
+                    </ul>
+                </div>
+                <FeaturedJarsMobile jars={jars} setJars={setJars} />
+                <FeaturedJarsDesktop jars={jars} setJars={setJars} />
+            </div>
+            <div className="dashboard-transaction-chart-container dashboard-screen-chart">
+                <div className="dashboard-line-chart">
+                    <TransactionsChart transactions={transactions} />
+                </div>
+            </div>
+            <div className="recent-transactions-mobile">
+                <TransactionsTable transactions={transactions} />
+            </div>
+            <div className="dashboard-section-right">
+                <div className="recent-transactions-desktop">
+                    <TransactionsTable transactions={transactions} />
+                </div>
+                <ul className='financial-news-container financial-desktop'>
+                    <h3 className="financial-news-title">Top Financial News:</h3>
+                    {newsHeadlines.map((article, index) => (
+                        <li key={index} className="financial-news-item">
+                            <h4 className='financial-news-header'>{article.author}</h4>
+                            <a href={article.url} target="_blank" rel="noopener noreferrer" className="financial-news-link">
+                                {article.title}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <ul className='financial-news-container financial-mobile'>
+                <h3 className="financial-news-title">Top Financial News:</h3>
                 {newsHeadlines.map((article, index) => (
-                    <li key={index} className="white-text">
-                        <a href={article.url} target="_blank" rel="noopener noreferrer" className="white-text">
-                            {article.author}, {article.title}
+                    <li key={index} className="financial-news-item">
+                        <h4 className='financial-news-header'>{article.author}</h4>
+                        <a href={article.url} target="_blank" rel="noopener noreferrer" className="financial-news-link">
+                            {article.title}
                         </a>
                     </li>
                 ))}
             </ul>
-
-            {/* New Navigation Buttons */}
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <button onClick={() => navigate('/jars', { state: { userId } })} style={{ marginRight: '10px' }}>Go to Jars</button>
-                <button onClick={() => navigate('/transactions', { state: { userId } })}>Go to Transactions</button>
-                <button onClick={() => navigate('/accounts', { state: { userId } })}>Go to Accounts</button>
-                <button onClick={() => navigate('/budget', { state: { userId } })}>Go to Budget</button>
-                <button onClick={handleExportData} style={{ marginLeft: '10px' }}>Export Data</button>
-            </div>
         </div>
     );
 }

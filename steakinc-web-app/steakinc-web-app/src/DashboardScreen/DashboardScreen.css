@@ -2,3 +2,196 @@
 .white-text {
     color: white;
 }
+
+.dashboard-total-balance-container {
+    margin: 30px 45px;
+    color: #ffffff;
+    background-color: #DA4259;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.dashboard-total-balance {
+    list-style: none;
+    font-size: 60px;
+    margin: 0 0 0 60px;
+    padding-top: 10px;
+}
+
+.dashboard-total-balance-title {
+    margin: 3px 0 0 5px;
+    position: absolute;
+}
+
+.financial-news-container {
+   margin: 20px auto;
+   padding: 10px;
+   border: 1px solid #ffffff;
+   border-radius: 10px;
+   list-style: none;
+   background-color: #0B1739;
+   color: #ffffff;
+   max-width: 400px;
+}
+
+.financial-news-title {
+    margin-top: 0;
+}
+
+.financial-news-item {
+    margin-top: 10px;
+}
+
+.jar-dashboard-container {
+    color: #ffffff;
+    display: flex;
+    margin-left: 22px;
+}
+
+.featured-jars-container {
+    margin-bottom: 20px;
+}
+
+.desktop {
+    display: none;
+}
+
+.dashboard-line-chart {
+    max-width: 930px;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: #0B1739;
+    padding: 10px;
+}
+
+.recent-transactions-desktop {
+    display: none;
+    max-width: 520px;
+}
+
+.dashboard-header-wrapper {
+    max-width: 1000px;
+}
+
+.financial-desktop {
+    display: none;
+    max-width: 500px;
+}
+
+.financial-mobile {
+    max-width: 1000px;
+}
+
+.financial-news-link {
+    color: #FFFF00;
+}
+
+.financial-news-header {
+    color: #ffffff;
+}
+
+@media (min-width: 769px) {
+    .dashboard-wrapper {
+        margin-left: 300px;
+        margin-top: 100px;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    .dashboard-total-balance-container {
+        height: 150px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .dashboard-header-wrapper {
+        width: 600px;
+    }
+
+    .dashboard-line-chart {
+        margin-left: 40px;
+        width: 500px;
+    }
+
+    .dashboard-wrapper {
+        margin-top: 0;
+    }
+
+    .transaction-table-title {
+        margin: 10px;
+        position: sticky;
+    }
+
+    .dashboard-total-balance-title {
+        font-size: 28px;
+    }
+
+    .dashboard-total-balance {
+        margin-left: 130px;
+        padding-top: 50px;
+        font-size: 70px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .dashboard-header-wrapper {
+        width: 800px;
+    }
+
+    .dashboard-line-chart {
+        width: 700px;
+    }
+
+    .jars-dashboard {
+        scale: 1.25;
+    }
+}
+
+@media (min-width: 1642px) {
+    .recent-transactions-mobile {
+        display: none;
+    }
+
+    .recent-transactions-desktop {
+        display: block;
+    }
+
+    .financial-desktop {
+        display: block;
+        margin: 20px 0 0 0;
+    }
+
+    .financial-mobile {
+        display: none;
+    }
+
+    .dashboard-section-right {
+        position: fixed;
+        right: 20px;
+        top: 30px;
+        height: 100%;
+        margin-right: 15px;
+    }
+
+    .dashboard-total-balance {
+        margin-left: 260px;
+        padding-top: 0;
+        font-size: 100px;
+    }
+}
+
+@media (min-width: 1800px) {
+    .dashboard-header-wrapper {
+        width: 1000px;
+    }
+
+    .dashboard-line-chart {
+        width: 900px;
+    }
+}
