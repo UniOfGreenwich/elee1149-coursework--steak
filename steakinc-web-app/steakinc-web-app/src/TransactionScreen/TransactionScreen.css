@@ -54,7 +54,6 @@
 
 .transaction-table-container {
     width: 100%;
-    min-width: 600px; 
 }
 
 .transaction-table-container th, .transaction-table-container td {
